@@ -10,7 +10,7 @@
     $today = date('Y') . '-' . date('m') . '-' . date('d');
     $today_re = date('d') . '-' . date('m') . '-' . date('Y');
 
-    include_once('../../../web1/config/connec.php');
+    include_once('./Event-Reg-Project/asset/config/config.php');
 
     if ($event_view == 'show_data') {
 
