@@ -16,7 +16,7 @@
                             <i class="bi bi-gear-wide-connected"></i> ตั้งค่าการลงทะเบียน
                         </button>
                         <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal-add">
-                            <i class="bi bi-sliders"></i> นำเข้าข้อมูล
+                            <i class="bi bi-upload"></i> นำเข้าข้อมูล
                         </button>
                         <button type="button" class="btn btn-info btn-sm " data-bs-toggle="modal" data-bs-target="#modal-add">
                             <i class="bi bi-file-earmark-arrow-up"></i></i> Export
