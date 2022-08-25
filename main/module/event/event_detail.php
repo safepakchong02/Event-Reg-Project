@@ -2,7 +2,7 @@
     <!-- ข้อมูลผู้ลงทะเบียน -->
     <div class="col-12 pt-4">
         <h2>รายชื่อผู้ลงทะเบียน</h2><br>
-        <div class="container">
+        <div class="container" style="width:100%">
             <div class="row">
                 <div class="col">
                     <h3>กิจกรรม : ...</3>
@@ -41,22 +41,9 @@
             <tbody>
                 <tr>
                     <td align="center">1</td>
-                    <td>123456789</td>
+                    <td align="center">123456789</td>
                     <td>ปัญญทัศน์ ศรีบุตรวงศ์</td>
                     <td>ชาย</td>
-                    <td>สารสนเทศ</td>
-                    <td>15/09/2565 16:00</td>
-                    <td>
-                        <button class="btn btn-info btn-sm text-white">ข้อมูลผู้ลงทะเบียน</button>
-                        <button class="btn btn-warning btn-sm">แก้ไข</button>
-                        <button class="btn btn-danger btn-sm">ลบ</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="center">2</td>
-                    <td>123456789</td>
-                    <td>ปัญญทัศน์ ศรีบุตรวงศ์</td>
-                    <td>หญิง</td>
                     <td>สารสนเทศ</td>
                     <td>15/09/2565 16:00</td>
                     <td>

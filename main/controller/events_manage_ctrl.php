@@ -1,7 +1,7 @@
 <script>
     var app = angular.module("<?= $app_name ?>", ['datatables']);
     app.controller("<?= $ctrl_name ?>", function($scope, $http) { // start controller function
-
+        $scope.test = "test";
         // start show event
         $http.get("main/model/event/query_event.php?event_view=show_data")
             .then(function(res) { // start then

@@ -5,7 +5,7 @@ include("main/controller/$ctrl_name.php");
 ?>
 
 <!-- เริ่ม dashboard -->
-<div class="container-fluid" ng-controller="<?= $ctrl_name ?>">
+<div class="container-fluid" ng-app="<?= $app_name ?>" ng-controller="<?= $ctrl_name ?>">
     <div class="row">
         <div class="col-12 pt-4">
             <h1>รายชื่อกิจกรรม</h1><br>
