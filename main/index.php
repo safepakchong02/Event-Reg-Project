@@ -28,6 +28,7 @@ $app_name = "SuthReg";
 
 <body ng-app="<?=$app_name?>">
     <div class="container-fluid">
+        hdcsdcdscvsd
         <div class="row">
             <!-- sidebar -->
             <? include("main/body/sidebar.php"); ?>

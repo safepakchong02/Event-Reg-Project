@@ -32,7 +32,6 @@
         }
         echo $results;
     } else if ($event_view == "show_dropdown") {
-        $sql = "SELECT * FROM `dropdown`";
         $resource_data = mysqli_query($handle, $sql);
         $count_row = mysqli_num_rows($resource_data);
 
