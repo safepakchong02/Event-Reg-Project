@@ -9,6 +9,8 @@ include("main/function/function_date.php");
 
 $_SESSION["user_name"] = "Admin";
 $_SESSION["perm"] = "admin";
+if (isset($_GET["p"])) $_SESSION["path"] = $_GET["p"];
+else $_SESSION["path"] = "event";
 
 // global var
 $app_name = "SuthReg";
