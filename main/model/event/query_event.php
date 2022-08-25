@@ -14,11 +14,10 @@
 
     if ($event_view == 'show_data') {
 
-        $sql = "SELECT * FROM `event` 
-        INNER JOIN dropdown 
-        ON event.dp_id = dropdown.dp_id 
-        WHERE status = '1'
-        ";
+        $sql = "SELECT * FROM `events` 
+        LEFT JOIN 'users' 
+        ON 'events.ev_assign_to' = 'users.user_id'
+        WHERE ev_del = '0'";
         $resource_data = mysqli_query($handle, $sql);
         $count_row = mysqli_num_rows($resource_data);
 
