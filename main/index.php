@@ -7,13 +7,15 @@ include("main/function/function_sql.php");
 include("main/function/function_form.php");
 include("main/function/function_date.php");
 
-$_SESSION["user_name"] = "Admin";
+$_SESSION["user_name"] = "ปัญญทัศน์";
+$_SESSION["user_id"] = "99";
 $_SESSION["perm"] = "admin";
 if (isset($_GET["p"])) $_SESSION["path"] = $_GET["p"];
 else $_SESSION["path"] = "event";
 
 // global var
 $app_name = "SuthReg";
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +28,7 @@ $app_name = "SuthReg";
     <title>SUTH REG</title>
 </head>
 
-<body ng-app="<?=$app_name?>">
+<body ng-app="<?= $app_name ?>">
     <div class="container-fluid">
         <div class="row">
             <!-- sidebar -->

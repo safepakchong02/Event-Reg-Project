@@ -5,9 +5,9 @@ include("main/controller/$ctrl_name.php");
 ?>
 
 <!-- เริ่ม dashboard -->
-<div class="container-fluid" ng-app="<?= $app_name ?>" ng-controller="<?= $ctrl_name ?>">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-12 pt-4">
+        <div class="col-12 pt-4" ng-controller="<?= $ctrl_name ?>">
             <h1>รายชื่อกิจกรรม</h1><br>
             <!-- เพิ่มข้อมูล -->
             <div class="d-flex justify-content-end pb-2">
@@ -18,7 +18,7 @@ include("main/controller/$ctrl_name.php");
             <? include("main/module/event/event_add.php"); ?>
             <!-- จบการเพิ่มข้อมูล -->
             <!-- แสดงข้อมูล -->
-            <table id="example" class="table table-striped nowrap" style="width:100%">
+            <table datatable="ng" id="example" class="table nowrap" style="width:100%">
                 <thead>
                     <tr class="table-dark">
                         <th>ไอดี</th>
@@ -31,16 +31,16 @@ include("main/controller/$ctrl_name.php");
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="table-danger" ng-repeat="show_event_data in event_data">
+                    <tr ng-repeat="show_event_data in event_data" class="{{show_event_data.isOpen}}">
                         <? include("main/module/event/event_edit.php"); ?>
-                        <td>{{$scope.show_event_data.ev_id}}</td> <!-- "ev_id is name col" -->
-                        <td>{{$scope.show_event_data.ev_title}}</td>
-                        <td>{{$scope.show_event_data.ev_assign_to}}</td>
-                        <td>{{$scope.show_event_data.ev_status}}</td>
-                        <td>{{$scope.show_event_data.ev_date_start}}</td>
-                        <td>{{$scope.show_event_data.ev_date_end}}</td>
+                        <td>{{show_event_data.ev_id}}</td> <!-- "ev_id" is name col -->
+                        <td>{{show_event_data.ev_title}}</td>
+                        <td>{{show_event_data.user_name}} {{show_event_data.user_surname}}</td>
+                        <td>{{show_event_data.ev_status}}</td>
+                        <td>{{show_event_data.ev_date_start}}</td>
+                        <td>{{show_event_data.ev_date_end}}</td>
                         <td>
-                            <a href="index.php?p=event&m=event_detail&id={{$scope.show_event_data.ev_id}}" class="btn btn-info btn-sm text-white">ข้อมูลผู้ลงทะเบียน</a>
+                            <a href="index.php?p=event&m=event_detail&id={{show_event_data.ev_id}}" class="btn btn-info btn-sm text-white">ข้อมูลผู้ลงทะเบียน</a>
                             <button ng-click="edit_event_view(show_event_data.ev_id)" class="btn btn-warning btn-sm">แก้ไข</button>
                             <button ng-click="delete_event(show_event_data.ev_id)" class="btn btn-danger btn-sm">ลบ</button>
                         </td>
@@ -50,7 +50,7 @@ include("main/controller/$ctrl_name.php");
             <script>
                 $(document).ready(function() {
                     var table = $('#example').DataTable({
-                        scrollX: true,
+                        // scrollX: true,
                     });
                 });
             </script>
