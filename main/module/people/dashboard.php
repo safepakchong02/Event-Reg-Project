@@ -1,6 +1,6 @@
 <!-- import ctrl -->
 <?
-$ctrl_name = "events_manage_ctrl";
+$ctrl_name = "people_manage_ctrl";
 include("main/controller/$ctrl_name.php");
 ?>
 
@@ -29,13 +29,14 @@ include("main/controller/$ctrl_name.php");
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="show_event_data in event_data">
-                        <? include("main/module/event/event_edit.php"); ?>
-                        <td>{{show_event_data.ev_id}}</td> <!-- "ev_id" is name col -->
-                        <td>{{show_event_data.ev_title}}</td>
-                        <td>{{show_event_data.user_name}} {{show_event_data.user_surname}}</td>
-                        <td>{{show_event_data.ev_status}}</td>
+                    <tr ng-repeat="show_people_data in people_data">
+                        <? include("main/module/people/people_edit.php"); ?>
+                        <td>{{show_people_data.user_id}}</td> <!-- "ev_id" is name col -->
+                        <td>{{show_people_data.user_name}} {{show_people_data.user_surname}}</td>
+                        <td>{{show_people_data.dep_name}}</td>
+                        <td>{{show_people_data.perm}}</td>
                         <td>
+                            <!-- not edit -->
                             <a href="index.php?p=event&m=event_detail&id={{show_event_data.ev_id}}" class="btn btn-info btn-sm text-white">เปลี่ยนรหัสผ่าน</a>
                             <button ng-click="edit_event_view(show_event_data.ev_id)" class="btn btn-warning btn-sm">แก้ไข</button>
                             <button ng-click="delete_event(show_event_data.ev_id)" class="btn btn-danger btn-sm">ลบ</button>
