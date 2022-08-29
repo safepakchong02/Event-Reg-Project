@@ -3,10 +3,14 @@ include_once('../../../../asset/config/config.php');
 
 //$sql = "SELECT * FROM `events`";
 
-$sql = "insert into event set
-    title='" . $_POST['title_event'] . "' ,
-    ev_id='" . $_POST['ev_id'] . "' ,
-    status ='1"."';";
+$sql = "insert into events set
+    ev_title='" . $_POST['ev_title'] . "' ,
+    ev_date_start='" . $_POST['ev_date_start'] . "' ,
+    ev_date_end='" . $_POST['ev_date_end'] . "' ,
+    ev_assign_to='" . $_POST['ev_assign_to'] . "' ,
+    ev_created_by='" . $_POST['ev_created_by'] . "' ,
+    ev_table_name='" . $_POST['ev_table_name'] . "' ,
+    ev_del = '" . $_POST['ev_del'] . "';";
 
 mysqli_query($handle, $sql);
 echo "";
