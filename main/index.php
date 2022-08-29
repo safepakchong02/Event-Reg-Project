@@ -10,6 +10,11 @@ include("main/function/function_date.php");
 $_SESSION["user_name"] = "ปัญญทัศน์";
 $_SESSION["user_id"] = "99";
 $_SESSION["perm"] = "admin";
+
+// $_SESSION["user_name"] = "Punnyathat";
+// $_SESSION["user_id"] = "6204709";
+// $_SESSION["perm"] = "manager";
+
 if (isset($_GET["p"])) $_SESSION["path"] = $_GET["p"];
 else $_SESSION["path"] = "event";
 
@@ -49,12 +54,4 @@ $app_name = "SuthReg";
         </div>
     </div>
 </body>
-
-<script type="text/javascript">
-    function myHide() {
-        document.getElementById('hidepage').style.visibility = 'visible'; //content ที่ต้องการแสดงหลังจากเพจโหลดเสร็จ
-        document.getElementById('hidepage2').style.display = 'none'; //content ที่ต้องการแสดงระหว่างโหลดเพจ
-    }
-</script>
-
 </html>

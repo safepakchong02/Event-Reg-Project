@@ -1,13 +1,23 @@
 <script>
+	// เพิ่ม 0 ลงไปในหลักหน่วย เมื่อเวลาน้อยกว่า 10
+	function addZero(num) {
+		if (num < 10) {
+			return `0${num}`;
+		}
+		else {
+			return `${num}`;
+		}
+	}
+
 	// แปลง JS default date format เป็น dd/mm/yyyy hh:mm(30/12/2022 00:00)
 	function convertDate(str) {
 		var out = new Date(str);
 
-		out = out.getDate() + "/" +
-			out.getMonth() + "/" +
-			out.getFullYear() + " " +
-			out.getHours() + ":" +
-			out.getMinutes();
+		out = addZero(out.getDate()) + "/" +
+			addZero(out.getMonth()) + "/" +
+			addZero(out.getFullYear()) + " " +
+			addZero(out.getHours()) + ":" +
+			addZero(out.getMinutes());
 
 		return out;
 	} // end convertDate function
@@ -23,7 +33,7 @@
 			parseInt(date[1]), // month
 			parseInt(date[0]), // day
 			parseInt(time[0]), // hour
-			parseInt(time[1])  // minutes
+			parseInt(time[1]) // minutes
 		)
 		return date_js;
 	}

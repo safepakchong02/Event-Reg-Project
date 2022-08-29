@@ -40,8 +40,8 @@ include("main/controller/$ctrl_name.php");
                         <td>{{show_event_data.ev_date_start}}</td>
                         <td>{{show_event_data.ev_date_end}}</td>
                         <td>
-                            <a href="index.php?p=event&m=event_detail&id={{show_event_data.ev_id}}" class="btn btn-info btn-sm text-white">ข้อมูลผู้ลงทะเบียน</a>
-                            <button ng-click="edit_event_view(show_event_data.ev_id)" class="btn btn-warning btn-sm">แก้ไข</button>
+                            <a href="index.php?p=event&m=event_detail&ev_id={{show_event_data.ev_id}}" class="btn btn-info btn-sm text-white">ข้อมูลผู้ลงทะเบียน</a>
+                            <button ng-click="edit_event_view(show_event_data.ev_id)" data-bs-toggle="modal" data-bs-target="#modal-edit" class="btn btn-warning btn-sm">แก้ไข</button>
                             <button ng-click="delete_event(show_event_data.ev_id)" class="btn btn-danger btn-sm">ลบ</button>
                         </td>
                     </tr>
