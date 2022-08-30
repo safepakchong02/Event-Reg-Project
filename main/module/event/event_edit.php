@@ -23,13 +23,13 @@
                         <div class="col-6">
                             <div class="form-group pb-2">
                                 <label> วันที่เปิดลงทะเบียน :</label>
-                                <input type="datetime-local" ng-model="edit_ev_date_start.value" name="edit_ev_date_start" class="form-control" required>
+                                <input type="datetime-local" ng-model="edit_ev_date_start" name="edit_ev_date_start" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group pb-2">
                                 <label> วันที่ปิดลงทะเบียน :</label>
-                                <input type="datetime-local" ng-model="edit_ev_date_end.value" name="edit_ev_date_end" class="form-control" required>
+                                <input type="datetime-local" ng-model="edit_ev_date_end" name="edit_ev_date_end" class="form-control" required>
                             </div>
                         </div>
                     </div>

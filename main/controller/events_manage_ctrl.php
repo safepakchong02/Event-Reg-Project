@@ -54,8 +54,8 @@
                 data: `ev_id=${$scope.edit_ev_id}` +
                     `&ev_title=${$scope.edit_ev_title}` +
                     `&ev_assign_to=${$scope.edit_ev_assign_to}` +
-                    `&ev_date_start=${convertDate($scope.edit_ev_date_start)}` +
-                    `&ev_date_end=${convertDate($scope.edit_ev_date_end)}`,
+                    `&ev_date_start=${convertDate($scope.edit_ev_date_start.value)}` +
+                    `&ev_date_end=${convertDate($scope.edit_ev_date_end.value)}`,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
