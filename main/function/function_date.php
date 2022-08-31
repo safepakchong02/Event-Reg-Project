@@ -1,11 +1,20 @@
 <script>
-	// เพิ่ม 0 ลงไปในหลักหน่วย เมื่อเวลาน้อยกว่า 10
+	// เพิ่ม 0 ลงไปในหลักหน่วย เมื่อเวลาน้อยกว่า 10 และ int convert to string
 	function addZero(num) {
 		if (num < 10) {
 			return `0${num}`;
-		}
-		else {
+		} else {
 			return `${num}`;
+		}
+	}
+
+	// ลบ 0 ออกจากหลักหน่วย เมื่อเวลาน้อยกว่า 10 and string convert to int
+	function delZero(str) {
+		if (str.charAt(0) === "0") {
+			// alert(parseInt(str.substr(1)));
+			return parseInt(str.substr(1));
+		} else {
+			return parseInt(str);
 		}
 	}
 
@@ -14,7 +23,7 @@
 		var out = new Date(str);
 
 		out = addZero(out.getDate()) + "/" +
-			addZero(out.getMonth()) + "/" +
+			addZero(out.getMonth()+1) + "/" +
 			addZero(out.getFullYear()) + " " +
 			addZero(out.getHours()) + ":" +
 			addZero(out.getMinutes());
@@ -29,11 +38,11 @@
 		var time = str[1].split(":");
 
 		var date_js = new Date(
-			parseInt(date[2]), // year
-			parseInt(date[1]), // month
-			parseInt(date[0]), // day
-			parseInt(time[0]), // hour
-			parseInt(time[1]) // minutes
+			delZero(date[2]), // year
+			(delZero(date[1])-1), // month
+			delZero(date[0]), // day
+			delZero(time[0]), // hour
+			delZero(time[1]) // minutes
 		)
 		return date_js;
 	}

@@ -18,7 +18,7 @@
         /* ==================--SHOW--======================= */
         $http.get("main/model/event/query_event_detail.php?event_view=show_data")
             .then(function(res) { // start then
-                if (res.data.results_data !== "null") {
+                if (res.data.results_data !== "null" && res.data !== "") {
                     $scope.header_data = res.data.results_data.header; // "results_data" is key in json format
                     $scope.table_data = res.data.results_data.table_data;
 

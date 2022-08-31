@@ -1,16 +1,23 @@
-<div class="container-fluid"><br>
-        <div class="row" >
+<!-- import ctrl -->
+<?
+$ctrl_name = "event_detail_import_ctrl";
+include("main/controller/$ctrl_name.php");
+?>
+
+<? if (isset($_GET["ev_id"])) { ?>
+    <div class="container-fluid"><br>
+        <div class="row">
             <div class="col-1" style="width: 140px;">
-                <button type="button" class="btn btn-primary"><i class="bi bi-caret-left-fill"></i>ย้อนกลับ</button>
+                <a href="index.php?p=event&m=event_detail&ev_id=<?= $_GET["ev_id"] ?>" class="btn btn-primary"><i class="bi bi-caret-left-fill"></i>ย้อนกลับ</a>
             </div>
             <div class="col">
                 <h1>นำเข้าข้อมูล</h1>
             </div>
         </div>
-        <div class="row"> 
+        <div class="row">
             <div class="col-3" style="width:10%;">
                 <label>Upload File :</label>
-            </div>         
+            </div>
             <div class="col-8">
                 <input class="form-control form-control-sm" id="formFileSm" type="file">
             </div>
@@ -59,3 +66,6 @@
             });
         </script>
     </div>
+<? } else { ?>
+    <meta http-equiv="refresh" content="0;url=index.php?p=event&m=dashboard">
+<? } ?>
