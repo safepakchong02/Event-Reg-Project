@@ -27,36 +27,65 @@ include("main/controller/$ctrl_name.php");
         </div>
         <br>
         <!-----show table----->
-        <table datatable="ng" id="example" class="table nowrap" style="width:100%">
-            <thead>
-                <tr class="table-dark">
-                    <th>ไอดี</th>
-                    <th>ชื่อกิจกรรม</th>
-                    <th>เจ้าหน้าที่ลงทะเบียน</th>
-                    <th>สถานะลงทะเบียน</th>
-                    <th>วันที่เปิดลงทะเบียน</th>
-                    <th>วันที่ปิดลงทะเบียน</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="show_event_data in event_data">
-                    <? include("main/module/event/event_edit.php"); ?>
-                    <td>{{show_event_data.ev_id}}</td> <!-- "ev_id" is name col -->
-                    <td>{{show_event_data.ev_title}}</td>
-                    <td>{{show_event_data.user_name}} {{show_event_data.user_surname}}</td>
-                    <td>{{show_event_data.ev_status}}</td>
-                    <td>{{show_event_data.ev_date_start}}</td>
-                    <td>{{show_event_data.ev_date_end}}</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="test">
+            <table datatable="ng" id="example" class="table nowrap" style="width:100%">
+                <thead>
+                    <tr class="table-dark">
+                        <th>ไอดี</th>
+                        <th>ชื่อกิจกรรม</th>
+                        <th>เจ้าหน้าที่ลงทะเบียน</th>
+                        <th>สถานะลงทะเบียน</th>
+                        <th>วันที่เปิดลงทะเบียน</th>
+                        <th>วันที่ปิดลงทะเบียน</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="show_event_data in event_data">
+                        <? include("main/module/event/event_edit.php"); ?>
+                        <td>{{show_event_data.ev_id}}</td> <!-- "ev_id" is name col -->
+                        <td>{{show_event_data.ev_title}}</td>
+                        <td>{{show_event_data.user_name}} {{show_event_data.user_surname}}</td>
+                        <td>{{show_event_data.ev_status}}</td>
+                        <td>{{show_event_data.ev_date_start}}</td>
+                        <td>{{show_event_data.ev_date_end}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
         <br>
         <!-----เลือกtype----->
-        <div class="col-8">
-            <input type="text" ng-model="edit_ev_title" name="edit_ev_title" class="form-control" required>
+        <div class="container-fluid"><br>
+            <div class="row">
+                <div class="col-4">ชื่อคอลัมน์ในไฟล์ที่อัปโหลด</div>
+                <div class="col-8">แปลงเป็นชื่อที่เราระบุ</div>
+            </div>
+            <div class="row pb-3">
+                <div class="col-4">
+                    <input type="text" ng-model="edit_ev_title" name="edit_ev_title" class="form-control" required>
+                </div>
+                <div class="col-8">
+                    <select class="form-control">
+                        <option>โปรดระบุ</option>
+                        <option>รหัสพนักงาน</option>
+                        <option>รหัสบัตรประชาชน</option>
+                        <option>ชื่อ-สกุล</option>
+                        <option>เบอร์โทรศัพท์</option>
+                        <option>ชื่อบริษัท</option>
+                        <option>แผนก</option>
+                        <option>ตำแหน่ง</option>
+                        <option>เงินเดือน</option>
+                        <option>เพศ</option>
+                        <option>อายุ</option>
+                        <option>วันเดือนปีเกิด</option>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <div class="d-flex justify-content-end pb-2">
+                <button ng-click="setting_save()" type="button" class="btn btn-success btn-sm"></i>บันทึก</button>
+            </div>
         </div>
-
 
         <script>
             $(document).ready(function() {

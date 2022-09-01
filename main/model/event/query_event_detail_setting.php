@@ -61,6 +61,7 @@
             $gender = covertBoolean($_POST["gender"]);
             $age = covertBoolean($_POST["age"]);
             $birthDate = covertBoolean($_POST["birthDate"]);
+            $table_name = "ev" . $ev_id . "u" . $_SESSION["user_id"];
 
             $sql_update = "UPDATE `event_setting` SET " .
                 "`walk_in` = '$walk_in'," .

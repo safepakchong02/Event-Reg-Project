@@ -89,6 +89,29 @@
         mysqli_query($handle, $sql_add_event);
         // echo $sql_add_event;
 
+        //******************** create table *********************//
+        $sql_create_table = "CREATE TABLE " . $table_name . " (" .
+            "id int(11) NOT NULL AUTO_INCREMENT," .
+            "PRIMARY KEY (id)" .");";
+        mysqli_query($handle, $sql_create_table);
+
+        //******************** add data to table *********************//
+        $sql_add_data = "INSERT INTO `event_setting` SET " .
+        "`ev_id` = '" . $ev_id . "'," .
+            "`walk_in` = '1'," .
+            "`emp_id` = '0'," .
+            "`card_id` = '0'," .
+            "`name` = '0'," .
+            "`call` = '0'," .
+            "`com_name` = '0'," .
+            "`dep` = '0'," .
+            "`pos` = '0'," .
+            "`salary` = '0'," .
+            "`gender` = '0'," .
+            "`age` = '0'," .
+            "`birthDate` = '0' ";
+        mysqli_query($handle, $sql_add_data);
+
         //******************** view Edit *********************//
     } else if ($event_view == 'show_data_edit') {
 
