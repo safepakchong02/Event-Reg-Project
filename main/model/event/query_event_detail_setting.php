@@ -25,35 +25,6 @@
 
         if ($count_row > 0) {
             while ($result = mysqli_fetch_assoc($resource_data)) {
-<<<<<<< HEAD
-                $js["ev_id"] = $result["ev_id"];
-                $js["walk_in"] = $result["walk_in"];
-
-              if ($result["รหัสพนักงาน"] == '1') $js["รหัสพนักงาน"] = true;
-              else $js["รหัสพนักงาน"] = false;
-                if ($result["รหัสบัตรประชาชน	"] == '1') $js["รหัสบัตรประชาชน	"] = true;
-                else $js["รหัสบัตรประชาชน	"] = false;
-                if ($result["ชื่อ-สกุล	"] == '1') $js["ชื่อ-สกุล	"] = true;
-                else $js["ชื่อ-สกุล"] = false;
-                if ($result["เบอร์โทรศัพท์	"] == '1') $js["เบอร์โทรศัพท์	"] = true;
-                else $js["เบอร์โทรศัพท์	"] = false;
-                if ($result["ชื่อบริษัท"] == '1') $js["ชื่อบริษัท"] = true;
-                else $js["ชื่อบริษัท"] = false;
-                if ($result["เงินเดือน"] == '1') $js["เงินเดือน"] = true;
-                else $js["เงินเดือน"] = false;
-                if ($result["เพศ"] == '1') $js["เพศ"] = true;
-                else $js["เพศ"] = false;
-                if ($result["อายุ"] == '1') $js["อายุ"] = true;
-                else $js["อายุ"] = false;
-                if ($result["วันเดือนปีเกิด"] == '1') $js["วันเดือนปีเกิด"] = true;
-                else $js["วันเดือนปีเกิด"] = false;
-
-
-
-
-                $rows[] = $result;
-            }
-=======
                 foreach($result as $key => $val) {
                     switch($key) {
                         case "ev_id":
@@ -67,7 +38,6 @@
 
                 $rows[] = $js;
             } // end while
->>>>>>> main
 
             $data = json_encode($rows);
             //$totaldata = sizeof($rows);
