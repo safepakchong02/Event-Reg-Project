@@ -15,7 +15,7 @@ include("main/controller/$ctrl_name.php");
             </div>
         </div>
         <div class="row">
-            <div class="col-3" style="width:10%;">
+            <div class="col-3" style="width:13%;">
                 <label>Upload File :</label>
             </div>
             <div class="col-8">
@@ -27,7 +27,7 @@ include("main/controller/$ctrl_name.php");
         </div>
         <br>
         <!-----show table----->
-        <table datatable="ng" id="example" class="table table-striped nowrap" style="width:100%">
+        <table datatable="ng" id="example" class="table nowrap" style="width:100%">
             <thead>
                 <tr class="table-dark">
                     <th>ไอดี</th>
@@ -48,15 +48,15 @@ include("main/controller/$ctrl_name.php");
                     <td>{{show_event_data.ev_status}}</td>
                     <td>{{show_event_data.ev_date_start}}</td>
                     <td>{{show_event_data.ev_date_end}}</td>
-                    <td>
-                        <a href="index.php?p=event&m=event_detail&id={{show_event_data.ev_id}}" class="btn btn-info btn-sm text-white">ข้อมูลผู้ลงทะเบียน</a>
-                        <button ng-click="edit_event_view(show_event_data.ev_id)" class="btn btn-warning btn-sm">แก้ไข</button>
-                        <button ng-click="delete_event(show_event_data.ev_id)" class="btn btn-danger btn-sm">ลบ</button>
-                    </td>
                 </tr>
             </tbody>
         </table>
+        <br>
         <!-----เลือกtype----->
+        <div class="col-8">
+            <input type="text" ng-model="edit_ev_title" name="edit_ev_title" class="form-control" required>
+        </div>
+
 
         <script>
             $(document).ready(function() {

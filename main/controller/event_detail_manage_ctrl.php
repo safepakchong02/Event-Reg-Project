@@ -28,7 +28,7 @@
                     $scope.isEmpty = true;
                     visibleUI($scope.isEmpty);
                 }
-            }) // end then
+            }); // end then
         /* ==================END SHOW======================= */
         /* ==================--ADD---======================= */
         $scope.add_event_detail = function() {

@@ -33,7 +33,7 @@ include("main/controller/$ctrl_name.php");
             </div>
         </div>
         <!-- แสดงข้อมูล -->
-        <table id="example" class="table table-striped nowrap" style="width:100%">
+        <table datatable="ng" id="example" class="table nowrap" style="width:100%">
             <thead>
                 <tr class="table-dark">
                     <th ng-repeat="header in header_data">{{header}}</th>
