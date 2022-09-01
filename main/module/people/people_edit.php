@@ -11,25 +11,25 @@
             <div class="col-6">
               <div class="form-group pb-2">
                 <label> รหัสพนักงาน :</label>
-                <input type="text" ng-model="add_title_event" name="add_title_event" class="form-control" required>
+                <input type="text" ng-model="edit_user_id" name="edit_user_id" class="form-control" required>
               </div>
             </div>
             <div class="col-6">
               <div class="form-group pb-2">
                 <label> ชื่อ :</label>
-                <input type="text" ng-model="add_emp_id" name="add_emp_id" class="form-control" required>
+                <input type="text" ng-model="edit_user_name" name="edit_user_name" class="form-control" required>
               </div>
             </div>
             <div class="col-6">
               <div class="form-group pb-2">
                 <label> นามสกุล :</label>
-                <input type="text" ng-model="add_emp_id" name="add_emp_id" class="form-control" required>
+                <input type="text" ng-model="edit_user_surname" name="edit_user_surname" class="form-control" required>
               </div>
             </div>
             <div class="col-6">
               <div class="form-group pb-2">
                 <label> แผนก :</label>
-                <input type="text" ng-model="add_emp_id" name="add_emp_id" class="form-control" required>
+                <input type="text" ng-model="edit_dep_id" name="edit_dep_id" class="form-control" required>
               </div>
             </div>
             <div class="col-6">

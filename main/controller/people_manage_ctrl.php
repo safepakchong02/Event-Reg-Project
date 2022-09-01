@@ -14,11 +14,12 @@
             $http({
                 method: 'POST',
                 url: 'main/model/event/query_event.php?event_view=add',
-                data: `ev_title=${$scope.add_ev_title}` +
-                    `&ev_assign_to=${$scope.add_ev_assign_to}` +
-                    `&ev_date_start=${convertDate($scope.add_ev_date_start.value)}` +
-                    `&ev_date_end=${convertDate($scope.add_ev_date_end.value)}`,
-                headers: {
+                data: `user_id=${$scope.add_user_id}` +
+                    `&user_name=${$scope.add_user_name}` +
+                    `&user_surname=${$scope.add_user_surname}` +
+                    `&dep_id=${$scope.add_dep_id}` +
+                    `&perm=${$scope.add_perm}`,
+                    headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }).then(function(response) {
@@ -38,11 +39,11 @@
             $http.get(`main/model/event/query_event.php?event_view=show_data_edit&ev_id=${$ev_id}`)
                 .then(function(response) { // start then
                     // alert(response.data);
-                    $scope.edit_ev_id = response.data.results_data_edit[0].ev_id;
-                    $scope.edit_ev_title = response.data.results_data_edit[0].ev_title;
-                    $scope.edit_ev_assign_to = response.data.results_data_edit[0].ev_assign_to;
-                    $scope.edit_ev_date_start = createDate(response.data.results_data_edit[0].ev_date_start);
-                    $scope.edit_ev_date_end = createDate(response.data.results_data_edit[0].ev_date_end);
+                    $scope.edit_user_id = response.data.results_data_edit[0].user_id;
+                    $scope.edit_user_name = response.data.results_data_edit[0].user_name;
+                    $scope.edit_user_surname = response.data.results_data_edit[0].user_surname;
+                    $scope.edit_dep_id = createDate(response.data.results_data_edit[0].dep_id);
+                    $scope.edit_perm = createDate(response.data.results_data_edit[0].perm);
 
                 }) // end then
         } // end edit_event_view function
@@ -51,11 +52,11 @@
             $http({
                 method: 'POST',
                 url: 'main/model/event/query_event.php?event_view=edit_form_save',
-                data: `ev_id=${$scope.edit_ev_id}` +
-                    `&ev_title=${$scope.edit_ev_title}` +
-                    `&ev_assign_to=${$scope.edit_ev_assign_to}` +
-                    `&ev_date_start=${convertDate($scope.edit_ev_date_start)}` +
-                    `&ev_date_end=${convertDate($scope.edit_ev_date_end)}`,
+                data: `user_id=${$scope.edit_user_id}` +
+                    `&user_name=${$scope.edit_user_name}` +
+                    `&user_surname=${$scope.edit_user_surname}` +
+                    `&dep_id=${$scope.edit_dep_id}` +
+                    `&perm=${$scope.edit_perm}`,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }

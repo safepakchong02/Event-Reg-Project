@@ -11,32 +11,32 @@
             <div class="col-6">
               <div class="form-group pb-2">
                 <label> รหัสพนักงาน :</label>
-                <input type="text" ng-model="add_title_event" name="add_title_event" class="form-control" required>
+                <input type="text" ng-model="add_user_id" name="add_user_id" class="form-control" required>
               </div>
             </div>
             <div class="col-6">
               <div class="form-group pb-2">
                 <label> ชื่อ :</label>
-                <input type="text" ng-model="add_emp_id" name="add_emp_id" class="form-control" required>
+                <input type="text" ng-model="add_user_name" name="add_user_name" class="form-control" required>
               </div>
-            </div>
+            </div>_
             <div class="col-6">
               <div class="form-group pb-2">
                 <label> นามสกุล :</label>
-                <input type="text" ng-model="add_emp_id" name="add_emp_id" class="form-control" required>
+                <input type="text" ng-model="add_user_surname" name="add_user_surname" class="form-control" required>
               </div>
             </div>
             <div class="col-6">
               <div class="form-group pb-2">
                 <label> แผนก :</label>
-                <input type="text" ng-model="add_emp_id" name="add_emp_id" class="form-control" required>
+                <input type="text" ng-model="add_dep_id" name="add_dep_id" class="form-control" required>
               </div>
             </div>
             <div class="col-6">
               <div class="form-group pb-2">
                 <label> สิทธิ์การใช้งาน :</label>
                 <select class="form-select" aria-label="Default select example">
-                        <option selected>------โปรดระบุ------</option>
+                        <optionre ng-selected="edit_perm == '------โปรดระบุ------'">------โปรดระบุ------</optionre>
                         <option value="1">Admin</option>
                         <option value="2">Register</option>
                         <option value="3">User</option>
