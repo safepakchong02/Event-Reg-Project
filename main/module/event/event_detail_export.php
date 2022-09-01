@@ -82,7 +82,7 @@
             </thead>
         </table>
         <!-- แสดงข้อมูล -->
-        <table id="example" class="table table-striped" style="width:100%">
+        <table datatable="ng" id="example" class="table nowrap" style="width:100%">
             <thead>
                 <tr class="table-dark">
                     <th>รหัสพนักงาน</th>
