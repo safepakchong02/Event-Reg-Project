@@ -26,8 +26,11 @@
             $data = json_encode($rows);
             //$totaldata = sizeof($rows);
             $results = '{"results_data":' . $data . '}';
+            echo $results;
         }
-        echo $results;
+        else {
+            echo "";
+        }
 
         //******************** add data *********************//
     } else if ($event_view == 'add') {

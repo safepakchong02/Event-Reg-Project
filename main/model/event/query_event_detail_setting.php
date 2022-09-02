@@ -30,6 +30,9 @@
                         case "ev_id":
                             $js[$key] = $result[$key];
                             break;
+                        case "has_reg_by":
+                            $js[$key] = $result[$key];
+                            break;
                         default :
                             if($val == "1") $js[$key] = true;
                             else $js[$key] = false;
@@ -61,8 +64,6 @@
             $gender = covertBoolean($_POST["gender"]);
             $age = covertBoolean($_POST["age"]);
             $birthDate = covertBoolean($_POST["birthDate"]);
-            $table_name = "ev" . $ev_id . "u" . $_SESSION["user_id"];
-
             $sql_update = "UPDATE `event_setting` SET " .
                 "`walk_in` = '$walk_in'," .
                 "`emp_id` = '$emp_id'," .

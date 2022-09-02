@@ -1,4 +1,11 @@
-<div class="container-fluid"><br>
+<!-- import ctrl -->
+<?
+$ctrl_name = "event_dashboard_ctrl";
+include("main/controller/$ctrl_name.php");
+?>
+
+<!-- เริ่ม dashboard -->
+<div class="container-fluid" ng-controller="<?= $ctrl_name ?>"><br>
     <div class="row">
         <div class="col">
             <h1>รายการกิจกรรม</h1>
@@ -25,7 +32,7 @@
                     <td>{{show_event_data.ev_date_start}}</td>
                     <td>{{show_event_data.ev_date_end}}</td>
                     <td>
-                        <button ng-click="delete_event(show_event_data.ev_id)" class="btn btn-primary btn-sm">Dashboard</button>
+                        <a href="index.php?p=reg&m=reg_dashboard&ev_id={{show_event_data.ev_id}}" class="btn btn-primary btn-sm">Dashboard</a>
                     </td>
                 </tr>
             </tbody>
@@ -40,3 +47,4 @@
         <!-- จบการแสดงข้อมูล -->
     </div>
 </div>
+<!-- จบ dashboard -->

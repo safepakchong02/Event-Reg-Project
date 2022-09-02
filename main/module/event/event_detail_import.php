@@ -5,7 +5,7 @@ include("main/controller/$ctrl_name.php");
 ?>
 
 <? if (isset($_GET["ev_id"])) { ?>
-    <div class="container-fluid"><br>
+    <div class="container-fluid" ng-controller="<?= $ctrl_name ?>"><br>
         <div class="row">
             <div class="col-1" style="width: 140px;">
                 <a href="index.php?p=event&m=event_detail&ev_id=<?= $_GET["ev_id"] ?>" class="btn btn-primary"><i class="bi bi-caret-left-fill"></i>ย้อนกลับ</a>
@@ -15,28 +15,23 @@ include("main/controller/$ctrl_name.php");
             </div>
         </div>
         <div class="row">
-            <div class="col-3" style="width:13%;">
+            <!-- <div class="col-2">
                 <label>Upload File :</label>
+            </div> -->
+            <div class="col-4">
+                <input type="file" id="importFile" class="form-control form-control-sm" />
             </div>
-            <div class="col-8">
-                <input class="form-control form-control-sm" id="formFileSm" type="file">
-            </div>
-            <div class="col">
-                <button type="button" class="btn btn-primary btn-sm"><i class="bi bi-person-plus-fill"></i> Import</button>
+            <div class="col-2">
+                <button type="button" ng-click="import()" class="btn btn-primary btn-sm"><i class="bi bi-person-plus-fill"></i> Import</button>
             </div>
         </div>
         <br>
         <!-----show table----->
-        <div class="test">
+        <div ng-hide="isInit">
             <table datatable="ng" id="example" class="table nowrap" style="width:100%">
                 <thead>
                     <tr class="table-dark">
-                        <th>ไอดี</th>
-                        <th>ชื่อกิจกรรม</th>
-                        <th>เจ้าหน้าที่ลงทะเบียน</th>
-                        <th>สถานะลงทะเบียน</th>
-                        <th>วันที่เปิดลงทะเบียน</th>
-                        <th>วันที่ปิดลงทะเบียน</th>
+                        <th ng-repeat="(key, val) in data">{{key}}</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -55,7 +50,7 @@ include("main/controller/$ctrl_name.php");
         </div>
         <br>
         <!-----เลือกtype----->
-        <div class="container-fluid"><br>
+        <div class="container-fluid" ng-hide="isInit"><br>
             <div class="row">
                 <div class="col-4">ชื่อคอลัมน์ในไฟล์ที่อัปโหลด</div>
                 <div class="col-8">แปลงเป็นชื่อที่เราระบุ</div>

@@ -16,7 +16,9 @@
     <script src="../../../Event-Reg-Project/asset/js/angular-datatables.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.3.0/js/responsive.bootstrap5.min.js"></script>
-
+    <script src="//cdn.jsdelivr.net/alasql/0.2/alasql.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.core.min.js" integrity="sha512-UhlYw//T419BPq/emC5xSZzkjjreRfN3426517rfsg/XIEC02ggQBb680V0VvP+zaDZ78zqse3rqnnI5EJ6rxA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped&display=swap" rel="stylesheet">
@@ -24,5 +26,20 @@
     <style>
         body {
             font-family: 'IBM Plex Sans Thai Looped', sans-serif;
+        }
+
+        .btn_custom {
+            background-color: #00a170;
+            color: #7aee42;
+        }
+
+        .btn_danger {
+            background-color: #e02828;
+            color: #7aee42;
+        }
+
+        .btn_normal {
+            background-color: #009dff;
+            color: #7aee42;
         }
     </style>

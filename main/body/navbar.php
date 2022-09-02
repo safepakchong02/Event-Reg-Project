@@ -9,15 +9,17 @@
                 <li class="nav-item">
                     <a href="index.php?p=reg&m=event_dashboard" class="nav-link text-white">แดชบอร์ด</a>
                 </li>
-                <li class="nav-item">
-                    <a href="index.php?p=reg&m=reg_dashboard" class="nav-link text-white">สรุปผลกิจกรรม</a>
-                </li>
-                <li class="nav-item">
-                    <a href="index.php?p=reg&m=reg_register" class="nav-link text-white">ลงทะเบียน</a>
-                </li>
-                <li class="nav-item">
-                    <a href="index.php?p=reg&m=reg_search" class="nav-link text-white">รายชื่อลงทะเบียน</a>
-                </li>
+                <? if (isset($_GET["ev_id"])) { ?>
+                    <li class="nav-item">
+                        <a href="index.php?p=reg&m=reg_dashboard&ev_id=<?= $_GET["ev_id"] ?>" class="nav-link text-white">สรุปผลกิจกรรม</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.php?p=reg&m=reg_register&ev_id=<?= $_GET["ev_id"] ?>" class="nav-link text-white">ลงทะเบียน</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.php?p=reg&m=reg_search&ev_id=<?= $_GET["ev_id"] ?>" class="nav-link text-white">รายชื่อลงทะเบียน</a>
+                    </li>
+                <? } ?>
             </ul>
             <ul class="nav navbar-nav ms-auto">
                 <li class="nav-item dropdown">

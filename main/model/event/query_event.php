@@ -75,7 +75,6 @@
         } // end if
 
         //sql insert data
-        $table_name = "ev" . $ev_id . "u" . $_SESSION["user_id"];
         $sql_add_event = "insert into events set " .
             "ev_id='" . $ev_id . "'," .
             "ev_title='" . $_POST['ev_title'] . "'," .
@@ -83,21 +82,14 @@
             "ev_date_start='" . $_POST['ev_date_start'] . "'," .
             "ev_date_end='" . $_POST['ev_date_end'] . "'," .
             "ev_create_by='" . $_SESSION["user_id"] . "'," .
-            "ev_table_name='" . $table_name . "'," .
             "ev_del = '0';";
 
         mysqli_query($handle, $sql_add_event);
         // echo $sql_add_event;
 
-        //******************** create table *********************//
-        $sql_create_table = "CREATE TABLE " . $table_name . " (" .
-            "id int(11) NOT NULL AUTO_INCREMENT," .
-            "PRIMARY KEY (id)" .");";
-        mysqli_query($handle, $sql_create_table);
-
         //******************** add data to table *********************//
         $sql_add_data = "INSERT INTO `event_setting` SET " .
-        "`ev_id` = '" . $ev_id . "'," .
+            "`ev_id` = '" . $ev_id . "'," .
             "`walk_in` = '1'," .
             "`emp_id` = '0'," .
             "`card_id` = '0'," .
