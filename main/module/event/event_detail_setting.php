@@ -93,10 +93,38 @@ include("main/controller/$ctrl_name.php");
         <!--จบตารางตัวแปร-->
         <div class="container">
             <div class="modal-footer">
-                <div class="d-flex justify-content-end pb-2" id="4">
+                <div class="d-flex justify-content-end pb-2">
                     <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal-detail_add"><i class="bi bi-display"></i> Preview</button>
-                    &nbsp;&nbsp;&nbsp;
-                    <button ng-click="setting_save()" type="button" class="btn btn-success btn-sm"></i>บันทึก</button>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="container">
+            <div class="row">
+                <div class="col-2">
+                    <span>ลงทะเบียนโดยใช้</span>
+                </div>
+            <div class="row">
+                <div class="col-6">
+                    <select class="form-select" aria-label="Default select example">
+                          <option selected>------โปรดระบุ------</option>
+                          <option value="emp_id">รหัสพนักงาน</option>
+                          <option value="card_id">รหัสบัตรประชาชน</option>
+                          <option value="name">ชื่อ-สกุล</option>
+                          <option value="call">เบอร์โทรศัพท์</option>
+                          <option value="com_name">ชื่อบริษัท</option>
+                          <option value="dep">แผนก</option>
+                          <option value="pos">ตำแหน่ง</option>
+                          <option value="salary">เงินเดือน</option>
+                          <option value="gender">เพศ</option>
+                          <option value="age">อายุ</option>
+                          <option value="birthDate">วันเดือนปีเกิด</option>
+                  </select>
+                </div>
+            </div><br><br><br><br><br><br><br><br><br>
+            <div class="row">
+                <div class="d-flex justify-content-end pb-2">
+                   <button ng-click="setting_save()" type="button" class="btn btn-success btn-sm"></i>บันทึก</button>
                 </div>
             </div>
         </div>

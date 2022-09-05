@@ -12,6 +12,14 @@ if (!isset($_GET["ev_id"])) { ?>
     <!-- เพิ่มข้อมูล -->
     <? include("main/module/event/event_detail_add.php"); ?>
     <!-- จบการเพิ่มข้อมูล -->
+    
+    <!-- success -->
+    <? include("main/body/status_reg_success.php"); ?>
+    <!-- end success -->
+    
+    <!-- error -->
+    <? include("main/body/status_reg_error.php"); ?>
+    <!-- end error -->
 
     <!-- header -->
     <div class="row">
