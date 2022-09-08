@@ -7,7 +7,6 @@ if (!isset($_GET["ev_id"])) { ?>
     <meta http-equiv="refresh" content="0;url=index.php?p=reg&m=event_dashboard">
 <? } ?>
 
-
 <div ng-controller="<?= $ctrl_name ?>">
     <div class="container-fluid"><br>
         <div class="row">
@@ -15,11 +14,11 @@ if (!isset($_GET["ev_id"])) { ?>
                 <h1>ชื่อกิจกรรม: {{event_data[0].ev_title}}</h1>
                 <h3>วันที่/เวลา: {{event_data[0].ev_date_start}} ถึง {{event_data[0].ev_date_end}}</h3>
             </div>
-        </div><br>
+        </div><br><br>
 
         <div class="container">
-            <div class="row justify-content-center" align="center">
-                <div class="col-6 col-sm-3">
+            <div class="row justify-content-md-center" align="center">
+                <div class="col-xs-6 col-md-3">
                     <div class="card text-white btn_custom mb-3" style="max-width: 18rem;">
                         <div class="card-header">
                             <ion-icon name="people-outline"></ion-icon>
@@ -30,7 +29,7 @@ if (!isset($_GET["ev_id"])) { ?>
                         </div>
                     </div>
                 </div>
-                <div class="col-6 col-sm-3">
+                <div class="col-xs-6 col-md-3">
                     <div class="card text-white btn_danger mb-3" style="max-width: 18rem;">
                         <div class="card-header">
                             <ion-icon name="cart-outline"></ion-icon>
@@ -41,7 +40,7 @@ if (!isset($_GET["ev_id"])) { ?>
                         </div>
                     </div>
                 </div>
-                <div class="col-6 col-sm-3">
+                <div class="col-xs-6 col-md-3">
                     <div class="card text-white btn_normal mb-3" style="max-width: 18rem;">
                         <div class="card-header">
                             <ion-icon name="desktop-outline"></ion-icon>

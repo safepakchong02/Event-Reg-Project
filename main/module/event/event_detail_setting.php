@@ -99,13 +99,10 @@ include("main/controller/$ctrl_name.php");
             </div>
         </div>
         <hr>
-        <div class="container">
-            <div class="row">
-                <div class="col-2">
-                    <span>ลงทะเบียนโดยใช้</span>
-                </div>
-            <div class="row">
-                <div class="col-6">
+        <div class="container"><br>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label text-right">ลงทะเบียนโดยใช้ : </label>
+                <div class="col">
                     <select class="form-select" aria-label="Default select example">
                           <option selected>------โปรดระบุ------</option>
                           <option value="emp_id">รหัสพนักงาน</option>
@@ -119,9 +116,9 @@ include("main/controller/$ctrl_name.php");
                           <option value="gender">เพศ</option>
                           <option value="age">อายุ</option>
                           <option value="birthDate">วันเดือนปีเกิด</option>
-                  </select>
-                </div>
-            </div><br><br><br><br><br><br><br><br><br>
+                    </select>
+                </div>    
+            </div><br><br><br><br><br>
             <div class="row">
                 <div class="d-flex justify-content-end pb-2">
                    <button ng-click="setting_save()" type="button" class="btn btn-success btn-sm"></i>บันทึก</button>

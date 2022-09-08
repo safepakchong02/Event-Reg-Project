@@ -29,6 +29,21 @@
             }
         }
 
+        $scope.preview = () => {
+            $scope.preview = {};
+            $scope.preview.emp_id = $scope.add_detail_emp_id;
+            $scope.preview.card_id = $scope.add_detail_card_id;
+            $scope.preview.name = $scope.add_detail_name;
+            $scope.preview.call = $scope.add_detail_call;
+            $scope.preview.com_name = $scope.add_detail_com_name;
+            $scope.preview.dep = $scope.add_detail_dep;
+            $scope.preview.pos = $scope.add_detail_pos;
+            $scope.preview.salary = $scope.add_detail_salary;
+            $scope.preview.gender = $scope.add_detail_gender;
+            $scope.preview.age = $scope.add_detail_age;
+            $scope.preview.birthDate = $scope.add_detail_birthDate;
+        }
+
         // init page
         clearData();
 
@@ -97,7 +112,7 @@
                                 'Content-Type': 'application/x-www-form-urlencoded'
                             }
                         }).then(function(response) {
-                                console.log(response.data);
+                                $scope.preview();
                                 var status = response.data.status;
 
                                 $("#modal-detail_add").modal("hide");
@@ -118,10 +133,9 @@
                         $("#modal-detail_add").modal("hide");
                         clearData();
 
-                        $scope.isExist = false;
-                        $("#modal-status_reg_error").modal("show");
+                        $("#modal-status_reg_error_isExist").modal("show");
                         setTimeout(() => {
-                            $("#modal-status_reg_error").modal("hide");
+                            $("#modal-status_reg_error_isExist").modal("hide");
                         }, 2000)
                     } //end if else isExist
                     // end add data
