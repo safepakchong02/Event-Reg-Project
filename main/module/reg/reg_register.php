@@ -32,9 +32,9 @@ if (!isset($_GET["ev_id"])) { ?>
     <!-- end header -->
 
     <!-- register -->
-    <div class="container"><br><br>
+    <div class="container my-5"><br><br>
         <div class="row justify-content-center" align="center">
-            <div class="col-12">
+            <div class="col-xs-3 col-lg-6">
                 <span class="h3">ลงทะเบียน</span>
             </div>
         </div><br><br>
@@ -45,7 +45,7 @@ if (!isset($_GET["ev_id"])) { ?>
         </div><br>
         <div class="row justify-content-center" align="center">
             <div class="col-6">
-                <button type="button" class="btn btn-primary btn-block col-md-12">ลงทะเบียนเข้ากิจกรรม</button>
+                <button type="button" class="btn btn-primary btn-block col-md-12"> ลงทะเบียนเข้ากิจกรรม</button>
             </div>
         </div><br>
         <div class="row justify-content-center" align="center" ng-hide="!check.walk_in">

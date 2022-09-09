@@ -31,33 +31,23 @@
         } else {
             echo "";
         }
-        
     } else if ($event_view == 'show_member') {
         $sql = "SELECT * FROM `event_member` " .
-        "WHERE del = '0' and ev_id = '" . $_GET["ev_id"] . "'";
+            "WHERE del = '0' and ev_id = '" . $_GET["ev_id"] . "'";
 
         $resource_data = mysqli_query($handle, $sql);
         $count_row = mysqli_num_rows($resource_data);
         $header = [];
-        $table = [];
-        $headerIsSet = false;
+        $row = [];
+        $col = [];
 
         if ($count_row > 0) {
             while ($result = mysqli_fetch_assoc($resource_data)) {
-                foreach ($result as $key => $value) {
-                    if (!$headerIsSet) $header[] = $key;
-                    $table[] = $value; 
-                }
-                $headerIsSet = true;
+                $rows[] = $result;
             }
 
-            // $data = json_encode($rows);
-            // $results = '{"results_data":' . $data . '}';
-            // echo $results;
-
-            $header = json_encode($header);
-            $table = json_encode($table);
-            $rs = "{\"header_data\": $header, \"table_data\": $table}";
+            $table = json_encode($rows);
+            $rs = "{\"results_data\": $table}";
             echo $rs;
         } else {
             echo "";
@@ -83,10 +73,10 @@
         mysqli_query($handle, $sql_add_event);
         echo '{"status": true}';
         // echo $sql_add_event;
-    } else if ($event_view == 'hasExist'){
+    } else if ($event_view == 'hasExist') {
         $sql = "SELECT * FROM `event_member` " .
-        "WHERE del = '0' and `". $_POST["key"] ."`='" . $_POST["value"] . "'" .
-        " and `ev_id`='". $_POST["ev_id"] . "'";
+            "WHERE del = '0' and `" . $_POST["key"] . "`='" . $_POST["value"] . "'" .
+            " and `ev_id`='" . $_POST["ev_id"] . "'";
 
         $resource_data = mysqli_query($handle, $sql);
         $count_row = mysqli_num_rows($resource_data);
@@ -99,8 +89,8 @@
     } else if ($event_view == 'show_data_edit') {
 
         $sql = "SELECT * FROM `event_member` " .
-        "WHERE `id` = '$id' `and ev_id` = '" . $_GET["ev_id"] . "'";
-        
+            "WHERE `id` = '$id' `and ev_id` = '" . $_GET["ev_id"] . "'";
+
         $resource_data = mysqli_query($handle, $sql);
         $numRows = mysqli_num_fields($resource_data);
 
@@ -118,19 +108,19 @@
             $id = $_POST['id'];
 
             $sql_update = "UPDATE `event_member` set " .
-            "`emp_id`='" . $_POST['emp_id'] . "'," .
-            "`card_id`='" . $_POST['card_id'] . "'," .
-            "`name`='" . $_POST['name'] . "'," .
-            "`call`='" . $_POST["call"] . "'," .
-            "`com_name`='" . $_POST["com_name"] . "'," .
-            "`dep`='" . $_POST['dep'] . "'," .
-            "`pos`='" . $_POST['pos'] . "'," .
-            "`salary`='" . $_POST['salary'] . "'," .
-            "`gender`='" . $_POST['gender'] . "'," .
-            "`age`='" . $_POST["age"] . "'," .
-            "`birthDate`='" . $_POST['birthDate'] . "'," .
-            "`reg_date`='" . $_POST['reg_date'] . 
-            "WHERE `id` = $id" ."';";
+                "`emp_id`='" . $_POST['emp_id'] . "'," .
+                "`card_id`='" . $_POST['card_id'] . "'," .
+                "`name`='" . $_POST['name'] . "'," .
+                "`call`='" . $_POST["call"] . "'," .
+                "`com_name`='" . $_POST["com_name"] . "'," .
+                "`dep`='" . $_POST['dep'] . "'," .
+                "`pos`='" . $_POST['pos'] . "'," .
+                "`salary`='" . $_POST['salary'] . "'," .
+                "`gender`='" . $_POST['gender'] . "'," .
+                "`age`='" . $_POST["age"] . "'," .
+                "`birthDate`='" . $_POST['birthDate'] . "'," .
+                "`reg_date`='" . $_POST['reg_date'] .
+                "WHERE `id` = $id" . "';";
 
             mysqli_query($handle, $sql_update);
             // echo $sql_update;

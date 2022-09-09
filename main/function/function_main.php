@@ -34,7 +34,10 @@
 			case "birthDate":
 				return "วันเกิด";
 				break;
-			default :
+			case "reg_date":
+				return "วันที่เข้าร่วมกิจกรรม";
+				break;
+			default:
 				return "";
 				break;
 		}
