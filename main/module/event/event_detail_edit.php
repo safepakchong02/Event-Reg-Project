@@ -11,49 +11,49 @@
                         <div class="col-6" ng-hide="!check.emp_id">
                             <div class="form-group pb-2">
                                 <label> รหัสพนักงาน :</label>
-                                <input type="text" ng-model="edit_detail_emp_id" name="edit_detail_emp_id" value="" class="form-control">
+                                <input type="text" ng-model="data_edit.emp_id" name="data_edit.emp_id" value="" class="form-control">
                             </div>
                         </div>
                         <div class="col-6" ng-hide="!check.com_name">
                             <div class="form-group pb-2">
                                 <label> ชื่อบริษัท :</label>
-                                <input type="text" ng-model="edit_detail_com_name" name="edit_detail_com_name" value="" class="form-control">
+                                <input type="text" ng-model="data_edit.com_name" name="data_edit.com_name" value="" class="form-control">
                             </div>
                         </div>
                         <div class="col-6" ng-hide="!check.name">
                             <div class="form-group pb-2">
                                 <label> ชื่อ-สกุล :</label>
-                                <input type="text" ng-model="edit_detail_name" name="edit_detail_name" value="" class="form-control">
+                                <input type="text" ng-model="data_edit.name" name="data_edit.name" value="" class="form-control">
                             </div>
                         </div>
                         <div class="col-6" ng-hide="!check.card_id">
                             <div class="form-group pb-2">
                                 <label> รหัสบัตรประชาชน :</label>
-                                <input type="text" ng-model="edit_detail_card_id" name="edit_detail_card_id" value="" class="form-control">
+                                <input type="text" ng-model="data_edit.card_id" name="data_edit.card_id" value="" class="form-control">
                             </div>
                         </div>
                         <div class="col-6" ng-hide="!check.dep">
                             <div class="form-group pb-2">
                                 <label> แผนก :</label>
-                                <input type="text" ng-model="edit_detail_dep" name="edit_detail_dep" value="" class="form-control">
+                                <input type="text" ng-model="data_edit.dep" name="data_edit.dep" value="" class="form-control">
                             </div>
                         </div>
                         <div class="col-6" ng-hide="!check.pos">
                             <div class="form-group pb-2">
                                 <label> ตำแหน่ง :</label>
-                                <input type="text" ng-model="edit_detail_pos" name="edit_detail_pos" value="" class="form-control">
+                                <input type="text" ng-model="data_edit.pos" name="data_edit.pos" value="" class="form-control">
                             </div>
                         </div>
                         <div class="col-6" ng-hide="!check.call">
                             <div class="form-group pb-2">
                                 <label> เบอร์โทรศัพท์ :</label>
-                                <input type="tel" ng-model="edit_detail_call" name="edit_detail_call" value="" class="form-control">
+                                <input type="tel" ng-model="data_edit.call" name="data_edit.call" value="" class="form-control">
                             </div>
                         </div>
                         <div class="col-6" ng-hide="!check.gender">
                             <div class="form-group pb-2">
                                 <label> เพศ :</label>
-                                <select class="form-select" ng-model="edit_detail_gender">
+                                <select class="form-select" ng-model="data_edit.gender">
                                     <option selected>------โปรดระบุ------</option>
                                     <option value="1">ชาย</option>
                                     <option value="2">หญิง</option>
@@ -64,19 +64,19 @@
                         <div class="col-6" ng-hide="!check.age">
                             <div class="form-group pb-2">
                                 <label> อายุ :</label>
-                                <input type="number" ng-model="edit_detail_age" name="edit_detail_age" value="" class="form-control">
+                                <input type="number" ng-model="data_edit.age" name="data_edit.age" value="" class="form-control">
                             </div>
                         </div>
                         <div class="col-6" ng-hide="!check.birthDate">
                             <div class="form-group pb-2">
                                 <label> วันเดือนปีเกิด :</label>
-                                <input type="date" ng-model="edit_detail_birthDate" name="edit_detail_birthDate" value="" class="form-control">
+                                <input type="date" ng-model="data_edit.birthDate" name="data_edit.birthDate" value="" class="form-control">
                             </div>
                         </div>
                         <div class="col-6" ng-hide="!check.salary">
                             <div class="form-group pb-2">
                                 <label> เงินเดือน :</label>
-                                <input type="number" ng-model="edit_detail_salary" name="edit_detail_salary" value="" class="form-control">
+                                <input type="number" ng-model="data_edit.salary" name="data_edit.salary" value="" class="form-control">
                             </div>
                         </div>
                     </div>

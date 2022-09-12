@@ -37,9 +37,6 @@
 
         $resource_data = mysqli_query($handle, $sql);
         $count_row = mysqli_num_rows($resource_data);
-        $header = [];
-        $row = [];
-        $col = [];
 
         if ($count_row > 0) {
             while ($result = mysqli_fetch_assoc($resource_data)) {
@@ -88,8 +85,9 @@
         }
     } else if ($event_view == 'show_data_edit') {
 
+        $id = $_GET["id"];
         $sql = "SELECT * FROM `event_member` " .
-            "WHERE `id` = '$id' `and ev_id` = '" . $_GET["ev_id"] . "'";
+            "WHERE `id` = '$id'";
 
         $resource_data = mysqli_query($handle, $sql);
         $numRows = mysqli_num_fields($resource_data);
@@ -118,23 +116,22 @@
                 "`salary`='" . $_POST['salary'] . "'," .
                 "`gender`='" . $_POST['gender'] . "'," .
                 "`age`='" . $_POST["age"] . "'," .
-                "`birthDate`='" . $_POST['birthDate'] . "'," .
-                "`reg_date`='" . $_POST['reg_date'] .
-                "WHERE `id` = $id" . "';";
+                "`birthDate`='" . $_POST['birthDate'] . "'" .
+                " WHERE `id` = '$id';";
 
             mysqli_query($handle, $sql_update);
             // echo $sql_update;
         }
 
         //******************** delete data *********************//
-    } else if ($event_view == 'del_event') {
+    } else if ($event_view == 'del_reg') {
 
         if ($_GET['id'] != '') {
             $id = $_GET['id'];
-            $sql_delete_event = "UPDATE `event_member` SET `del` = '1'" .
-                " WHERE `events`.`id` = '$id'";
-            mysqli_query($handle, $sql_delete_event);
-            // echo $sql_delete_event;
+            $sql_delete_reg = "UPDATE `event_member` SET `del` = '1'" .
+                " WHERE `id` = '$id'";
+            mysqli_query($handle, $sql_delete_reg);
+            // echo $sql_delete_reg;
         }
 
         //******************** else *********************//

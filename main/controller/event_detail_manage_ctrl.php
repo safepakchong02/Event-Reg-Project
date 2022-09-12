@@ -1,33 +1,27 @@
 <script>
-    function visibleUI(status) {
-        if (status) {
-            $(document).ready(() => {
-                $("#example_wrapper").hide();
-            });
-        } else {
-            $(document).ready(() => {
-                $("#example_wrapper").show();
-            });
-        }
-    } // end function
-
     var app = angular.module("<?= $app_name ?>", ['datatables']);
     app.controller("<?= $ctrl_name ?>", function($scope, $http) { // start controller function
-        $scope.isEmpty = true;
+        /* ===============CHECK DATA=============== */
+        $scope.checkReg = (date) => {
+            if (date === "") return "-"
+            else return date;
+        }
+        /* ===============END CHECK DATA=============== */
 
         /* ==================--SHOW--======================= */
-        $http.get("main/model/event/query_event_detail.php?event_view=show_data")
+        $http.get("main/model/event/query_event.php?event_view=show_data")
             .then(function(res) { // start then
-                if (res.data.results_data !== "null" && res.data !== "") {
-                    $scope.header_data = res.data.results_data.header; // "results_data" is key in json format
-                    $scope.table_data = res.data.results_data.table_data;
+                $scope.ev_title = res.data.results_data[0].ev_title;
+            }); // end then
 
-                    $scope.isEmpty = false;
-                    visibleUI($scope.isEmpty);
-                } else {
-                    $scope.isEmpty = true;
-                    visibleUI($scope.isEmpty);
-                }
+        $http.get("main/model/event/query_event_detail_setting.php?event_view=show_data&ev_id=<?= $_GET["ev_id"] ?>")
+            .then(function(res) { // start then
+                $scope.check = res.data.results_data[0];
+            }); // end then
+
+        $http.get("main/model/event/query_event_detail.php?event_view=show_data&ev_id=<?= $_GET["ev_id"] ?>")
+            .then((res) => { // start then
+                $scope.data_table = res.data.results_data;
             }); // end then
         /* ==================END SHOW======================= */
         /* ==================--ADD---======================= */

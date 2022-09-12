@@ -5,13 +5,13 @@
                 <br>
                 <div class="row text-center">
                     <div class="col-12">
-                        <span style="font-size:1.5rem;"><b>บันทึกข้อมูลเสร็จสิ้น</b></span>
+                        <span style="font-size:1.5rem;"><b>ดำเนินการเสร็จสิ้น</b></span>
                     </div>
                     <div class="col-12">
                         <i class="bi bi-check2-circle " style="color: #49C83E; font-size:7rem;"></i>
                     </div>
                 </div>
-                <form ng-controller="<?=$ctrl_name?>">
+                <!-- <form ng-controller="<?=$ctrl_name?>">
                     <div class="row">
                         <div class="col-6" ng-hide="!check.emp_id">
                             <div class="form-group pb-2">
@@ -85,7 +85,7 @@
                             </div>
                         </div>
                     </div>
-                </form>
+                </form> -->
             </div>
         </div>
     </div>

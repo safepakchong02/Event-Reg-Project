@@ -13,7 +13,8 @@
     //******************** show data *********************//
     if ($event_view == 'show_data') {
 
-        $sql = "SELECT * FROM ";
+        $sql = "SELECT * FROM `event_member` " .
+        "WHERE del = '0' and ev_id = '" . $_GET["ev_id"] . "'";
 
         $resource_data = mysqli_query($handle, $sql);
         $count_row = mysqli_num_rows($resource_data);
@@ -23,53 +24,44 @@
                 $rows[] = $result;
             }
 
-            $data = json_encode($rows);
-            //$totaldata = sizeof($rows);
-            $results = '{"results_data":' . $data . '}';
-            echo $results;
-        }
-        else {
+            $table = json_encode($rows);
+            $rs = "{\"results_data\": $table}";
+            echo $rs;
+        } else {
             echo "";
         }
 
         //******************** add data *********************//
     } else if ($event_view == 'add') {
-        $ev_id = 1;
-
-        // หาไอดีที่มากที่สุด
-        $sql_max_val = "SELECT MAX(ev_id) FROM `events`";
-        $rs = mysqli_query($handle, $sql_max_val);
-        $count_row = mysqli_num_rows($rs);
-
-        if ($count_row > 0) {
-            while ($result = mysqli_fetch_assoc($rs)) {
-                $ev_id = intval($result["MAX(ev_id)"]) + 1;
-            } // end while
-        } // end if
-
-        //sql insert data
-        $table_name = "ev" . $ev_id . "u" . $_SESSION["user_id"];
-        $sql_add_event = "insert into events set " .
-            "ev_id='" . $ev_id . "'," .
-            "ev_title='" . $_POST['ev_title'] . "'," .
-            "ev_assign_to='" . $_POST['ev_assign_to'] . "'," .
-            "ev_date_start='" . $_POST['ev_date_start'] . "'," .
-            "ev_date_end='" . $_POST['ev_date_end'] . "'," .
-            "ev_create_by='" . $_SESSION["user_id"] . "'," .
-            "ev_table_name='" . $table_name . "'," .
-            "ev_del = '0';";
+        $sql_add_event = "insert into `event_member` set " .
+        "`ev_id`='" . $_POST["ev_id"] . "'," .
+            "`add_by`='" . $_SESSION['user_id'] . "'," .
+            "`del`='0'," .
+            "`emp_id`='" . $_POST['emp_id'] . "'," .
+            "`card_id`='" . $_POST['card_id'] . "'," .
+            "`name`='" . $_POST['name'] . "'," .
+            "`call`='" . $_POST["call"] . "'," .
+            "`com_name`='" . $_POST["com_name"] . "'," .
+            "`dep`='" . $_POST['dep'] . "'," .
+            "`pos`='" . $_POST['pos'] . "'," .
+            "`salary`='" . $_POST['salary'] . "'," .
+            "`gender`='" . $_POST['gender'] . "'," .
+            "`age`='" . $_POST["age"] . "'," .
+            "`birthDate`='" . $_POST['birthDate'] . "'," .
+            "`reg_date`='" . $_POST['reg_date'] . "';";
 
         mysqli_query($handle, $sql_add_event);
-        // echo $sql_add_event;
+        echo '{"status": true}';
 
         //******************** view Edit *********************//
     } else if ($event_view == 'show_data_edit') {
 
-        $sql = "SELECT * FROM `events`" .
-            " WHERE ev_id = '" . $_GET['ev_id'] . "'";
+        $id = $_GET["id"];
+        $sql = "SELECT * FROM `event_member` " .
+        "WHERE `id` = '$id'";
+
         $resource_data = mysqli_query($handle, $sql);
         $numRows = mysqli_num_fields($resource_data);
-        //		$resultArray = array();
 
         while ($result = mysqli_fetch_assoc($resource_data)) {
             $rows[] = $result;
@@ -81,32 +73,36 @@
 
         //******************** Update Edit *********************//
     } else if ($event_view == 'edit_form_save') {
-        if ($_POST['ev_id'] != '') {
-            $ev_id = $_POST["ev_id"];
-            $ev_title = $_POST['ev_title'];
-            $ev_date_start = $_POST['ev_date_start'];
-            $ev_date_end = $_POST['ev_date_end'];
-            $ev_assign_to = $_POST['ev_assign_to'];
+        if ($_POST['id'] != '') {
+            $id = $_POST['id'];
 
+            $sql_update = "UPDATE `event_member` set " .
+            "`emp_id`='" . $_POST['emp_id'] . "'," .
+                "`card_id`='" . $_POST['card_id'] . "'," .
+                "`name`='" . $_POST['name'] . "'," .
+                "`call`='" . $_POST["call"] . "'," .
+                "`com_name`='" . $_POST["com_name"] . "'," .
+                "`dep`='" . $_POST['dep'] . "'," .
+                "`pos`='" . $_POST['pos'] . "'," .
+                "`salary`='" . $_POST['salary'] . "'," .
+                "`gender`='" . $_POST['gender'] . "'," .
+                "`age`='" . $_POST["age"] . "'," .
+                "`birthDate`='" . $_POST['birthDate'] . "'" .
+                " WHERE `id` = '$id';";
 
-            $sql_update = "UPDATE `events` SET `ev_title` = '$ev_title'," .
-                " `ev_assign_to` = '$ev_assign_to'," .
-                " `ev_date_start` = '$ev_date_start'," .
-                " `ev_date_end` = '$ev_date_end'" .
-                " WHERE `ev_id` = '$ev_id'";
             mysqli_query($handle, $sql_update);
             // echo $sql_update;
         }
 
         //******************** delete data *********************//
-    } else if ($event_view == 'del_event') {
+    } else if ($event_view == 'del_reg') {
 
-        if ($_GET['ev_id'] != '') {
-            $ev_id = $_GET['ev_id'];
-            $sql_delete_event = "UPDATE `events` SET `ev_del` = '1'" .
-                " WHERE `events`.`ev_id` = '$ev_id'";
-            mysqli_query($handle, $sql_delete_event);
-            // echo $sql_delete_event;
+        if ($_GET['id'] != '') {
+            $id = $_GET['id'];
+            $sql_delete_reg = "UPDATE `event_member` SET `del` = '1'" .
+            " WHERE `id` = '$id'";
+            mysqli_query($handle, $sql_delete_reg);
+            // echo $sql_delete_reg;
         }
 
         //******************** else *********************//
