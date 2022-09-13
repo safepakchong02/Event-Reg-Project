@@ -45,12 +45,12 @@ if (!isset($_GET["ev_id"])) { ?>
         </div><br>
         <div class="row justify-content-center" align="center">
             <div class="col-6">
-                <button type="button" class="btn btn-primary btn-block col-md-12"> ลงทะเบียนเข้ากิจกรรม</button>
+                <button type="button" ng-click="register()" class="btn btn-primary btn-block col-md-12"> ลงทะเบียนเข้ากิจกรรม</button>
             </div>
         </div><br>
         <div class="row justify-content-center" align="center" ng-hide="!check.walk_in">
             <div class="col-6">
-                <button type="button" class="btn btn-primary btn-block col-md-12" data-bs-toggle="modal" data-bs-target="#modal-detail_add">เพิ่มข้อมูลผู้ลงทะเบียนใหม่</button>
+                <button type="button" class="btn btn-success btn-block col-md-12" data-bs-toggle="modal" data-bs-target="#modal-detail_add">เพิ่มข้อมูลผู้ลงทะเบียนใหม่</button>
             </div>
         </div>
     </div>

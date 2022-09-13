@@ -45,43 +45,61 @@
         } // end add_event_detail function
         /* ==================END ADD-======================= */
         /* ==================--EDIT--======================= */
-        $scope.edit_event_detail_view = function($id) { // start edit_event_detail_view function
-            $http.get(`main/model/event/query_event_detail.php?event_view=show_data_edit&id=${$id}`)
-                .then(function(response) { // start then
-                    // alert(response.data);
+        $scope.edit_reg_view = (id) => {
+            $http.get(`main/model/reg/query_reg.php?event_view=show_data_edit&id=${id}`)
+                .then((res) => { // start then
+                    $scope.data_edit = res.data.results_data_edit[0];
+                    $scope.data_edit.birthDate = createDate($scope.data_edit.birthDate);
+                }); // end then
+        }
 
-                }) // end then
-        } // end edit_event_detail_view function
-
-        $scope.edit_event_detail_save = function() { // start edit_event_detail_save function
+        $scope.edit_form_save = () => {
             $http({
                 method: 'POST',
-                url: 'main/model/event/query_event_detail.php?event_view=edit_form_save',
-                data: ``,
+                url: 'main/model/reg/query_reg.php?event_view=edit_form_save',
+                data: `id=${$scope.data_edit.id}` +
+                    `&emp_id=${$scope.data_edit.emp_id}` +
+                    `&card_id=${$scope.data_edit.card_id}` +
+                    `&name=${$scope.data_edit.name}` +
+                    `&call=${$scope.data_edit.call}` +
+                    `&com_name=${$scope.data_edit.com_name}` +
+                    `&dep=${$scope.data_edit.dep}` +
+                    `&pos=${$scope.data_edit.pos}` +
+                    `&salary=${$scope.data_edit.salary}` +
+                    `&gender=${$scope.data_edit.gender}` +
+                    `&age=${$scope.data_edit.age}` +
+                    `&birthDate=${convertDate($scope.data_edit.birthDate)}`,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }).then(function(response) {
-                    // alert(response.data);
-                    location.reload();
+                    // console.log(response.data);
+                    $("#modal-detail_edit").modal("hide");
+                    $("#modal-status_reg_success").modal("show");
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1500)
                 },
                 function(response) { // optional
                     // failed
                     alert('ไม่สามารถบันทึกข้อมูลได้');
                 });
-
-        } // end edit_event_detail_save function
+        }
         /* ==================END EDIT======================= */
         /* ==================-DELETE-======================= */
-        $scope.delete_event_detail = function($id) { // start delete_event_detail function
-            if (confirm("คุณต้องการลบข้อมูลหรือไม่")) {
-                $http.get(`main/model/event/query_event_detail.php?event_view=del_event&id=${$id}`)
-                    .then(function(res) { // start then
-                        // alert(res.data);
-                        location.reload();
-                    }) // end then
-            }
-        } // end delete_event_detail function
+        $scope.del_reg = (id) => {
+            if (confirm("คุณต้องการลบข้อมูลนี้หรือไม่")) {
+                $http.get(`main/model/reg/query_reg.php?event_view=del_reg&id=${id}`)
+                    .then((res) => { // start then
+                        // console.log(res.data);
+                        $("#modal-detail_edit").modal("hide");
+                        $("#modal-status_reg_success").modal("show");
+                        setTimeout(() => {
+                            location.reload();
+                        }, 1500)
+                    }); // end then
+            } // end if confirm
+        }
         /* ==================END DELETE===================== */
 
     }); // end controller function

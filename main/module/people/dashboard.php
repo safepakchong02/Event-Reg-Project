@@ -11,7 +11,7 @@ include("main/controller/$ctrl_name.php");
             <h1>แสดงรายชื่อพนักงาน</h1><br>
             <!-- เพิ่มข้อมูล -->
             <div class="d-flex justify-content-end pb-2">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-add">
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-add">
                     <i class="bi bi-plus-circle"></i> เพิ่มข้อมูลพนักงาน
                 </button>
             </div>

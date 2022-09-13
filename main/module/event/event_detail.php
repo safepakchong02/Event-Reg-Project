@@ -8,6 +8,12 @@ include("main/controller/$ctrl_name.php");
     <!-- ข้อมูลผู้ลงทะเบียน -->
     <? $ev_id = $_GET["ev_id"]; ?>
     <div class="col-12 pt-4" ng-controller="<?= $ctrl_name ?>">
+        <!-- add member -->
+        <? include("main/module/event/event_detail_add.php"); ?>
+        <!-- end add member -->
+        <!-- status success -->
+        <? include("main/body/status_reg_success.php"); ?>
+        <!-- end status success -->
         <h1>รายชื่อผู้ลงทะเบียน</h1><br>
         <div class="container-fluid">
             <div class="row">
@@ -16,7 +22,7 @@ include("main/controller/$ctrl_name.php");
                 </div>
                 <div class="col-9">
                     <div class="col-12" align="right">
-                        <button ng-hide="isInit" type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modal-detail-add">
+                        <button ng-hide="isInit" type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modal-detail_add">
                             <i class="bi bi-person-plus-fill"></i> เพิ่มรายชื่อ
                         </button>
                         <a href="index.php?p=event&m=event_detail_setting&ev_id=<?= $ev_id ?>" class="btn btn-primary btn-sm">
@@ -25,7 +31,7 @@ include("main/controller/$ctrl_name.php");
                         <a href="index.php?p=event&m=event_detail_import&ev_id=<?= $ev_id ?>" class="btn btn-primary btn-sm">
                             <i class="bi bi-upload"></i> นำเข้าข้อมูล
                         </a>
-                        <a href="index.php?p=event&m=event_detail_export&ev_id=<?= $ev_id ?>" ng-hide="isInit" class="btn btn-info btn-sm ">
+                        <a ng-hide="isInit" href="index.php?p=event&m=event_detail_export&ev_id=<?= $ev_id ?>" class="btn btn-info btn-sm ">
                             <i class="bi bi-file-earmark-arrow-up"></i></i> Export
                         </a>
                     </div>

@@ -7,7 +7,7 @@
                     $("#modal-status_login_logout").modal("show");
                     setTimeout(() => {
                         location.replace("/Event-Reg-Project/");
-                    }, 1500)
+                    }, 500)
                 }); // end then
         <? } ?>
 
@@ -27,13 +27,13 @@
                         $("#modal-status_login_success").modal("show");
                         setTimeout(() => {
                             location.reload();
-                        }, 1500)
+                        }, 500)
                     } else {
                         // console.log("error");
                         $("#modal-status_login_error").modal("show");
                         setTimeout(() => {
                             location.reload();
-                        }, 1500)
+                        }, 500)
                     }
                 },
                 function(response) { // optional

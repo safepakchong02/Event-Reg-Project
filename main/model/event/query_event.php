@@ -18,8 +18,12 @@
             "LEFT JOIN users " . 
             "ON events.ev_assign_to = users.user_id " .
             "WHERE ev_del = '0'";
-        }
-        else {
+        } elseif ($_SESSION["perm"] == "register") {
+            $sql = "SELECT * FROM events " .
+            "LEFT JOIN users " .
+            "ON events.ev_assign_to = users.user_id " .
+            "WHERE ev_del = '0' and ev_assign_to = '" . $_SESSION["user_id"] . "'";
+        } else {
             $sql = "SELECT * FROM events " .
             "LEFT JOIN users " .
             "ON events.ev_assign_to = users.user_id " .

@@ -29,25 +29,10 @@
             }
         }
 
-        $scope.preview = () => {
-            $scope.preview = {};
-            $scope.preview.emp_id = $scope.add_detail_emp_id;
-            $scope.preview.card_id = $scope.add_detail_card_id;
-            $scope.preview.name = $scope.add_detail_name;
-            $scope.preview.call = $scope.add_detail_call;
-            $scope.preview.com_name = $scope.add_detail_com_name;
-            $scope.preview.dep = $scope.add_detail_dep;
-            $scope.preview.pos = $scope.add_detail_pos;
-            $scope.preview.salary = $scope.add_detail_salary;
-            $scope.preview.gender = $scope.add_detail_gender;
-            $scope.preview.age = $scope.add_detail_age;
-            $scope.preview.birthDate = $scope.add_detail_birthDate;
-        }
-
         // init page
         clearData();
 
-        // start show event
+        /* =============SHOW DATA============= */
         $http.get("main/model/reg/query_reg.php?event_view=show_data&ev_id=<?= $_GET["ev_id"] ?>")
             .then((res) => { // start then
                 $scope.event_data = res.data.results_data; // "results_data" is key in json format
@@ -59,7 +44,59 @@
                 $scope.reg_by = res.data.results_data[0]["has_reg_by"];
                 $scope.has_reg_by = convertNameCol($scope.reg_by);
             }); // end then
+        /* =============END SHOW DATA============= */
 
+        /* =============REGISTER============= */
+        $scope.register = () => {
+            $http({
+                method: 'POST',
+                url: 'main/model/reg/query_reg.php?event_view=noData',
+                data: `ev_id=<?= $_GET["ev_id"] ?>` +
+                    `&key=${$scope.reg_by}` +
+                    `&value=${$scope.reg}`,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }).then((res) => {
+                var isNoData = res.data.noData;
+
+                if (!isNoData) {
+                    var data = res.data.results_data[0];
+                    var id = data.id;
+                    var now = new Date();
+                    var reg_date = convertDate(now.toString());
+
+                    $http({
+                        method: 'POST',
+                        url: 'main/model/reg/query_reg.php?event_view=reg',
+                        data: `id=${id}` +
+                            `&reg_date=${reg_date}`,
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        }
+                    }).then((res) => {
+                        // console.log(res.data);
+                        $scope.preview = data;
+                        $scope.preview.birthDate = createDate(data.birthDate);
+                        // console.log($scope.preview);
+                        $("#modal-status_reg_success").modal("show");
+                        setTimeout(() => {
+                            $("#modal-status_reg_success").modal("hide");
+                        }, 1000)
+                    });
+                } else {
+                    $("#modal-status_reg_error_isNoData").modal("show");
+                    setTimeout(() => {
+                        $("#modal-status_reg_error_isNoData").modal("hide");
+                    }, 1000)
+                } // end else if 
+
+                $scope.reg = "";
+            }); // end then
+        } // end function register
+        /* =============END REGISTER============= */
+
+        /* =============ADD MEMBER============= */
         $scope.add_member = () => {
             var birthDate = "";
 
@@ -112,7 +149,7 @@
                                 'Content-Type': 'application/x-www-form-urlencoded'
                             }
                         }).then(function(response) {
-                                $scope.preview();
+                                // $scope.preview();
                                 var status = response.data.status;
 
                                 $("#modal-detail_add").modal("hide");
@@ -136,7 +173,7 @@
                         $("#modal-status_reg_error_isExist").modal("show");
                         setTimeout(() => {
                             $("#modal-status_reg_error_isExist").modal("hide");
-                        }, 2000)
+                        }, 1000)
                     } //end if else isExist
                     // end add data
                 },
@@ -146,6 +183,7 @@
                 });
             // end check exist data
         } // end add_member function
+        /* =============END ADD MEMBER============= */
 
     }); // end controller function
 </script>

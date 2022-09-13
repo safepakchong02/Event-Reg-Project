@@ -7,80 +7,66 @@
             <h1>ออกรายงานผล</h1>
         </div>
     </div>
-    <div class="container">
-      <table class="table">
-            <thead>
-                <tr>
-                    <div class="col-4">
-                        <div class="col">
-                            <h3>ค้นหาข้อมูล</h3>
+    <div class="container pb-3"><br>
+        <div class="row">
+            <div class="col-md-4">
+                <h3>ค้นหาข้อมูล</h3>
+            </div>
+            <div class="box-body">
+         		<div class="row">
+					<div class="col-md-4 pb-3">
+						<div class="form-group">
+							<label>รหัสพนักงาน :</label>
+                            <input type="search" class="form-control rounded" placeholder="------- ไม่ระบุข้อมูล -------" aria-label="Search" aria-describedby="search-addon" />  
+						</div>
+					</div>
+                    <div class="col-md-4 pb-3">
+                        <div class="form-group">
+                            <label >แผนก :</label>
+                            <input type="search" class="form-control rounded" placeholder="------- ไม่ระบุข้อมูล -------" aria-label="Search" aria-describedby="search-addon" />
                         </div>
                     </div>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="box-body">
-         			    <div class="row">
-						    <div class="col-md-4">
-							    <div class="form-group">
-								    <label>รหัสพนักงาน :</label>
-                                    <input type="search" class="form-control rounded" placeholder="------- ไม่ระบุข้อมูล -------" aria-label="Search" aria-describedby="search-addon" />  
-							    </div>
-						    </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                
-                                    <label >แผนก :</label>
-                                    <input type="search" class="form-control rounded" placeholder="------- ไม่ระบุข้อมูล -------" aria-label="Search" aria-describedby="search-addon" />
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label >ตำแหน่ง :</label>
-                                    <input type="search" class="form-control rounded" placeholder="------- ไม่ระบุข้อมูล -------" aria-label="Search" aria-describedby="search-addon" />
-                                </div>
-                            </div>
-					    </div>
-                        <br>
-                        <div class="row">
-						    <div class="col-md-4">
-							    <div class="form-group">
-								    <label>เพศ :</label>
-                                    <select class="form-control selectpicker" id="select-country" data-live-search="true">
-                                        <option data-tokens="/">---ไม่ระบุข้อมูล---</option>
-                                        <option data-tokens="/">ชาย</option>
-                                        <option data-tokens="/">หญิง</option>
-                                        <option data-tokens="/">เพศทางเลือก</option>
-                                    </select>  
-							    </div>
-						    </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label >สถานะลงทะเบียน :</label>
-                                    <select class="form-control selectpicker" id="select-country" data-live-search="true">
-                                        <option data-tokens="/">---ไม่ระบุข้อมูล---</option>
-                                        <option data-tokens="/">เปิดลงทะเบียน</option>
-                                        <option data-tokens="/">ปิดลงทะเบียน</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label >วันที่เข้ากิจกรรม :</label>
-                                    <input type="datetime-local" class="form-control rounded" placeholder="------- ไม่ระบุข้อมูล -------" aria-label="Search" aria-describedby="search-addon" />
-                                </div>
-                            </div>
-					    </div>
+                    <div class="col-md-4 pb-3">
+                        <div class="form-group">
+                            <label >ตำแหน่ง :</label>
+                            <input type="search" class="form-control rounded" placeholder="------- ไม่ระบุข้อมูล -------" aria-label="Search" aria-describedby="search-addon" />
+                        </div>
                     </div>
-                    <!-- /.box-body -->
+				
+				    <div class="col-md-4 pb-3">
+					    <div class="form-group">
+							<label>เพศ :</label>
+                            <select class="form-control selectpicker" id="select-country" data-live-search="true">
+                                <option data-tokens="/">---ไม่ระบุข้อมูล---</option>
+                                <option data-tokens="/">ชาย</option>
+                                <option data-tokens="/">หญิง</option>
+                                <option data-tokens="/">เพศทางเลือก</option>
+                            </select>  
+						</div>
+					</div>
+                    <div class="col-md-4 pb-3">
+                        <div class="form-group">
+                            <label >สถานะลงทะเบียน :</label>
+                            <select class="form-control selectpicker" id="select-country" data-live-search="true">
+                                <option data-tokens="/">---ไม่ระบุข้อมูล---</option>
+                                <option data-tokens="/">เปิดลงทะเบียน</option>
+                                <option data-tokens="/">ปิดลงทะเบียน</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4 pb-3">
+                        <div class="form-group">
+                            <label >วันที่เข้ากิจกรรม :</label>
+                            <input type="datetime-local" class="form-control rounded" placeholder="------- ไม่ระบุข้อมูล -------" aria-label="Search" aria-describedby="search-addon" />
+                        </div>
+                    </div>
                     <div class="box-footer"><br>
-                        <button type="submit" id="submit" class="btn btn-success btn-sm" ng-click="Export()" ><i class="bi bi-file-earmark-excel-fill"></i>  Export Excel</button>
+                        <button type="button" class="btn btn-success btn-sm" ng-click="Export()"><i class="bi bi-file-earmark-excel-fill"></i> Export Excel</button>
                     </div>
-                    <!-- /.box-footer-->
-                  </td>
-                </tr>
-            </thead>
-        </table>
+                </div>
+            </div>
+        </div>
+    </div>
         <!-- แสดงข้อมูล -->
         <table datatable="ng" id="example" class="table nowrap" style="width:100%">
             <thead>

@@ -49,6 +49,18 @@
         } else {
             echo "";
         }
+    } else if ($event_view == 'reg') {
+
+        if ($_POST['id'] != '') {
+            $id = $_POST["id"];
+            $reg_date = $_POST["reg_date"];
+            $sql_reg = "UPDATE `event_member` SET `reg_date` = '$reg_date'" .
+                " WHERE `id` = '$id'";
+            mysqli_query($handle, $sql_reg);
+            // echo $sql_reg;
+        }
+
+        //******************** else *********************//
     } else if ($event_view == 'add') {
         $sql_add_event = "insert into `event_member` set " .
             "`ev_id`='" . $_POST["ev_id"] . "'," .
@@ -82,6 +94,25 @@
             echo '{"isExist": true}';
         } else {
             echo '{"isExist": false}';
+        }
+    } else if ($event_view == 'noData') {
+        $sql = "SELECT * FROM `event_member` " .
+            "WHERE del = '0' and `" . $_POST["key"] . "`='" . $_POST["value"] . "'" .
+            " and `ev_id`='" . $_POST["ev_id"] . "'";
+
+        $resource_data = mysqli_query($handle, $sql);
+        $count_row = mysqli_num_rows($resource_data);
+
+        if ($count_row > 0) {
+            while ($result = mysqli_fetch_assoc($resource_data)) {
+                $rows[] = $result;
+            }
+
+            $data = json_encode($rows);
+            echo "{\"noData\": false, \"results_data\": $data}";
+            
+        } else {
+            echo "{\"noData\": true}";
         }
     } else if ($event_view == 'show_data_edit') {
 

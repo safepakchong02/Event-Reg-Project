@@ -59,7 +59,7 @@
                     $("#modal-status_reg_success").modal("show");
                     setTimeout(() => {
                         location.reload();
-                    }, 1500)
+                    }, 500)
                 },
                 function(response) { // optional
                     // failed
@@ -78,7 +78,7 @@
                         $("#modal-status_reg_success").modal("show");
                         setTimeout(() => {
                             location.reload();
-                        }, 1500)
+                        }, 500)
                     }); // end then
             } // end if confirm
         }

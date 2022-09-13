@@ -6,7 +6,7 @@
                     <div class="col-12">
                         <span style="font-size:1.5rem;"><b>ไม่สามารถเข้าสู่ระบบได้</b></span>
                     </div>
-                    <div class="col-12">
+                    <div class="col-12"><br>
                         <i class="bi bi-x-circle" style="color: #ff0000; font-size:7rem;"></i>
                     </div>
                 </div>
