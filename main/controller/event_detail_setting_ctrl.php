@@ -25,7 +25,7 @@
                     `&com_name=${$scope.check.com_name}` +
                     `&dep=${$scope.check.dep}` +
                     `&pos=${$scope.check.pos}` +
-                    `&salary=${$scope.check.salary}` +
+                    `&no=${$scope.check.no}` +
                     `&gender=${$scope.check.gender}` +
                     `&age=${$scope.check.age}` +
                     `&birthDate=${$scope.check.birthDate}`,

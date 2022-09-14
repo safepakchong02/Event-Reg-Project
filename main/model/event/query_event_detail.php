@@ -44,7 +44,7 @@
             "`com_name`='" . $_POST["com_name"] . "'," .
             "`dep`='" . $_POST['dep'] . "'," .
             "`pos`='" . $_POST['pos'] . "'," .
-            "`salary`='" . $_POST['salary'] . "'," .
+            "`no`='" . $_POST['no'] . "'," .
             "`gender`='" . $_POST['gender'] . "'," .
             "`age`='" . $_POST["age"] . "'," .
             "`birthDate`='" . $_POST['birthDate'] . "'," .
@@ -84,7 +84,7 @@
                 "`com_name`='" . $_POST["com_name"] . "'," .
                 "`dep`='" . $_POST['dep'] . "'," .
                 "`pos`='" . $_POST['pos'] . "'," .
-                "`salary`='" . $_POST['salary'] . "'," .
+                "`no`='" . $_POST['no'] . "'," .
                 "`gender`='" . $_POST['gender'] . "'," .
                 "`age`='" . $_POST["age"] . "'," .
                 "`birthDate`='" . $_POST['birthDate'] . "'" .

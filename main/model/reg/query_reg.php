@@ -73,14 +73,26 @@
             "`com_name`='" . $_POST["com_name"] . "'," .
             "`dep`='" . $_POST['dep'] . "'," .
             "`pos`='" . $_POST['pos'] . "'," .
-            "`salary`='" . $_POST['salary'] . "'," .
+            "`no`='" . $_POST['no'] . "'," .
             "`gender`='" . $_POST['gender'] . "'," .
             "`age`='" . $_POST["age"] . "'," .
             "`birthDate`='" . $_POST['birthDate'] . "'," .
             "`reg_date`='" . $_POST['reg_date'] . "';";
 
         mysqli_query($handle, $sql_add_event);
-        echo '{"status": true}';
+        echo "{" .
+            "\"emp_id\" : \"". $_POST["emp_id"] . "\", " .
+            "\"card_id\" : \"" . $_POST["card_id"] . "\", " .
+            "\"name\" : \"" . $_POST["name"] . "\", " .
+            "\"call\" : \"" . $_POST["call"] . "\", " .
+            "\"com_name\" : \"" . $_POST["com_name"] . "\", " .
+            "\"dep\" : \"" . $_POST["dep"] . "\", " .
+            "\"pos\" : \"" . $_POST["pos"] . "\", " .
+            "\"no\" : \"" . $_POST["no"] . "\", " .
+            "\"gender\" : \"" . $_POST["gender"] . "\", " .
+            "\"age\" : \"" . $_POST["age"] . "\", " .
+            "\"birthDate\" : \"" . $_POST["birthDate"] . "\" " . 
+        "}";
         // echo $sql_add_event;
     } else if ($event_view == 'hasExist') {
         $sql = "SELECT * FROM `event_member` " .
@@ -91,9 +103,9 @@
         $count_row = mysqli_num_rows($resource_data);
 
         if ($count_row > 0) {
-            echo '{"isExist": true}';
+            echo "{\"isExist\": true}";
         } else {
-            echo '{"isExist": false}';
+            echo "{\"isExist\": false}";
         }
     } else if ($event_view == 'noData') {
         $sql = "SELECT * FROM `event_member` " .
@@ -144,7 +156,7 @@
                 "`com_name`='" . $_POST["com_name"] . "'," .
                 "`dep`='" . $_POST['dep'] . "'," .
                 "`pos`='" . $_POST['pos'] . "'," .
-                "`salary`='" . $_POST['salary'] . "'," .
+                "`no`='" . $_POST['no'] . "'," .
                 "`gender`='" . $_POST['gender'] . "'," .
                 "`age`='" . $_POST["age"] . "'," .
                 "`birthDate`='" . $_POST['birthDate'] . "'" .

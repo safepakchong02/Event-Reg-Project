@@ -69,7 +69,7 @@ include("main/controller/$ctrl_name.php");
                         <option>ชื่อบริษัท</option>
                         <option>แผนก</option>
                         <option>ตำแหน่ง</option>
-                        <option>เงินเดือน</option>
+                        <option>ลำดับที่</option>
                         <option>เพศ</option>
                         <option>อายุ</option>
                         <option>วันเดือนปีเกิด</option>

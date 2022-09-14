@@ -116,7 +116,7 @@ if (!isset($_GET["ev_id"])) { ?>
                 <th ng-show="check.com_name">ชื่อบริษัท</th>
                 <th ng-show="check.dep">แผนก</th>
                 <th ng-show="check.pos">ตำแหน่ง</th>
-                <th ng-show="check.salary">เงินเดือน</th>
+                <th ng-show="check.salary">ลำดับที่</th>
                 <th ng-show="check.gender">เพศ</th>
                 <th ng-show="check.age">อายุ</th>
                 <th ng-show="check.birthDate">วันเกิด</th>

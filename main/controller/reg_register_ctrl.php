@@ -9,7 +9,7 @@
             $scope.add_detail_com_name = "";
             $scope.add_detail_dep = "";
             $scope.add_detail_pos = "";
-            $scope.add_detail_salary = null;
+            $scope.add_detail_no = null;
             $scope.add_detail_gender = "";
             $scope.add_detail_age = null;
             $scope.add_detail_birthDate = "";
@@ -92,6 +92,7 @@
                 } // end else if 
 
                 $scope.reg = "";
+                delete $scope.preview;
             }); // end then
         } // end function register
         /* =============END REGISTER============= */
@@ -103,15 +104,13 @@
             // check value
             if ($scope.add_detail_birthDate !== "")
                 birthDate = convertDate($scope.add_detail_birthDate);
-            if ($scope.add_detail_salary === null)
-                $scope.add_detail_salary = "";
+            if ($scope.add_detail_no === null)
+                $scope.add_detail_no = "";
             if ($scope.add_detail_age === null)
                 $scope.add_detail_age = "";
             // end check value
 
             // check exist data
-            $scope.isExist = true;
-            $scope.isNoData = true;
             $http({
                 method: 'POST',
                 url: 'main/model/reg/query_reg.php?event_view=hasExist',
@@ -122,10 +121,10 @@
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }).then((response) => {
-                    $scope.isExist = response.data.isExist;
+                    var isExist = response.data.isExist;
 
                     // add data
-                    if (!$scope.isExist) {
+                    if (!isExist) {
                         var now = new Date();
                         var reg_date = convertDate(now.toString());
 
@@ -140,7 +139,7 @@
                                 `&com_name=${$scope.add_detail_com_name}` +
                                 `&dep=${$scope.add_detail_dep}` +
                                 `&pos=${$scope.add_detail_pos}` +
-                                `&salary=${$scope.add_detail_salary}` +
+                                `&no=${$scope.add_detail_no}` +
                                 `&gender=${$scope.add_detail_gender}` +
                                 `&age=${$scope.add_detail_age}` +
                                 `&birthDate=${birthDate}` +
@@ -148,19 +147,18 @@
                             headers: {
                                 'Content-Type': 'application/x-www-form-urlencoded'
                             }
-                        }).then(function(response) {
-                                // $scope.preview();
-                                var status = response.data.status;
-
+                        }).then((res) => {
+                                var data = res.data
+                                // console.log(data);
+                                $scope.preview = data;
+                                $scope.preview.birthDate = createDate(data.birthDate);
+                                console.log($scope.preview);
                                 $("#modal-detail_add").modal("hide");
-                                clearData();
-
-                                if (status) {
-                                    $("#modal-status_reg_success").modal("show");
-                                    setTimeout(() => {
-                                        $("#modal-status_reg_success").modal("hide");
-                                    }, 2000)
-                                }
+                                // clearData();
+                                $("#modal-status_reg_success").modal("show");
+                                setTimeout(() => {
+                                    $("#modal-status_reg_success").modal("hide");
+                                }, 1000)
                             },
                             function(response) { // optional
                                 // failed

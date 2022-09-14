@@ -15,8 +15,8 @@ include("main/function/function_date.php");
 // $_SESSION["user_id"] = "6204709";
 // $_SESSION["perm"] = "manager";
 
-// $_SESSION["user_name"] = "ปัญญทัศน์";
-// $_SESSION["user_id"] = "99";
+// $_SESSION["user_name"] = "Punnyathat";
+// $_SESSION["user_id"] = "6204709";
 // $_SESSION["perm"] = "register";
 
 if (isset($_GET["p"])) $_SESSION["path"] = $_GET["p"];

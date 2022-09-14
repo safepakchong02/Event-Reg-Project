@@ -67,7 +67,7 @@ include("main/controller/$ctrl_name.php");
                             </td>
                             <td class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" ng-disabled="!check.walk_in" ng-model="check.salary" id="check">
-                                <label class="custom-control-label" for="customCheck1">เงินเดือน</label>
+                                <label class="custom-control-label" for="customCheck1">ลำดับที่</label>
                             </td>
                         </tr>
                         <tr id="3">
@@ -112,7 +112,7 @@ include("main/controller/$ctrl_name.php");
                           <option value="com_name">ชื่อบริษัท</option>
                           <option value="dep">แผนก</option>
                           <option value="pos">ตำแหน่ง</option>
-                          <option value="salary">เงินเดือน</option>
+                          <option value="salary">ลำดับที่</option>
                           <option value="gender">เพศ</option>
                           <option value="age">อายุ</option>
                           <option value="birthDate">วันเดือนปีเกิด</option>

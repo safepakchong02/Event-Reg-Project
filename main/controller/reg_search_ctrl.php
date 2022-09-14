@@ -46,7 +46,7 @@
                     `&com_name=${$scope.data_edit.com_name}` +
                     `&dep=${$scope.data_edit.dep}` +
                     `&pos=${$scope.data_edit.pos}` +
-                    `&salary=${$scope.data_edit.salary}` +
+                    `&no=${$scope.data_edit.no}` +
                     `&gender=${$scope.data_edit.gender}` +
                     `&age=${$scope.data_edit.age}` +
                     `&birthDate=${convertDate($scope.data_edit.birthDate)}`,
