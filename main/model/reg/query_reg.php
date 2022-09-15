@@ -178,6 +178,33 @@
         }
 
         //******************** else *********************//
+    } else if ($event_view == 'report') {
+        if (isset($_GET["ev_id"])) {
+            $sql_sum_report = "";
+            mysqli_query($handle, $sql_sum_report);
+
+            // fetch data here
+            
+            // end fetch data
+
+            $sql_report_data = "";
+            mysqli_query($handle, $sql_report_data);
+
+            // fetch data here
+            
+            // end fetch data
+            
+            echo "{
+                \"sum_report\": {
+                    \"all\": $all ,
+                    \"่join\": $join ,
+                    \"no_join\": $no_join
+                } ,
+                \"report_data\": $json
+            }";
+        } else {
+            echo "false";    
+        }
     } else {
         echo "";
     }
