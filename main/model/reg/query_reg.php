@@ -177,33 +177,110 @@
             // echo $sql_delete_reg;
         }
 
-        //******************** else *********************//
-    } else if ($event_view == 'report') {
+    } else if ($event_view == 'report_sum') {
         if (isset($_GET["ev_id"])) {
-            $sql_sum_report = "";
-            mysqli_query($handle, $sql_sum_report);
+            // get all count
+            $sql_sum_report = " SELECT COUNT(*) as `all` FROM `event_member` " .
+                " WHERE `ev_id` = '" . $_GET["ev_id"] . "' and `del` = '0'";
 
-            // fetch data here
-            
-            // end fetch data
+            $resource_data = mysqli_query($handle, $sql_sum_report);
 
-            $sql_report_data = "";
-            mysqli_query($handle, $sql_report_data);
+            while ($result = mysqli_fetch_assoc($resource_data)) {
+                $all = $result['all'];
+            }
 
-            // fetch data here
-            
-            // end fetch data
+            // get join count
+            $sql_sum_report = " SELECT COUNT(*) as `join` FROM `event_member` " .
+                " WHERE `ev_id` = '" . $_GET["ev_id"] . "' and `del` = '0' and `reg_date` != ''";
+
+            $resource_data = mysqli_query($handle, $sql_sum_report);
+
+            while ($result = mysqli_fetch_assoc($resource_data)) {
+                $join = $result['join'];
+            }
+
+            // get no_join count
+            $sql_sum_report = " SELECT COUNT(*) as `no_join` FROM `event_member` " .
+                " WHERE `ev_id` = '" . $_GET["ev_id"] . "' and `del` = '0' and `reg_date` = ''";
+
+            $resource_data = mysqli_query($handle, $sql_sum_report);
+
+            while ($result = mysqli_fetch_assoc($resource_data)) {
+                $no_join = $result['no_join'];
+            }
             
             echo "{
-                \"sum_report\": {
+                \"report_sum\": {
                     \"all\": $all ,
-                    \"่join\": $join ,
+                    \"Join\": $join ,
                     \"no_join\": $no_join
-                } ,
-                \"report_data\": $json
+                }
             }";
         } else {
             echo "false";    
+        }
+    } else if ($event_view == 'report_data') {
+
+        if (isset($_GET["ev_id"]) && isset($_GET["group_by"])) {
+            $ev_id = $_GET["ev_id"];
+            $group_by = $_GET["group_by"];
+            
+            // join
+            $sql_report_data = "SELECT one.$group_by , COALESCE(one.c, 0) AS \"join\" , 
+            COALESCE(two.c, 0) AS \"no_join\"
+            FROM
+            (
+                SELECT $group_by, COUNT(*) AS \"c\"
+                FROM event_member
+                WHERE ev_id = \"$ev_id\" AND del = \"0\" AND reg_date != \"\"
+                GROUP BY $group_by
+            ) as one
+            LEFT OUTER JOIN
+            (
+                SELECT $group_by, COUNT(*) AS \"c\"
+                FROM event_member
+                WHERE ev_id = \"$ev_id\" AND del = \"0\" AND reg_date = \"\"
+                GROUP BY $group_by
+            ) as two
+            ON one.$group_by  = two.$group_by
+            UNION
+            SELECT three.$group_by , COALESCE(four.c, 0) AS \"join\" , 
+            COALESCE(three.c, 0) AS \"no_join\"
+            FROM
+            (
+                SELECT $group_by, COUNT(*) AS \"c\"
+                FROM event_member
+                WHERE ev_id = \"$ev_id\" AND del = \"0\" AND reg_date != \"\"
+                GROUP BY $group_by
+            ) as four
+            RIGHT OUTER JOIN
+            (
+                SELECT $group_by, COUNT(*) AS \"c\"
+                FROM event_member
+                WHERE ev_id = \"$ev_id\" AND del = \"0\" AND reg_date = \"\"
+                GROUP BY $group_by
+            ) as three
+            ON four.$group_by  = three.$group_by
+            ORDER BY `join` DESC";
+
+            $resource_data = mysqli_query($handle, $sql_report_data);
+            
+            while ($result = mysqli_fetch_assoc($resource_data)) {
+                $rows[] = $result;
+            }
+
+            $data = json_encode($rows);
+            echo "{
+                \"report_data\": $data
+            }";
+        }
+    } else if ($event_view == 'reset_reg') {
+        if ($_GET['id'] != '') {
+            $id = $_GET['id'];
+            $sql_delete_reg = "UPDATE `event_member` SET `reg_date` = ''" .
+                " WHERE `id` = '$id'";
+            mysqli_query($handle, $sql_delete_reg);
+            // echo $sql_delete_reg;
         }
     } else {
         echo "";

@@ -49,6 +49,7 @@
                     `&no=${$scope.data_edit.no}` +
                     `&gender=${$scope.data_edit.gender}` +
                     `&age=${$scope.data_edit.age}` +
+                    `&no=${$scope.data_edit.no}` +
                     `&birthDate=${convertDate($scope.data_edit.birthDate)}`,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -83,6 +84,21 @@
             } // end if confirm
         }
         /* ===============END DEL DATA=============== */
+
+        /* ===============RESET REGISTER=============== */
+        $scope.reset_reg = (id) => {
+            if (confirm("คุณต้องการรีเซ็ทการลงทะเบียนนี้หรือไม่")) {
+                $http.get(`main/model/reg/query_reg.php?event_view=reset_reg&id=${id}`)
+                    .then((res) => { // start then
+                        // console.log(res.data);
+                        $("#modal-status_reg_success").modal("show");
+                        setTimeout(() => {
+                            location.reload();
+                        }, 500)
+                    }); // end then
+            } // end if confirm
+        }
+        /* ===============END RESET REGISTER=============== */
 
     }); // end controller function
 </script>

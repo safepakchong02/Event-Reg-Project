@@ -1,92 +1,91 @@
-<div class="modal fade" tabindex="-1" id="modal-add">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title"><i class="bi bi-plus-circle"></i> เพิ่มข้อมูลผู้ลงทะเบียน</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="row">
-              <div class="col-6">
-                <div class="form-group pb-2">
-                  <label> รหัสพนักงาน :</label>
-                  <input type="text" ng-model="add_title_event" name="add_title_event" class="form-control" required>
-                </div>
-              </div>
-              <div class="col-6">
-                <div class="form-group pb-2">
-                  <label> ชื่อบริษัท :</label>
-                  <input type="text" ng-model="add_title_event" name="add_title_event" class="form-control" required>
-                </div>
-              </div>
-              <div class="col-6">
-                <div class="form-group pb-2">
-                  <label> ชื่อ-สกุล :</label>
-                  <input type="text" ng-model="add_emp_id" name="add_emp_id" class="form-control" required>
-                </div>
-              </div>
-              <div class="col-6">
-                <div class="form-group pb-2">
-                  <label> รหัสบัตรประชาชน :</label>
-                  <input type="text" ng-model="add_title_event" name="add_title_event" class="form-control" required>
-                </div>
-              </div>
-              <div class="col-6">
-                <div class="form-group pb-2">
-                  <label> แผนก :</label>
-                  <input type="text" ng-model="add_emp_id" name="add_emp_id" class="form-control" required>
-                </div>
-              </div>
-              <div class="col-6">
-                <div class="form-group pb-2">
-                  <label> ตำแหน่ง :</label>
-                  <input type="text" ng-model="add_emp_id" name="add_emp_id" class="form-control" required>
-                </div>
-              </div>
-              <div class="col-6">
-                <div class="form-group pb-2">
-                  <label> เบอร์โทรศัพท์ :</label>
-                  <input type="tel" ng-model="add_emp_id" name="add_emp_id" class="form-control" required>
-                </div>
-              </div>
-              <div class="col-6">
-                <div class="form-group pb-2">
-                  <label> เพศ :</label>
-                  <select class="form-select" aria-label="Default select example">
-                          <option selected>------โปรดระบุ------</option>
-                          <option value="1">ชาย</option>
-                          <option value="2">หญิง</option>
-                          <option value="3">เพศทางเลือก</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-6">
-                <div class="form-group pb-2">
-                  <label> อายุ :</label>
-                  <input type="number" ng-model="add_title_event" name="add_title_event" class="form-control" required>
-                </div>
-              </div>
-              <div class="col-6">
-                <div class="form-group pb-2">
-                  <label> วันเดือนปีเกิด :</label>
-                  <input type="date" ng-model="add_title_event" name="add_title_event" class="form-control" required>
-                </div>
-              </div>
-              <div class="col-6">
-                <div class="form-group pb-2">
-                  <label> ลำดับที่ :</label>
-                  <input type="number" ng-model="add_title_event" name="add_title_event" class="form-control" required>
-                </div>
+<div class="modal fade" tabindex="-1" id="modal-detail_add">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="bi bi-plus-circle"></i> เพิ่มข้อมูลผู้ลงทะเบียน</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="detail_edit" ng-submit="add_member()" ng-controller="<?= $ctrl_name ?>">
+          <div class="row">
+            <div class="col-6" ng-if="check.emp_id">
+              <div class="form-group pb-2">
+                <label> รหัสพนักงาน :</label>
+                <input type="text" ng-model="data_add.emp_id" name="data_add.emp_id" class="form-control" required>
               </div>
             </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
+            <div class="col-6" ng-if="check.com_name">
+              <div class="form-group pb-2">
+                <label> ชื่อบริษัท :</label>
+                <input type="text" ng-model="data_add.com_name" name="data_add.com_name" class="form-control" required>
+              </div>
+            </div>
+            <div class="col-6" ng-if="check.name">
+              <div class="form-group pb-2">
+                <label> ชื่อ-สกุล :</label>
+                <input type="text" ng-model="data_add.name" name="data_add.name" class="form-control" required>
+              </div>
+            </div>
+            <div class="col-6" ng-if="check.card_id">
+              <div class="form-group pb-2">
+                <label> รหัสบัตรประชาชน :</label>
+                <input type="text" ng-model="data_add.card_id" name="data_add.card_id" class="form-control" required>
+              </div>
+            </div>
+            <div class="col-6" ng-if="check.dep">
+              <div class="form-group pb-2">
+                <label> แผนก :</label>
+                <input type="text" ng-model="data_add.dep" name="data_add.dep" class="form-control" required>
+              </div>
+            </div>
+            <div class="col-6" ng-if="check.pos">
+              <div class="form-group pb-2">
+                <label> ตำแหน่ง :</label>
+                <input type="text" ng-model="data_add.pos" name="data_add.pos" class="form-control" required>
+              </div>
+            </div>
+            <div class="col-6" ng-if="check.call">
+              <div class="form-group pb-2">
+                <label> เบอร์โทรศัพท์ :</label>
+                <input type="tel" ng-model="data_add.call" name="data_add.call" class="form-control" required>
+              </div>
+            </div>
+            <div class="col-6" ng-if="check.gender">
+              <div class="form-group pb-2">
+                <label>เพศ :</label>
+                <select class="form-select" ng-model="data_add.gender">
+                  <option selected>------โปรดระบุ------</option>
+                  <option value="male" ng-selected="data_add.gender == 'male">ชาย</option>
+                  <option value="female" ng-selected="data_add.gender == 'female">หญิง</option>
+                  <option value="LGBTQ+" ng-selected="data_add.gender == 'LGBTQ+">เพศทางเลือก</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-6" ng-if="check.age">
+              <div class="form-group pb-2">
+                <label> อายุ :</label>
+                <input type="number" ng-model="data_add.age" name="data_add.age" class="form-control" required>
+              </div>
+            </div>
+            <div class="col-6" ng-if="check.birthDate">
+              <div class="form-group pb-2">
+                <label> วันเดือนปีเกิด :</label>
+                <input type="date" ng-model="data_add.birthDate" name="data_add.birthDate" class="form-control" required>
+              </div>
+            </div>
+            <div class="col-6" ng-if="check.no">
+              <div class="form-group pb-2">
+                <label> ลำดับที่ :</label>
+                <input type="number" ng-model="data_add.no" name="data_add.no" class="form-control" required>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" form="detail_edit" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
-  
+</div>

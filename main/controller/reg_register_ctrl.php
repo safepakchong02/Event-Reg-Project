@@ -2,17 +2,18 @@
     var app = angular.module("<?= $app_name ?>", ['datatables']);
     app.controller("<?= $ctrl_name ?>", function($scope, $http) { // start controller function
         const clearData = () => {
-            $scope.add_detail_emp_id = "";
-            $scope.add_detail_card_id = "";
-            $scope.add_detail_name = "";
-            $scope.add_detail_call = "";
-            $scope.add_detail_com_name = "";
-            $scope.add_detail_dep = "";
-            $scope.add_detail_pos = "";
-            $scope.add_detail_no = null;
-            $scope.add_detail_gender = "";
-            $scope.add_detail_age = null;
-            $scope.add_detail_birthDate = "";
+            $scope.data_add = {};
+            $scope.data_add.emp_id = "";
+            $scope.data_add.card_id = "";
+            $scope.data_add.name = "";
+            $scope.data_add.call = "";
+            $scope.data_add.com_name = "";
+            $scope.data_add.dep = "";
+            $scope.data_add.pos = "";
+            $scope.data_add.no = null;
+            $scope.data_add.gender = "";
+            $scope.data_add.age = null;
+            $scope.data_add.birthDate = "";
         }
 
         const searchBy = (key) => {
@@ -102,12 +103,12 @@
             var birthDate = "";
 
             // check value
-            if ($scope.add_detail_birthDate !== "")
-                birthDate = convertDate($scope.add_detail_birthDate);
-            if ($scope.add_detail_no === null)
-                $scope.add_detail_no = "";
-            if ($scope.add_detail_age === null)
-                $scope.add_detail_age = "";
+            if ($scope.data_add.birthDate !== "")
+                birthDate = convertDate($scope.data_add.birthDate);
+            if ($scope.data_add.no === null)
+                $scope.data_add.no = "";
+            if ($scope.data_add.age === null)
+                $scope.data_add.age = "";
             // end check value
 
             // check exist data
@@ -127,21 +128,21 @@
                     if (!isExist) {
                         var now = new Date();
                         var reg_date = convertDate(now.toString());
-
                         $http({
                             method: 'POST',
                             url: 'main/model/reg/query_reg.php?event_view=add',
                             data: `ev_id=<?= $_GET["ev_id"] ?>` +
-                                `&emp_id=${$scope.add_detail_emp_id}` +
-                                `&card_id=${$scope.add_detail_card_id}` +
-                                `&name=${$scope.add_detail_name}` +
-                                `&call=${$scope.add_detail_call}` +
-                                `&com_name=${$scope.add_detail_com_name}` +
-                                `&dep=${$scope.add_detail_dep}` +
-                                `&pos=${$scope.add_detail_pos}` +
-                                `&no=${$scope.add_detail_no}` +
-                                `&gender=${$scope.add_detail_gender}` +
-                                `&age=${$scope.add_detail_age}` +
+                                `&emp_id=${$scope.data_add.emp_id}` +
+                                `&card_id=${$scope.data_add.card_id}` +
+                                `&name=${$scope.data_add.name}` +
+                                `&call=${$scope.data_add.call}` +
+                                `&com_name=${$scope.data_add.com_name}` +
+                                `&dep=${$scope.data_add.dep}` +
+                                `&pos=${$scope.data_add.pos}` +
+                                `&no=${$scope.data_add.no}` +
+                                `&gender=${$scope.data_add.gender}` +
+                                `&age=${$scope.data_add.age}` +
+                                `&no=${$scope.data_add.no}` +
                                 `&birthDate=${birthDate}` +
                                 `&reg_date=${reg_date}`,
                             headers: {
@@ -152,9 +153,9 @@
                                 // console.log(data);
                                 $scope.preview = data;
                                 $scope.preview.birthDate = createDate(data.birthDate);
-                                console.log($scope.preview);
+                                // console.log($scope.preview);
                                 $("#modal-detail_add").modal("hide");
-                                // clearData();
+                                clearData();
                                 $("#modal-status_reg_success").modal("show");
                                 setTimeout(() => {
                                     $("#modal-status_reg_success").modal("hide");

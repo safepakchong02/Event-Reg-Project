@@ -7,7 +7,7 @@ if (!isset($_GET["ev_id"])) { ?>
     <meta http-equiv="refresh" content="0;url=index.php?p=reg&m=event_dashboard">
 <? } ?>
 <!-- status success -->
-<?include("main/body/status_reg_success.php");?>
+<? include("main/body/status_reg_success.php"); ?>
 <!-- end status success -->
 
 <!-- content -->
@@ -140,6 +140,7 @@ if (!isset($_GET["ev_id"])) { ?>
                 <td ng-show="check.birthDate">{{row.birthDate}}</td>
                 <td>{{checkReg(row.reg_date)}}</td>
                 <td>
+                    <button type="button" ng-click="reset_reg(row.id)" class="btn btn-primary btn-sm">รีเซ็ทการลงทะเบียน</button>
                     <button type="button" ng-click="edit_reg_view(row.id)" data-bs-toggle="modal" data-bs-target="#modal-detail_edit" class="btn btn-warning btn-sm">แก้ไข</button>
                     <button type="button" ng-click="del_reg(row.id)" class="btn btn-danger btn-sm">ลบ</button>
                 </td>
