@@ -2,6 +2,7 @@
     var app = angular.module("<?= $app_name ?>", ['datatables']);
     app.controller("<?= $ctrl_name ?>", function($scope, $http, $interval) { // start controller function
         $scope.group_by = "";
+        $scope.regIsOpen = true;
 
         $scope.widthCal = (n1, n2) => {
             n1 = parseInt(n1);
@@ -16,6 +17,18 @@
         $http.get("main/model/reg/query_reg.php?event_view=show_data&ev_id=<?= $_GET["ev_id"] ?>")
             .then(function(res) { // start then
                 $scope.event_data = res.data.results_data; // "results_data" is key in json format
+
+                if ($scope.event_data[0].ev_status == "เปิดลงทะเบียน") $scope.regIsOpen = true;
+                else $scope.regIsOpen = false;
+
+                /* =============RELOAD REALTIME============= */
+                if ($scope.regIsOpen) {
+                    $interval(() => {
+                        console.log("reload");
+                        $scope.loadData();
+                    }, 5000)
+                }
+                /* =============RELOAD REALTIME============= */
             }) // end then
 
         $http.get("main/model/event/query_event_detail_setting.php?event_view=show_data&ev_id=<?= $_GET["ev_id"] ?>")
@@ -46,10 +59,6 @@
         /* =============INIT PAGE============= */
         $scope.loadData();
 
-        $interval(() => {
-            // console.log("reload");
-            $scope.loadData();
-        }, 60000)
         /* =============END SHOW REPORT REALTIME============= */
     }); // end controller function
 </script>

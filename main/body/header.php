@@ -52,5 +52,11 @@
             box-shadow: 0 12px 34px rgba(0, 0, 0, 0.12);
         }
 
+        .center_screen {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
 
     </style>

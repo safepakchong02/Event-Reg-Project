@@ -22,7 +22,26 @@
 
         if ($count_row > 0) {
             while ($result = mysqli_fetch_assoc($resource_data)) {
-                $rows[] = $result;
+                $js["ev_id"] = $result["ev_id"];
+                $js["ev_title"] = $result["ev_title"];
+                $js["ev_date_start"] = $result["ev_date_start"];
+                $js["ev_date_end"] = $result["ev_date_end"];
+                $js["user_name"] = $result["user_name"];
+                $js["user_surname"] = $result["user_surname"];
+
+                $d_st = DateTime::createFromFormat('d/m/Y H:i', $result["ev_date_start"]);
+                $d_ed = DateTime::createFromFormat('d/m/Y H:i', $result["ev_date_end"]);
+                $now = new DateTime();
+
+                if ($now >= $d_st && $now <= $d_ed) {
+                    $js["ev_status"] = "เปิดลงทะเบียน";
+                    $js["isOpen"] = "table-success";
+                } else {
+                    $js["ev_status"] = "ปิดลงทะเบียน";
+                    $js["isOpen"] = "table-danger";
+                }
+                $rows[] = $js;
+                // $rows[] = $result;
             }
 
             $data = json_encode($rows);

@@ -33,7 +33,7 @@ if (!isset($_GET["ev_id"])) { ?>
     <!-- end header -->
 
     <!-- register -->
-    <div class="container my-5"><br><br>
+    <div class="container my-5" ng-if="regIsOpen"><br><br>
         <div class="row justify-content-center" align="center">
             <div class="col-xs-3 col-lg-6">
                 <span class="h3">ลงทะเบียน</span>
@@ -56,5 +56,21 @@ if (!isset($_GET["ev_id"])) { ?>
         </div>
     </div>
     <!-- end register -->
+
+    <!-- close register -->
+    <div class="container center_screen" ng-if="!regIsOpen"><br><br>
+        <div class="row justify-content-center" align="center">
+            <div class="col-12"><br>
+                <i class="bi bi-x-circle" style="color: #ff0000; font-size:7rem;"></i>
+            </div>
+        </div><br>
+        <div class="row justify-content-center" align="center">
+            <div class="col-12">
+                <span class="h3">ระบบปิดลงทะเบียน</span>
+            </div>
+        </div><br>
+    </div>
+    <!-- end close register -->
+
 </div>
 <!-- end content -->

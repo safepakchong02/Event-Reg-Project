@@ -139,7 +139,7 @@ if (!isset($_GET["ev_id"])) { ?>
                 <td ng-show="check.age">{{row.age}}</td>
                 <td ng-show="check.birthDate">{{row.birthDate}}</td>
                 <td>{{checkReg(row.reg_date)}}</td>
-                <td>
+                <td ng-if="regIsOpen">
                     <button type="button" ng-click="reset_reg(row.id)" class="btn btn-primary btn-sm">รีเซ็ทการลงทะเบียน</button>
                     <button type="button" ng-click="edit_reg_view(row.id)" data-bs-toggle="modal" data-bs-target="#modal-detail_edit" class="btn btn-warning btn-sm">แก้ไข</button>
                     <button type="button" ng-click="del_reg(row.id)" class="btn btn-danger btn-sm">ลบ</button>
