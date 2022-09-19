@@ -89,7 +89,7 @@
                     $("#modal-status_reg_error_isNoData").modal("show");
                     setTimeout(() => {
                         $("#modal-status_reg_error_isNoData").modal("hide");
-                    }, 1000)
+                    }, 500)
                 } // end else if 
 
                 $scope.reg = "";
@@ -156,9 +156,9 @@
                                 // console.log($scope.preview);
                                 $("#modal-detail_add").modal("hide");
                                 clearData();
-                                $("#modal-status_reg_success").modal("show");
+                                $("#modal-status_success").modal("show");
                                 setTimeout(() => {
-                                    $("#modal-status_reg_success").modal("hide");
+                                    $("#modal-status_success").modal("hide");
                                 }, 1000)
                             },
                             function(response) { // optional

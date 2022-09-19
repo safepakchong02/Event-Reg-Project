@@ -15,6 +15,7 @@ if (!isset($_GET["ev_id"])) { ?>
 
     <!-- success -->
     <? include("main/body/status_reg_success.php"); ?>
+    <? include("main/body/status_success.php"); ?>
     <!-- end success -->
 
     <!-- error -->

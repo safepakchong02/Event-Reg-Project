@@ -45,6 +45,8 @@
             $data = json_encode($rows);
             //$totaldata = sizeof($rows);
             $results = '{"results_data":' . $data . '}';
+        } else {
+            $results = "null";
         }
         echo $results;
 
@@ -63,6 +65,7 @@
             $no = covertBoolean($_POST["no"]);
             $gender = covertBoolean($_POST["gender"]);
             $age = covertBoolean($_POST["age"]);
+            $has_reg_by = $_POST["has_reg_by"];
             $birthDate = covertBoolean($_POST["birthDate"]);
             $sql_update = "UPDATE `event_setting` SET " .
                 "`walk_in` = '$walk_in'," .
@@ -76,6 +79,7 @@
                 "`no` = '$no'," .
                 "`gender` = '$gender'," .
                 "`age` = '$age'," .
+                "`has_reg_by` = '$has_reg_by'," .
                 "`birthDate` = '$birthDate' " .
                 " WHERE `ev_id` = '$ev_id'";
             mysqli_query($handle, $sql_update);

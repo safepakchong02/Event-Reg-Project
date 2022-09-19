@@ -8,12 +8,19 @@ include("main/controller/$ctrl_name.php");
     <!-- ข้อมูลผู้ลงทะเบียน -->
     <? $ev_id = $_GET["ev_id"]; ?>
     <div class="col-12 pt-4" ng-controller="<?= $ctrl_name ?>">
-        <!-- add member -->
+        <!-- เพิ่มข้อมูล -->
         <? include("main/module/event/event_detail_add.php"); ?>
-        <!-- end add member -->
-        <!-- status success -->
+        <!-- จบการเพิ่มข้อมูล -->
+
+        <!-- success -->
         <? include("main/body/status_reg_success.php"); ?>
-        <!-- end status success -->
+        <? include("main/body/status_success.php"); ?>
+        <!-- end success -->
+
+        <!-- error -->
+        <? include("main/body/status_reg_error_isNoData.php"); ?>
+        <? include("main/body/status_reg_error_isExist.php"); ?>
+        <!-- end error -->
         <h1>รายชื่อผู้ลงทะเบียน</h1><br>
         <div class="container-fluid">
             <div class="row">
@@ -50,7 +57,7 @@ include("main/controller/$ctrl_name.php");
                     <th ng-show="check.com_name">ชื่อบริษัท</th>
                     <th ng-show="check.dep">แผนก</th>
                     <th ng-show="check.pos">ตำแหน่ง</th>
-                    <th ng-show="check.salary">เงินเดือน</th>
+                    <th ng-show="check.no">ลำดับที่</th>
                     <th ng-show="check.gender">เพศ</th>
                     <th ng-show="check.age">อายุ</th>
                     <th ng-show="check.birthDate">วันเกิด</th>
@@ -68,7 +75,7 @@ include("main/controller/$ctrl_name.php");
                     <td ng-show="check.com_name">{{row.com_name}}</td>
                     <td ng-show="check.dep">{{row.dep}}</td>
                     <td ng-show="check.pos">{{row.pos}}</td>
-                    <td ng-show="check.salary">{{row.salary}}</td>
+                    <td ng-show="check.no">{{row.no}}</td>
                     <td ng-show="check.gender">{{row.gender}}</td>
                     <td ng-show="check.age">{{row.age}}</td>
                     <td ng-show="check.birthDate">{{row.birthDate}}</td>

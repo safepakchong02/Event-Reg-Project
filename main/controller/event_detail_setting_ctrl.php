@@ -1,9 +1,6 @@
 <script>
     var app = angular.module("<?= $app_name ?>", []);
     app.controller("<?= $ctrl_name ?>", function($scope, $http) { // start controller function
-        // init web
-        $scope.walkInIsOpen = true;
-
         /* ==================--SHOW--======================= */
         $http.get("main/model/event/query_event_detail_setting.php?event_view=show_data&ev_id=<?= $_GET["ev_id"] ?>")
             .then(function(res) { // start then
@@ -11,12 +8,17 @@
             }); // end then
         /* ==================END SHOW======================= */
 
+        $scope.testFunc = () => {
+            console.log($scope.check);
+            // $scope.$apply();
+        }
+
         /* ==================--EDIT--======================= */
         $scope.setting_save = function() {
             $http({
                 method: 'POST',
                 url: 'main/model/event/query_event_detail_setting.php?event_view=edit_form_save',
-                data: `ev_id=<?=$_GET["ev_id"]?>` +
+                data: `ev_id=<?= $_GET["ev_id"] ?>` +
                     `&walk_in=${$scope.check.walk_in}` +
                     `&emp_id=${$scope.check.emp_id}` +
                     `&card_id=${$scope.check.card_id}` +
@@ -28,13 +30,16 @@
                     `&no=${$scope.check.no}` +
                     `&gender=${$scope.check.gender}` +
                     `&age=${$scope.check.age}` +
+                    `&has_reg_by=${$scope.check.has_reg_by}` +
                     `&birthDate=${$scope.check.birthDate}`,
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    }
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
             }).then(function(response) {
-                    // alert(response.data);
-                    location.reload();
+                    $("#modal-status_success").modal("show");
+                    setTimeout(() => {
+                        location.reload();
+                    }, 500)
                 },
                 function(response) { // optional
                     // failed

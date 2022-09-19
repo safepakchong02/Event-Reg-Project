@@ -17,6 +17,11 @@ include("main/controller/$ctrl_name.php");
             </div>
             <? include("main/module/event/event_add.php"); ?>
             <!-- จบการเพิ่มข้อมูล -->
+
+            <!-- status success-->
+            <?include("main/body/status_success.php");?>
+            <!-- end success -->
+            
             <!-- แสดงข้อมูล -->
             <table datatable="ng" id="example" class="table nowrap" style="width:100%">
                 <thead>

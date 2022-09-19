@@ -22,8 +22,11 @@
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }).then(function(response) {
-                    // alert(response.data);
-                    location.reload();
+                    $("#modal-add").modal("hide");
+                    $("#modal-status_success").modal("show");
+                    setTimeout(() => {
+                        location.reload();
+                    }, 500)
                 },
                 function(response) { // optional
                     // failed
@@ -60,8 +63,11 @@
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }).then(function(response) {
-                    // alert(response.data);
-                    location.reload();
+                    $("#modal-edit").modal("hide");
+                    $("#modal-status_success").modal("show");
+                    setTimeout(() => {
+                        location.reload();
+                    }, 500)
                 },
                 function(response) { // optional
                     // failed
@@ -76,8 +82,10 @@
             if (confirm("คุณต้องการลบข้อมูลหรือไม่")) {
                 $http.get(`main/model/event/query_event.php?event_view=del_event&ev_id=${$ev_id}`)
                     .then(function(res) { // start then
-                        // alert(res.data);
-                        location.reload();
+                        $("#modal-status_success").modal("show");
+                        setTimeout(() => {
+                            location.reload();
+                        }, 500)
                     }) // end then
             }
         } // end delete_event

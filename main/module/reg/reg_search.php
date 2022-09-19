@@ -7,7 +7,7 @@ if (!isset($_GET["ev_id"])) { ?>
     <meta http-equiv="refresh" content="0;url=index.php?p=reg&m=event_dashboard">
 <? } ?>
 <!-- status success -->
-<? include("main/body/status_reg_success.php"); ?>
+<? include("main/body/status_success.php"); ?>
 <!-- end status success -->
 
 <!-- content -->

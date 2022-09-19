@@ -57,7 +57,7 @@
             }).then(function(response) {
                     // console.log(response.data);
                     $("#modal-detail_edit").modal("hide");
-                    $("#modal-status_reg_success").modal("show");
+                    $("#modal-status_success").modal("show");
                     setTimeout(() => {
                         location.reload();
                     }, 500)
@@ -76,7 +76,7 @@
                     .then((res) => { // start then
                         // console.log(res.data);
                         $("#modal-detail_edit").modal("hide");
-                        $("#modal-status_reg_success").modal("show");
+                        $("#modal-status_success").modal("show");
                         setTimeout(() => {
                             location.reload();
                         }, 500)
@@ -91,7 +91,7 @@
                 $http.get(`main/model/reg/query_reg.php?event_view=reset_reg&id=${id}`)
                     .then((res) => { // start then
                         // console.log(res.data);
-                        $("#modal-status_reg_success").modal("show");
+                        $("#modal-status_success").modal("show");
                         setTimeout(() => {
                             location.reload();
                         }, 500)

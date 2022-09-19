@@ -11,7 +11,7 @@
                         <i class="bi bi-check2-circle " style="color: #49C83E; font-size:7rem;"></i>
                     </div>
                 </div>
-                <form ng-controller="<?=$ctrl_name?>">
+                <form ng-controller="<?= $ctrl_name ?>">
                     <div class="row">
                         <div class="col-6" ng-hide="!check.emp_id">
                             <div class="form-group pb-2">
@@ -60,9 +60,9 @@
                                 <label> เพศ :</label>
                                 <select class="form-select" ng-model="preview.gender">
                                     <option>------โปรดระบุ------</option>
-                                    <option value="1" ng-selected="preview.gender == 1">ชาย</option>
-                                    <option value="2" ng-selected="preview.gender == 2">หญิง</option>
-                                    <option value="3" ng-selected="preview.gender == 3">เพศทางเลือก</option>
+                                    <option value="male" ng-selected="preview.gender == 'male'">ชาย</option>
+                                    <option value="female" ng-selected="preview.gender == 'female'">หญิง</option>
+                                    <option value="LGBTQ+" ng-selected="preview.gender == 'LGBTQ+'">เพศทางเลือก</option>
                                 </select>
                             </div>
                         </div>
