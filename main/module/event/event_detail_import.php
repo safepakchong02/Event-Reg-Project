@@ -27,30 +27,23 @@ include("main/controller/$ctrl_name.php");
         </div>
         <br>
         <!-----show table----->
-        <div ng-hide="isInit">
-            <table datatable="ng" id="example" class="table nowrap" style="width:100%">
+        <div id="table" ng-hide="isInit">
+            <table class="table nowrap" style="width:100%">
                 <thead>
                     <tr class="table-dark">
-                        <th ng-repeat="(key, val) in data">{{key}}</th>
-                        <th></th>
+                        <th ng-repeat="h in head">{{h}}</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="show_event_data in event_data">
-                        <? include("main/module/event/event_edit.php"); ?>
-                        <td>{{show_event_data.ev_id}}</td> <!-- "ev_id" is name col -->
-                        <td>{{show_event_data.ev_title}}</td>
-                        <td>{{show_event_data.user_name}} {{show_event_data.user_surname}}</td>
-                        <td>{{show_event_data.ev_status}}</td>
-                        <td>{{show_event_data.ev_date_start}}</td>
-                        <td>{{show_event_data.ev_date_end}}</td>
+                    <tr>
+
                     </tr>
                 </tbody>
             </table>
         </div>
         <br>
         <!-----เลือกtype----->
-        <div class="container-fluid" ng-hide="isInit"><br>
+        <div class="container-fluid" id="convert" ng-hide="isInit"><br>
             <div class="row">
                 <div class="col-4">ชื่อคอลัมน์ในไฟล์ที่อัปโหลด</div>
                 <div class="col-8">แปลงเป็นชื่อที่เราระบุ</div>
@@ -81,14 +74,6 @@ include("main/controller/$ctrl_name.php");
                 <button ng-click="setting_save()" type="button" class="btn btn-success btn-sm"></i>บันทึก</button>
             </div>
         </div>
-
-        <script>
-            $(document).ready(function() {
-                var table = $('#example').DataTable({
-                    scrollX: true,
-                });
-            });
-        </script>
     </div>
 <? } else { ?>
     <meta http-equiv="refresh" content="0;url=index.php?p=event&m=dashboard">

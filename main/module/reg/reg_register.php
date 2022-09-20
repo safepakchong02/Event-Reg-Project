@@ -35,23 +35,23 @@ if (!isset($_GET["ev_id"])) { ?>
     <!-- register -->
     <div class="container my-5" ng-if="regIsOpen"><br><br>
         <div class="row justify-content-center" align="center">
-            <div class="col-xs-3 col-lg-6">
+            <div class="d-grid gap-2 col-md-4">
                 <span class="h3">ลงทะเบียน</span>
             </div>
-        </div><br><br>
+        </div><br>
         <div class="row justify-content-center" align="center">
-            <div class="col-6">
+            <div class="d-grid gap-2 col-md-4">
                 <input type="text" placeholder="{{has_reg_by}}" ng-model="reg" name="reg" class="form-control" required>
             </div>
         </div><br>
         <div class="row justify-content-center" align="center">
-            <div class="col-6">
-                <button type="button" ng-click="register()" class="btn btn-primary btn-block col-md-12"> ลงทะเบียนเข้ากิจกรรม</button>
+            <div class="d-grid gap-2 col-md-4">
+                <button type="button" ng-click="register()" class="btn btn-primary btn-block"> ลงทะเบียนเข้ากิจกรรม</button>
             </div>
         </div><br>
         <div class="row justify-content-center" align="center" ng-hide="!check.walk_in">
-            <div class="col-6">
-                <button type="button" class="btn btn-success btn-block col-md-12" data-bs-toggle="modal" data-bs-target="#modal-detail_add">เพิ่มข้อมูลผู้ลงทะเบียนใหม่</button>
+            <div class="d-grid gap-2 col-md-4">
+                <button type="button" class="btn btn-success btn-block" data-bs-toggle="modal" data-bs-target="#modal-detail_add">เพิ่มข้อมูลผู้ลงทะเบียนใหม่</button>
             </div>
         </div>
     </div>

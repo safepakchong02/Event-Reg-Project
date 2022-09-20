@@ -22,8 +22,8 @@
 			case "pos":
 				return "ตำแหน่ง";
 				break;
-			case "salary":
-				return "เงินเดือน";
+			case "no":
+				return "ลำดับที่";
 				break;
 			case "gender":
 				return "เพศ";

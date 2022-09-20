@@ -53,7 +53,7 @@ include("main/controller/$ctrl_name.php");
                 </div>
             </div>
             <div class="row justify-content-center" align="center">
-                <div class="col-4">
+                <div class="col-sm-6 col-md-4">
                     <div class="input-group flex-nowrap">
                         <input type="text" ng-model="user_id" class="form-control col-md-12" placeholder="รหัสพนักงาน">
                         <span class="input-group-text " id="addon-wrapping"><i class="bi bi-person-fill"></i></span>
@@ -61,7 +61,7 @@ include("main/controller/$ctrl_name.php");
                 </div>
             </div><br>
             <div class="row justify-content-center" align="center">
-                <div class="col-4">
+                <div class="col-sm-6 col-md-4">
                     <div class="input-group flex-nowrap">
                         <input type="password" ng-model="password" class="form-control col-md-12" placeholder="รหัสผ่าน" autocomplete="username">
                         <span class="input-group-text" id="addon-wrapping"><i class="bi bi-lock-fill"></i></span>
@@ -69,10 +69,8 @@ include("main/controller/$ctrl_name.php");
                 </div>
             </div><br>
             <div class="row justify-content-center" align="center">
-                <div class="col-4">
-                    <div class="input-group flex-nowrap">
-                        <button type="summit" class="btn btn-primary btn-block col-md-12" data-bs-toggle="modal" data-bs-target="#modal-add">เข้าสู่ระบบ</button>
-                    </div>
+                <div class="d-grid gap-2 col-md-4">
+                    <button type="summit" class="btn btn-primary btn-block">เข้าสู่ระบบ</button>
                 </div>
             </div>
         </form>

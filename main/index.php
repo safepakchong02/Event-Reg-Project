@@ -3,8 +3,8 @@
 
 date_default_timezone_set('Asia/Bangkok');
 include("main/function/function_main.php");
-include("main/function/function_sql.php");
-include("main/function/function_form.php");
+// include("main/function/function_sql.php");
+// include("main/function/function_form.php");
 include("main/function/function_date.php");
 
 // $_SESSION["user_name"] = "ปัญญทัศน์";

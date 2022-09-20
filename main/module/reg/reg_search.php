@@ -106,47 +106,49 @@ if (!isset($_GET["ev_id"])) { ?>
     </div>
 
     <!-- data table -->
-    <table datatable="ng" id="example" class="table nowrap" style="width:100%">
-        <thead>
-            <tr class="table-dark">
-                <th ng-show="check.emp_id">รหัสพนักงาน</th>
-                <th ng-show="check.card_id">รหัสบัตรประชาชน</th>
-                <th ng-show="check.name">ชื่อ - สกุล</th>
-                <th ng-show="check.call">เบอร์โทรศัพท์</th>
-                <th ng-show="check.com_name">ชื่อบริษัท</th>
-                <th ng-show="check.dep">แผนก</th>
-                <th ng-show="check.pos">ตำแหน่ง</th>
-                <th ng-show="check.salary">ลำดับที่</th>
-                <th ng-show="check.gender">เพศ</th>
-                <th ng-show="check.age">อายุ</th>
-                <th ng-show="check.birthDate">วันเกิด</th>
-                <th>วันที่เข้าร่วมกิจกรรม</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="row in data_table">
-                <? include("main/module/event/event_detail_edit.php"); ?>
-                <td ng-show="check.emp_id">{{row.emp_id}}</td>
-                <td ng-show="check.card_id">{{row.card_id}}</td>
-                <td ng-show="check.name">{{row.name}}</td>
-                <td ng-show="check.call">{{row.call}}</td>
-                <td ng-show="check.com_name">{{row.com_name}}</td>
-                <td ng-show="check.dep">{{row.dep}}</td>
-                <td ng-show="check.pos">{{row.pos}}</td>
-                <td ng-show="check.salary">{{row.salary}}</td>
-                <td ng-show="check.gender">{{row.gender}}</td>
-                <td ng-show="check.age">{{row.age}}</td>
-                <td ng-show="check.birthDate">{{row.birthDate}}</td>
-                <td>{{checkReg(row.reg_date)}}</td>
-                <td ng-if="regIsOpen">
-                    <button type="button" ng-click="reset_reg(row.id)" class="btn btn-primary btn-sm">รีเซ็ทการลงทะเบียน</button>
-                    <button type="button" ng-click="edit_reg_view(row.id)" data-bs-toggle="modal" data-bs-target="#modal-detail_edit" class="btn btn-warning btn-sm">แก้ไข</button>
-                    <button type="button" ng-click="del_reg(row.id)" class="btn btn-danger btn-sm">ลบ</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table datatable="ng" id="example" class="table nowrap" style="width:100%">
+            <thead>
+                <tr class="table-dark">
+                    <th ng-show="check.emp_id">รหัสพนักงาน</th>
+                    <th ng-show="check.card_id">รหัสบัตรประชาชน</th>
+                    <th ng-show="check.name">ชื่อ - สกุล</th>
+                    <th ng-show="check.call">เบอร์โทรศัพท์</th>
+                    <th ng-show="check.com_name">ชื่อบริษัท</th>
+                    <th ng-show="check.dep">แผนก</th>
+                    <th ng-show="check.pos">ตำแหน่ง</th>
+                    <th ng-show="check.no">ลำดับที่</th>
+                    <th ng-show="check.gender">เพศ</th>
+                    <th ng-show="check.age">อายุ</th>
+                    <th ng-show="check.birthDate">วันเกิด</th>
+                    <th>วันที่เข้าร่วมกิจกรรม</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in data_table">
+                    <? include("main/module/event/event_detail_edit.php"); ?>
+                    <td ng-show="check.emp_id">{{row.emp_id}}</td>
+                    <td ng-show="check.card_id">{{row.card_id}}</td>
+                    <td ng-show="check.name">{{row.name}}</td>
+                    <td ng-show="check.call">{{row.call}}</td>
+                    <td ng-show="check.com_name">{{row.com_name}}</td>
+                    <td ng-show="check.dep">{{row.dep}}</td>
+                    <td ng-show="check.pos">{{row.pos}}</td>
+                    <td ng-show="check.no">{{row.no}}</td>
+                    <td ng-show="check.gender">{{row.gender}}</td>
+                    <td ng-show="check.age">{{row.age}}</td>
+                    <td ng-show="check.birthDate">{{row.birthDate}}</td>
+                    <td>{{checkReg(row.reg_date)}}</td>
+                    <td ng-if="regIsOpen">
+                        <button type="button" ng-click="reset_reg(row.id)" class="btn btn-primary btn-sm">รีเซ็ทการลงทะเบียน</button>
+                        <button type="button" ng-click="edit_reg_view(row.id)" data-bs-toggle="modal" data-bs-target="#modal-detail_edit" class="btn btn-warning btn-sm">แก้ไข</button>
+                        <button type="button" ng-click="del_reg(row.id)" class="btn btn-danger btn-sm">ลบ</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     <!-- end data table -->
 </div>
 <!-- end content -->

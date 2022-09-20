@@ -1,20 +1,31 @@
 <script>
     var app = angular.module("<?= $app_name ?>", ['datatables']);
-    app.controller("<?= $ctrl_name ?>", function($scope, $http, $rootScope) { // start controller function
+    app.controller("<?= $ctrl_name ?>", function($scope, $http) { // start controller function
         $scope.isInit = true;
+        $scope.head = [];
 
-
-        $('#importFile').change(function(event) {
+        $('#importFile').change((event) => {
             $scope.importFile = URL.createObjectURL(event.target.files[0]);
         });
 
-        $scope.import = function() {
-            alasql('SELECT * FROM XLSX(?,{headers:true})', [$scope.importFile], function(data) {
-                $scope.isInit = false;
-                $scope.data = data;
-                console.log($scope.data);
-                console.log($scope.isInit);
-            });
-        }
+        /* ==================IMPORT======================= */
+        $scope.import = () => {
+            alasql('SELECT * FROM XLSX(?,{headers:true})',
+                [$scope.importFile],
+                (data) => {
+                    $scope.isInit = false;
+                    const head = [];
+
+                    for (const h in data[0]) {
+                        head.push(h);
+                    }
+                    $scope.head = head;
+                    console.log($scope.head);
+                    $("#table").removeClass("ng-hide");
+                    $("#convert").removeClass("ng-hide");
+
+                }); // end callback and alasql
+        }; // end import function
+        /* ==================END IMPORT======================= */
     }); // end controller function
 </script>
