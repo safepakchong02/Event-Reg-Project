@@ -12,7 +12,7 @@ switch ($_SESSION["path"]) {
 }
 ?>
 <? if (!isset($_GET["event"])) { ?>
-    <div class="col-2 d-flex flex-column flex-shrink-0 p-3 text-bg-dark vh-100">
+    <div class="col-2 d-flex flex-column flex-shrink-0 p-3 text-bg-dark vh-100 nav_full">
         <a href="index.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
             <span class="fs-4">SUTH REG</span>
         </a>
@@ -47,4 +47,16 @@ switch ($_SESSION["path"]) {
             </ul>
         </div>
     </div>
+
+    <style>
+        .nav_full {
+            position:fixed;
+            /* width: 200px; */
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            height: 100%;
+        }
+    </style>
+    
 <? } ?>

@@ -46,11 +46,11 @@ $app_name = "SuthReg";
         </div>
     <? } elseif ($_SESSION["perm"] === "admin" || $_SESSION["perm"] === "manager") { ?>
         <div class="container-fluid">
+            <!-- sidebar -->
+            <? include("main/body/sidebar.php"); ?>
+            <!-- end sidebar -->
             <div class="row">
-                <!-- sidebar -->
-                <? include("main/body/sidebar.php"); ?>
-                <!-- end sidebar -->
-
+                <div class="col-2"></div>
                 <!-- content -->
                 <div class="col-10">
                     <?

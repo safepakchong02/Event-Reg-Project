@@ -35,8 +35,8 @@ include("main/controller/$ctrl_name.php");
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-
+                    <tr ng-repeat="row in data">
+                        <td ng-repeat="col in row[1]">{{col}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -50,10 +50,10 @@ include("main/controller/$ctrl_name.php");
             </div>
             <div class="row pb-3">
                 <div class="col-4">
-                    <input type="text" ng-model="edit_ev_title" name="edit_ev_title" class="form-control" required>
+                    <input type="text" ng-model="test" name="test" class="form-control" required>
                 </div>
                 <div class="col-8">
-                    <select class="form-control">
+                    <select class="form-control" ng-model="has_col[i]">
                         <option>โปรดระบุ</option>
                         <option>รหัสพนักงาน</option>
                         <option>รหัสบัตรประชาชน</option>

@@ -9,7 +9,7 @@
             n2 = parseInt(n2);
             var sum = n1 + n2;
             var num = (n1 / sum) * 100;
-            console.log(`n1=${n1} n2=${n2} num=${num} sum=${sum}`);
+            // console.log(`n1=${n1} n2=${n2} num=${num} sum=${sum}`);
             return `${num}%`;
         }
 
@@ -26,7 +26,7 @@
                     $interval(() => {
                         console.log("reload");
                         $scope.loadData();
-                    }, 5000)
+                    }, 60000)
                 }
                 /* =============RELOAD REALTIME============= */
             }) // end then
@@ -43,7 +43,7 @@
                 $http.get(`main/model/reg/query_reg.php?event_view=report_data&ev_id=<?= $_GET["ev_id"] ?>&group_by=${$scope.group_by}`)
                     .then((res) => { // start then
                         $scope.report_data = res.data.report_data; // "results_data" is key in json format
-                        console.log($scope.report_data);
+                        // console.log($scope.report_data);
                     }) // end then
             } else {
                 delete $scope.report_data;
@@ -52,7 +52,7 @@
             $http.get(`main/model/reg/query_reg.php?event_view=report_sum&ev_id=<?= $_GET["ev_id"] ?>`)
                 .then((res) => { // start then
                     $scope.report_sum = res.data.report_sum; // "results_data" is key in json format
-                    console.log($scope.report_sum);
+                    // console.log($scope.report_sum);
                 }) // end then
         }
 
