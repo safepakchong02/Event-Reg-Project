@@ -6,6 +6,10 @@ include("main/controller/$ctrl_name.php");
 
 <? if (isset($_GET["ev_id"])) { ?>
     <div class="container-fluid" ng-controller="<?= $ctrl_name ?>"><br>
+        <!-- loading screen -->
+        <?include("main/body/loading.php");?>
+        <!-- end loading screen -->
+
         <div class="row">
             <div class="col-1" style="width: 140px;">
                 <a href="index.php?p=event&m=event_detail&ev_id=<?= $_GET["ev_id"] ?>" class="btn btn-primary"><i class="bi bi-caret-left-fill"></i>ย้อนกลับ</a>

@@ -1,5 +1,6 @@
 <script>
     const col = {};
+    let table = null;
     const testFunc = (element) => {
         let col_new = element.value;
         let col_old = element.getAttribute("colold");
@@ -54,7 +55,7 @@
                         `); // end append
                     } // end for
 
-                    $("#preview").dataTable({
+                    table = $("#preview").dataTable({
                         "data": data,
                         "columns": arrHead,
                     });
@@ -66,7 +67,6 @@
 
         $scope.import_save = () => {
             let data_new = [];
-            // console.log($scope.data);
 
             for (i in $scope.data) {
                 let data_col = {};
@@ -75,7 +75,22 @@
                 }
                 data_new.push(data_col);
             }
-            console.log(data_new);
+            // console.log(data_new);
+
+            $("#modal-loading").modal("show");
+            data_new = JSON.stringify(data_new);
+            $http({
+                method: 'POST',
+                url: 'main/model/event/query_event_detail_import.php?event_view=import',
+                data: `ev_id=<?= $_GET["ev_id"] ?>` +
+                    `&data=${data_new}`,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }).then((res) => {
+                $("#modal-loading").modal("hide");
+                console.log(res.data);
+            }); // end then http
 
         }; // end import_save function
         /* ==================END IMPORT======================= */
