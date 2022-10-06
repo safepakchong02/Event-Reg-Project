@@ -35,7 +35,8 @@
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
-            }).then(function(response) {
+            }).then((res) => {
+                    // console.log(res.data);
                     $("#modal-status_success").modal("show");
                     setTimeout(() => {
                         location.reload();

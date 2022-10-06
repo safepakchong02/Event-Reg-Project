@@ -7,8 +7,12 @@ include("main/controller/$ctrl_name.php");
 <? if (isset($_GET["ev_id"])) { ?>
     <div class="container-fluid" ng-controller="<?= $ctrl_name ?>"><br>
         <!-- loading screen -->
-        <?include("main/body/loading.php");?>
+        <? include("main/body/loading.php"); ?>
         <!-- end loading screen -->
+
+        <!-- status success -->
+        <? include("main/body/status_success.php"); ?>
+        <!-- end status success -->
 
         <div class="row">
             <div class="col-1" style="width: 140px;">
@@ -22,8 +26,9 @@ include("main/controller/$ctrl_name.php");
             <div class="col-4">
                 <input type="file" id="importFile" class="form-control form-control-sm" />
             </div>
-            <div class="col-2">
-                <button type="button" ng-click="import()" class="btn btn-primary btn-sm"><i class="bi bi-person-plus-fill"></i> Import</button>
+            <div class="col-4">
+                <button id="import" type="button" ng-click="import()" class="btn btn-primary btn-sm"><i class="bi bi-person-plus-fill"></i> Import</button>
+                <button id="reset" type="button" ng-click="reset()" class="btn btn-danger btn-sm ng-hide"><i class="bi bi-repeat"></i> รีเซ็ทการอัปโหลดไฟล์</button>
             </div>
         </div>
         <br>

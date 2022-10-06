@@ -1,6 +1,7 @@
 <script>
     const col = {};
     let table = null;
+
     const testFunc = (element) => {
         let col_new = element.value;
         let col_old = element.getAttribute("colold");
@@ -11,16 +12,33 @@
     app.controller("<?= $ctrl_name ?>", function($scope, $http) { // start controller function
         $scope.isInit = true;
         $scope.has_col = [];
+        $scope.all = 0;
+        $scope.now = 0;
+        // $("#modal-loading").modal("show");
+
+        $scope.widthCal = (n1, n2) => {
+            n1 = parseInt(n1);
+            // n1++;
+            n2 = parseInt(n2);
+            var num = (n1 / n2) * 100;
+            // console.log(`n1=${n1} n2=${n2} num=${num}`);
+            return `${num}%`;
+        }
 
         $('#importFile').change((event) => {
             $scope.importFile = URL.createObjectURL(event.target.files[0]);
         });
+
+        $scope.reset = () => {
+            location.reload();
+        }
 
         /* ==================IMPORT======================= */
         $scope.import = () => {
             alasql('SELECT * FROM XLSX(?,{headers:true})',
                 [$scope.importFile],
                 (data) => {
+                    // console.log(data);
                     $scope.data = data;
                     let head = Object.keys(data[0]);
                     $scope.head = head;
@@ -62,36 +80,119 @@
 
                     $("#table").removeClass("ng-hide");
                     $("#convert").removeClass("ng-hide");
+                    $("#reset").removeClass("ng-hide");
+                    $("#import").prop('disabled', true);
+                    $("#importFile").prop('disabled', true);
                 }); // end callback and alasql
         }; // end import function
 
-        $scope.import_save = () => {
-            let data_new = [];
+        $scope.func_save = (i) => {
+            setTimeout(() => {
+                let data_col = {
+                    "emp_id": "",
+                    "card_id": "",
+                    "name": "",
+                    "call": "",
+                    "com_name": "",
+                    "dep": "",
+                    "pos": "",
+                    "no": "",
+                    "gender": "",
+                    "age": "",
+                    "no": "",
+                    "birthDate": "",
+                    "reg_date": ""
+                }; // end let data_col
 
-            for (i in $scope.data) {
-                let data_col = {};
                 for (j in $scope.head) {
                     data_col[col[$scope.head[j]]] = $scope.data[i][$scope.head[j]];
-                }
-                data_new.push(data_col);
-            }
-            // console.log(data_new);
+                } // end for j
 
+                $http({
+                    method: 'POST',
+                    url: 'main/model/reg/query_reg.php?event_view=add',
+                    data: `ev_id=<?= $_GET["ev_id"] ?>` +
+                        `&emp_id=${data_col.emp_id}` +
+                        `&card_id=${data_col.card_id}` +
+                        `&name=${data_col.name}` +
+                        `&call=${data_col.call}` +
+                        `&com_name=${data_col.com_name}` +
+                        `&dep=${data_col.dep}` +
+                        `&pos=${data_col.pos}` +
+                        `&no=${data_col.no}` +
+                        `&gender=${data_col.gender}` +
+                        `&age=${data_col.age}` +
+                        `&no=${data_col.no}` +
+                        `&birthDate=${data_col.birthDate}` +
+                        `&reg_date=${data_col.reg_date}`,
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                }).then(async (res) => {
+                    $scope.now = parseInt(i) + 1;
+                    console.log(res.data);
+                }); // end then http
+            }, 1000 * i)
+        }
+
+        $scope.import_save = () => {
             $("#modal-loading").modal("show");
-            data_new = JSON.stringify(data_new);
+            $("#isImport").removeClass("ng-hide");
+            $scope.all = $scope.data.length;
+
+            let setting = {
+                "emp_id": false,
+                "card_id": false,
+                "name": false,
+                "call": false,
+                "com_name": false,
+                "dep": false,
+                "pos": false,
+                "no": false,
+                "gender": false,
+                "age": false,
+                "no": false,
+                "birthDate": false,
+            }; // end let data_col
+
+            for (i in $scope.head) {
+                setting[col[$scope.head[i]]] = true;
+            } // end for i
+            // console.log(setting);
+
             $http({
                 method: 'POST',
-                url: 'main/model/event/query_event_detail_import.php?event_view=import',
+                url: 'main/model/event/query_event_detail_setting.php?event_view=import',
                 data: `ev_id=<?= $_GET["ev_id"] ?>` +
-                    `&data=${data_new}`,
+                    `&emp_id=${setting.emp_id}` +
+                    `&card_id=${setting.card_id}` +
+                    `&name=${setting.name}` +
+                    `&call=${setting.call}` +
+                    `&com_name=${setting.com_name}` +
+                    `&dep=${setting.dep}` +
+                    `&pos=${setting.pos}` +
+                    `&no=${setting.no}` +
+                    `&gender=${setting.gender}` +
+                    `&age=${setting.age}` +
+                    `&birthDate=${setting.birthDate}`,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }).then((res) => {
-                $("#modal-loading").modal("hide");
-                console.log(res.data);
-            }); // end then http
+                // console.log(res.data);
+                for (i in $scope.data) {
+                    $scope.func_save(i);
+                } // end for i
 
+                setTimeout(() => {
+                    $("#modal-loading").modal("hide");
+                    $("#modal-status_success").modal("show");
+                    setTimeout(() => {
+                        $("#modal-status_success").modal("hide");
+                        location.replace("index.php?p=event&m=event_detail&ev_id=<?= $_GET["ev_id"] ?>");
+                    }, 1000);
+                }, 1000 * $scope.all);
+            }); // end then
         }; // end import_save function
         /* ==================END IMPORT======================= */
     }); // end controller function

@@ -21,7 +21,14 @@ include("main/controller/$ctrl_name.php");
         <? include("main/body/status_reg_error_isNoData.php"); ?>
         <? include("main/body/status_reg_error_isExist.php"); ?>
         <!-- end error -->
-        <h1>รายชื่อผู้ลงทะเบียน</h1><br>
+        <div class="row">
+            <div class="col-1" style="width: 140px;">
+                <a href="index.php?p=event&m=dashboard" class="btn btn-primary"><i class="bi bi-caret-left-fill"></i>ย้อนกลับ</a>
+            </div>
+            <div class="col">
+                <h1>รายชื่อผู้ลงทะเบียน</h1>
+            </div>
+        </div>
         <div class="container-fluid">
             <div class="row">
                 <div class="col">

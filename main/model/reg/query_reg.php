@@ -117,7 +117,7 @@
         $sql = "SELECT * FROM `event_member` " .
             "WHERE del = '0' and `" . $_POST["key"] . "`='" . $_POST["value"] . "'" .
             " and `ev_id`='" . $_POST["ev_id"] . "'";
-
+        // echo $sql;
         $resource_data = mysqli_query($handle, $sql);
         $count_row = mysqli_num_rows($resource_data);
 

@@ -29,11 +29,16 @@ if (!isset($_GET["ev_id"])) { ?>
             <h1>ชื่อกิจกรรม: {{event_data[0].ev_title}}</h1>
             <h3>วันที่/เวลา: {{event_data[0].ev_date_start}} ถึง {{event_data[0].ev_date_end}}</h3>
         </div>
-    </div><br>
+    </div>
     <!-- end header -->
 
     <!-- register -->
     <div class="container my-5" ng-if="regIsOpen"><br><br>
+        <div class="row justify-content-center" align="center">
+            <div class="d-grid gap-2 col-md-4">
+                <img src="asset\img\logo sut.png" class="rounded mx-auto d-block" width="150" height="200">
+            </div>
+        </div><br>
         <div class="row justify-content-center" align="center">
             <div class="d-grid gap-2 col-md-4">
                 <span class="h3">ลงทะเบียน</span>
@@ -41,7 +46,7 @@ if (!isset($_GET["ev_id"])) { ?>
         </div><br>
         <div class="row justify-content-center" align="center">
             <div class="d-grid gap-2 col-md-4">
-                <input type="text" placeholder="{{has_reg_by}}" ng-model="reg" name="reg" class="form-control" required>
+                <input type="text" id="reg" placeholder="{{has_reg_by}}" ng-model="reg" name="reg" class="form-control">
             </div>
         </div><br>
         <div class="row justify-content-center" align="center">

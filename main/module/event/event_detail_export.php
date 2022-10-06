@@ -1,103 +1,164 @@
-<div class="container-fluid"><br>
-    <div class="row" >
+<!-- import ctrl -->
+<?
+$ctrl_name = "reg_search_ctrl";
+include("main/controller/$ctrl_name.php");
+
+if (!isset($_GET["ev_id"])) { ?>
+    <meta http-equiv="refresh" content="0;url=index.php?p=reg&m=event_dashboard">
+<? } ?>
+
+<!-- style -->
+<style>
+    .dataTables_filter {
+        display: none;
+    }
+</style>
+<!-- end style -->
+
+<!-- content -->
+<div class="container-fluid" ng-controller="<?= $ctrl_name ?>"><br>
+    <div class="row">
         <div class="col-1" style="width: 140px;">
-            <button type="button" class="btn btn-primary"><i class="bi bi-caret-left-fill"></i>ย้อนกลับ</button>
+            <a href="index.php?p=event&m=event_detail&ev_id=<?= $_GET["ev_id"] ?>" class="btn btn-primary"><i class="bi bi-caret-left-fill"></i>ย้อนกลับ</a>
         </div>
         <div class="col">
-            <h1>ออกรายงานผล</h1>
+            <h1>ส่งออกข้อมูล</h1>
         </div>
     </div>
+
+    <!-- search key -->
     <div class="container pb-3"><br>
         <div class="row">
             <div class="col-md-4">
                 <h3>ค้นหาข้อมูล</h3>
             </div>
             <div class="box-body">
-         		<div class="row">
-					<div class="col-md-4 pb-3">
-						<div class="form-group">
-							<label>รหัสพนักงาน :</label>
-                            <input type="search" class="form-control rounded" placeholder="------- ไม่ระบุข้อมูล -------" aria-label="Search" aria-describedby="search-addon" />  
-						</div>
-					</div>
-                    <div class="col-md-4 pb-3">
+                <div class="row">
+                    <div class="col-md-4 pb-3" ng-show="check.emp_id">
                         <div class="form-group">
-                            <label >แผนก :</label>
-                            <input type="search" class="form-control rounded" placeholder="------- ไม่ระบุข้อมูล -------" aria-label="Search" aria-describedby="search-addon" />
+                            <label>รหัสพนักงาน :</label>
+                            <input type="search" onkeyup="searchColumn(0, this.value)" class="form-control rounded" placeholder="------- ไม่ระบุข้อมูล -------" />
                         </div>
                     </div>
-                    <div class="col-md-4 pb-3">
+                    <div class="col-md-4 pb-3" ng-show="check.card_id">
                         <div class="form-group">
-                            <label >ตำแหน่ง :</label>
-                            <input type="search" class="form-control rounded" placeholder="------- ไม่ระบุข้อมูล -------" aria-label="Search" aria-describedby="search-addon" />
+                            <label>บัตรประชาชน :</label>
+                            <input type="search" onkeyup="searchColumn(1, this.value)" class="form-control rounded" placeholder="------- ไม่ระบุข้อมูล -------" />
                         </div>
                     </div>
-				
-				    <div class="col-md-4 pb-3">
-					    <div class="form-group">
-							<label>เพศ :</label>
-                            <select class="form-control selectpicker" id="select-country" data-live-search="true">
-                                <option data-tokens="/">---ไม่ระบุข้อมูล---</option>
-                                <option data-tokens="/">ชาย</option>
-                                <option data-tokens="/">หญิง</option>
-                                <option data-tokens="/">เพศทางเลือก</option>
-                            </select>  
-						</div>
-					</div>
-                    <div class="col-md-4 pb-3">
+                    <div class="col-md-4 pb-3" ng-show="check.name">
                         <div class="form-group">
-                            <label >สถานะลงทะเบียน :</label>
-                            <select class="form-control selectpicker" id="select-country" data-live-search="true">
-                                <option data-tokens="/">---ไม่ระบุข้อมูล---</option>
-                                <option data-tokens="/">เปิดลงทะเบียน</option>
-                                <option data-tokens="/">ปิดลงทะเบียน</option>
+                            <label>ชื่อ-นามสกุล :</label>
+                            <input type="search" onkeyup="searchColumn(2, this.value)" class="form-control rounded" placeholder="------- ไม่ระบุข้อมูล -------" />
+                        </div>
+                    </div>
+                    <div class="col-md-4 pb-3" ng-show="check.com_name">
+                        <div class="form-group">
+                            <label>ชื่อบริษัท :</label>
+                            <input type="search" onkeyup="searchColumn(4, this.value)" class="form-control rounded" placeholder="------- ไม่ระบุข้อมูล -------" />
+                        </div>
+                    </div>
+                    <div class="col-md-4 pb-3" ng-show="check.dep">
+                        <div class="form-group">
+                            <label>แผนก :</label>
+                            <input type="search" onkeyup="searchColumn(5, this.value)" class="form-control rounded" placeholder="------- ไม่ระบุข้อมูล -------" />
+                        </div>
+                    </div>
+                    <div class="col-md-4 pb-3" ng-show="check.pos">
+                        <div class="form-group">
+                            <label>ตำแหน่ง :</label>
+                            <input type="search" onkeyup="searchColumn(6, this.value)" class="form-control rounded" placeholder="------- ไม่ระบุข้อมูล -------" />
+                        </div>
+                    </div>
+                    <div class="col-md-4 pb-3" ng-show="check.gender">
+                        <div class="form-group">
+                            <label>เพศ :</label>
+                            <select class="form-control" onchange="searchColumn(8, this.value)">
+                                <option value="">---ไม่ระบุข้อมูล---</option>
+                                <option value="ชาย">ชาย</option>
+                                <option value="หญิง">หญิง</option>
+                                <option value="ทางเลือก">เพศทางเลือก</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-md-4 pb-3">
                         <div class="form-group">
-                            <label >วันที่เข้ากิจกรรม :</label>
-                            <input type="datetime-local" class="form-control rounded" placeholder="------- ไม่ระบุข้อมูล -------" aria-label="Search" aria-describedby="search-addon" />
+                            <label>สถานะการลงทะเบียน :</label>
+                            <select class="form-control" onchange="searchColumn(11, this.value)">
+                                <option value="">---ไม่ระบุข้อมูล---</option>
+                                <option value="/">เข้าร่วม</option>
+                                <option value="-">ไม่เข้าร่วม</option>
+                            </select>
                         </div>
                     </div>
-                    <div class="box-footer"><br>
-                        <button type="button" class="btn btn-success btn-sm" ng-click="Export()"><i class="bi bi-file-earmark-excel-fill"></i> Export Excel</button>
+                    <div class="col-md-4 pb-3">
+                        <div class="form-group">
+                            <label>วันที่เข้ากิจกรรม :</label>
+                            <input type="search" onkeyup="searchColumn(11, this.value)" class="form-control rounded" placeholder="dd/mm/yyyy hh:mm หรือ hh:mm" />
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="box-footer"><br>
+                <button type="button" class="btn btn-success btn-sm" ng-click="export()"><i class="bi bi-file-earmark-excel-fill"></i> Export Excel</button>
+            </div>
         </div>
     </div>
-        <!-- แสดงข้อมูล -->
+    <!-- end search key -->
+
+    <div class="pb-3">
+        <span class="h3">รายชื่อผู้ลงทะเบียน</span>
+    </div>
+
+    <!-- data table -->
+    <div class="table-responsive">
         <table datatable="ng" id="example" class="table nowrap" style="width:100%">
             <thead>
                 <tr class="table-dark">
-                    <th>รหัสพนักงาน</th>
-                    <th>รหัสบัตรประชาชน</th>
-                    <th>ชื่อ-สกุล</th>
-                    <th>เพศ</th>
-                    <th>แผนก</th>
-                    <th>วันที่เข้ากิจกรรม</th>
-                    <th></th>
+                    <th ng-show="check.emp_id">รหัสพนักงาน</th>
+                    <th ng-show="check.card_id">รหัสบัตรประชาชน</th>
+                    <th ng-show="check.name">ชื่อ - สกุล</th>
+                    <th ng-show="check.call">เบอร์โทรศัพท์</th>
+                    <th ng-show="check.com_name">ชื่อบริษัท</th>
+                    <th ng-show="check.dep">แผนก</th>
+                    <th ng-show="check.pos">ตำแหน่ง</th>
+                    <th ng-show="check.no">ลำดับที่</th>
+                    <th ng-show="check.gender">เพศ</th>
+                    <th ng-show="check.age">อายุ</th>
+                    <th ng-show="check.birthDate">วันเกิด</th>
+                    <th>วันที่เข้าร่วมกิจกรรม</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td align="center">1</td>
-                    <td align="center">123456789</td>
-                    <td>ปัญญทัศน์ ศรีบุตรวงศ์</td>
-                    <td>ชาย</td>
-                    <td>สารสนเทศ</td>
-                    <td>15/09/2565 16:00</td>
+                <tr ng-repeat="row in data_table">
+                    <? include("main/module/event/event_detail_edit.php"); ?>
+                    <td ng-show="check.emp_id">{{row.emp_id}}</td>
+                    <td ng-show="check.card_id">{{row.card_id}}</td>
+                    <td ng-show="check.name">{{row.name}}</td>
+                    <td ng-show="check.call">{{row.call}}</td>
+                    <td ng-show="check.com_name">{{row.com_name}}</td>
+                    <td ng-show="check.dep">{{row.dep}}</td>
+                    <td ng-show="check.pos">{{row.pos}}</td>
+                    <td ng-show="check.no">{{row.no}}</td>
+                    <td ng-show="check.gender">{{row.gender}}</td>
+                    <td ng-show="check.age">{{row.age}}</td>
+                    <td ng-show="check.birthDate">{{row.birthDate}}</td>
+                    <td>{{checkReg(row.reg_date)}}</td>
                 </tr>
             </tbody>
         </table>
-        <script>
-            $(document).ready(function() {
-                var table = $('#example').DataTable({
-                    scrollX: true,
-                });
-            });
-        </script>
-        <!-- จบการแสดงข้อมูล -->
     </div>
+    <!-- end data table -->
 </div>
+<!-- end content -->
+<!-- script built in -->
+<script>
+    const searchColumn = (c, k) => {
+        table = $('#example')
+            .DataTable()
+            .column(c)
+            .search(k)
+            .draw();
+    }
+</script>
+<!-- end script built in -->

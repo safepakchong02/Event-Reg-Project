@@ -1,6 +1,11 @@
 <script>
+    let table = $('#example').DataTable({
+        scrollX: true,
+    });
+
     var app = angular.module("<?= $app_name ?>", ['datatables']);
     app.controller("<?= $ctrl_name ?>", function($scope, $http) { // start controller function
+
         /* ===============CHECK DATA=============== */
         $scope.checkReg = (date) => {
             if (date === "") return "-"
@@ -104,5 +109,38 @@
         }
         /* ===============END RESET REGISTER=============== */
 
+        /* ===============EXPORT=============== */
+        $scope.export = () => {
+            var data = table.rows({
+                search: 'applied'
+            }).data().toArray();
+
+            if (data.length == 0) {
+                // console.log("no data");
+                searchColumn(0, "");
+                data = table.rows().data().toArray();
+            }
+
+            var header = ["รหัสพนักงาน", "รหัสบัตรประชาชน", "ชื่อ - สกุล", "เบอร์โทรศัพท์", "ชื่อบริษัท", "แผนก", "ตำแหน่ง", "ลำดับที่", "เพศ", "อายุ", "วันเกิด", "วันที่เข้าร่วมกิจกรรม"];
+            var rows = [];
+
+            if (data.length != 0) {
+                for (i in data) {
+                    var col = {};
+                    for (j in data[i]) {
+                        // replace  html string
+                        data[i][j] = data[i][j].replace("&nbsp;", " ");
+                        data[i][j] = data[i][j].replace("&nbsp;", " ");
+                        
+                        if (data[i][j].startsWith("<button")); // skip button
+                        else if (data[i][j] != "") col[header[j]] = data[i][j];
+                    }
+                    rows.push(col);
+                }
+            }
+            console.log(rows);
+            alasql('SELECT * INTO XLSX("export.xlsx",{headers:true}) FROM ?', [rows]);
+        }
+        /* ===============END EXPORT=============== */
     }); // end controller function
 </script>

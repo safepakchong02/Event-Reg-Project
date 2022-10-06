@@ -10,6 +10,14 @@ if (!isset($_GET["ev_id"])) { ?>
 <? include("main/body/status_success.php"); ?>
 <!-- end status success -->
 
+<!-- style -->
+<style>
+    .dataTables_filter {
+        display: none;
+    }
+</style>
+<!-- end style -->
+
 <!-- content -->
 <div class="container-fluid" ng-controller="<?= $ctrl_name ?>"><br>
     <!-- header -->
@@ -95,7 +103,7 @@ if (!isset($_GET["ev_id"])) { ?>
                 </div>
             </div>
             <div class="box-footer"><br>
-                <button type="button" class="btn btn-success btn-sm" ng-click="Export()"><i class="bi bi-file-earmark-excel-fill"></i> Export Excel</button>
+                <button type="button" class="btn btn-success btn-sm" ng-click="export()"><i class="bi bi-file-earmark-excel-fill"></i> Export Excel</button>
             </div>
         </div>
     </div>
@@ -140,7 +148,7 @@ if (!isset($_GET["ev_id"])) { ?>
                     <td ng-show="check.age">{{row.age}}</td>
                     <td ng-show="check.birthDate">{{row.birthDate}}</td>
                     <td>{{checkReg(row.reg_date)}}</td>
-                    <td ng-if="regIsOpen">
+                    <td ng-show="regIsOpen">
                         <button type="button" ng-click="reset_reg(row.id)" class="btn btn-primary btn-sm">รีเซ็ทการลงทะเบียน</button>
                         <button type="button" ng-click="edit_reg_view(row.id)" data-bs-toggle="modal" data-bs-target="#modal-detail_edit" class="btn btn-warning btn-sm">แก้ไข</button>
                         <button type="button" ng-click="del_reg(row.id)" class="btn btn-danger btn-sm">ลบ</button>
@@ -154,18 +162,12 @@ if (!isset($_GET["ev_id"])) { ?>
 <!-- end content -->
 <!-- script built in -->
 <script>
-    function searchColumn(col, key) {
-        $('#example')
+    const searchColumn = (c, k) => {
+        table = $('#example')
             .DataTable()
-            .column(col)
-            .search(key)
+            .column(c)
+            .search(k)
             .draw();
     }
-
-    $(document).ready(function() {
-        var table = $('#example').DataTable({
-            scrollX: true,
-        });
-    });
 </script>
 <!-- end script built in -->

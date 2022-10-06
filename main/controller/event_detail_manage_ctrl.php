@@ -41,9 +41,9 @@
         clearData();
 
         /* ==================--SHOW--======================= */
-        $http.get("main/model/event/query_event.php?event_view=show_data")
+        $http.get("main/model/event/query_event.php?event_view=show_data_edit&ev_id=<?= $_GET["ev_id"] ?>")
             .then(function(res) { // start then
-                $scope.ev_title = res.data.results_data[0].ev_title;
+                $scope.ev_title = res.data.results_data_edit[0].ev_title;
             }); // end then
 
         $http.get("main/model/event/query_event_detail_setting.php?event_view=show_data&ev_id=<?= $_GET["ev_id"] ?>")
@@ -55,6 +55,7 @@
         $http.get("main/model/reg/query_reg.php?event_view=show_member&ev_id=<?= $_GET["ev_id"] ?>")
             .then((res) => { // start then
                 $scope.data_table = res.data.results_data;
+                // console.log($scope.data_table);
             }); // end then
         /* ==================END SHOW======================= */
 

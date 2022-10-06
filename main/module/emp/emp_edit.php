@@ -2,44 +2,44 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title"><i class="bi bi-pencil-square"></i> แก้ไขข้อมูลพนักงาน</h5>
+        <h5 class="modal-title"><i class="bi bi-plus-circle"></i> เพิ่มข้อมูลพนักงาน</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form id="ev_edit" ng-submit="edit_event_save()" ng-controller="<?= $ctrl_name ?>">
+        <form ng-submit="edit_emp_save()" id="edit_emp_save">
           <div class="row">
             <div class="col-6">
               <div class="form-group pb-2">
                 <label> รหัสพนักงาน :</label>
-                <input type="text" ng-model="add_title_event" name="add_title_event" class="form-control" required>
+                <input type="text" ng-model="emp_edit.user_id" name="emp_edit.user_id" class="form-control" required disabled>
               </div>
             </div>
             <div class="col-6">
               <div class="form-group pb-2">
                 <label> ชื่อ :</label>
-                <input type="text" ng-model="add_emp_id" name="add_emp_id" class="form-control" required>
+                <input type="text" ng-model="emp_edit.user_name" name="emp_edit.user_name" class="form-control" required>
               </div>
             </div>
             <div class="col-6">
               <div class="form-group pb-2">
                 <label> นามสกุล :</label>
-                <input type="text" ng-model="add_emp_id" name="add_emp_id" class="form-control" required>
+                <input type="text" ng-model="emp_edit.user_surname" name="emp_edit.user_surname" class="form-control" required>
               </div>
             </div>
             <div class="col-6">
               <div class="form-group pb-2">
                 <label> แผนก :</label>
-                <input type="text" ng-model="add_emp_id" name="add_emp_id" class="form-control" required>
+                <input type="text" ng-model="emp_edit.dep_id" name="emp_edit.dep_id" class="form-control" required>
               </div>
             </div>
             <div class="col-6">
               <div class="form-group pb-2">
                 <label> สิทธิ์การใช้งาน :</label>
-                <select class="form-select" aria-label="Default select example">
-                        <option selected>------โปรดระบุ------</option>
-                        <option value="1">Admin</option>
-                        <option value="2">Register</option>
-                        <option value="3">User</option>
+                <select class="form-select" ng-model="emp_edit.perm">
+                  <option ng-selected="emp_edit.perm == ''">------โปรดระบุ------</option>
+                  <option ng-selected="emp_edit.perm == 'admin'" value="admin">admin</option>
+                  <option ng-selected="emp_edit.perm == 'manager'" value="manager">manager</option>
+                  <option ng-selected="emp_edit.perm == 'register'" value="register">register</option>
                 </select>
               </div>
             </div>
@@ -48,7 +48,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="submit" class="btn btn-primary" form="edit_emp_save">Save changes</button>
       </div>
     </div>
   </div>

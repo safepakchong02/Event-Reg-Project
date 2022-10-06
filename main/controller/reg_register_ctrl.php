@@ -19,10 +19,10 @@
         const searchBy = (key) => {
             switch (key) {
                 case "emp_id":
-                    return $scope.add_detail_emp_id;
+                    return $scope.data_add.emp_id;
                     break;
                 case "card_id":
-                    return $scope.add_detail_card_id;
+                    return $scope.data_add.card_id;
                     break;
                 default:
                     return "";
@@ -53,6 +53,8 @@
 
         /* =============REGISTER============= */
         $scope.register = () => {
+            $scope.reg = $("#reg").val();
+            // console.log($scope.reg);
             $http({
                 method: 'POST',
                 url: 'main/model/reg/query_reg.php?event_view=noData',
@@ -97,6 +99,7 @@
                 } // end else if 
 
                 $scope.reg = "";
+                $("#reg").val("");
                 delete $scope.preview;
             }); // end then
         } // end function register
@@ -126,7 +129,9 @@
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }).then((response) => {
+                    // console.log($scope);
                     var isExist = response.data.isExist;
+                    // console.log(isExist);
 
                     // add data
                     if (!isExist) {
@@ -153,11 +158,6 @@
                                 'Content-Type': 'application/x-www-form-urlencoded'
                             }
                         }).then((res) => {
-                                var data = res.data
-                                // console.log(data);
-                                $scope.preview = data;
-                                $scope.preview.birthDate = createDate(data.birthDate);
-                                // console.log($scope.preview);
                                 $("#modal-detail_add").modal("hide");
                                 clearData();
                                 $("#modal-status_success").modal("show");

@@ -2,6 +2,7 @@
     function covertBoolean($bool) {
         if ($bool == "true") return "1";
         else return "0";
+        // return $bool;
     }
     
     date_default_timezone_set('Asia/Bangkok');
@@ -81,7 +82,37 @@
                 "`age` = '$age'," .
                 "`has_reg_by` = '$has_reg_by'," .
                 "`birthDate` = '$birthDate' " .
-                " WHERE `ev_id` = '$ev_id'";
+                " WHERE `event_setting`.`ev_id` = '$ev_id'";
+            mysqli_query($handle, $sql_update);
+            // echo $sql_update;
+        }
+    } else if ($event_view == 'import') {
+        if ($_POST['ev_id'] != '') {
+            $ev_id = $_POST["ev_id"];
+            $emp_id = covertBoolean($_POST["emp_id"]);
+            $card_id = covertBoolean($_POST["card_id"]);
+            $name = covertBoolean($_POST["name"]);
+            $call = covertBoolean($_POST["call"]);
+            $com_name = covertBoolean($_POST["com_name"]);
+            $dep = covertBoolean($_POST["dep"]);
+            $pos = covertBoolean($_POST["pos"]);
+            $no = covertBoolean($_POST["no"]);
+            $gender = covertBoolean($_POST["gender"]);
+            $age = covertBoolean($_POST["age"]);
+            $birthDate = covertBoolean($_POST["birthDate"]);
+            $sql_update = "UPDATE `event_setting` SET " .
+                "`emp_id` = '$emp_id'," .
+                "`card_id` = '$card_id'," .
+                "`name` = '$name'," .
+                "`call` = '$call'," .
+                "`com_name` = '$com_name'," .
+                "`dep` = '$dep'," .
+                "`pos` = '$pos'," .
+                "`no` = '$no'," .
+                "`gender` = '$gender'," .
+                "`age` = '$age'," .
+                "`birthDate` = '$birthDate' " .
+                " WHERE `event_setting`.`ev_id` = '$ev_id'";
             mysqli_query($handle, $sql_update);
             // echo $sql_update;
         }

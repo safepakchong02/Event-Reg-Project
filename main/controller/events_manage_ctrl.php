@@ -5,7 +5,11 @@
         $http.get("main/model/event/query_event.php?event_view=show_data")
             .then(function(res) { // start then
                 $scope.event_data = res.data.results_data; // "results_data" is key in json format
-
+            }) // end then
+        $http.get("main/model/emp/query_emp.php?event_view=emp")
+            .then(function(res) { // start then
+                $scope.emp_data = res.data.results_data; // "results_data" is key in json format
+                // console.log($scope.emp_data);
             }) // end then
 
         /* ==================ADD================== */

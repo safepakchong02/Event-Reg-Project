@@ -53,4 +53,17 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
+
+        datalist {
+            background-color: white;
+            width: 350px;
+            padding: 5px;
+            max-height: 10rem;
+            overflow-y: auto
+        }
+
+        option {
+            padding: 4px;
+            margin-bottom: 1px;
+        }
     </style>

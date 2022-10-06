@@ -17,7 +17,10 @@
             <div class="col-6">
               <div class="form-group pb-2">
                 <label> เจ้าหน้าที่ดูแล :</label>
-                <input type="text" ng-model="add_ev_assign_to" name="add_ev_assign_to" class="form-control" required>
+                <input type="text" ng-model="add_ev_assign_to" name="add_ev_assign_to" list="add_ev_assign_to" class="form-control" placeholder="รหัสพนักงาน" required>
+                <datalist id="add_ev_assign_to">
+                  <option ng-repeat="emp in emp_data" value="{{emp.user_id}}">{{emp.user_name}} {{emp.user_surname}}</option>
+                </datalist>
               </div>
             </div>
             <div class="col-6">

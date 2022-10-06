@@ -27,13 +27,13 @@
 
     //******************** import data *********************//
     if ($event_view == 'import') {
-        if (isset($_POST["ev_id"])) {
+        if (isset($_GET["ev_id"])) {
             $add_data = [];
 
-            $data = json_decode($_POST["data"]);
+            $data = json_decode(file_get_contents("php://input"));
             for ($i = 0; $i < count($data); $i++) {
                 $arr = array(
-                    $_POST["ev_id"],
+                    $_GET["ev_id"],
                     $_SESSION['user_id'],
                     "0",
                     "",
@@ -53,37 +53,37 @@
                 foreach ($data[$i] as $key => $val) {
                     switch ($key) {
                         case "emp_id":
-                            $arr[3] = (string) $val;
+                            $arr[3] = $val;
                             break;
                         case "card_id":
-                            $arr[4] = (string) $val;
+                            $arr[4] = $val;
                             break;
                         case "name":
-                            $arr[5] = (string) $val;
+                            $arr[5] = $val;
                             break;
                         case "call":
-                            $arr[6] = (string) $val;
+                            $arr[6] = $val;
                             break;
                         case "com_name":
-                            $arr[7] = (string) $val;
+                            $arr[7] = $val;
                             break;
                         case "dep":
-                            $arr[8] = (string) $val;
+                            $arr[8] = $val;
                             break;
                         case "pos":
-                            $arr[9] = (string) $val;
+                            $arr[9] = $val;
                             break;
                         case "no":
-                            $arr[10] = (string) $val;
+                            $arr[10] = $val;
                             break;
                         case "gender":
-                            $arr[11] = (string) $val;
+                            $arr[11] = $val;
                             break;
                         case "age":
-                            $arr[12] = (string) $val;
+                            $arr[12] = $val;
                             break;
                         case "birthDate":
-                            $arr[13] = (string) $val;
+                            $arr[13] = $val;
                             break;
                     } // end switch
                 } // end foreach
@@ -103,8 +103,7 @@
                 ) VALUES $add_data";
             // $rs = mysqli_query($handle, $sql);
 
-            // echo "{\"sql\": $rs, \"status\": true}";
-            echo $sql;
+            echo "{\"sql\": $rs, \"status\": true}";
         } else {
             echo "false";
         } // end if isset($_POST["ev_id"])
