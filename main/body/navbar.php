@@ -1,5 +1,53 @@
+<style>
+    /* li.nav-item:hover a {
+        border-style: solid;
+        border-width: 1px;
+        padding: 5px 5px 5px 5px;
+    } */
+
+    nav div div ul li a,
+    nav div div ul li a:after,
+    nav div div ul li a:before {
+        transition: all .25s;
+    }
+
+    nav.shift div div ul li a {
+        position: relative;
+        z-index: 1;
+    }
+
+    nav.shift ul li a:hover {
+        color: #91640F;
+    }
+
+    nav.shift ul li a:after {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+        width: 100%;
+        height: 1px;
+        content: '.';
+        color: transparent;
+        background: #F1C40F; /*change background color */
+        visibility: none;
+        opacity: 0;
+        z-index: -1;
+        border-radius: 20px;
+    }
+
+    nav.shift ul li a:hover:after {
+        opacity: 1;
+        visibility: visible;
+        height: 100%;
+    }
+</style>
+
 <? if (!isset($_GET["event"])) { ?>
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-sm navbar-light shift" style="background-color: #00b0b2;">
         <div class="container-fluid">
             <a href="index.php" class="navbar-brand text-white">SUTH REG</a>
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">

@@ -81,6 +81,20 @@
 
         //******************** else *********************//
     } else if ($event_view == 'add') {
+        $sql = "SELECT MAX(`no`) AS 'no' FROM `event_member` ".
+        "WHERE `ev_id` = '" . $_POST["ev_id"] . "' AND" . 
+        "`del` = '0'";
+
+        $resource_data = mysqli_query($handle, $sql);
+        $count_row = mysqli_num_rows($resource_data);
+        $no = 1;
+
+        if ($count_row > 0) {
+            while ($result = mysqli_fetch_assoc($resource_data)) {
+                $no = ((int) $result["no"]) + (int)1;
+            } // end while
+        } // end if
+        
         $sql_add_event = "insert into `event_member` set " .
             "`ev_id`='" . $_POST["ev_id"] . "'," .
             "`add_by`='" . $_SESSION['user_id'] . "'," .
@@ -92,7 +106,7 @@
             "`com_name`='" . $_POST["com_name"] . "'," .
             "`dep`='" . $_POST['dep'] . "'," .
             "`pos`='" . $_POST['pos'] . "'," .
-            "`no`='" . $_POST['no'] . "'," .
+            "`no`='" . $no . "'," .
             "`gender`='" . $_POST['gender'] . "'," .
             "`age`='" . $_POST["age"] . "'," .
             "`birthDate`='" . $_POST['birthDate'] . "'," .
@@ -107,7 +121,7 @@
             "\"com_name\" : \"" . $_POST["com_name"] . "\", " .
             "\"dep\" : \"" . $_POST["dep"] . "\", " .
             "\"pos\" : \"" . $_POST["pos"] . "\", " .
-            "\"no\" : \"" . $_POST["no"] . "\", " .
+            "\"no\" : \"" . $no . "\", " .
             "\"gender\" : \"" . $_POST["gender"] . "\", " .
             "\"age\" : \"" . $_POST["age"] . "\", " .
             "\"birthDate\" : \"" . $_POST["birthDate"] . "\" " . 

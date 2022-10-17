@@ -63,7 +63,6 @@
             $com_name = covertBoolean($_POST["com_name"]);
             $dep = covertBoolean($_POST["dep"]);
             $pos = covertBoolean($_POST["pos"]);
-            $no = covertBoolean($_POST["no"]);
             $gender = covertBoolean($_POST["gender"]);
             $age = covertBoolean($_POST["age"]);
             $has_reg_by = $_POST["has_reg_by"];
@@ -77,7 +76,6 @@
                 "`com_name` = '$com_name'," .
                 "`dep` = '$dep'," .
                 "`pos` = '$pos'," .
-                "`no` = '$no'," .
                 "`gender` = '$gender'," .
                 "`age` = '$age'," .
                 "`has_reg_by` = '$has_reg_by'," .
@@ -96,7 +94,6 @@
             $com_name = covertBoolean($_POST["com_name"]);
             $dep = covertBoolean($_POST["dep"]);
             $pos = covertBoolean($_POST["pos"]);
-            $no = covertBoolean($_POST["no"]);
             $gender = covertBoolean($_POST["gender"]);
             $age = covertBoolean($_POST["age"]);
             $birthDate = covertBoolean($_POST["birthDate"]);
@@ -108,7 +105,6 @@
                 "`com_name` = '$com_name'," .
                 "`dep` = '$dep'," .
                 "`pos` = '$pos'," .
-                "`no` = '$no'," .
                 "`gender` = '$gender'," .
                 "`age` = '$age'," .
                 "`birthDate` = '$birthDate' " .

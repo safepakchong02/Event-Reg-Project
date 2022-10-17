@@ -14,6 +14,15 @@ include("main/controller/$ctrl_name.php");
         }
     </script>
 
+    <style>
+        .border {
+            border-radius: 20px;
+            border: 10px #707B7C;
+            padding: 25px;
+            background: #F7F9F9; 
+        }
+    </style>
+    
     <!-- ตั่งค่าการลงทะเบียน -->
     <div class="container-fluid" ng-controller="<?= $ctrl_name ?>" ng-init="isPreview = true"><br>
         <div class="row">
@@ -25,94 +34,94 @@ include("main/controller/$ctrl_name.php");
             </div>
         </div>
         <!-- preview -->
-        <? include("main/module/event/event_detail_add.php"); ?>
+        <? include("main/module/event/event_detail_add_preview.php"); ?>
         <!-- end preview -->
 
         <!-- status success -->
-        <?include("main/body/status_success.php");?>
+        <? include("main/body/status_success.php"); ?>
         <!-- end status success -->
         <!--ตารางตัวแปร-->
-        <div class="container">
-            <form>
-                <table class="table" border="2px">
-                    <thead>
-                        <tr>
-                            <div class="row">
-                                <div class="col-3">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" role="switch" ng-model="check.walk_in" id="check.walk_in" />
-                                        <label class="form-check-label" for="flexSwitchCheckDefault">เปิดการลงทะเบียนเพิ่มเติม</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </tr>
-                        <br>
-                        <tr id="1">
-                            <td class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" ng-disabled="!check.walk_in" onchange="hide_element(this,'emp_id')" ng-model="check.emp_id" id="check">
-                                <label class="custom-control-label" for="customCheck1">รหัสพนักงาน</label>
-                            </td>
-                            <td class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" ng-disabled="!check.walk_in" onchange="hide_element(this,'card_id')" ng-model="check.card_id" id="check">
-                                <label class="custom-control-label" for="customCheck1">รหัสบัตรประชาชน</label>
-                            </td>
-                            <td class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" ng-disabled="!check.walk_in" onchange="hide_element(this,'name')" ng-model="check.name" id="check">
-                                <label class="custom-control-label" for="customCheck1">ชื่อ-สกุล</label>
-                            </td>
-                            <td class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" ng-disabled="!check.walk_in" onchange="hide_element(this,'call')" ng-model="check.call" id="check">
-                                <label class="custom-control-label" for="customCheck1">เบอร์โทรศัพท์</label>
-                            </td>
-                        </tr>
-                        <tr id="2">
-                            <td class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" ng-disabled="!check.walk_in" onchange="hide_element(this,'com_name')" ng-model="check.com_name" id="check">
-                                <label class="custom-control-label" for="customCheck1">ชื่อบริษัท</label>
-                            </td>
-                            <td class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" ng-disabled="!check.walk_in" onchange="hide_element(this,'dep')" ng-model="check.dep" id="check">
-                                <label class="custom-control-label" for="customCheck1">แผนก</label>
-                            </td>
-                            <td class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" ng-disabled="!check.walk_in" onchange="hide_element(this,'pos')" ng-model="check.pos" id="check">
-                                <label class="custom-control-label" for="customCheck1">ตำแหน่ง</label>
-                            </td>
-                            <td class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" ng-disabled="!check.walk_in" onchange="hide_element(this,'no')" ng-model="check.no" id="check">
-                                <label class="custom-control-label" for="customCheck1">ลำดับที่</label>
-                            </td>
-                        </tr>
-                        <tr id="3">
-                            <td class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" ng-disabled="!check.walk_in" onchange="hide_element(this,'gender')" ng-model="check.gender" id="check">
-                                <label class="custom-control-label" for="customCheck1">เพศ</label>
-                            </td>
-                            <td class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" ng-disabled="!check.walk_in" onchange="hide_element(this,'age')" ng-model="check.age" id="check">
-                                <label class="custom-control-label" for="customCheck1">อายุ</label>
-                            </td>
-                            <td class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" ng-disabled="!check.walk_in" onchange="hide_element(this,'birthDate')" ng-model="check.birthDate" id="check">
-                                <label class="custom-control-label" for="customCheck1">วันเดือนปีเกิด</label>
-                            </td>
-                            <td class="custom-control custom-checkbox">
-                            </td>
-                        </tr>
-                    </thead>
-                </table>
-            </form>
-        </div>
-        <!--จบตารางตัวแปร-->
-        <div class="container">
-            <div class="modal-footer">
-                <div class="d-flex justify-content-end pb-2">
-                    <button type="button" ng-click="testFunc()" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal-detail_add"><i class="bi bi-display"></i> Preview</button>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-3">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" ng-model="check.walk_in" id="check.walk_in" />
+                        <label class="form-check-label" for="flexSwitchCheckDefault">เปิดการลงทะเบียนเพิ่มเติม</label>
+                    </div>
+                </div>
+            </div><br>
+            <div class="container border">
+                <div class="row">
+                    <div class="col-md-3 pb-4">        
+                        <td class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" ng-disabled="!check.walk_in" onchange="hide_element(this,'emp_id')" ng-model="check.emp_id" id="check">
+                            <label class="custom-control-label" for="customCheck1">รหัสพนักงาน</label>
+                        </td>
+                    </div>
+                    <div class="col-md-3 pb-4">        
+                        <td class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" ng-disabled="!check.walk_in" onchange="hide_element(this,'card_id')" ng-model="check.card_id" id="check">
+                            <label class="custom-control-label" for="customCheck1">รหัสบัตรประชาชน</label>
+                        </td>
+                    </div>
+                    <div class="col-md-3 pb-4">        
+                        <td class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" ng-disabled="!check.walk_in" onchange="hide_element(this,'name')" ng-model="check.name" id="check">
+                            <label class="custom-control-label" for="customCheck1">ชื่อ-สกุล</label>
+                        </td>
+                    </div>
+                    <div class="col-md-3 pb-4">        
+                        <td class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" ng-disabled="!check.walk_in" onchange="hide_element(this,'call')" ng-model="check.call" id="check">
+                            <label class="custom-control-label" for="customCheck1">เบอร์โทรศัพท์</label>
+                        </td>
+                    </div>
+                    <div class="col-md-3 pb-4">        
+                        <td class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" ng-disabled="!check.walk_in" onchange="hide_element(this,'com_name')" ng-model="check.com_name" id="check">
+                            <label class="custom-control-label" for="customCheck1">ชื่อบริษัท</label>
+                        </td>
+                    </div>
+                    <div class="col-md-3 pb-4">        
+                        <td class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" ng-disabled="!check.walk_in" onchange="hide_element(this,'dep')" ng-model="check.dep" id="check">
+                            <label class="custom-control-label" for="customCheck1">แผนก</label>
+                        </td>
+                    </div>
+                    <div class="col-md-3 pb-4">        
+                        <td class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" ng-disabled="!check.walk_in" onchange="hide_element(this,'pos')" ng-model="check.pos" id="check">
+                            <label class="custom-control-label" for="customCheck1">ตำแหน่ง</label>
+                        </td>
+                    </div> 
+                    <div class="col-md-3 pb-4">        
+                        <td class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" ng-disabled="!check.walk_in" onchange="hide_element(this,'gender')" ng-model="check.gender" id="check">
+                            <label class="custom-control-label" for="customCheck1">เพศ</label>
+                        </td>
+                    </div>
+                    <div class="col-md-3 pb-4">        
+                        <td class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" ng-disabled="!check.walk_in" onchange="hide_element(this,'age')" ng-model="check.age" id="check">
+                            <label class="custom-control-label" for="customCheck1">อายุ</label>
+                        </td>
+                    </div>
+                    <div class="col-md-3 pb-4">        
+                        <td class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" ng-disabled="!check.walk_in" onchange="hide_element(this,'birthDate')" ng-model="check.birthDate" id="check">
+                            <label class="custom-control-label" for="customCheck1">วันเดือนปีเกิด</label>
+                        </td>
+                    </div>
+                </div>
+                <!--จบตารางตัวแปร-->
+                <div class="modal-footer">
+                    <div class="d-flex justify-content-end">
+                        <button type="button" ng-click="testFunc()" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal-detail_add"><i class="bi bi-display"></i> Preview</button>
+                    </div>
                 </div>
             </div>
         </div>
-        <hr>
-        <div class="container"><br>
+        <div class="container-fluid"><br>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label text-right">ลงทะเบียนโดยใช้ : </label>
                 <div class="col">

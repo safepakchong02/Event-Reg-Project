@@ -3,16 +3,41 @@
 $ctrl_name = "event_dashboard_ctrl";
 include("main/controller/$ctrl_name.php");
 ?>
+
+<style>
+    body {
+        margin: 0;
+        background-color: #ee5b23;
+    }
+
+    .dataTables_length {
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+
+    .dataTables_filter {
+        margin-right: 10px;
+        margin-top: 10px;
+    }
+
+    .dataTables_info {
+        margin-left: 10px;
+    }
+
+    .dataTables_paginate.paging_simple_numbers {
+        padding-right: 10px;
+    }
+</style>
+
 <!-- เริ่ม dashboard -->
 <div class="container-fluid" ng-controller="<?= $ctrl_name ?>"><br>
     <div class="row">
         <div class="col">
-            <h1>รายการกิจกรรม</h1>
+            <h1 class="text-white">รายการกิจกรรม</h1>
         </div>
     </div>
-    <div class="row">
         <!-- แสดงข้อมูล -->
-        <div class="table-responsive">
+        <div class="table-responsive" style="background-color: #ffffff; border-radius: 10px;">
             <table datatable="ng" id="example" class="table nowrap" style="width:100%">
                 <thead>
                     <tr class="table-dark">
@@ -47,6 +72,5 @@ include("main/controller/$ctrl_name.php");
             // doc.style.overflowX = "scroll";
         </script>
         <!-- จบการแสดงข้อมูล -->
-    </div>
 </div>
 <!-- จบ dashboard -->

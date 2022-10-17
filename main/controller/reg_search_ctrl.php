@@ -1,6 +1,10 @@
 <script>
     let table = $('#example').DataTable({
-        scrollX: true,
+        responsive: true,
+        columnDefs: [{
+            responsivePriority: 1,
+            targets: -1
+        }]
     });
 
     var app = angular.module("<?= $app_name ?>", ['datatables']);
@@ -69,7 +73,7 @@
                     $("#modal-status_success").modal("show");
                     setTimeout(() => {
                         location.reload();
-                    }, 500)
+                    }, 5000)
                 },
                 function(response) { // optional
                     // failed
@@ -88,7 +92,7 @@
                         $("#modal-status_success").modal("show");
                         setTimeout(() => {
                             location.reload();
-                        }, 500)
+                        }, 5000)
                     }); // end then
             } // end if confirm
         }
@@ -103,7 +107,7 @@
                         $("#modal-status_success").modal("show");
                         setTimeout(() => {
                             location.reload();
-                        }, 500)
+                        }, 5000)
                     }); // end then
             } // end if confirm
         }
@@ -121,7 +125,7 @@
                 data = table.rows().data().toArray();
             }
 
-            var header = ["รหัสพนักงาน", "รหัสบัตรประชาชน", "ชื่อ - สกุล", "เบอร์โทรศัพท์", "ชื่อบริษัท", "แผนก", "ตำแหน่ง", "ลำดับที่", "เพศ", "อายุ", "วันเกิด", "วันที่เข้าร่วมกิจกรรม"];
+            var header = ["ลำดับที่", "รหัสพนักงาน", "รหัสบัตรประชาชน", "ชื่อ - สกุล", "เบอร์โทรศัพท์", "ชื่อบริษัท", "แผนก", "ตำแหน่ง", "เพศ", "อายุ", "วันเกิด", "วันที่เข้าร่วมกิจกรรม"];
             var rows = [];
 
             if (data.length != 0) {
@@ -131,7 +135,7 @@
                         // replace  html string
                         data[i][j] = data[i][j].replace("&nbsp;", " ");
                         data[i][j] = data[i][j].replace("&nbsp;", " ");
-                        
+
                         if (data[i][j].startsWith("<button")); // skip button
                         else if (data[i][j] != "") col[header[j]] = data[i][j];
                     }

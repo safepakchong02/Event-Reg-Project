@@ -54,9 +54,10 @@ include("main/controller/$ctrl_name.php");
         </div>
         <!-- แสดงข้อมูล -->
         <!-- data table -->
-        <table datatable="ng" id="example" class="table nowrap" style="width:100%">
+        <table datatable="ng" id="example" class="table nowrap dt-responsive" style="width:100%">
             <thead>
                 <tr class="table-dark">
+                    <th ng-show="check.no">ลำดับที่</th>
                     <th ng-show="check.emp_id">รหัสพนักงาน</th>
                     <th ng-show="check.card_id">รหัสบัตรประชาชน</th>
                     <th ng-show="check.name">ชื่อ - สกุล</th>
@@ -64,17 +65,17 @@ include("main/controller/$ctrl_name.php");
                     <th ng-show="check.com_name">ชื่อบริษัท</th>
                     <th ng-show="check.dep">แผนก</th>
                     <th ng-show="check.pos">ตำแหน่ง</th>
-                    <th ng-show="check.no">ลำดับที่</th>
                     <th ng-show="check.gender">เพศ</th>
                     <th ng-show="check.age">อายุ</th>
                     <th ng-show="check.birthDate">วันเกิด</th>
                     <th>วันที่เข้าร่วมกิจกรรม</th>
-                    <th></th>
+                    <th data-priority="1"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="row in data_table">
                     <? include("main/module/event/event_detail_edit.php"); ?>
+                    <td ng-show="check.no">{{row.no}}</td>
                     <td ng-show="check.emp_id">{{row.emp_id}}</td>
                     <td ng-show="check.card_id">{{row.card_id}}</td>
                     <td ng-show="check.name">{{row.name}}</td>
@@ -82,7 +83,6 @@ include("main/controller/$ctrl_name.php");
                     <td ng-show="check.com_name">{{row.com_name}}</td>
                     <td ng-show="check.dep">{{row.dep}}</td>
                     <td ng-show="check.pos">{{row.pos}}</td>
-                    <td ng-show="check.no">{{row.no}}</td>
                     <td ng-show="check.gender">{{row.gender}}</td>
                     <td ng-show="check.age">{{row.age}}</td>
                     <td ng-show="check.birthDate">{{row.birthDate}}</td>
@@ -98,12 +98,11 @@ include("main/controller/$ctrl_name.php");
         <script>
             $(document).ready(function() {
                 var table = $('#example').DataTable({
-                    scrollX: true,
                     responsive: true,
                     columnDefs: [{
-                        responsivePriority: 1,
-                        targets: -1
-                    }]
+                            responsivePriority: 1,
+                            targets: -1
+                        }]
                 });
             });
         </script>

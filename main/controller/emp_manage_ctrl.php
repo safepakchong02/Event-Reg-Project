@@ -31,7 +31,7 @@
                     $("#modal-status_success").modal("show");
                     setTimeout(() => {
                         location.reload();
-                    }, 500);
+                    }, 1500);
                 },
                 function(response) { // optional
                     // failed
@@ -66,7 +66,7 @@
                     $("#modal-status_success").modal("show");
                     setTimeout(() => {
                         location.reload();
-                    }, 500);
+                    }, 1500);
                 },
                 function(response) { // optional
                     // failed
@@ -84,7 +84,7 @@
                         $("#modal-status_success").modal("show");
                         setTimeout(() => {
                             location.reload();
-                        }, 500);
+                        }, 1500);
                     }) // end then
             }
         } // end delete_emp

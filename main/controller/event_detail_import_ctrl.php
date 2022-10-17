@@ -38,7 +38,7 @@
             alasql('SELECT * FROM XLSX(?,{headers:true})',
                 [$scope.importFile],
                 (data) => {
-                    // console.log(data);
+                    console.log(data);
                     $scope.data = data;
                     let head = Object.keys(data[0]);
                     $scope.head = head;
@@ -190,7 +190,7 @@
                     setTimeout(() => {
                         $("#modal-status_success").modal("hide");
                         location.replace("index.php?p=event&m=event_detail&ev_id=<?= $_GET["ev_id"] ?>");
-                    }, 1000);
+                    }, 5000);
                 }, 1000 * $scope.all);
             }); // end then
         }; // end import_save function

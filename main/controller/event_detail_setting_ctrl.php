@@ -27,7 +27,6 @@
                     `&com_name=${$scope.check.com_name}` +
                     `&dep=${$scope.check.dep}` +
                     `&pos=${$scope.check.pos}` +
-                    `&no=${$scope.check.no}` +
                     `&gender=${$scope.check.gender}` +
                     `&age=${$scope.check.age}` +
                     `&has_reg_by=${$scope.check.has_reg_by}` +
@@ -40,7 +39,7 @@
                     $("#modal-status_success").modal("show");
                     setTimeout(() => {
                         location.reload();
-                    }, 500)
+                    }, 1500)
                 },
                 function(response) { // optional
                     // failed

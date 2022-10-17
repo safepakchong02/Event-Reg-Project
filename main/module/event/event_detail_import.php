@@ -26,8 +26,9 @@ include("main/controller/$ctrl_name.php");
             <div class="col-4">
                 <input type="file" id="importFile" class="form-control form-control-sm" />
             </div>
-            <div class="col-4">
-                <button id="import" type="button" ng-click="import()" class="btn btn-primary btn-sm"><i class="bi bi-person-plus-fill"></i> Import</button>
+            <div class="col-8">
+                <button id="import" type="button" ng-click="import()" class="btn btn-primary btn-sm"><i class="bi bi-person-plus-fill"></i> นำเข้าข้อมูล</button>
+                <a href="asset/file/" class="btn btn-success btn-sm"><i class="bi bi-file-earmark-excel"></i> ดาวน์โหลดตัวอย่างไฟล์</a>
                 <button id="reset" type="button" ng-click="reset()" class="btn btn-danger btn-sm ng-hide"><i class="bi bi-repeat"></i> รีเซ็ทการอัปโหลดไฟล์</button>
             </div>
         </div>

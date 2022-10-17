@@ -113,7 +113,7 @@
                                 $("#modal-status_success").modal("show");
                                 setTimeout(() => {
                                     location.reload();
-                                }, 500)
+                                }, 1500)
                             },
                             function(response) { // optional
                                 // failed
@@ -125,7 +125,7 @@
                         $("#modal-status_reg_error_isExist").modal("show");
                         setTimeout(() => {
                             location.reload();
-                        }, 1000)
+                        }, 1500)
                     } //end if else isExist
                     // end add data
                 },
@@ -176,7 +176,7 @@
                     $("#modal-status_success").modal("show");
                     setTimeout(() => {
                         location.reload();
-                    }, 500)
+                    }, 1500)
                 },
                 function(response) { // optional
                     // failed
@@ -193,7 +193,7 @@
                         $("#modal-status_success").modal("show");
                         setTimeout(() => {
                             location.reload();
-                        }, 500)
+                        }, 1500)
                     }); // end then
             } // end if confirm
         }

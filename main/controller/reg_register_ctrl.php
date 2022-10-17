@@ -1,6 +1,6 @@
 <script>
     var app = angular.module("<?= $app_name ?>", ['datatables']);
-    app.controller("<?= $ctrl_name ?>", function($scope, $http) { // start controller function
+    app.controller("<?= $ctrl_name ?>", function($scope, $http, $interval) { // start controller function
         const clearData = () => {
             $scope.data_add = {};
             $scope.data_add.emp_id = "";
@@ -34,14 +34,34 @@
         clearData();
 
         /* =============SHOW DATA============= */
-        $http.get("main/model/reg/query_reg.php?event_view=show_data&ev_id=<?= $_GET["ev_id"] ?>")
-            .then((res) => { // start then
-                $scope.regIsOpen = true;
-                $scope.event_data = res.data.results_data; // "results_data" is key in json format
+        const checkReg = () => {
+            $http.get("main/model/reg/query_reg.php?event_view=show_data&ev_id=<?= $_GET["ev_id"] ?>")
+                .then((res) => { // start then
+                    $scope.regIsOpen = true;
+                    $scope.event_data = res.data.results_data; // "results_data" is key in json format
 
-                if ($scope.event_data[0].ev_status == "เปิดลงทะเบียน") $scope.regIsOpen = true;
-                else $scope.regIsOpen = false;
-            }) // end then
+                    let now = new Date();
+                    let st = createDate($scope.event_data[0].ev_date_start);
+                    let ed = createDate($scope.event_data[0].ev_date_end);
+
+                    if (now >= st && now <= ed) {
+                        $scope.regIsOpen = true;
+                        // console.log("open");
+                        $("#reg_open").removeClass("ng-hide");
+                        $("#reg_close").addClass("ng-hide");
+                    } else {
+                        $scope.regIsOpen = false;
+                        // console.log("close");
+                        $("#reg_open").addClass("ng-hide");
+                        $("#reg_close").removeClass("ng-hide");
+                    }
+                }) // end then
+        } // end checkReg func
+        checkReg();
+        $interval(() => {
+            checkReg();
+            // console.log("reload");
+        }, 300000)
 
         $http.get("main/model/event/query_event_detail_setting.php?event_view=show_data&ev_id=<?= $_GET["ev_id"] ?>")
             .then((res) => { // start then
@@ -87,15 +107,12 @@
                         $scope.preview.birthDate = createDate(data.birthDate);
                         // console.log($scope.preview);
                         $("#modal-status_reg_success").modal("show");
-                        setTimeout(() => {
-                            $("#modal-status_reg_success").modal("hide");
-                        }, 1000)
                     });
                 } else {
                     $("#modal-status_reg_error_isNoData").modal("show");
                     setTimeout(() => {
                         $("#modal-status_reg_error_isNoData").modal("hide");
-                    }, 500)
+                    }, 15000)
                 } // end else if 
 
                 $scope.reg = "";
@@ -135,8 +152,7 @@
 
                     // add data
                     if (!isExist) {
-                        var now = new Date();
-                        var reg_date = convertDate(now.toString());
+                        var reg_date = "";
                         $http({
                             method: 'POST',
                             url: 'main/model/reg/query_reg.php?event_view=add',
@@ -163,7 +179,7 @@
                                 $("#modal-status_success").modal("show");
                                 setTimeout(() => {
                                     $("#modal-status_success").modal("hide");
-                                }, 1000)
+                                }, 15000)
                             },
                             function(response) { // optional
                                 // failed
@@ -176,7 +192,7 @@
                         $("#modal-status_reg_error_isExist").modal("show");
                         setTimeout(() => {
                             $("#modal-status_reg_error_isExist").modal("hide");
-                        }, 1000)
+                        }, 15000)
                     } //end if else isExist
                     // end add data
                 },

@@ -8,6 +8,12 @@
             <div class="modal-body">
                 <form id="detail_edit" ng-submit="edit_form_save()" ng-controller="<?= $ctrl_name ?>">
                     <div class="row">
+                        <div class="col-6" ng-if="check.no">
+                            <div class="form-group pb-2">
+                                <label> ลำดับที่ :</label>
+                                <input disabled type="number" ng-model="data_edit.no" name="data_edit.no" class="form-control" required>
+                            </div>
+                        </div>
                         <div class="col-6" ng-if="check.emp_id">
                             <div class="form-group pb-2">
                                 <label> รหัสพนักงาน :</label>
@@ -55,28 +61,22 @@
                                 <label>เพศ :</label>
                                 <select class="form-select" ng-model="data_edit.gender">
                                     <option selected>------โปรดระบุ------</option>
-                                    <option value="male" ng-selected="data_edit.gender == 'male">ชาย</option>
-                                    <option value="female" ng-selected="data_edit.gender == 'female">หญิง</option>
-                                    <option value="LGBTQ+" ng-selected="data_edit.gender == 'LGBTQ+">เพศทางเลือก</option>
+                                    <option value="ชาย" ng-selected="data_edit.gender == 'ชาย">ชาย</option>
+                                    <option value="หญิง" ng-selected="data_edit.gender == 'หญิง">หญิง</option>
+                                    <option value="เพศทางเลือก" ng-selected="data_edit.gender == 'เพศทางเลือก">เพศทางเลือก</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-6" ng-if="check.age">
                             <div class="form-group pb-2">
                                 <label> อายุ :</label>
-                                <input type="number" ng-model="data_edit.age" name="data_edit.age" class="form-control" required>
+                                <input type="text" ng-model="data_edit.age" name="data_edit.age" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-6" ng-if="check.birthDate">
                             <div class="form-group pb-2">
                                 <label> วันเดือนปีเกิด :</label>
                                 <input type="date" ng-model="data_edit.birthDate" name="data_edit.birthDate" class="form-control" required>
-                            </div>
-                        </div>
-                        <div class="col-6" ng-if="check.no">
-                            <div class="form-group pb-2">
-                                <label> ลำดับที่ :</label>
-                                <input type="number" ng-model="data_edit.no" name="data_edit.no" class="form-control" required>
                             </div>
                         </div>
                     </div>
