@@ -8,6 +8,12 @@
       <div class="modal-body">
         <form id="detail_add" ng-submit="add_member()" ng-controller="<?= $ctrl_name ?>">
           <div class="row">
+            <div class="col-6" ng-if="check.no">
+              <div class="form-group pb-2">
+                <label> ลำดับที่ :</label>
+                <input type="number" ng-model="data_add.no" name="data_add.no" class="form-control" required>
+              </div>
+            </div>
             <div class="col-6" ng-if="check.emp_id" id="emp_id">
               <div class="form-group pb-2">
                 <label> รหัสพนักงาน :</label>
@@ -18,6 +24,12 @@
               <div class="form-group pb-2">
                 <label> ชื่อบริษัท :</label>
                 <input type="text" ng-model="data_add.com_name" name="data_add.com_name" class="form-control" required>
+              </div>
+            </div>
+            <div class="col-6" ng-if="check.prefix" id="prefix">
+              <div class="form-group pb-2">
+                <label> คำนำหน้า :</label>
+                <input type="text" ng-model="data_add.prefix" name="data_add.prefix" class="form-control" required>
               </div>
             </div>
             <div class="col-6" ng-if="check.name" id="name">
@@ -72,12 +84,12 @@
                 <label> วันเดือนปีเกิด :</label>
                 <input type="date" ng-model="data_add.birthDate" name="data_add.birthDate" class="form-control" required>
               </div>
-              <!-- <div class="col-6" ng-if="check.no" id="no">
-                <div class="form-group pb-2">
-                  <label> ลำดับที่ :</label>
-                  <input type="number" ng-model="data_add.no" name="data_add.no" class="form-control">
-                </div>
-              </div> -->
+            </div>
+            <div class="col-12" ng-if="check.comment" id="comment">
+              <div class="form-group pb-2">
+                <label> หมายเหตุ :</label>
+                <textarea rows="3" ng-model="data_add.comment" name="data_add.comment" class="form-control"></textarea>
+              </div>
             </div>
           </div>
         </form>

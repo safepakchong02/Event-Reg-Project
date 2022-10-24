@@ -40,9 +40,9 @@ include("main/controller/$ctrl_name.php");
                         <td>{{show_emp_data.perm}}</td>
                         <td>
                             <!-- not edit -->
-                            <a ng-click="reset_password(show_emp_data.user_id)" class="btn btn-info btn-sm text-white">เปลี่ยนรหัสผ่าน</a>
-                            <button ng-click="edit_emp_view(show_emp_data.user_id)" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modal-edit">แก้ไข</button>
-                            <button ng-click="delete_emp(show_emp_data.user_id)" class="btn btn-danger btn-sm">ลบ</button>
+                            <a ng-click="reset_password(show_emp_data.id)" class="btn btn-info btn-sm text-white">เปลี่ยนรหัสผ่าน</a>
+                            <button ng-click="edit_emp_view(show_emp_data.id)" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modal-edit">แก้ไข</button>
+                            <button ng-click="delete_emp(show_emp_data.id)" class="btn btn-danger btn-sm">ลบ</button>
                         </td>
                     </tr>
                 </tbody>

@@ -81,19 +81,21 @@
 
         //******************** else *********************//
     } else if ($event_view == 'add') {
-        $sql = "SELECT MAX(`no`) AS 'no' FROM `event_member` ".
-        "WHERE `ev_id` = '" . $_POST["ev_id"] . "' AND" . 
-        "`del` = '0'";
-
-        $resource_data = mysqli_query($handle, $sql);
-        $count_row = mysqli_num_rows($resource_data);
         $no = 1;
+        if ($_POST["no"] == "") {
+            $sql = "SELECT MAX(`no`) AS 'no' FROM `event_member` " .
+                "WHERE `ev_id` = '" . $_POST["ev_id"] . "' AND" .
+                "`del` = '0'";
 
-        if ($count_row > 0) {
-            while ($result = mysqli_fetch_assoc($resource_data)) {
-                $no = ((int) $result["no"]) + (int)1;
-            } // end while
-        } // end if
+            $resource_data = mysqli_query($handle, $sql);
+            $count_row = mysqli_num_rows($resource_data);
+
+            if ($count_row > 0) {
+                while ($result = mysqli_fetch_assoc($resource_data)) {
+                    $no = ((int)$result["no"]) + (int)1;
+                } // end while
+            } // end if
+        } else $no = (int)$_POST["no"];
         
         $sql_add_event = "insert into `event_member` set " .
             "`ev_id`='" . $_POST["ev_id"] . "'," .
@@ -101,6 +103,7 @@
             "`del`='0'," .
             "`emp_id`='" . $_POST['emp_id'] . "'," .
             "`card_id`='" . $_POST['card_id'] . "'," .
+            "`prefix`='" . $_POST['prefix'] . "'," .
             "`name`='" . $_POST['name'] . "'," .
             "`call`='" . $_POST["call"] . "'," .
             "`com_name`='" . $_POST["com_name"] . "'," .
@@ -110,6 +113,7 @@
             "`gender`='" . $_POST['gender'] . "'," .
             "`age`='" . $_POST["age"] . "'," .
             "`birthDate`='" . $_POST['birthDate'] . "'," .
+            "`comment`='" . $_POST['comment'] . "'," .
             "`reg_date`='" . $_POST['reg_date'] . "';";
 
         mysqli_query($handle, $sql_add_event);
@@ -184,6 +188,7 @@
             $sql_update = "UPDATE `event_member` set " .
                 "`emp_id`='" . $_POST['emp_id'] . "'," .
                 "`card_id`='" . $_POST['card_id'] . "'," .
+                "`prefix`='" . $_POST['prefix'] . "'," .
                 "`name`='" . $_POST['name'] . "'," .
                 "`call`='" . $_POST["call"] . "'," .
                 "`com_name`='" . $_POST["com_name"] . "'," .
@@ -192,7 +197,8 @@
                 "`no`='" . $_POST['no'] . "'," .
                 "`gender`='" . $_POST['gender'] . "'," .
                 "`age`='" . $_POST["age"] . "'," .
-                "`birthDate`='" . $_POST['birthDate'] . "'" .
+                "`birthDate`='" . $_POST['birthDate'] . "'," .
+                "`comment`='" . $_POST['comment'] . "'" .
                 " WHERE `id` = '$id';";
 
             mysqli_query($handle, $sql_update);

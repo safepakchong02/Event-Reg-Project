@@ -26,6 +26,7 @@
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }).then(function(response) {
+                // console.log(response.data);
                     $("#modal-add").modal("hide");
                     $("#modal-status_success").modal("show");
                     setTimeout(() => {

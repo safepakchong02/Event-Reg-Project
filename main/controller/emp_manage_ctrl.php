@@ -42,8 +42,8 @@
         /* ==================END ADD================== */
 
         /* ==================EDIT================== */
-        $scope.edit_emp_view = (user_id) => { // start edit_event_view function
-            $http.get(`main/model/emp/query_emp.php?event_view=show_data_edit&user_id=${user_id}`)
+        $scope.edit_emp_view = (id) => { // start edit_event_view function
+            $http.get(`main/model/emp/query_emp.php?event_view=show_data_edit&id=${id}`)
                 .then((res) => { // start then
                     $scope.emp_edit = res.data.results_data_edit[0];
                 }) // end then
@@ -53,7 +53,8 @@
             $http({
                 method: 'POST',
                 url: 'main/model/emp/query_emp.php?event_view=edit_form_save',
-                data: `user_id=${$scope.emp_edit.user_id}` +
+                data: `id=${$scope.emp_edit.id}` +
+                    `user_id=${$scope.emp_edit.user_id}` +
                     `&user_name=${$scope.emp_edit.user_name}` +
                     `&user_surname=${$scope.emp_edit.user_surname}` +
                     `&dep_id=${$scope.emp_edit.dep_id}` +
@@ -77,9 +78,9 @@
         /* ==================END EDIT================== */
 
         /* ==================DELETE================== */
-        $scope.delete_emp = (user_id) => { // start delete_emp function
+        $scope.delete_emp = (id) => { // start delete_emp function
             if (confirm("คุณต้องการลบข้อมูลหรือไม่")) {
-                $http.get(`main/model/emp/query_emp.php?event_view=del_emp&user_id=${user_id}`)
+                $http.get(`main/model/emp/query_emp.php?event_view=del_emp&id=${id}`)
                     .then(function(res) { // start then
                         $("#modal-status_success").modal("show");
                         setTimeout(() => {

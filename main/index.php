@@ -19,11 +19,17 @@ include("main/function/function_date.php");
 // $_SESSION["user_id"] = "6204709";
 // $_SESSION["perm"] = "register";
 
+// global var
+$app_name = "SuthReg";
+$no_auth = false;
+
 if (isset($_GET["p"])) $_SESSION["path"] = $_GET["p"];
 else $_SESSION["path"] = "event";
 
-// global var
-$app_name = "SuthReg";
+if (!isset($_SESSION["perm"])) $_SESSION["perm"] = "";
+if (isset($_GET["no_auth"])) {
+    $no_auth = true;
+}
 
 ?>
 <!DOCTYPE html>
@@ -40,7 +46,7 @@ $app_name = "SuthReg";
 </head>
 
 <body ng-app="<?= $app_name ?>">
-    <? if (!isset($_SESSION["perm"])) { ?>
+    <? if ($_SESSION["perm"] == "" && !$no_auth) { ?>
         <div class="container-fluid">
             <? include("main/module/login/login.php"); ?>
         </div>
@@ -84,7 +90,9 @@ $app_name = "SuthReg";
             ?>
         </div>
         <!-- end content -->
-    <? } else { ?>
+    <? } elseif ($no_auth && isset($_GET["ev_id"])) {
+        include("main/module/reg/reg_register.php");
+    } else { ?>
         <div class="container-fluid">
             <? include("main/module/login/login.php"); ?>
         </div>

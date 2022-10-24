@@ -7,6 +7,9 @@
 			case "card_id":
 				return "รหัสบัตรประชาชน";
 				break;
+			case "prefix":
+				return "หมายเหตุ";
+				break;
 			case "name":
 				return "ชื่อ - สกุล";
 				break;
@@ -37,6 +40,9 @@
 			case "reg_date":
 				return "วันที่เข้าร่วมกิจกรรม";
 				break;
+			case "comment":
+				return "หมายเหตุ";
+				break;
 			default:
 				return "";
 				break;
@@ -45,7 +51,8 @@
 </script>
 
 <?php
-function module($path, $mod) {
+function module($path, $mod)
+{
 	$path = "main/module/" . $path . "/" . $mod . ".php";
 
 	if (file_exists($path)) {
@@ -56,7 +63,8 @@ function module($path, $mod) {
 	}
 }
 
-function chk_get_url($get_url) {
+function chk_get_url($get_url)
+{
 	if ($get_url != '') {
 		$url_use = $get_url;
 	} else {

@@ -58,6 +58,7 @@
             $walk_in = covertBoolean($_POST["walk_in"]);
             $emp_id = covertBoolean($_POST["emp_id"]);
             $card_id = covertBoolean($_POST["card_id"]);
+            $prefix = covertBoolean($_POST["prefix"]);
             $name = covertBoolean($_POST["name"]);
             $call = covertBoolean($_POST["call"]);
             $com_name = covertBoolean($_POST["com_name"]);
@@ -71,6 +72,7 @@
                 "`walk_in` = '$walk_in'," .
                 "`emp_id` = '$emp_id'," .
                 "`card_id` = '$card_id'," .
+                "`prefix` = '$prefix'," .
                 "`name` = '$name'," .
                 "`call` = '$call'," .
                 "`com_name` = '$com_name'," .
@@ -89,6 +91,7 @@
             $ev_id = $_POST["ev_id"];
             $emp_id = covertBoolean($_POST["emp_id"]);
             $card_id = covertBoolean($_POST["card_id"]);
+            $prefix = covertBoolean($_POST["prefix"]);
             $name = covertBoolean($_POST["name"]);
             $call = covertBoolean($_POST["call"]);
             $com_name = covertBoolean($_POST["com_name"]);
@@ -100,6 +103,7 @@
             $sql_update = "UPDATE `event_setting` SET " .
                 "`emp_id` = '$emp_id'," .
                 "`card_id` = '$card_id'," .
+                "`prefix` = '$prefix'," .
                 "`name` = '$name'," .
                 "`call` = '$call'," .
                 "`com_name` = '$com_name'," .

@@ -9,61 +9,144 @@ if (!isset($_GET["ev_id"])) { ?>
 <style>
     body {
         margin: 0;
-        background-color: #ee5b23;
+        background: rgb(255, 126, 37);
+        background: linear-gradient(180deg, rgba(255, 126, 37, 1) 28%, rgba(255, 198, 37, 1) 100%);
     }
 
     .btn_title {
-        background-color: #00b0b2;
-        color: #FBFCFC;
+        background-color: #f1f1f1;
+        color: black;
+    }
+
+    .circular-progress-join {
+        position: relative;
+        height: 180px;
+        width: 180px;
+        border-radius: 50%;
+        background: conic-gradient(#28B463 3.6deg, #ededed 0deg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .circular-progress-join::before {
+        content: "";
+        position: absolute;
+        height: 150px;
+        width: 150px;
+        border-radius: 50%;
+        background-color: #f1f1f1;
+        align-items: center;
+    }
+
+    .progress-value-join {
+        position: relative;
+        font-size: 35px;
+        font-weight: 600;
+        color: #28B463;
+    }
+
+    .circular-progress-no_join {
+        position: relative;
+        height: 180px;
+        width: 180px;
+        border-radius: 50%;
+        background: conic-gradient(#CB4335 3.6deg, #ededed 0deg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .circular-progress-no_join::before {
+        content: "";
+        position: absolute;
+        height: 150px;
+        width: 150px;
+        border-radius: 50%;
+        background-color: #f1f1f1;
+        align-items: center;
+    }
+
+    .progress-value-no_join {
+        position: relative;
+        font-size: 35px;
+        font-weight: 600;
+        color: #CB4335;
+    }
+
+    .circular-progress-all {
+        position: relative;
+        height: 180px;
+        width: 180px;
+        border-radius: 50%;
+        background: conic-gradient(#3498DB 3.6deg, #ededed 0deg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .circular-progress-all::before {
+        content: "";
+        position: absolute;
+        height: 150px;
+        width: 150px;
+        border-radius: 50%;
+        background-color: #f1f1f1;
+        align-items: center;
+    }
+
+    .progress-value-all {
+        position: relative;
+        font-size: 35px;
+        font-weight: 600;
+        color: #3498DB;
+    }
+
+    .text-size {
+        font-size: 20px;
+    }
+
+    .title {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        border-radius: 25px;
+        background-color: white;
     }
 </style>
 
 <div ng-controller="<?= $ctrl_name ?>"><br>
+    <!-- header -->
     <div class="container-fluid"><br>
         <div class="row justify-content-md-center" align="center">
-            <div class="col-xs-6 col-md" style="padding-bottom: 1rem;">
-                <div class="card text-white btn_title mb-3 shadow" style="width: 20rem; border-radius: 2rem;">
-                    <h3 class="card-body" align="center">กิจกรรม <b>{{event_data[0].ev_title}}</b></h3>
-                    <h8 class="card-title" align="center">{{event_data[0].ev_date_start}} - {{event_data[0].ev_date_end}}</h8>
-                </div>
+            <div class="col-auto title">
+                <h3 class="" align="center">กิจกรรม <b>{{event_data[0].ev_title}}</b></h3>
             </div>
         </div>
     </div>
     <hr><br>
+    <!-- end header -->
     <div class="container">
         <div class="row justify-content-md-center" align="center">
-            <div class="col-xs-6 col-md-3" style="padding-bottom: 1rem;">
-                <div class="card text-white btn_custom mb-3 shadow" style="max-width: 18rem; border-radius: 2rem;">
-                    <div class="card-body">
-                        <ion-icon name="people-outline"></ion-icon>
-                        <i class="bi bi-people-fill"></i> จำนวนผู้มาเข้าร่วม
-                        <hr>
-                        <h5 class="card-title" align="center">จำนวน {{report_sum.Join}} คน</h5>
-                    </div>
+            <div class="col-xs-6 col-md-3">
+                <div class="circular-progress-join">
+                    <span class="progress-value-join">{{report_sum.Join}}</span>
                 </div>
+                <br><text class="text-black text-size"><i class="bi bi-people-fill"></i>จำนวนผู้มาเข้าร่วม</text>
             </div>
-            <div class="col-xs-6 col-md-3" style="padding-bottom: 1rem;">
-                <div class="card text-white btn_danger mb-3 shadow" style="max-width: 18rem; border-radius: 2rem;">
-                    <div class="card-body">
-                        <ion-icon name="cart-outline"></ion-icon>
-                        <i class="bi bi-people-fill"></i> จำนวนผู้ไม่มาเข้าร่วม
-                        <hr>
-                        <h5 class="card-title" align="center">จำนวน {{report_sum.no_join}} คน</h5>
-                    </div>
+            <div class="col-xs-6 col-md-3">
+                <div class="circular-progress-no_join">
+                    <span class="progress-value-no_join">{{report_sum.no_join}}</span>
                 </div>
+                <br><text class="text-black text-size"><i class="bi bi-people-fill"></i>จำนวนผู้ไม่มาเข้าร่วม</text>
             </div>
-            <div class="col-xs-6 col-md-3" style="padding-bottom: 1rem;">
-                <div class="card text-white btn_normal mb-3 shadow" style="max-width: 18rem; border-radius: 2rem;">
-                    <div class="card-body">
-                        <ion-icon name="desktop-outline"></ion-icon>
-                        <i class="bi bi-people-fill"></i> จำนวนผู้ลงทะเบียน
-                        <hr>
-                        <h5 class="card-title" align="center">จำนวน {{report_sum.all}} คน</h5>
-                    </div>
+            <div class="col-xs-6 col-md-3">
+                <div class="circular-progress-all">
+                    <span class="progress-value-all">{{report_sum.all}}</span>
                 </div>
+                <br><text class="text-black text-size"><i class="bi bi-people-fill"></i>จำนวนผู้ลงทะเบียน</text>
             </div>
         </div>
-    </div>
+    </div><br>
     <hr>
 
     <div class="container">

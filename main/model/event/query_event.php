@@ -11,25 +11,27 @@
     include_once('../../../asset/config/config.php');
 
     //******************** show data *********************//
-    if ($event_view == 'show_data') {
+    if (@$_SESSION["perm"] == "") {
+        echo "{\"status\": 403}";
+    }else if ($event_view == 'show_data') {
 
         if ($_SESSION["perm"] == "admin") {
             $sql = "SELECT * FROM events " .
-            "LEFT JOIN users " . 
-            "ON events.ev_assign_to = users.user_id " .
-            "WHERE ev_del = '0'";
+                "LEFT JOIN users " .
+                "ON events.ev_assign_to = users.user_id " .
+                "WHERE ev_del = '0'";
         } elseif ($_SESSION["perm"] == "register") {
             $sql = "SELECT * FROM events " .
-            "LEFT JOIN users " .
-            "ON events.ev_assign_to = users.user_id " .
-            "WHERE ev_del = '0' and ev_assign_to = '" . $_SESSION["user_id"] . "'";
+                "LEFT JOIN users " .
+                "ON events.ev_assign_to = users.user_id " .
+                "WHERE ev_del = '0' and ev_assign_to = '" . $_SESSION["user_id"] . "'";
         } else {
             $sql = "SELECT * FROM events " .
-            "LEFT JOIN users " .
-            "ON events.ev_assign_to = users.user_id " .
-            "WHERE ev_del = '0' and ev_create_by = '". $_SESSION["user_id"] ."'";
+                "LEFT JOIN users " .
+                "ON events.ev_assign_to = users.user_id " .
+                "WHERE ev_del = '0' and ev_create_by = '" . $_SESSION["user_id"] . "'";
         }
-        
+
         $resource_data = mysqli_query($handle, $sql);
         $count_row = mysqli_num_rows($resource_data);
 
@@ -111,8 +113,8 @@
         //******************** view Edit *********************//
     } else if ($event_view == 'show_data_edit') {
 
-        $sql = "SELECT * FROM `events`". 
-        " WHERE ev_id = '" . $_GET['ev_id'] . "'";
+        $sql = "SELECT * FROM `events`" .
+            " WHERE ev_id = '" . $_GET['ev_id'] . "'";
         $resource_data = mysqli_query($handle, $sql);
         $numRows = mysqli_num_fields($resource_data);
         //		$resultArray = array();
@@ -150,11 +152,11 @@
         if ($_GET['ev_id'] != '') {
             $ev_id = $_GET['ev_id'];
             $sql_delete_event = "UPDATE `events` SET `ev_del` = '1'" .
-            " WHERE `events`.`ev_id` = '$ev_id'";
+                " WHERE `events`.`ev_id` = '$ev_id'";
             mysqli_query($handle, $sql_delete_event);
             // echo $sql_delete_event;
         }
-    
+
         //******************** else *********************//
     } else {
         $results = '{"results_data":null}';

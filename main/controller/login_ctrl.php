@@ -6,8 +6,8 @@
                 .then((res) => { // start then
                     $("#modal-status_login_logout").modal("show");
                     setTimeout(() => {
-                        location.replace("/Event-Reg-Project/");
-                    }, 500)
+                        location.replace("/");
+                    }, 1500)
                 }); // end then
         <? } ?>
 
@@ -15,25 +15,29 @@
             $http({
                 method: 'POST',
                 url: 'main/model/login/query_login.php?event_view=login',
-                data: `user_id=${$scope.user_id}` +
+                data: `captcha_code=${$scope.captcha_code}` +
+                    `&user_id=${$scope.user_id}` +
                     `&password=${$scope.password}`,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }).then(function(res) {
+                    // console.log(res.data);
                     var bool = res.data.status;
+                    var captcha_code = res.data.captcha_code;
+                    if (!captcha_code) document.getElementById("login_error").textContent = "captcha code ไม่ถูกต้อง";
                     if (bool) {
                         // console.log("success");
                         $("#modal-status_login_success").modal("show");
                         setTimeout(() => {
                             location.reload();
-                        }, 500)
+                        }, 1500)
                     } else {
                         // console.log("error");
                         $("#modal-status_login_error").modal("show");
                         setTimeout(() => {
                             location.reload();
-                        }, 500)
+                        }, 1500)
                     }
                 },
                 function(response) { // optional

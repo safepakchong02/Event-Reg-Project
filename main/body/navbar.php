@@ -32,7 +32,8 @@
         height: 1px;
         content: '.';
         color: transparent;
-        background: #F1C40F; /*change background color */
+        background: #F1C40F;
+        /*change background color */
         visibility: none;
         opacity: 0;
         z-index: -1;
@@ -47,7 +48,7 @@
 </style>
 
 <? if (!isset($_GET["event"])) { ?>
-    <nav class="navbar navbar-expand-sm navbar-light shift" style="background-color: #00b0b2;">
+    <nav class="navbar navbar-expand-sm navbar-light shift" style="background-color: #ee5b23;">
         <div class="container-fluid">
             <a href="index.php" class="navbar-brand text-white">SUTH REG</a>
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">

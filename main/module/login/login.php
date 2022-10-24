@@ -16,10 +16,15 @@
     }
 
     body {
-        background-image: url("asset\\img\\pic-clinic-ratanavet6-2.jpg");
+        background-image: url("asset/img/suth_bg.jpg");
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
+    }
+
+    .captcha-input {
+        background: #FFF url("") repeat-y left center;
+        /* padding-left: 50px; */
     }
 </style>
 <!-- end style -->
@@ -62,7 +67,7 @@ include("main/controller/$ctrl_name.php");
                     <div class="row justify-content-center" align="center">
                         <div class="d-grid gap-2 col-10 col-xs-5">
                             <div class="input-group flex-nowrap">
-                                <input type="text" ng-model="user_id" class="form-control col-md-12" placeholder="รหัสพนักงาน">
+                                <input required type="text" ng-model="user_id" class="form-control col-md-12" placeholder="รหัสพนักงาน">
                                 <span class="input-group-text " id="addon-wrapping"><i class="bi bi-person-fill"></i></span>
                             </div>
                         </div>
@@ -70,8 +75,16 @@ include("main/controller/$ctrl_name.php");
                     <div class="row justify-content-center" align="center">
                         <div class="d-grid gap-2 col-10 col-xs-5">
                             <div class="input-group flex-nowrap">
-                                <input type="password" ng-model="password" class="form-control col-md-12" placeholder="รหัสผ่าน" autocomplete="username">
+                                <input required type="password" ng-model="password" class="form-control col-md-12" placeholder="รหัสผ่าน" autocomplete="username">
                                 <span class="input-group-text" id="addon-wrapping"><i class="bi bi-lock-fill"></i></span>
+                            </div>
+                        </div>
+                    </div><br>
+                    <div class="row justify-content-center" align="center">
+                        <div class="d-grid gap-2 col-10 col-xs-5">
+                            <div class="input-group flex-nowrap">
+                                <input required type="text" ng-model="captcha_code" class="form-control col-md-12" placeholder="Captcha Code">
+                                <span class="input-group-text" id="addon-wrapping"><img src="main/module/login/captchaImageSource.php"></span>
                             </div>
                         </div>
                     </div><br>

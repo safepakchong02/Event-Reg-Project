@@ -34,47 +34,53 @@ if (!isset($_GET["ev_id"])) { ?>
             </div>
             <div class="box-body">
                 <div class="row">
+                    <div class="col-md-4 pb-3" ng-show="check.no">
+                        <div class="form-group">
+                            <label>ลำดับที่ :</label>
+                            <input type="search" onkeyup="searchColumn(0, this.value)" class="form-control rounded" placeholder="------- ไม่ระบุข้อมูล -------" />
+                        </div>
+                    </div>
                     <div class="col-md-4 pb-3" ng-show="check.emp_id">
                         <div class="form-group">
                             <label>รหัสพนักงาน :</label>
-                            <input type="search" onkeyup="searchColumn(0, this.value)" class="form-control rounded" placeholder="------- ไม่ระบุข้อมูล -------" />
+                            <input type="search" onkeyup="searchColumn(1, this.value)" class="form-control rounded" placeholder="------- ไม่ระบุข้อมูล -------" />
                         </div>
                     </div>
                     <div class="col-md-4 pb-3" ng-show="check.card_id">
                         <div class="form-group">
                             <label>บัตรประชาชน :</label>
-                            <input type="search" onkeyup="searchColumn(1, this.value)" class="form-control rounded" placeholder="------- ไม่ระบุข้อมูล -------" />
+                            <input type="search" onkeyup="searchColumn(2, this.value)" class="form-control rounded" placeholder="------- ไม่ระบุข้อมูล -------" />
                         </div>
                     </div>
                     <div class="col-md-4 pb-3" ng-show="check.name">
                         <div class="form-group">
                             <label>ชื่อ-นามสกุล :</label>
-                            <input type="search" onkeyup="searchColumn(2, this.value)" class="form-control rounded" placeholder="------- ไม่ระบุข้อมูล -------" />
+                            <input type="search" onkeyup="searchColumn(4, this.value)" class="form-control rounded" placeholder="------- ไม่ระบุข้อมูล -------" />
                         </div>
                     </div>
                     <div class="col-md-4 pb-3" ng-show="check.com_name">
                         <div class="form-group">
                             <label>ชื่อบริษัท :</label>
-                            <input type="search" onkeyup="searchColumn(4, this.value)" class="form-control rounded" placeholder="------- ไม่ระบุข้อมูล -------" />
+                            <input type="search" onkeyup="searchColumn(6, this.value)" class="form-control rounded" placeholder="------- ไม่ระบุข้อมูล -------" />
                         </div>
                     </div>
                     <div class="col-md-4 pb-3" ng-show="check.dep">
                         <div class="form-group">
                             <label>แผนก :</label>
-                            <input type="search" onkeyup="searchColumn(5, this.value)" class="form-control rounded" placeholder="------- ไม่ระบุข้อมูล -------" />
+                            <input type="search" onkeyup="searchColumn(7, this.value)" class="form-control rounded" placeholder="------- ไม่ระบุข้อมูล -------" />
                         </div>
                     </div>
                     <div class="col-md-4 pb-3" ng-show="check.pos">
                         <div class="form-group">
                             <label>ตำแหน่ง :</label>
-                            <input type="search" onkeyup="searchColumn(6, this.value)" class="form-control rounded" placeholder="------- ไม่ระบุข้อมูล -------" />
+                            <input type="search" onkeyup="searchColumn(8, this.value)" class="form-control rounded" placeholder="------- ไม่ระบุข้อมูล -------" />
                         </div>
                     </div>
                     <div class="col-md-4 pb-3" ng-show="check.gender">
                         <div class="form-group">
                             <label>เพศ :</label>
-                            <select class="form-control" onchange="searchColumn(8, this.value)">
-                                <option value="">---ไม่ระบุข้อมูล---</option>
+                            <select class="form-control" onchange="searchColumn(9, this.value)">
+                                <option value="">------- ไม่ระบุข้อมูล -------</option>
                                 <option value="ชาย">ชาย</option>
                                 <option value="หญิง">หญิง</option>
                                 <option value="ทางเลือก">เพศทางเลือก</option>
@@ -84,8 +90,8 @@ if (!isset($_GET["ev_id"])) { ?>
                     <div class="col-md-4 pb-3">
                         <div class="form-group">
                             <label>สถานะการลงทะเบียน :</label>
-                            <select class="form-control" onchange="searchColumn(11, this.value)">
-                                <option value="">---ไม่ระบุข้อมูล---</option>
+                            <select class="form-control" onchange="searchColumn(12, this.value)">
+                                <option value="">------- ไม่ระบุข้อมูล -------</option>
                                 <option value="/">เข้าร่วม</option>
                                 <option value="-">ไม่เข้าร่วม</option>
                             </select>
@@ -94,7 +100,7 @@ if (!isset($_GET["ev_id"])) { ?>
                     <div class="col-md-4 pb-3">
                         <div class="form-group">
                             <label>วันที่เข้ากิจกรรม :</label>
-                            <input type="search" onkeyup="searchColumn(11, this.value)" class="form-control rounded" placeholder="dd/mm/yyyy hh:mm หรือ hh:mm" />
+                            <input type="search" onkeyup="searchColumn(12, this.value)" class="form-control rounded" placeholder="dd/mm/yyyy hh:mm หรือ hh:mm" />
                         </div>
                     </div>
                 </div>
@@ -118,6 +124,7 @@ if (!isset($_GET["ev_id"])) { ?>
                     <th ng-show="check.no">ลำดับที่</th>
                     <th ng-show="check.emp_id">รหัสพนักงาน</th>
                     <th ng-show="check.card_id">รหัสบัตรประชาชน</th>
+                    <th ng-show="check.prefix">คำนำหน้า</th>
                     <th ng-show="check.name">ชื่อ - สกุล</th>
                     <th ng-show="check.call">เบอร์โทรศัพท์</th>
                     <th ng-show="check.com_name">ชื่อบริษัท</th>
@@ -127,6 +134,7 @@ if (!isset($_GET["ev_id"])) { ?>
                     <th ng-show="check.age">อายุ</th>
                     <th ng-show="check.birthDate">วันเกิด</th>
                     <th>วันที่เข้าร่วมกิจกรรม</th>
+                    <th ng-show="check.comment">หมายเหตุ</th>
                 </tr>
             </thead>
             <tbody>
@@ -134,6 +142,7 @@ if (!isset($_GET["ev_id"])) { ?>
                     <td ng-show="check.no">{{row.no}}</td>
                     <td ng-show="check.emp_id">{{row.emp_id}}</td>
                     <td ng-show="check.card_id">{{row.card_id}}</td>
+                    <td ng-show="check.prefix">{{row.prefix}}</td>
                     <td ng-show="check.name">{{row.name}}</td>
                     <td ng-show="check.call">{{row.call}}</td>
                     <td ng-show="check.com_name">{{row.com_name}}</td>
@@ -143,6 +152,7 @@ if (!isset($_GET["ev_id"])) { ?>
                     <td ng-show="check.age">{{row.age}}</td>
                     <td ng-show="check.birthDate">{{row.birthDate}}</td>
                     <td>{{checkReg(row.reg_date)}}</td>
+                    <td ng-show="check.comment">{{row.comment}}</td>
                 </tr>
             </tbody>
         </table>

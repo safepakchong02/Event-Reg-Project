@@ -20,6 +20,12 @@
                 <input type="text" ng-model="data_add.com_name" name="data_add.com_name" class="form-control">
               </div>
             </div>
+            <div class="col-6" ng-hide="!check.prefix" id="prefix">
+              <div class="form-group pb-2">
+                <label> คำนำหน้า :</label>
+                <input type="text" ng-model="data_add.prefix" name="data_add.prefix" class="form-control">
+              </div>
+            </div>
             <div class="col-6" ng-hide="!check.name" id="name">
               <div class="form-group pb-2">
                 <label> ชื่อ-สกุล :</label>
@@ -72,12 +78,12 @@
                 <label> วันเดือนปีเกิด :</label>
                 <input type="date" ng-model="data_add.birthDate" name="data_add.birthDate" class="form-control">
               </div>
-              <!-- <div class="col-6" ng-hide="!check.no" id="no">
-                <div class="form-group pb-2">
-                  <label> ลำดับที่ :</label>
-                  <input type="number" ng-model="data_add.no" name="data_add.no" class="form-control">
-                </div>
-              </div> -->
+            </div>
+            <div class="col-12" ng-hide="!check.comment" id="comment">
+              <div class="form-group pb-2">
+                <label> หมายเหตุ :</label>
+                <textarea rows="3" ng-model="data_add.comment" name="data_add.comment" class="form-control"></textarea>
+              </div>
             </div>
           </div>
         </form>

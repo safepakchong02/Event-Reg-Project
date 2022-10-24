@@ -28,7 +28,7 @@ include("main/controller/$ctrl_name.php");
             </div>
             <div class="col-8">
                 <button id="import" type="button" ng-click="import()" class="btn btn-primary btn-sm"><i class="bi bi-person-plus-fill"></i> นำเข้าข้อมูล</button>
-                <a href="asset/file/" class="btn btn-success btn-sm"><i class="bi bi-file-earmark-excel"></i> ดาวน์โหลดตัวอย่างไฟล์</a>
+                <a href="asset/files/template.xlsx" target="_blank" class="btn btn-success btn-sm"><i class="bi bi-file-earmark-excel"></i> ดาวน์โหลดตัวอย่างไฟล์</a>
                 <button id="reset" type="button" ng-click="reset()" class="btn btn-danger btn-sm ng-hide"><i class="bi bi-repeat"></i> รีเซ็ทการอัปโหลดไฟล์</button>
             </div>
         </div>
@@ -50,11 +50,11 @@ include("main/controller/$ctrl_name.php");
                 <div class="col-4">ชื่อคอลัมน์ในไฟล์ที่อัปโหลด</div>
                 <div class="col-8">แปลงเป็นชื่อที่เราระบุ</div>
             </div>
-            <div id="convertCol">
-            </div>
+            <form id="convertCol" ng-submit="import_save()">
+            </form>
             <br>
             <div class="d-flex justify-content-end pb-2">
-                <button ng-click="import_save()" type="button" class="btn btn-success btn-sm"></i>บันทึก</button>
+                <button type="submit" form="convertCol" class="btn btn-success btn-sm"></i>บันทึก</button>
             </div>
         </div>
     </div>

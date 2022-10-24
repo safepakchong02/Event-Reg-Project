@@ -13,6 +13,15 @@
             // $scope.$apply();
         }
 
+        /* ==================SHOW LINK REG NO_AUTH======================= */
+
+        let link_no_auth = `${location.origin}${location.pathname}?ev_id=<?= $_GET["ev_id"] ?>&no_auth=true`;
+        // console.log(link_no_auth);
+        $scope.link_no_auth = link_no_auth;
+
+        /* ==================END LINK REG NO_AUTH======================= */
+
+
         /* ==================--EDIT--======================= */
         $scope.setting_save = function() {
             $http({
@@ -22,6 +31,7 @@
                     `&walk_in=${$scope.check.walk_in}` +
                     `&emp_id=${$scope.check.emp_id}` +
                     `&card_id=${$scope.check.card_id}` +
+                    `&prefix=${$scope.check.prefix}` +
                     `&name=${$scope.check.name}` +
                     `&call=${$scope.check.call}` +
                     `&com_name=${$scope.check.com_name}` +

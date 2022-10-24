@@ -91,7 +91,7 @@
     } else if ($event_view == 'show_data_edit') {
 
         $sql = "SELECT * FROM `users`" .
-            " WHERE user_id = '" . $_GET['user_id'] . "'";
+            " WHERE id = '" . $_GET['id'] . "'";
         $resource_data = mysqli_query($handle, $sql);
         $numRows = mysqli_num_fields($resource_data);
         //		$resultArray = array();
@@ -106,7 +106,8 @@
 
         //******************** Update Edit *********************//
     } else if ($event_view == 'edit_form_save') {
-        if ($_POST['user_id'] != '') {
+        if ($_POST['id'] != '') {
+            $id = $_POST["id"];
             $user_id = $_POST['user_id'];
             $user_name = $_POST['user_name'];
             $user_surname = $_POST['user_surname'];
@@ -117,7 +118,7 @@
                 "`user_surname` = '$user_surname'," .
                 "`dep_id` = '$dep_id'," .
                 "`perm` = '$perm'" .
-                " WHERE `users`.`user_id` = '$user_id'";
+                " WHERE `users`.`id` = '$id'";
             mysqli_query($handle, $sql_update);
             // echo $sql_update;
         }
@@ -125,10 +126,10 @@
         //******************** delete data *********************//
     } else if ($event_view == 'del_emp') {
 
-        if ($_GET['user_id'] != '') {
-            $user_id = $_GET['user_id'];
+        if ($_GET['id'] != '') {
+            $id = $_GET['id'];
             $sql_delete_emp = "UPDATE `users` SET `user_del` = '1'" .
-                " WHERE `users`.`user_id` = '$user_id'";
+                " WHERE `users`.`id` = '$id'";
             mysqli_query($handle, $sql_delete_emp);
             // echo $sql_delete_event;
         }

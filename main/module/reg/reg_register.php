@@ -10,12 +10,20 @@ if (!isset($_GET["ev_id"])) { ?>
 <style>
     body {
         margin: 0;
-        background-color: #ee5b23;
+        background: rgb(255, 126, 37);
+        background: linear-gradient(180deg, rgba(255, 126, 37, 1) 28%, rgba(255, 198, 37, 1) 100%);
     }
 
     .btn_title {
-        background-color: #00b0b2;
-        color: #FBFCFC;
+        background-color: #f1f1f1;
+        color: black;
+    }
+
+    .title {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        border-radius: 25px;
+        background-color: white;
     }
 </style>
 
@@ -38,14 +46,12 @@ if (!isset($_GET["ev_id"])) { ?>
     <!-- header -->
     <div class="container-fluid"><br>
         <div class="row justify-content-md-center" align="center">
-            <div class="col-xs-6 col-md" style="padding-bottom: 1rem;">
-                <div class="card text-white btn_title mb-3 shadow" style="width: 20rem; border-radius: 2rem;">
-                    <h3 class="card-body" align="center">กิจกรรม <b>{{event_data[0].ev_title}}</b></h3>
-                    <h8 class="card-title" align="center">{{event_data[0].ev_date_start}} - {{event_data[0].ev_date_end}}</h8>
-                </div>
+            <div class="col-auto title">
+                <h3 class="" align="center">กิจกรรม <b>{{event_data[0].ev_title}}</b></h3>
             </div>
         </div>
     </div>
+    <hr><br>
     <!-- end header -->
 
     <!-- register -->
@@ -76,11 +82,13 @@ if (!isset($_GET["ev_id"])) { ?>
                                     <button type="button" ng-click="register()" class="btn btn-primary btn-block"> ลงทะเบียนเข้ากิจกรรม</button>
                                 </div>
                             </div><br>
-                            <div class="row justify-content-center" align="center" ng-hide="!check.walk_in">
-                                <div class="d-grid gap-2 col-md-8 col-xs-5">
-                                    <button type="button" class="btn btn-success btn-block" data-bs-toggle="modal" data-bs-target="#modal-detail_add">เพิ่มข้อมูลผู้ลงทะเบียนใหม่</button>
+                            <? if (!$no_auth) { ?>
+                                <div class="row justify-content-center" align="center" ng-hide="!check.walk_in">
+                                    <div class="d-grid gap-2 col-md-8 col-xs-5">
+                                        <button type="button" class="btn btn-success btn-block" data-bs-toggle="modal" data-bs-target="#modal-detail_add">เพิ่มข้อมูลผู้ลงทะเบียนใหม่</button>
+                                    </div>
                                 </div>
-                            </div>
+                            <? } ?>
                         </div>
                     </div>
                 </div>

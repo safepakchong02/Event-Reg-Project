@@ -31,10 +31,10 @@ include("main/controller/$ctrl_name.php");
         </div>
         <div class="container-fluid">
             <div class="row">
-                <div class="col">
+                <div class="col-6">
                     <h3>กิจกรรม : {{ev_title}}</3>
                 </div>
-                <div class="col-9">
+                <div class="col-6">
                     <div class="col-12" align="right">
                         <button ng-hide="isInit" type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modal-detail_add">
                             <i class="bi bi-person-plus-fill"></i> เพิ่มรายชื่อ
@@ -48,6 +48,9 @@ include("main/controller/$ctrl_name.php");
                         <a ng-hide="isInit" href="index.php?p=event&m=event_detail_export&ev_id=<?= $ev_id ?>" class="btn btn-info btn-sm ">
                             <i class="bi bi-file-earmark-arrow-up"></i></i> Export
                         </a>
+                        <button ng-hide="isInit" type="button" class="btn btn-danger btn-sm" ng-click="del_all_reg(<?= $ev_id ?>)">
+                            <i class="bi bi-trash"></i> ลบข้อมูลทั้งหมด
+                        </button>
                     </div>
                 </div>
             </div>
@@ -60,6 +63,7 @@ include("main/controller/$ctrl_name.php");
                     <th ng-show="check.no">ลำดับที่</th>
                     <th ng-show="check.emp_id">รหัสพนักงาน</th>
                     <th ng-show="check.card_id">รหัสบัตรประชาชน</th>
+                    <th ng-show="check.prefix">คำนำหน้า</th>
                     <th ng-show="check.name">ชื่อ - สกุล</th>
                     <th ng-show="check.call">เบอร์โทรศัพท์</th>
                     <th ng-show="check.com_name">ชื่อบริษัท</th>
@@ -69,6 +73,7 @@ include("main/controller/$ctrl_name.php");
                     <th ng-show="check.age">อายุ</th>
                     <th ng-show="check.birthDate">วันเกิด</th>
                     <th>วันที่เข้าร่วมกิจกรรม</th>
+                    <th ng-show="check.comment">หมายเหตุ</th>
                     <th data-priority="1"></th>
                 </tr>
             </thead>
@@ -78,6 +83,7 @@ include("main/controller/$ctrl_name.php");
                     <td ng-show="check.no">{{row.no}}</td>
                     <td ng-show="check.emp_id">{{row.emp_id}}</td>
                     <td ng-show="check.card_id">{{row.card_id}}</td>
+                    <td ng-show="check.prefix">{{row.prefix}}</td>
                     <td ng-show="check.name">{{row.name}}</td>
                     <td ng-show="check.call">{{row.call}}</td>
                     <td ng-show="check.com_name">{{row.com_name}}</td>
@@ -87,6 +93,7 @@ include("main/controller/$ctrl_name.php");
                     <td ng-show="check.age">{{row.age}}</td>
                     <td ng-show="check.birthDate">{{row.birthDate}}</td>
                     <td>{{checkReg(row.reg_date)}}</td>
+                    <td ng-show="check.comment">{{row.comment}}</td>
                     <td>
                         <button type="button" ng-click="edit_reg_view(row.id)" data-bs-toggle="modal" data-bs-target="#modal-detail_edit" class="btn btn-warning btn-sm">แก้ไข</button>
                         <button type="button" ng-click="del_reg(row.id)" class="btn btn-danger btn-sm">ลบ</button>
@@ -100,9 +107,9 @@ include("main/controller/$ctrl_name.php");
                 var table = $('#example').DataTable({
                     responsive: true,
                     columnDefs: [{
-                            responsivePriority: 1,
-                            targets: -1
-                        }]
+                        responsivePriority: 1,
+                        targets: -1
+                    }]
                 });
             });
         </script>

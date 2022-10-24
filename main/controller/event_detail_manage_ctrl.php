@@ -63,7 +63,7 @@
         $scope.add_member = () => {
             var birthDate = "";
             // check value
-            if ($scope.data_add.birthDate !== null)
+            if ($scope.data_add.birthDate !== "")
                 birthDate = convertDate($scope.data_add.birthDate);
             if ($scope.data_add.no === null)
                 $scope.data_add.no = "";
@@ -94,6 +94,7 @@
                             data: `ev_id=<?= $_GET["ev_id"] ?>` +
                                 `&emp_id=${$scope.data_add.emp_id}` +
                                 `&card_id=${$scope.data_add.card_id}` +
+                                `&prefix=${$scope.data_add.prefix}` +
                                 `&name=${$scope.data_add.name}` +
                                 `&call=${$scope.data_add.call}` +
                                 `&com_name=${$scope.data_add.com_name}` +
@@ -104,6 +105,7 @@
                                 `&age=${$scope.data_add.age}` +
                                 `&no=${$scope.data_add.no}` +
                                 `&birthDate=${birthDate}` +
+                                `&comment=${$scope.data_add.comment}` +
                                 `&reg_date=${reg_date}`,
                             headers: {
                                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -134,8 +136,9 @@
                     console.log(response);
                 });
             // end check exist data
-        } // end add_member function
+        }
         /* ==================END ADD-======================= */
+
         /* ==================--EDIT--======================= */
         $scope.edit_reg_view = (id) => {
             $http.get(`main/model/reg/query_reg.php?event_view=show_data_edit&id=${id}`)
@@ -158,6 +161,7 @@
                 data: `id=${$scope.data_edit.id}` +
                     `&emp_id=${$scope.data_edit.emp_id}` +
                     `&card_id=${$scope.data_edit.card_id}` +
+                    `&prefix=${$scope.data_edit.prefix}` +
                     `&name=${$scope.data_edit.name}` +
                     `&call=${$scope.data_edit.call}` +
                     `&com_name=${$scope.data_edit.com_name}` +
@@ -167,11 +171,13 @@
                     `&gender=${$scope.data_edit.gender}` +
                     `&age=${$scope.data_edit.age}` +
                     `&no=${$scope.data_edit.no}` +
+                    `&comment=${$scope.data_edit.comment}` +
                     `&birthDate=${birthDate}`,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }).then(function(response) {
+                    // console.log(response.data);
                     $("#modal-detail_edit").modal("hide");
                     $("#modal-status_success").modal("show");
                     setTimeout(() => {
@@ -184,6 +190,7 @@
                 });
         }
         /* ==================END EDIT======================= */
+
         /* ==================-DELETE-======================= */
         $scope.del_reg = (id) => {
             if (confirm("คุณต้องการลบข้อมูลนี้หรือไม่")) {
@@ -198,6 +205,21 @@
             } // end if confirm
         }
         /* ==================END DELETE===================== */
+
+        /* ===================DELETE ALL======================== */
+        $scope.del_all_reg = (ev_id) => {
+            if (confirm("คุณต้องการลบข้อมูลทั้งหมดนี้หรือไม่")) {
+                $http.get(`main/model/event/query_event_detail.php?event_view=del_all&ev_id=${ev_id}`)
+                    .then((res) => { // start then
+                        // console.log(res.data);
+                        $("#modal-status_success").modal("show");
+                        setTimeout(() => {
+                            location.reload();
+                        }, 1500)
+                    }); // end then
+            } // end if confirm
+        }
+        /* ==================END DELETE ALL===================== */
 
     }); // end controller function
 </script>

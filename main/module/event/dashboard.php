@@ -19,39 +19,41 @@ include("main/controller/$ctrl_name.php");
             <!-- จบการเพิ่มข้อมูล -->
 
             <!-- status success-->
-            <?include("main/body/status_success.php");?>
+            <? include("main/body/status_success.php"); ?>
             <!-- end success -->
-            
+
             <!-- แสดงข้อมูล -->
-            <table datatable="ng" id="example" class="table nowrap" style="width:100%">
-                <thead>
-                    <tr class="table-dark">
-                        <th>ไอดี</th>
-                        <th>ชื่อกิจกรรม</th>
-                        <th>เจ้าหน้าที่ลงทะเบียน</th>
-                        <th>สถานะลงทะเบียน</th>
-                        <th>วันที่เปิดลงทะเบียน</th>
-                        <th>วันที่ปิดลงทะเบียน</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="show_event_data in event_data" class="{{show_event_data.isOpen}}">
-                        <? include("main/module/event/event_edit.php"); ?>
-                        <td>{{show_event_data.ev_id}}</td> <!-- "ev_id" is name col -->
-                        <td>{{show_event_data.ev_title}}</td>
-                        <td>{{show_event_data.user_name}} {{show_event_data.user_surname}}</td>
-                        <td>{{show_event_data.ev_status}}</td>
-                        <td>{{show_event_data.ev_date_start}}</td>
-                        <td>{{show_event_data.ev_date_end}}</td>
-                        <td>
-                            <a href="index.php?p=event&m=event_detail&ev_id={{show_event_data.ev_id}}" class="btn btn-info btn-sm text-white">ข้อมูลผู้ลงทะเบียน</a>
-                            <button ng-click="edit_event_view(show_event_data.ev_id)" data-bs-toggle="modal" data-bs-target="#modal-edit" class="btn btn-warning btn-sm">แก้ไข</button>
-                            <button ng-click="delete_event(show_event_data.ev_id)" class="btn btn-danger btn-sm">ลบ</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div style="overflow-x:scroll;">
+                <table datatable="ng" id="example" class="table nowrap" style="width:100%">
+                    <thead>
+                        <tr class="table-dark">
+                            <th>ไอดี</th>
+                            <th>ชื่อกิจกรรม</th>
+                            <th>เจ้าหน้าที่ลงทะเบียน</th>
+                            <th>สถานะลงทะเบียน</th>
+                            <th>วันที่เปิดลงทะเบียน</th>
+                            <th>วันที่ปิดลงทะเบียน</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="show_event_data in event_data" class="{{show_event_data.isOpen}}">
+                            <? include("main/module/event/event_edit.php"); ?>
+                            <td>{{show_event_data.ev_id}}</td> <!-- "ev_id" is name col -->
+                            <td>{{show_event_data.ev_title}}</td>
+                            <td>{{show_event_data.user_name}} {{show_event_data.user_surname}}</td>
+                            <td>{{show_event_data.ev_status}}</td>
+                            <td>{{show_event_data.ev_date_start}}</td>
+                            <td>{{show_event_data.ev_date_end}}</td>
+                            <td>
+                                <a href="index.php?p=event&m=event_detail&ev_id={{show_event_data.ev_id}}" class="btn btn-info btn-sm text-white">ข้อมูลผู้ลงทะเบียน</a>
+                                <button ng-click="edit_event_view(show_event_data.ev_id)" data-bs-toggle="modal" data-bs-target="#modal-edit" class="btn btn-warning btn-sm">แก้ไข</button>
+                                <button ng-click="delete_event(show_event_data.ev_id)" class="btn btn-danger btn-sm">ลบ</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <script>
                 $(document).ready(function() {
                     var table = $('#example').DataTable({

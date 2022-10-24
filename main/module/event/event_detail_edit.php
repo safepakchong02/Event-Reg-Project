@@ -11,7 +11,7 @@
                         <div class="col-6" ng-if="check.no">
                             <div class="form-group pb-2">
                                 <label> ลำดับที่ :</label>
-                                <input disabled type="number" ng-model="data_edit.no" name="data_edit.no" class="form-control" required>
+                                <input type="number" ng-model="data_edit.no" name="data_edit.no" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-6" ng-if="check.emp_id">
@@ -24,6 +24,12 @@
                             <div class="form-group pb-2">
                                 <label> ชื่อบริษัท :</label>
                                 <input type="text" ng-model="data_edit.com_name" name="data_edit.com_name" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-6" ng-if="check.prefix" id="prefix">
+                            <div class="form-group pb-2">
+                                <label> คำนำหน้า :</label>
+                                <input type="text" ng-model="data_edit.prefix" name="data_edit.prefix" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-6" ng-if="check.name">
@@ -77,6 +83,12 @@
                             <div class="form-group pb-2">
                                 <label> วันเดือนปีเกิด :</label>
                                 <input type="date" ng-model="data_edit.birthDate" name="data_edit.birthDate" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-12" ng-if="check.comment">
+                            <div class="form-group pb-2">
+                                <label> หมายเหตุ :</label>
+                                <textarea rows="3" ng-model="data_edit.comment" name="data_edit.comment" class="form-control"></textarea>
                             </div>
                         </div>
                     </div>

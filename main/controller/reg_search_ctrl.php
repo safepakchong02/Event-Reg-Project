@@ -43,6 +43,7 @@
             $http.get(`main/model/reg/query_reg.php?event_view=show_data_edit&id=${id}`)
                 .then((res) => { // start then
                     $scope.data_edit = res.data.results_data_edit[0];
+                    $scope.data_edit.no = parseInt($scope.data_edit.no);
                     $scope.data_edit.birthDate = createDate($scope.data_edit.birthDate);
                 }); // end then
         }
@@ -54,6 +55,7 @@
                 data: `id=${$scope.data_edit.id}` +
                     `&emp_id=${$scope.data_edit.emp_id}` +
                     `&card_id=${$scope.data_edit.card_id}` +
+                    `&prefix=${$scope.data_edit.prefix}` +
                     `&name=${$scope.data_edit.name}` +
                     `&call=${$scope.data_edit.call}` +
                     `&com_name=${$scope.data_edit.com_name}` +
@@ -63,7 +65,8 @@
                     `&gender=${$scope.data_edit.gender}` +
                     `&age=${$scope.data_edit.age}` +
                     `&no=${$scope.data_edit.no}` +
-                    `&birthDate=${convertDate($scope.data_edit.birthDate)}`,
+                    `&birthDate=${convertDate($scope.data_edit.birthDate)}` +
+                    `&comment=${$scope.data_edit.comment}`,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
@@ -73,7 +76,7 @@
                     $("#modal-status_success").modal("show");
                     setTimeout(() => {
                         location.reload();
-                    }, 5000)
+                    }, 1500)
                 },
                 function(response) { // optional
                     // failed
@@ -92,7 +95,7 @@
                         $("#modal-status_success").modal("show");
                         setTimeout(() => {
                             location.reload();
-                        }, 5000)
+                        }, 1500)
                     }); // end then
             } // end if confirm
         }
@@ -107,7 +110,7 @@
                         $("#modal-status_success").modal("show");
                         setTimeout(() => {
                             location.reload();
-                        }, 5000)
+                        }, 1500)
                     }); // end then
             } // end if confirm
         }
@@ -125,7 +128,7 @@
                 data = table.rows().data().toArray();
             }
 
-            var header = ["ลำดับที่", "รหัสพนักงาน", "รหัสบัตรประชาชน", "ชื่อ - สกุล", "เบอร์โทรศัพท์", "ชื่อบริษัท", "แผนก", "ตำแหน่ง", "เพศ", "อายุ", "วันเกิด", "วันที่เข้าร่วมกิจกรรม"];
+            var header = ["ลำดับที่", "รหัสพนักงาน", "รหัสบัตรประชาชน", "คำนำหน้า", "ชื่อ - สกุล", "เบอร์โทรศัพท์", "ชื่อบริษัท", "แผนก", "ตำแหน่ง", "เพศ", "อายุ", "วันเกิด", "วันที่เข้าร่วมกิจกรรม", "หมายเหตุ"];
             var rows = [];
 
             if (data.length != 0) {

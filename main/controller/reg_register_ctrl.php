@@ -5,6 +5,7 @@
             $scope.data_add = {};
             $scope.data_add.emp_id = "";
             $scope.data_add.card_id = "";
+            $scope.data_add.prefix = "";
             $scope.data_add.name = "";
             $scope.data_add.call = "";
             $scope.data_add.com_name = "";
@@ -14,21 +15,40 @@
             $scope.data_add.gender = "";
             $scope.data_add.age = null;
             $scope.data_add.birthDate = "";
+            $scope.data_add.comment = "";
         }
 
-        const searchBy = (key) => {
-            switch (key) {
-                case "emp_id":
-                    return $scope.data_add.emp_id;
-                    break;
-                case "card_id":
-                    return $scope.data_add.card_id;
-                    break;
-                default:
-                    return "";
-                    break;
-            }
+        // bypass preview angular not working
+        const setPreview = (data) => {
+            // console.log(data);
+            if(data.no != "") document.getElementsByName("preview.no")[0].value = parseInt(data.no);
+            if(data.emp_id != "") document.getElementsByName("preview.emp_id")[0].value = data.emp_id;
+            if(data.card_id != "") document.getElementsByName("preview.card_id")[0].value = data.card_id;
+            if(data.com_name != "") document.getElementsByName("preview.com_name")[0].value = data.com_name;
+            if(data.prefix != "") document.getElementsByName("preview.prefix")[0].value = data.prefix;
+            if(data.name != "") document.getElementsByName("preview.name")[0].value = data.name;
+            if(data.dep != "") document.getElementsByName("preview.dep")[0].value = data.dep;
+            if(data.pos != "") document.getElementsByName("preview.pos")[0].value = data.pos;
+            if(data.call != "") document.getElementsByName("preview.call")[0].value = data.call;
+            if(data.age != "") document.getElementsByName("preview.age")[0].value = data.age;
+            if(data.birthDate != "") document.getElementsByName("preview.birthDate")[0].value = createDate(data.birthDate);
+            if(data.comment != "") document.getElementsByName("preview.comment")[0].value = data.comment;
         }
+        // end bypass
+
+        // const searchBy = (key) => {
+        //     switch (key) {
+        //         case "emp_id":
+        //             return $scope.data_add.emp_id;
+        //             break;
+        //         case "card_id":
+        //             return $scope.data_add.card_id;
+        //             break;
+        //         default:
+        //             return "";
+        //             break;
+        //     }
+        // }
 
         // init page
         clearData();
@@ -88,26 +108,32 @@
                 var isNoData = res.data.noData;
 
                 if (!isNoData) {
+                    // console.log(res.data);
                     var data = res.data.results_data[0];
                     var id = data.id;
                     var now = new Date();
                     var reg_date = convertDate(now.toString());
 
-                    $http({
-                        method: 'POST',
-                        url: 'main/model/reg/query_reg.php?event_view=reg',
-                        data: `id=${id}` +
-                            `&reg_date=${reg_date}`,
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded'
-                        }
-                    }).then((res) => {
-                        // console.log(res.data);
-                        $scope.preview = data;
-                        $scope.preview.birthDate = createDate(data.birthDate);
-                        // console.log($scope.preview);
+                    if (data.reg_date == "") {
+                        $http({
+                            method: 'POST',
+                            url: 'main/model/reg/query_reg.php?event_view=reg',
+                            data: `id=${id}` +
+                                `&reg_date=${reg_date}`,
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded'
+                            }
+                        }).then((res2) => {
+                            data.no = parseInt(data.no);
+                            $scope.preview = data;
+                            $scope.preview.birthDate = createDate(data.birthDate);
+                            $("#modal-status_reg_success").modal("show");
+                        });
+                    } else {
+                        setPreview(data);
+                        document.getElementById("status_success_text").textContent = "คุณได้ลงทะเบียนไปแล้ว";
                         $("#modal-status_reg_success").modal("show");
-                    });
+                    }
                 } else {
                     $("#modal-status_reg_error_isNoData").modal("show");
                     setTimeout(() => {
@@ -159,6 +185,7 @@
                             data: `ev_id=<?= $_GET["ev_id"] ?>` +
                                 `&emp_id=${$scope.data_add.emp_id}` +
                                 `&card_id=${$scope.data_add.card_id}` +
+                                `&prefix=${$scope.data_add.prefix}` +
                                 `&name=${$scope.data_add.name}` +
                                 `&call=${$scope.data_add.call}` +
                                 `&com_name=${$scope.data_add.com_name}` +
@@ -169,6 +196,7 @@
                                 `&age=${$scope.data_add.age}` +
                                 `&no=${$scope.data_add.no}` +
                                 `&birthDate=${birthDate}` +
+                                `&comment=${$scope.data_add.comment}` +
                                 `&reg_date=${reg_date}`,
                             headers: {
                                 'Content-Type': 'application/x-www-form-urlencoded'

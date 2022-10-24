@@ -54,10 +54,11 @@
                                     <input type="text" value="${head[i]}" class="form-control" disabled>
                                 </div>
                                 <div class="col-8">
-                                    <select class="form-control" colold="${head[i]}" onchange="testFunc(this)">
+                                    <select class="form-control" colold="${head[i]}" onchange="testFunc(this)" required>
                                         <option value="" selected="selected">โปรดระบุ</option>
                                         <option value="emp_id">รหัสพนักงาน</option>
                                         <option value="card_id">รหัสบัตรประชาชน</option>
+                                        <option value="prefix">คำนำหน้า</option>
                                         <option value="name">ชื่อ-สกุล</option>
                                         <option value="call">เบอร์โทรศัพท์</option>
                                         <option value="com_name">ชื่อบริษัท</option>
@@ -67,6 +68,7 @@
                                         <option value="gender">เพศ</option>
                                         <option value="age">อายุ</option>
                                         <option value="birthDate">วันเดือนปีเกิด</option>
+                                        <option value="comment">หมายเหตุ</option>
                                     </select>
                                 </div>
                             </div>
@@ -91,6 +93,7 @@
                 let data_col = {
                     "emp_id": "",
                     "card_id": "",
+                    "prefix": "",
                     "name": "",
                     "call": "",
                     "com_name": "",
@@ -101,7 +104,8 @@
                     "age": "",
                     "no": "",
                     "birthDate": "",
-                    "reg_date": ""
+                    "reg_date": "",
+                    "comment": ""
                 }; // end let data_col
 
                 for (j in $scope.head) {
@@ -114,6 +118,7 @@
                     data: `ev_id=<?= $_GET["ev_id"] ?>` +
                         `&emp_id=${data_col.emp_id}` +
                         `&card_id=${data_col.card_id}` +
+                        `&prefix=${data_col.prefix}` +
                         `&name=${data_col.name}` +
                         `&call=${data_col.call}` +
                         `&com_name=${data_col.com_name}` +
@@ -124,11 +129,13 @@
                         `&age=${data_col.age}` +
                         `&no=${data_col.no}` +
                         `&birthDate=${data_col.birthDate}` +
-                        `&reg_date=${data_col.reg_date}`,
+                        `&reg_date=${data_col.reg_date}` +
+                        `&comment=${data_col.comment}`,
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded'
                     }
                 }).then(async (res) => {
+                    $("#modal-loading").modal("show");
                     $scope.now = parseInt(i) + 1;
                     console.log(res.data);
                 }); // end then http
@@ -143,6 +150,7 @@
             let setting = {
                 "emp_id": false,
                 "card_id": false,
+                "prefix": false,
                 "name": false,
                 "call": false,
                 "com_name": false,
@@ -153,6 +161,7 @@
                 "age": false,
                 "no": false,
                 "birthDate": false,
+                "comment": false
             }; // end let data_col
 
             for (i in $scope.head) {
@@ -166,6 +175,7 @@
                 data: `ev_id=<?= $_GET["ev_id"] ?>` +
                     `&emp_id=${setting.emp_id}` +
                     `&card_id=${setting.card_id}` +
+                    `&prefix=${setting.prefix}` +
                     `&name=${setting.name}` +
                     `&call=${setting.call}` +
                     `&com_name=${setting.com_name}` +
@@ -174,7 +184,8 @@
                     `&no=${setting.no}` +
                     `&gender=${setting.gender}` +
                     `&age=${setting.age}` +
-                    `&birthDate=${setting.birthDate}`,
+                    `&birthDate=${setting.birthDate}` +
+                    `&comment=${setting.comment}`,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
@@ -190,7 +201,7 @@
                     setTimeout(() => {
                         $("#modal-status_success").modal("hide");
                         location.replace("index.php?p=event&m=event_detail&ev_id=<?= $_GET["ev_id"] ?>");
-                    }, 5000);
+                    }, 1500);
                 }, 1000 * $scope.all);
             }); // end then
         }; // end import_save function
