@@ -54,8 +54,9 @@
                                     <input type="text" value="${head[i]}" class="form-control" disabled>
                                 </div>
                                 <div class="col-8">
-                                    <select class="form-control" colold="${head[i]}" onchange="testFunc(this)" required>
+                                    <select class="form-select" colold="${head[i]}" onchange="testFunc(this)" required>
                                         <option value="" selected="selected">โปรดระบุ</option>
+                                        <option value="no">ลำดับที่</option>
                                         <option value="emp_id">รหัสพนักงาน</option>
                                         <option value="card_id">รหัสบัตรประชาชน</option>
                                         <option value="prefix">คำนำหน้า</option>
@@ -64,7 +65,6 @@
                                         <option value="com_name">ชื่อบริษัท</option>
                                         <option value="dep">แผนก</option>
                                         <option value="pos">ตำแหน่ง</option>
-                                        <option value="no">ลำดับที่</option>
                                         <option value="gender">เพศ</option>
                                         <option value="age">อายุ</option>
                                         <option value="birthDate">วันเดือนปีเกิด</option>
@@ -74,6 +74,22 @@
                             </div>
                         `); // end append
                     } // end for
+
+                    $("#convertCol").append(`
+                        <hr>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label text-right">ลงทะเบียนโดยใช้ : </label>
+                            <div class="col">
+                                <select required class="form-select" id="has_reg_by">
+                                    <option value="" selected="selected">โปรดระบุ</option>
+                                    <option value="emp_id">รหัสพนักงาน</option>
+                                    <option value="card_id">รหัสบัตรประชาชน</option>
+                                    <option value="name">ชื่อ-สกุล</option>
+                                    <option value="call">เบอร์โทรศัพท์</option>
+                                    <option value="no">ลำดับที่</option>
+                                </select>
+                            </div>
+                        </div>`); // end append
 
                     table = $("#preview").dataTable({
                         "data": data,
@@ -161,13 +177,14 @@
                 "age": false,
                 "no": false,
                 "birthDate": false,
-                "comment": false
+                "has_reg_by": ""
             }; // end let data_col
 
             for (i in $scope.head) {
                 setting[col[$scope.head[i]]] = true;
             } // end for i
-            // console.log(setting);
+            setting["has_reg_by"] = $("#has_reg_by").val();
+            console.log(setting);
 
             $http({
                 method: 'POST',
@@ -185,7 +202,7 @@
                     `&gender=${setting.gender}` +
                     `&age=${setting.age}` +
                     `&birthDate=${setting.birthDate}` +
-                    `&comment=${setting.comment}`,
+                    `&has_reg_by=${setting.has_reg_by}`,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }

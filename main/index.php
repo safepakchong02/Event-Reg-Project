@@ -91,6 +91,7 @@ if (isset($_GET["no_auth"])) {
         </div>
         <!-- end content -->
     <? } elseif ($no_auth && isset($_GET["ev_id"])) {
+        $_SESSION["perm"] = "no_auth";
         include("main/module/reg/reg_register.php");
     } else { ?>
         <div class="container-fluid">

@@ -16,9 +16,11 @@
         /* =============SHOW DATA============= */
         $http.get("main/model/reg/query_reg.php?event_view=show_data&ev_id=<?= $_GET["ev_id"] ?>")
             .then(function(res) { // start then
-                $scope.event_data = res.data.results_data; // "results_data" is key in json format
+                let data = res.data.results_data[0];
+                $scope.event_data = splitTitle(data.ev_title); // "results_data" is key in json format
+                // console.log(spiltTitle(res.data.results_data[0]));
 
-                if ($scope.event_data[0].ev_status == "เปิดลงทะเบียน") $scope.regIsOpen = true;
+                if (data.ev_status == "เปิดลงทะเบียน") $scope.regIsOpen = true;
                 else $scope.regIsOpen = false;
 
                 /* =============RELOAD REALTIME============= */

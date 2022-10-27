@@ -48,6 +48,24 @@
 				break;
 		}
 	}
+
+	function splitTitle(title) {
+		let arr = title.split("{e}");
+		if (arr.length == 0) return title;
+		else return arr;
+	}
+
+	function convertTitle(title, reverse) {
+		let text = "";
+		if (reverse) text = String(title).replaceAll("{e}", "\n");
+		else text = String(title).replaceAll("\n", "{e}");
+		return text;
+	}
+
+	function viewTitle(title) {
+		let text = String(title).replaceAll("{e}", " ");
+		return text;
+	}
 </script>
 
 <?php

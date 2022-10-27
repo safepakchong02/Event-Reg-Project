@@ -5,7 +5,7 @@ include("main/controller/$ctrl_name.php");
 ?>
 
 <? if (isset($_GET["ev_id"])) { ?>
-    <!-- bypass angularJS ng-hide-->
+    <!-- bypass angular.js ng-hide -->
     <script>
         const hide_element = (th, id) => {
             // console.log(th.checked);
@@ -13,6 +13,7 @@ include("main/controller/$ctrl_name.php");
             else $(`#${id}`).addClass("ng-hide");
         }
     </script>
+    <!-- end bypass angular.js ng-hide -->
 
     <style>
         .border {
@@ -20,6 +21,11 @@ include("main/controller/$ctrl_name.php");
             border: 10px #707B7C;
             padding: 25px;
             background: #F7F9F9;
+        }
+
+        #qrcode img {
+            width: 200px;
+            height: 200px;
         }
     </style>
 
@@ -53,7 +59,10 @@ include("main/controller/$ctrl_name.php");
             <div class="row pb-3 pt-3">
                 <div class="col-6">
                     <label> ลิงก์สำหรับให้บุคคลทั่วไปลงทะเบียนด้วยเข้ากิจกรรม :</label>
-                    <input disabled type="text" ng-model="link_no_auth" name="link_no_auth" class="form-control" required>
+                    <input disabled type="text" ng-model="link_no_auth" name="link_no_auth" class="form-control">
+                    <br><label> QR Code :</label>
+                    <br>
+                    <div id="qrcode"></div><br>
                 </div>
             </div>
             <div class="container border">
@@ -143,7 +152,7 @@ include("main/controller/$ctrl_name.php");
                         <option ng-selected="check.has_reg_by == 'card_id'" value="card_id">รหัสบัตรประชาชน</option>
                         <option ng-selected="check.has_reg_by == 'name'" value="name">ชื่อ-สกุล</option>
                         <option ng-selected="check.has_reg_by == 'call'" value="call">เบอร์โทรศัพท์</option>
-                        <option ng-selected="check.has_reg_by == 'no'" value="salary">ลำดับที่</option>
+                        <option ng-selected="check.has_reg_by == 'no'" value="no">ลำดับที่</option>
                     </select>
                 </div>
             </div><br><br><br><br><br>
@@ -154,6 +163,19 @@ include("main/controller/$ctrl_name.php");
             </div>
         </div>
     </div>
+    <!-- create link and qr_code -->
+    <script>
+        let link_no_auth = `${location.origin}${location.pathname}?ev_id=<?= $_GET["ev_id"] ?>&no_auth=true`;
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
+            text: link_no_auth,
+            width: 480,
+            height: 480,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+    </script>
+    <!-- end create link and qr_code -->
     <!-- จบ ตั่งค่าการลงทะเบียน -->
 <? } else { ?>
     <meta http-equiv="refresh" content="0;url=index.php?p=event&m=dashboard">

@@ -15,7 +15,6 @@
 
         /* ==================SHOW LINK REG NO_AUTH======================= */
 
-        let link_no_auth = `${location.origin}${location.pathname}?ev_id=<?= $_GET["ev_id"] ?>&no_auth=true`;
         // console.log(link_no_auth);
         $scope.link_no_auth = link_no_auth;
 

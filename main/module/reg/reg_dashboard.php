@@ -116,14 +116,7 @@ if (!isset($_GET["ev_id"])) { ?>
 
 <div ng-controller="<?= $ctrl_name ?>"><br>
     <!-- header -->
-    <div class="container-fluid"><br>
-        <div class="row justify-content-md-center" align="center">
-            <div class="col-auto title">
-                <h3 class="" align="center">กิจกรรม <b>{{event_data[0].ev_title}}</b></h3>
-            </div>
-        </div>
-    </div>
-    <hr><br>
+    <?include("main/body/reg_title.php");?>
     <!-- end header -->
     <div class="container">
         <div class="row justify-content-md-center" align="center">

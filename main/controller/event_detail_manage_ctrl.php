@@ -1,6 +1,10 @@
 <script>
     var app = angular.module("<?= $app_name ?>", ['datatables']);
     app.controller("<?= $ctrl_name ?>", function($scope, $http) { // start controller function
+        $scope.viewTitle = (title) => {
+            return viewTitle(title);
+        }
+
         /* ===============CHECK DATA=============== */
         $scope.checkReg = (date) => {
             if (date === "") return "-"

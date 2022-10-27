@@ -21,7 +21,7 @@
         $http.get("main/model/reg/query_reg.php?event_view=show_data&ev_id=<?= $_GET["ev_id"] ?>")
             .then((res) => { // start then
                 $scope.regIsOpen = true;
-                $scope.event_data = res.data.results_data; // "results_data" is key in json format
+                $scope.event_data = splitTitle(res.data.results_data[0].ev_title); // "results_data" is key in json format
 
                 if ($scope.event_data[0].ev_status == "เปิดลงทะเบียน") $scope.regIsOpen = true;
                 else $scope.regIsOpen = false;

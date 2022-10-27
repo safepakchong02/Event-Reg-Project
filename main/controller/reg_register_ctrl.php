@@ -21,18 +21,18 @@
         // bypass preview angular not working
         const setPreview = (data) => {
             // console.log(data);
-            if(data.no != "") document.getElementsByName("preview.no")[0].value = parseInt(data.no);
-            if(data.emp_id != "") document.getElementsByName("preview.emp_id")[0].value = data.emp_id;
-            if(data.card_id != "") document.getElementsByName("preview.card_id")[0].value = data.card_id;
-            if(data.com_name != "") document.getElementsByName("preview.com_name")[0].value = data.com_name;
-            if(data.prefix != "") document.getElementsByName("preview.prefix")[0].value = data.prefix;
-            if(data.name != "") document.getElementsByName("preview.name")[0].value = data.name;
-            if(data.dep != "") document.getElementsByName("preview.dep")[0].value = data.dep;
-            if(data.pos != "") document.getElementsByName("preview.pos")[0].value = data.pos;
-            if(data.call != "") document.getElementsByName("preview.call")[0].value = data.call;
-            if(data.age != "") document.getElementsByName("preview.age")[0].value = data.age;
-            if(data.birthDate != "") document.getElementsByName("preview.birthDate")[0].value = createDate(data.birthDate);
-            if(data.comment != "") document.getElementsByName("preview.comment")[0].value = data.comment;
+            if (data.no != "") document.getElementsByName("preview.no")[0].value = parseInt(data.no);
+            if (data.emp_id != "") document.getElementsByName("preview.emp_id")[0].value = data.emp_id;
+            if (data.card_id != "") document.getElementsByName("preview.card_id")[0].value = data.card_id;
+            if (data.com_name != "") document.getElementsByName("preview.com_name")[0].value = data.com_name;
+            if (data.prefix != "") document.getElementsByName("preview.prefix")[0].value = data.prefix;
+            if (data.name != "") document.getElementsByName("preview.name")[0].value = data.name;
+            if (data.dep != "") document.getElementsByName("preview.dep")[0].value = data.dep;
+            if (data.pos != "") document.getElementsByName("preview.pos")[0].value = data.pos;
+            if (data.call != "") document.getElementsByName("preview.call")[0].value = data.call;
+            if (data.age != "") document.getElementsByName("preview.age")[0].value = data.age;
+            if (data.birthDate != "") document.getElementsByName("preview.birthDate")[0].value = createDate(data.birthDate);
+            if (data.comment != "") document.getElementsByName("preview.comment")[0].value = data.comment;
         }
         // end bypass
 
@@ -57,12 +57,13 @@
         const checkReg = () => {
             $http.get("main/model/reg/query_reg.php?event_view=show_data&ev_id=<?= $_GET["ev_id"] ?>")
                 .then((res) => { // start then
+                    let data = res.data.results_data[0];
                     $scope.regIsOpen = true;
-                    $scope.event_data = res.data.results_data; // "results_data" is key in json format
+                    $scope.event_data = splitTitle(data.ev_title); // "results_data" is key in json format
 
                     let now = new Date();
-                    let st = createDate($scope.event_data[0].ev_date_start);
-                    let ed = createDate($scope.event_data[0].ev_date_end);
+                    let st = createDate(data.ev_date_start);
+                    let ed = createDate(data.ev_date_end);
 
                     if (now >= st && now <= ed) {
                         $scope.regIsOpen = true;

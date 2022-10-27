@@ -39,7 +39,7 @@
         }
 
         //******************** add data *********************//
-    } elseif ($event_view == 'logout') {
+    } else if ($event_view == 'logout') {
         @session_destroy();
     } else {
         $results = '{"results_data":null}';

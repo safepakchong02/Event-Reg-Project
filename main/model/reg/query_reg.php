@@ -11,7 +11,9 @@
     include_once('../../../asset/config/config.php');
 
     //******************** show data header title*********************//
-    if ($event_view == 'show_data') {
+    if (@$_SESSION["perm"] == "") {
+        echo "{\"status\": 403}";
+    } else if ($event_view == 'show_data') {
         $sql = "SELECT * FROM events " .
             "LEFT JOIN users " .
             "ON events.ev_assign_to = users.user_id " .

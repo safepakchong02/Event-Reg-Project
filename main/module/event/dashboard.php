@@ -40,7 +40,7 @@ include("main/controller/$ctrl_name.php");
                         <tr ng-repeat="show_event_data in event_data" class="{{show_event_data.isOpen}}">
                             <? include("main/module/event/event_edit.php"); ?>
                             <td>{{show_event_data.ev_id}}</td> <!-- "ev_id" is name col -->
-                            <td>{{show_event_data.ev_title}}</td>
+                            <td>{{viewTitle(show_event_data.ev_title)}}</td>
                             <td>{{show_event_data.user_name}} {{show_event_data.user_surname}}</td>
                             <td>{{show_event_data.ev_status}}</td>
                             <td>{{show_event_data.ev_date_start}}</td>

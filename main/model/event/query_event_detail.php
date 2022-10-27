@@ -11,7 +11,9 @@
     include_once('../../../asset/config/config.php');
 
     //******************** show data *********************//
-    if ($event_view == 'del_all') {
+    if (@$_SESSION["perm"] == "") {
+        echo "{\"status\": 403}";
+    } else if ($event_view == 'del_all') {
 
         if (isset($_GET["ev_id"])) {
             $ev_id = $_GET["ev_id"];

@@ -1,6 +1,10 @@
 <script>
     var app = angular.module("<?= $app_name ?>", ['datatables']);
     app.controller("<?= $ctrl_name ?>", function($scope, $http) { // start controller function
+        $scope.viewTitle = (title) =>{
+            return viewTitle(title);
+        }
+        
         // start show event
         $http.get("main/model/event/query_event.php?event_view=show_data")
             .then(function(res) { // start then
@@ -14,11 +18,12 @@
 
         /* ==================ADD================== */
         $scope.add_event = function() { // start add_event function
+            let ev_title = convertTitle($scope.add_ev_title);
 
             $http({
                 method: 'POST',
                 url: 'main/model/event/query_event.php?event_view=add',
-                data: `ev_title=${$scope.add_ev_title}` +
+                data: `ev_title=${ev_title}` +
                     `&ev_assign_to=${$scope.add_ev_assign_to}` +
                     `&ev_date_start=${convertDate($scope.add_ev_date_start.value)}` +
                     `&ev_date_end=${convertDate($scope.add_ev_date_end.value)}`,
@@ -26,7 +31,7 @@
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }).then(function(response) {
-                // console.log(response.data);
+                    // console.log(response.data);
                     $("#modal-add").modal("hide");
                     $("#modal-status_success").modal("show");
                     setTimeout(() => {
@@ -47,7 +52,7 @@
                 .then(function(response) { // start then
                     // alert(response.data);
                     $scope.edit_ev_id = response.data.results_data_edit[0].ev_id;
-                    $scope.edit_ev_title = response.data.results_data_edit[0].ev_title;
+                    $scope.edit_ev_title = convertTitle(response.data.results_data_edit[0].ev_title, true);
                     $scope.edit_ev_assign_to = response.data.results_data_edit[0].ev_assign_to;
                     $scope.edit_ev_date_start = createDate(response.data.results_data_edit[0].ev_date_start);
                     $scope.edit_ev_date_end = createDate(response.data.results_data_edit[0].ev_date_end);
@@ -56,11 +61,12 @@
         } // end edit_event_view function
 
         $scope.edit_event_save = function() { // start edit_event_save function
+            let ev_title = convertTitle($scope.edit_ev_title);
             $http({
                 method: 'POST',
                 url: 'main/model/event/query_event.php?event_view=edit_form_save',
                 data: `ev_id=${$scope.edit_ev_id}` +
-                    `&ev_title=${$scope.edit_ev_title}` +
+                    `&ev_title=${ev_title}` +
                     `&ev_assign_to=${$scope.edit_ev_assign_to}` +
                     `&ev_date_start=${convertDate($scope.edit_ev_date_start)}` +
                     `&ev_date_end=${convertDate($scope.edit_ev_date_end)}`,

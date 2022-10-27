@@ -26,7 +26,9 @@
     include_once('../../../asset/config/config.php');
 
     //******************** import data *********************//
-    if ($event_view == 'import') {
+    if (@$_SESSION["perm"] == "") {
+        echo "{\"status\": 403}";
+    } else if ($event_view == 'import') {
         if (isset($_GET["ev_id"])) {
             $add_data = [];
 

@@ -53,7 +53,7 @@ include("main/controller/$ctrl_name.php");
     <? if (!isset($_GET["event"])) { ?>
         <form ng-submit="login()">
             <div class="row justify-content-center" align="center">
-                <div class="card text-black btn_title col-xs-6 col-mb-3 shadow" style=" height: 20rem; width: 40rem; border-radius: 2rem;">
+                <div class="card text-black btn_title col-xs-6 col-mb-3 shadow" style=" height: 23rem; width: 40rem; border-radius: 2rem;">
                     <div class="row justify-content-center" align="center">
                         <div class="col-12"><br>
                             <span class="h3">ระบบลงทะเบียนออนไลน์</span>

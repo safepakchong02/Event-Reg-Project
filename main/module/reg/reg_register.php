@@ -44,19 +44,12 @@ if (!isset($_GET["ev_id"])) { ?>
     <!-- end error -->
 
     <!-- header -->
-    <div class="container-fluid"><br>
-        <div class="row justify-content-md-center" align="center">
-            <div class="col-auto title">
-                <h3 class="" align="center">กิจกรรม <b>{{event_data[0].ev_title}}</b></h3>
-            </div>
-        </div>
-    </div>
-    <hr><br>
+    <? include("main/body/reg_title.php"); ?>
     <!-- end header -->
 
     <!-- register -->
     <div class="container-fluid">
-        <div class="row justify-content-md-center" align="center">
+        <div class="row justify-content-center" align="center">
             <!-- open register -->
             <div class="col-xs-6 col-md" style="padding-bottom: 1rem;" ng-show="regIsOpen" id="reg_open">
                 <div class="card text-black btn_body mb-3 shadow" style="max-width: 35rem; border-radius: 2rem;">

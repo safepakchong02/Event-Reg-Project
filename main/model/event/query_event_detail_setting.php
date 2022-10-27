@@ -17,7 +17,9 @@
     include_once('../../../asset/config/config.php');
 
     //******************** show data *********************//
-    if ($event_view == 'show_data') {
+    if (@$_SESSION["perm"] == "") {
+        echo "{\"status\": 403}";
+    } else if ($event_view == 'show_data') {
         $ev_id = $_GET["ev_id"];
         $sql = "SELECT * FROM event_setting WHERE ev_id = '$ev_id'";
 
@@ -99,6 +101,7 @@
             $pos = covertBoolean($_POST["pos"]);
             $gender = covertBoolean($_POST["gender"]);
             $age = covertBoolean($_POST["age"]);
+            $has_reg_by = $_POST["has_reg_by"];
             $birthDate = covertBoolean($_POST["birthDate"]);
             $sql_update = "UPDATE `event_setting` SET " .
                 "`emp_id` = '$emp_id'," .
@@ -111,6 +114,7 @@
                 "`pos` = '$pos'," .
                 "`gender` = '$gender'," .
                 "`age` = '$age'," .
+                "`has_reg_by` = '$has_reg_by'," .
                 "`birthDate` = '$birthDate' " .
                 " WHERE `event_setting`.`ev_id` = '$ev_id'";
             mysqli_query($handle, $sql_update);

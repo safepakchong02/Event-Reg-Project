@@ -13,20 +13,20 @@
     //******************** show data *********************//
     if (@$_SESSION["perm"] == "") {
         echo "{\"status\": 403}";
-    }else if ($event_view == 'show_data') {
+    } else if ($event_view == 'show_data') {
 
         if ($_SESSION["perm"] == "admin") {
-            $sql = "SELECT * FROM events " .
+            $sql = "SELECT DISTINCT ev_id, ev_title, ev_date_start, ev_date_end, `user_name`, `user_surname` FROM events " .
                 "LEFT JOIN users " .
                 "ON events.ev_assign_to = users.user_id " .
                 "WHERE ev_del = '0'";
         } elseif ($_SESSION["perm"] == "register") {
-            $sql = "SELECT * FROM events " .
+            $sql = "SELECT DISTINCT ev_id, ev_title, ev_date_start, ev_date_end, `user_name`, `user_surname` FROM events " .
                 "LEFT JOIN users " .
                 "ON events.ev_assign_to = users.user_id " .
                 "WHERE ev_del = '0' and ev_assign_to = '" . $_SESSION["user_id"] . "'";
         } else {
-            $sql = "SELECT * FROM events " .
+            $sql = "SELECT DISTINCT ev_id, ev_title, ev_date_start, ev_date_end, `user_name`, `user_surname` FROM events " .
                 "LEFT JOIN users " .
                 "ON events.ev_assign_to = users.user_id " .
                 "WHERE ev_del = '0' and ev_create_by = '" . $_SESSION["user_id"] . "'";

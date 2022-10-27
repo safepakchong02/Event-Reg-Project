@@ -8,10 +8,10 @@
             <div class="modal-body">
                 <form id="ev_edit" ng-submit="edit_event_save()" ng-controller="<?= $ctrl_name ?>">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-12">
                             <div class="form-group pb-2">
                                 <label> ชื่อกิจกรรม :</label>
-                                <input type="text" ng-model="edit_ev_title" name="edit_ev_title" class="form-control" required>
+                                <textarea rows="3" ng-model="edit_ev_title" name="edit_ev_title" class="form-control" required></textarea>
                             </div>
                         </div>
                         <div class="col-6">
