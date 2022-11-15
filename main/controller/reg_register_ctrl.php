@@ -18,40 +18,32 @@
             $scope.data_add.comment = "";
         }
 
-        // bypass preview angular not working
-        const setPreview = (data) => {
-            // console.log(data);
-            if (data.no != "") document.getElementsByName("preview.no")[0].value = parseInt(data.no);
-            if (data.emp_id != "") document.getElementsByName("preview.emp_id")[0].value = data.emp_id;
-            if (data.card_id != "") document.getElementsByName("preview.card_id")[0].value = data.card_id;
-            if (data.com_name != "") document.getElementsByName("preview.com_name")[0].value = data.com_name;
-            if (data.prefix != "") document.getElementsByName("preview.prefix")[0].value = data.prefix;
-            if (data.name != "") document.getElementsByName("preview.name")[0].value = data.name;
-            if (data.dep != "") document.getElementsByName("preview.dep")[0].value = data.dep;
-            if (data.pos != "") document.getElementsByName("preview.pos")[0].value = data.pos;
-            if (data.call != "") document.getElementsByName("preview.call")[0].value = data.call;
-            if (data.age != "") document.getElementsByName("preview.age")[0].value = data.age;
-            if (data.birthDate != "") document.getElementsByName("preview.birthDate")[0].value = createDate(data.birthDate);
-            if (data.comment != "") document.getElementsByName("preview.comment")[0].value = data.comment;
+        const searchBy = (key) => {
+            switch (key) {
+                case "no":
+                    return $scope.data_add.no;
+                    break;
+                case "hn":
+                    return $scope.data_add.hn;
+                    break;
+                case "emp_id":
+                    return $scope.data_add.emp_id;
+                    break;
+                case "card_id":
+                    return $scope.data_add.card_id;
+                    break;
+                case "call":
+                    return $scope.data_add.call;
+                    break;
+                default:
+                    return "";
+                    break;
+            }
         }
-        // end bypass
-
-        // const searchBy = (key) => {
-        //     switch (key) {
-        //         case "emp_id":
-        //             return $scope.data_add.emp_id;
-        //             break;
-        //         case "card_id":
-        //             return $scope.data_add.card_id;
-        //             break;
-        //         default:
-        //             return "";
-        //             break;
-        //     }
-        // }
 
         // init page
         clearData();
+        $scope.self_reg = true;
 
         /* =============SHOW DATA============= */
         const checkReg = () => {
@@ -59,7 +51,7 @@
                 .then((res) => { // start then
                     let data = res.data.results_data[0];
                     $scope.regIsOpen = true;
-                    $scope.event_data = splitTitle(data.ev_title); // "results_data" is key in json format
+                    $scope.event_data = splitTitle(data.ev_title);
 
                     let now = new Date();
                     let st = createDate(data.ev_date_start);
@@ -69,7 +61,7 @@
                         $scope.regIsOpen = true;
                         // console.log("open");
                         $("#reg_open").removeClass("ng-hide");
-                        $("#reg_close").addClass("ng-hide");
+                        if ($scope.self_reg) $("#reg_close").addClass("ng-hide");
                     } else {
                         $scope.regIsOpen = false;
                         // console.log("close");
@@ -79,16 +71,21 @@
                 }) // end then
         } // end checkReg func
         checkReg();
+
         $interval(() => {
             checkReg();
-            // console.log("reload");
-        }, 300000)
+            console.log("reload");
+        }, 60000)
 
         $http.get("main/model/event/query_event_detail_setting.php?event_view=show_data&ev_id=<?= $_GET["ev_id"] ?>")
             .then((res) => { // start then
                 $scope.check = res.data.results_data[0];
                 $scope.reg_by = res.data.results_data[0]["has_reg_by"];
                 $scope.has_reg_by = convertNameCol($scope.reg_by);
+                <? if ($_SESSION["perm"] == "no_auth") { ?>
+                    $scope.self_reg = $scope.check.self_reg;
+                <? } ?>
+                if (!$scope.self_reg) $("#reg_close").removeClass("ng-hide");
             }); // end then
         /* =============END SHOW DATA============= */
 
@@ -126,12 +123,16 @@
                             }
                         }).then((res2) => {
                             data.no = parseInt(data.no);
+                            data.age = parseInt(data.age);
+                            data.birthDate = createDate(data.birthDate);
                             $scope.preview = data;
-                            $scope.preview.birthDate = createDate(data.birthDate);
                             $("#modal-status_reg_success").modal("show");
                         });
                     } else {
-                        setPreview(data);
+                        data.no = parseInt(data.no);
+                        data.age = parseInt(data.age);
+                        data.birthDate = createDate(data.birthDate);
+                        $scope.preview = data;
                         document.getElementById("status_success_text").textContent = "คุณได้ลงทะเบียนไปแล้ว";
                         $("#modal-status_reg_success").modal("show");
                     }
@@ -144,7 +145,7 @@
 
                 $scope.reg = "";
                 $("#reg").val("");
-                delete $scope.preview;
+                // delete $scope.preview;
             }); // end then
         } // end function register
         /* =============END REGISTER============= */
@@ -184,10 +185,12 @@
                             method: 'POST',
                             url: 'main/model/reg/query_reg.php?event_view=add',
                             data: `ev_id=<?= $_GET["ev_id"] ?>` +
+                                `&hn=${$scope.data_add.hn}` +
                                 `&emp_id=${$scope.data_add.emp_id}` +
                                 `&card_id=${$scope.data_add.card_id}` +
                                 `&prefix=${$scope.data_add.prefix}` +
                                 `&name=${$scope.data_add.name}` +
+                                `&surname=${$scope.data_add.surname}` +
                                 `&call=${$scope.data_add.call}` +
                                 `&com_name=${$scope.data_add.com_name}` +
                                 `&dep=${$scope.data_add.dep}` +

@@ -96,10 +96,12 @@
                             method: 'POST',
                             url: 'main/model/reg/query_reg.php?event_view=add',
                             data: `ev_id=<?= $_GET["ev_id"] ?>` +
+                                `&hn=${$scope.data_add.hn}` +
                                 `&emp_id=${$scope.data_add.emp_id}` +
                                 `&card_id=${$scope.data_add.card_id}` +
                                 `&prefix=${$scope.data_add.prefix}` +
                                 `&name=${$scope.data_add.name}` +
+                                `&surname=${$scope.data_add.surname}` +
                                 `&call=${$scope.data_add.call}` +
                                 `&com_name=${$scope.data_add.com_name}` +
                                 `&dep=${$scope.data_add.dep}` +
@@ -149,6 +151,7 @@
                 .then((res) => { // start then
                     $scope.data_edit = res.data.results_data_edit[0];
                     $scope.data_edit.no = parseInt($scope.data_edit.no);
+                    $scope.data_edit.age = parseInt($scope.data_edit.age);
                     $scope.data_edit.birthDate = createDate($scope.data_edit.birthDate);
                 }); // end then
         }
@@ -163,10 +166,12 @@
                 method: 'POST',
                 url: 'main/model/reg/query_reg.php?event_view=edit_form_save',
                 data: `id=${$scope.data_edit.id}` +
+                    `&hn=${$scope.data_edit.hn}` +
                     `&emp_id=${$scope.data_edit.emp_id}` +
                     `&card_id=${$scope.data_edit.card_id}` +
                     `&prefix=${$scope.data_edit.prefix}` +
                     `&name=${$scope.data_edit.name}` +
+                    `&surname=${$scope.data_edit.surname}` +
                     `&call=${$scope.data_edit.call}` +
                     `&com_name=${$scope.data_edit.com_name}` +
                     `&dep=${$scope.data_edit.dep}` +
@@ -224,6 +229,21 @@
             } // end if confirm
         }
         /* ==================END DELETE ALL===================== */
+
+        /* ===============RESET REGISTER=============== */
+        $scope.reset_reg = (id) => {
+            if (confirm("คุณต้องการรีเซ็ทการลงทะเบียนนี้หรือไม่")) {
+                $http.get(`main/model/reg/query_reg.php?event_view=reset_reg&id=${id}`)
+                    .then((res) => { // start then
+                        // console.log(res.data);
+                        $("#modal-status_success").modal("show");
+                        setTimeout(() => {
+                            location.reload();
+                        }, 1500)
+                    }); // end then
+            } // end if confirm
+        }
+        /* ===============END RESET REGISTER=============== */
 
     }); // end controller function
 </script>

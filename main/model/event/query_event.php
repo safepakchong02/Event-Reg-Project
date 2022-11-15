@@ -48,13 +48,17 @@
                 $d_ed = DateTime::createFromFormat('d/m/Y H:i', $result["ev_date_end"]);
                 $now = new DateTime();
 
-                if ($now >= $d_st && $now <= $d_ed) {
+                if ($now >= $d_ed) {
+                    $js["ev_status"] = "ปิดลงทะเบียน";
+                    $js["isOpen"] = "table-danger";
+                } elseif ($now >= $d_st) {
                     $js["ev_status"] = "เปิดลงทะเบียน";
                     $js["isOpen"] = "table-success";
                 } else {
-                    $js["ev_status"] = "ปิดลงทะเบียน";
-                    $js["isOpen"] = "table-danger";
+                    $js["ev_status"] = "รอเปิดลงทะเบียน";
+                    $js["isOpen"] = "table-warning";
                 }
+
                 $rows[] = $js;
                 // $rows[] = $result;
             }

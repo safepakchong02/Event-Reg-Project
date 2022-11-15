@@ -17,7 +17,7 @@
 <div class="container-fluid"><br>
     <div class="row justify-content-center" align="center">
         <div class="col-auto title">
-            <div class="ev_title" ng-repeat="ev_title in event_data">
+            <div class="ev_title" ng-repeat="ev_title in event_data track by $index">
                 {{ev_title}} <br>
             </div>
         </div>

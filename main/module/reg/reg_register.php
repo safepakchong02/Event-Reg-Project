@@ -51,7 +51,7 @@ if (!isset($_GET["ev_id"])) { ?>
     <div class="container-fluid">
         <div class="row justify-content-center" align="center">
             <!-- open register -->
-            <div class="col-xs-6 col-md" style="padding-bottom: 1rem;" ng-show="regIsOpen" id="reg_open">
+            <div class="col-xs-6 col-md" style="padding-bottom: 1rem;" ng-show="regIsOpen" id="reg_open" ng-if="self_reg">
                 <div class="card text-black btn_body mb-3 shadow" style="max-width: 35rem; border-radius: 2rem;">
                     <div class="card-body">
                         <div class="container my-5">
@@ -99,7 +99,8 @@ if (!isset($_GET["ev_id"])) { ?>
                             </div><br>
                             <div class="row justify-content-center" align="center">
                                 <div class="col-12">
-                                    <span class="h3 text-black"><b>ระบบปิดลงทะเบียน</b></span>
+                                    <span class="h3 text-black" ng-if="self_reg"><b>ระบบปิดลงทะเบียน</b></span>
+                                    <span class="h4 text-black" ng-if="!self_reg"><b>กิจกรรมนี้ไม่ได้เปิดให้ลงทะเบียนด้วยตนเอง</b></span>
                                 </div>
                             </div><br>
                         </div>

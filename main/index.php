@@ -27,8 +27,11 @@ if (isset($_GET["p"])) $_SESSION["path"] = $_GET["p"];
 else $_SESSION["path"] = "event";
 
 if (!isset($_SESSION["perm"])) $_SESSION["perm"] = "";
-if (isset($_GET["no_auth"])) {
-    $no_auth = true;
+if (isset($_GET["no_auth"])) $no_auth = true;
+if (!isset($_SESSION["reg_preview"])) $_SESSION["reg_preview"] = false;
+if (isset($_GET["preview"])) {
+    if ($_GET["preview"] == "true") $_SESSION["reg_preview"] = true;
+    else $_SESSION["reg_preview"] = false;
 }
 
 ?>
@@ -50,7 +53,7 @@ if (isset($_GET["no_auth"])) {
         <div class="container-fluid">
             <? include("main/module/login/login.php"); ?>
         </div>
-    <? } elseif ($_SESSION["perm"] === "admin" || $_SESSION["perm"] === "manager") { ?>
+    <? } elseif (($_SESSION["perm"] === "admin" || $_SESSION["perm"] === "manager") && !$_SESSION["reg_preview"]) { ?>
         <div class="container-fluid">
             <!-- sidebar -->
             <? include("main/body/sidebar.php"); ?>
@@ -72,7 +75,7 @@ if (isset($_GET["no_auth"])) {
                 <!-- end content -->
             </div>
         </div>
-    <? } elseif ($_SESSION["perm"] == "register") { ?>
+    <? } elseif ($_SESSION["perm"] == "register" || $_SESSION["reg_preview"]) { ?>
         <!-- navbar -->
         <? include("main/body/navbar.php"); ?>
         <!-- end navbar -->

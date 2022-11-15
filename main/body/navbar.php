@@ -56,9 +56,11 @@
             </button>
             <div id="navbarCollapse" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="nav-item">
-                        <a href="index.php?p=reg&m=event_dashboard" class="nav-link text-white">แดชบอร์ด</a>
-                    </li>
+                    <? if ($_SESSION["reg_preview"] == false) { ?>
+                        <li class="nav-item">
+                            <a href="index.php?p=reg&m=event_dashboard" class="nav-link text-white">แดชบอร์ด</a>
+                        </li>
+                    <? } ?>
                     <? if (isset($_GET["ev_id"])) { ?>
                         <li class="nav-item">
                             <a href="index.php?p=reg&m=reg_dashboard&ev_id=<?= $_GET["ev_id"] ?>" class="nav-link text-white">สรุปผลกิจกรรม</a>
@@ -75,8 +77,9 @@
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle text-white" data-bs-toggle="dropdown"><?= $_SESSION["user_name"] ?></a>
                         <div class="dropdown-menu dropdown-menu-end">
-                            <a href="#" class="dropdown-item">เปลี่ยนรหัสผ่าน</a>
-                            <a href="index.php?p=login&m=login&event=logout" class="dropdown-item">ออกจากระบบ</a>
+                            <!-- <a href="#" class="dropdown-item">เปลี่ยนรหัสผ่าน</a> -->
+                            <? if ($_SESSION["reg_preview"]) { ?><a class="dropdown-item" href="index.php?p=event&m=event_detail&ev_id=<?= $_GET["ev_id"] ?>&preview=false"><i class="bi bi-eye-fill"></i> กลับไปหน้าจัดการ</a><? } ?>
+                            <a class="dropdown-item" href="index.php?p=login&m=login&event=logout"><i class="bi bi-box-arrow-left"></i> ออกจากระบบ</a>
                         </div>
                     </li>
                 </ul>

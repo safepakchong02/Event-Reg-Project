@@ -1,4 +1,6 @@
 <script>
+    let isChange = false;
+
     var app = angular.module("<?= $app_name ?>", []);
     app.controller("<?= $ctrl_name ?>", function($scope, $http) { // start controller function
         /* ==================--SHOW--======================= */
@@ -8,16 +10,28 @@
             }); // end then
         /* ==================END SHOW======================= */
 
-        $scope.testFunc = () => {
-            console.log($scope.check);
-            // $scope.$apply();
+        $scope.clickCheckBox = (param) => {
+            if ($scope.check[param]) $scope.check[param] = false;
+            else $scope.check[param] = true;
         }
 
+        /* ==================HANDLE CLOSE BEFORE SAVE======================= */
+
+        window.addEventListener("change", (e) => {
+            isChange = true;
+        });
+
+        window.addEventListener('beforeunload', (e) => {
+            if (isChange) {
+                console.log(e);
+                e.preventDefault();
+                e.returnValue = '';
+            }
+        });
+        /* ==================END HANDLE CLOSE BEFORE SAVE======================= */
+
         /* ==================SHOW LINK REG NO_AUTH======================= */
-
-        // console.log(link_no_auth);
         $scope.link_no_auth = link_no_auth;
-
         /* ==================END LINK REG NO_AUTH======================= */
 
 
@@ -28,10 +42,13 @@
                 url: 'main/model/event/query_event_detail_setting.php?event_view=edit_form_save',
                 data: `ev_id=<?= $_GET["ev_id"] ?>` +
                     `&walk_in=${$scope.check.walk_in}` +
+                    `&self_reg=${$scope.check.self_reg}` +
+                    `&hn=${$scope.check.hn}` +
                     `&emp_id=${$scope.check.emp_id}` +
                     `&card_id=${$scope.check.card_id}` +
                     `&prefix=${$scope.check.prefix}` +
                     `&name=${$scope.check.name}` +
+                    `&surname=${$scope.check.surname}` +
                     `&call=${$scope.check.call}` +
                     `&com_name=${$scope.check.com_name}` +
                     `&dep=${$scope.check.dep}` +
@@ -45,6 +62,7 @@
                 }
             }).then((res) => {
                     // console.log(res.data);
+                    isChange = false;
                     $("#modal-status_success").modal("show");
                     setTimeout(() => {
                         location.reload();

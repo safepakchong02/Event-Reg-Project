@@ -21,6 +21,11 @@ include("main/controller/$ctrl_name.php");
         <? include("main/body/status_reg_error_isNoData.php"); ?>
         <? include("main/body/status_reg_error_isExist.php"); ?>
         <!-- end error -->
+
+        <!-- edit -->
+        <? include("main/module/event/event_detail_edit.php"); ?>
+        <!-- end edit -->
+
         <div class="row">
             <div class="col-1" style="width: 140px;">
                 <a href="index.php?p=event&m=dashboard" class="btn btn-primary"><i class="bi bi-caret-left-fill"></i>ย้อนกลับ</a>
@@ -29,28 +34,47 @@ include("main/controller/$ctrl_name.php");
                 <h1>รายชื่อผู้ลงทะเบียน</h1>
             </div>
         </div>
-        <div class="container-fluid">
+        <div class="container-fluid pb-2">
             <div class="row">
                 <div class="col-6">
                     <h3>กิจกรรม : {{viewTitle(ev_title)}}</3>
                 </div>
-                <div class="col-6">
-                    <div class="col-12" align="right">
+                <div class="col-6" align="right">
+                    <!-- <div class="col-12" align="right">
                         <button ng-hide="isInit" type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modal-detail_add">
                             <i class="bi bi-person-plus-fill"></i> เพิ่มรายชื่อ
                         </button>
                         <a href="index.php?p=event&m=event_detail_setting&ev_id=<?= $ev_id ?>" class="btn btn-primary btn-sm">
-                            <i class="bi bi-gear-wide-connected"></i> ตั้งค่าการลงทะเบียน
+                            <i class="bi bi-gear-wide-connected"></i> ตั้งค่า
                         </a>
                         <a href="index.php?p=event&m=event_detail_import&ev_id=<?= $ev_id ?>" class="btn btn-primary btn-sm">
                             <i class="bi bi-upload"></i> นำเข้าข้อมูล
                         </a>
                         <a ng-hide="isInit" href="index.php?p=event&m=event_detail_export&ev_id=<?= $ev_id ?>" class="btn btn-info btn-sm ">
-                            <i class="bi bi-file-earmark-arrow-up"></i></i> Export
+                            <i class="bi bi-file-earmark-arrow-up"></i></i> ส่งออกข้อมูล
                         </a>
                         <button ng-hide="isInit" type="button" class="btn btn-danger btn-sm" ng-click="del_all_reg(<?= $ev_id ?>)">
                             <i class="bi bi-trash"></i> ลบข้อมูลทั้งหมด
                         </button>
+                    </div> -->
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            เมนู
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="index.php?p=reg&m=reg_dashboard&ev_id=<?= $ev_id ?>&preview=true"><i class="bi bi-eye-fill"></i> ไปหน้าลงทะเบียน</a></li>
+                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-detail_add"><i class="bi bi-person-plus-fill"></i> เพิ่มรายชื่อ</a></li>
+                            <li><a class="dropdown-item" href="index.php?p=event&m=event_detail_setting&ev_id=<?= $ev_id ?>"><i class="bi bi-gear-wide-connected"></i> ตั้งค่า</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="index.php?p=event&m=event_detail_import&ev_id=<?= $ev_id ?>"><i class="bi bi-upload"></i> นำเข้าข้อมูล</a></li>
+                            <li><a class="dropdown-item" href="index.php?p=event&m=event_detail_export&ev_id=<?= $ev_id ?>"><i class="bi bi-file-earmark-arrow-up"></i>ส่งออกข้อมูล</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#" ng-click="del_all_reg(<?= $ev_id ?>)"><i class="bi bi-trash"></i> ลบข้อมูลทั้งหมด</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -61,10 +85,12 @@ include("main/controller/$ctrl_name.php");
             <thead>
                 <tr class="table-dark">
                     <th ng-show="check.no">ลำดับที่</th>
+                    <th ng-show="check.hn">HN</th>
                     <th ng-show="check.emp_id">รหัสพนักงาน</th>
                     <th ng-show="check.card_id">รหัสบัตรประชาชน</th>
                     <th ng-show="check.prefix">คำนำหน้า</th>
-                    <th ng-show="check.name">ชื่อ - สกุล</th>
+                    <th ng-show="check.name">ชื่อ</th>
+                    <th ng-show="check.surname">นามสกุล</th>
                     <th ng-show="check.call">เบอร์โทรศัพท์</th>
                     <th ng-show="check.com_name">ชื่อบริษัท</th>
                     <th ng-show="check.dep">แผนก</th>
@@ -79,12 +105,13 @@ include("main/controller/$ctrl_name.php");
             </thead>
             <tbody>
                 <tr ng-repeat="row in data_table">
-                    <? include("main/module/event/event_detail_edit.php"); ?>
                     <td ng-show="check.no">{{row.no}}</td>
+                    <td ng-show="check.hn">{{row.hn}}</td>
                     <td ng-show="check.emp_id">{{row.emp_id}}</td>
                     <td ng-show="check.card_id">{{row.card_id}}</td>
                     <td ng-show="check.prefix">{{row.prefix}}</td>
                     <td ng-show="check.name">{{row.name}}</td>
+                    <td ng-show="check.surname">{{row.surname}}</td>
                     <td ng-show="check.call">{{row.call}}</td>
                     <td ng-show="check.com_name">{{row.com_name}}</td>
                     <td ng-show="check.dep">{{row.dep}}</td>
@@ -95,6 +122,7 @@ include("main/controller/$ctrl_name.php");
                     <td>{{checkReg(row.reg_date)}}</td>
                     <td ng-show="check.comment">{{row.comment}}</td>
                     <td>
+                        <button type="button" ng-click="reset_reg(row.id)" class="btn btn-primary btn-sm">รีเซ็ทการลงทะเบียน</button>
                         <button type="button" ng-click="edit_reg_view(row.id)" data-bs-toggle="modal" data-bs-target="#modal-detail_edit" class="btn btn-warning btn-sm">แก้ไข</button>
                         <button type="button" ng-click="del_reg(row.id)" class="btn btn-danger btn-sm">ลบ</button>
                     </td>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 19, 2022 at 03:38 PM
+-- Generation Time: Nov 14, 2022 at 05:50 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -66,10 +66,13 @@ CREATE TRIGGER `add_event_setting` AFTER INSERT ON `events` FOR EACH ROW BEGIN
 	INSERT INTO event_setting SET
     ev_id = new.ev_id ,
     walk_in = "1",
+    self_reg = "0",
+    hn = "0",
     emp_id = "0",
     card_id = "0",
     prefix = "0",
     name = "0",
+    surname = "0",
     `call` = "0",
     com_name = "0",
     dep = "0",
@@ -95,10 +98,12 @@ CREATE TABLE `event_member` (
   `ev_id` int(11) NOT NULL,
   `add_by` int(11) NOT NULL,
   `del` int(11) NOT NULL,
+  `hn` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `emp_id` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `card_id` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `prefix` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `surname` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `call` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `com_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `dep` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
@@ -120,10 +125,13 @@ CREATE TABLE `event_member` (
 CREATE TABLE `event_setting` (
   `ev_id` int(11) NOT NULL,
   `walk_in` tinyint(1) NOT NULL,
+  `self_reg` tinyint(1) NOT NULL,
+  `hn` tinyint(1) NOT NULL,
   `emp_id` tinyint(1) NOT NULL,
   `card_id` tinyint(1) NOT NULL,
   `prefix` tinyint(1) NOT NULL,
   `name` tinyint(1) NOT NULL,
+  `surname` tinyint(1) NOT NULL,
   `call` tinyint(1) NOT NULL,
   `com_name` tinyint(1) NOT NULL,
   `dep` tinyint(1) NOT NULL,

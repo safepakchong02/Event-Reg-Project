@@ -1,8 +1,11 @@
 <script>
 	function convertNameCol(name) {
 		switch (name) {
+			case "hn":
+				return "HN";
+				break;
 			case "emp_id":
-				return "รหัสพนักงาน";
+				return "รหัสพนักงาน/รหัสนักศึกษา";
 				break;
 			case "card_id":
 				return "รหัสบัตรประชาชน";
@@ -11,7 +14,10 @@
 				return "หมายเหตุ";
 				break;
 			case "name":
-				return "ชื่อ - สกุล";
+				return "ชื่อ";
+				break;
+			case "surname":
+				return "นามสกุล";
 				break;
 			case "call":
 				return "เบอร์โทรศัพท์";

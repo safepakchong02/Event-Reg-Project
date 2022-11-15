@@ -1,10 +1,11 @@
  <?php
-    function covertBoolean($bool) {
+    function covertBoolean($bool)
+    {
         if ($bool == "true") return "1";
         else return "0";
         // return $bool;
     }
-    
+
     date_default_timezone_set('Asia/Bangkok');
 
     if (@$_GET['event_view'] != '') {
@@ -28,16 +29,16 @@
 
         if ($count_row > 0) {
             while ($result = mysqli_fetch_assoc($resource_data)) {
-                foreach($result as $key => $val) {
-                    switch($key) {
+                foreach ($result as $key => $val) {
+                    switch ($key) {
                         case "ev_id":
                             $js[$key] = $result[$key];
                             break;
                         case "has_reg_by":
                             $js[$key] = $result[$key];
                             break;
-                        default :
-                            if($val == "1") $js[$key] = true;
+                        default:
+                            if ($val == "1") $js[$key] = true;
                             else $js[$key] = false;
                     } // end switch
                 } // end foreach
@@ -58,10 +59,13 @@
         if ($_POST['ev_id'] != '') {
             $ev_id = $_POST["ev_id"];
             $walk_in = covertBoolean($_POST["walk_in"]);
+            $self_reg = covertBoolean($_POST["self_reg"]);
+            $hn = covertBoolean($_POST["hn"]);
             $emp_id = covertBoolean($_POST["emp_id"]);
             $card_id = covertBoolean($_POST["card_id"]);
             $prefix = covertBoolean($_POST["prefix"]);
             $name = covertBoolean($_POST["name"]);
+            $surname = covertBoolean($_POST["surname"]);
             $call = covertBoolean($_POST["call"]);
             $com_name = covertBoolean($_POST["com_name"]);
             $dep = covertBoolean($_POST["dep"]);
@@ -72,10 +76,13 @@
             $birthDate = covertBoolean($_POST["birthDate"]);
             $sql_update = "UPDATE `event_setting` SET " .
                 "`walk_in` = '$walk_in'," .
+                "`self_reg` = '$self_reg'," .
+                "`hn` = '$hn'," .
                 "`emp_id` = '$emp_id'," .
                 "`card_id` = '$card_id'," .
                 "`prefix` = '$prefix'," .
                 "`name` = '$name'," .
+                "`surname` = '$surname'," .
                 "`call` = '$call'," .
                 "`com_name` = '$com_name'," .
                 "`dep` = '$dep'," .
@@ -91,10 +98,12 @@
     } else if ($event_view == 'import') {
         if ($_POST['ev_id'] != '') {
             $ev_id = $_POST["ev_id"];
+            $hn = covertBoolean($_POST["hn"]);
             $emp_id = covertBoolean($_POST["emp_id"]);
             $card_id = covertBoolean($_POST["card_id"]);
             $prefix = covertBoolean($_POST["prefix"]);
             $name = covertBoolean($_POST["name"]);
+            $surname = covertBoolean($_POST["surname"]);
             $call = covertBoolean($_POST["call"]);
             $com_name = covertBoolean($_POST["com_name"]);
             $dep = covertBoolean($_POST["dep"]);
@@ -104,10 +113,12 @@
             $has_reg_by = $_POST["has_reg_by"];
             $birthDate = covertBoolean($_POST["birthDate"]);
             $sql_update = "UPDATE `event_setting` SET " .
+                "`hn` = '$hn'," .
                 "`emp_id` = '$emp_id'," .
                 "`card_id` = '$card_id'," .
                 "`prefix` = '$prefix'," .
                 "`name` = '$name'," .
+                "`surname` = '$surname'," .
                 "`call` = '$call'," .
                 "`com_name` = '$com_name'," .
                 "`dep` = '$dep'," .
@@ -124,4 +135,4 @@
         $results = '{"results_data":null}';
         echo $results;
     }
-?>
+    ?>

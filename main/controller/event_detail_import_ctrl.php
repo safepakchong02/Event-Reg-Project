@@ -38,7 +38,7 @@
             alasql('SELECT * FROM XLSX(?,{headers:true})',
                 [$scope.importFile],
                 (data) => {
-                    console.log(data);
+                    // console.log(data);
                     $scope.data = data;
                     let head = Object.keys(data[0]);
                     $scope.head = head;
@@ -56,11 +56,14 @@
                                 <div class="col-8">
                                     <select class="form-select" colold="${head[i]}" onchange="testFunc(this)" required>
                                         <option value="" selected="selected">โปรดระบุ</option>
+                                        <option value="not">ยกเว้นข้อมูล</option>
                                         <option value="no">ลำดับที่</option>
+                                        <option value="hn">HN</option>
                                         <option value="emp_id">รหัสพนักงาน</option>
                                         <option value="card_id">รหัสบัตรประชาชน</option>
                                         <option value="prefix">คำนำหน้า</option>
-                                        <option value="name">ชื่อ-สกุล</option>
+                                        <option value="name">ชื่อ</option>
+                                        <option value="surname">นามสกุล</option>
                                         <option value="call">เบอร์โทรศัพท์</option>
                                         <option value="com_name">ชื่อบริษัท</option>
                                         <option value="dep">แผนก</option>
@@ -81,7 +84,8 @@
                             <label class="col-sm-2 col-form-label text-right">ลงทะเบียนโดยใช้ : </label>
                             <div class="col">
                                 <select required class="form-select" id="has_reg_by">
-                                    <option value="" selected="selected">โปรดระบุ</option>
+                                    <option >------โปรดระบุ------</option>
+                                    <option value="hn">HN</option>
                                     <option value="emp_id">รหัสพนักงาน</option>
                                     <option value="card_id">รหัสบัตรประชาชน</option>
                                     <option value="name">ชื่อ-สกุล</option>
@@ -107,10 +111,12 @@
         $scope.func_save = (i) => {
             setTimeout(() => {
                 let data_col = {
+                    "hn": "",
                     "emp_id": "",
                     "card_id": "",
                     "prefix": "",
                     "name": "",
+                    "surname": "",
                     "call": "",
                     "com_name": "",
                     "dep": "",
@@ -125,17 +131,22 @@
                 }; // end let data_col
 
                 for (j in $scope.head) {
-                    data_col[col[$scope.head[j]]] = $scope.data[i][$scope.head[j]];
+                    if (col[$scope.head[j]] == "not");
+                    else data_col[col[$scope.head[j]]] = $scope.data[i][$scope.head[j]];
                 } // end for j
+
+                console.log(data_col);
 
                 $http({
                     method: 'POST',
                     url: 'main/model/reg/query_reg.php?event_view=add',
                     data: `ev_id=<?= $_GET["ev_id"] ?>` +
+                        `&hn=${data_col.hn}` +
                         `&emp_id=${data_col.emp_id}` +
                         `&card_id=${data_col.card_id}` +
                         `&prefix=${data_col.prefix}` +
                         `&name=${data_col.name}` +
+                        `&surname=${data_col.surname}` +
                         `&call=${data_col.call}` +
                         `&com_name=${data_col.com_name}` +
                         `&dep=${data_col.dep}` +
@@ -153,7 +164,7 @@
                 }).then(async (res) => {
                     $("#modal-loading").modal("show");
                     $scope.now = parseInt(i) + 1;
-                    console.log(res.data);
+                    // console.log(res.data);
                 }); // end then http
             }, 1000 * i)
         }
@@ -164,10 +175,12 @@
             $scope.all = $scope.data.length;
 
             let setting = {
+                "hn": false,
                 "emp_id": false,
                 "card_id": false,
                 "prefix": false,
                 "name": false,
+                "surname": false,
                 "call": false,
                 "com_name": false,
                 "dep": false,
@@ -184,16 +197,17 @@
                 setting[col[$scope.head[i]]] = true;
             } // end for i
             setting["has_reg_by"] = $("#has_reg_by").val();
-            console.log(setting);
 
             $http({
                 method: 'POST',
                 url: 'main/model/event/query_event_detail_setting.php?event_view=import',
                 data: `ev_id=<?= $_GET["ev_id"] ?>` +
+                    `&hn=${setting.hn}` +
                     `&emp_id=${setting.emp_id}` +
                     `&card_id=${setting.card_id}` +
                     `&prefix=${setting.prefix}` +
                     `&name=${setting.name}` +
+                    `&surname=${setting.surname}` +
                     `&call=${setting.call}` +
                     `&com_name=${setting.com_name}` +
                     `&dep=${setting.dep}` +

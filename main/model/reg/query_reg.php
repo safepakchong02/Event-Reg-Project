@@ -103,10 +103,12 @@
             "`ev_id`='" . $_POST["ev_id"] . "'," .
             "`add_by`='" . $_SESSION['user_id'] . "'," .
             "`del`='0'," .
+            "`hn`='" . $_POST['hn'] . "'," .
             "`emp_id`='" . $_POST['emp_id'] . "'," .
             "`card_id`='" . $_POST['card_id'] . "'," .
             "`prefix`='" . $_POST['prefix'] . "'," .
             "`name`='" . $_POST['name'] . "'," .
+            "`surname`='" . $_POST['surname'] . "'," .
             "`call`='" . $_POST["call"] . "'," .
             "`com_name`='" . $_POST["com_name"] . "'," .
             "`dep`='" . $_POST['dep'] . "'," .
@@ -119,19 +121,7 @@
             "`reg_date`='" . $_POST['reg_date'] . "';";
 
         mysqli_query($handle, $sql_add_event);
-        echo "{" .
-            "\"emp_id\" : \"". $_POST["emp_id"] . "\", " .
-            "\"card_id\" : \"" . $_POST["card_id"] . "\", " .
-            "\"name\" : \"" . $_POST["name"] . "\", " .
-            "\"call\" : \"" . $_POST["call"] . "\", " .
-            "\"com_name\" : \"" . $_POST["com_name"] . "\", " .
-            "\"dep\" : \"" . $_POST["dep"] . "\", " .
-            "\"pos\" : \"" . $_POST["pos"] . "\", " .
-            "\"no\" : \"" . $no . "\", " .
-            "\"gender\" : \"" . $_POST["gender"] . "\", " .
-            "\"age\" : \"" . $_POST["age"] . "\", " .
-            "\"birthDate\" : \"" . $_POST["birthDate"] . "\" " . 
-        "}";
+        echo "";
         // echo $sql_add_event;
     } else if ($event_view == 'hasExist') {
         $sql = "SELECT * FROM `event_member` " .
@@ -188,10 +178,12 @@
             $id = $_POST['id'];
 
             $sql_update = "UPDATE `event_member` set " .
+                "`hn`='" . $_POST['hn'] . "'," .
                 "`emp_id`='" . $_POST['emp_id'] . "'," .
                 "`card_id`='" . $_POST['card_id'] . "'," .
                 "`prefix`='" . $_POST['prefix'] . "'," .
                 "`name`='" . $_POST['name'] . "'," .
+                "`surname`='" . $_POST['surname'] . "'," .
                 "`call`='" . $_POST["call"] . "'," .
                 "`com_name`='" . $_POST["com_name"] . "'," .
                 "`dep`='" . $_POST['dep'] . "'," .

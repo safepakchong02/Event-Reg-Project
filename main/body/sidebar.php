@@ -44,7 +44,7 @@ switch ($_SESSION["path"]) {
                 <strong> &nbsp;<?= $_SESSION["user_name"] ?></strong>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                <li><a class="dropdown-item" href="#">เปลี่ยนรหัสผ่าน</a></li>
+                <!-- <li><a class="dropdown-item" href="#">เปลี่ยนรหัสผ่าน</a></li> -->
                 <li><a class="dropdown-item" href="index.php?p=login&m=login&event=logout">ออกจากระบบ</a></li>
             </ul>
         </div>

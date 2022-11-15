@@ -20,10 +20,12 @@
         /* ===============SHOW DATA=============== */
         $http.get("main/model/reg/query_reg.php?event_view=show_data&ev_id=<?= $_GET["ev_id"] ?>")
             .then((res) => { // start then
+                let data = res.data.results_data[0];
                 $scope.regIsOpen = true;
-                $scope.event_data = splitTitle(res.data.results_data[0].ev_title); // "results_data" is key in json format
+                $scope.event_data = splitTitle(data.ev_title);
+                console.log($scope.event_data);
 
-                if ($scope.event_data[0].ev_status == "เปิดลงทะเบียน") $scope.regIsOpen = true;
+                if (data.ev_status == "เปิดลงทะเบียน") $scope.regIsOpen = true;
                 else $scope.regIsOpen = false;
             }); // end then
 
@@ -44,6 +46,7 @@
                 .then((res) => { // start then
                     $scope.data_edit = res.data.results_data_edit[0];
                     $scope.data_edit.no = parseInt($scope.data_edit.no);
+                    $scope.data_edit.age = parseInt($scope.data_edit.age);
                     $scope.data_edit.birthDate = createDate($scope.data_edit.birthDate);
                 }); // end then
         }
@@ -53,10 +56,12 @@
                 method: 'POST',
                 url: 'main/model/reg/query_reg.php?event_view=edit_form_save',
                 data: `id=${$scope.data_edit.id}` +
+                    `&hn=${$scope.data_edit.hn}` +
                     `&emp_id=${$scope.data_edit.emp_id}` +
                     `&card_id=${$scope.data_edit.card_id}` +
                     `&prefix=${$scope.data_edit.prefix}` +
                     `&name=${$scope.data_edit.name}` +
+                    `&surname=${$scope.data_edit.surname}` +
                     `&call=${$scope.data_edit.call}` +
                     `&com_name=${$scope.data_edit.com_name}` +
                     `&dep=${$scope.data_edit.dep}` +
@@ -128,7 +133,7 @@
                 data = table.rows().data().toArray();
             }
 
-            var header = ["ลำดับที่", "รหัสพนักงาน", "รหัสบัตรประชาชน", "คำนำหน้า", "ชื่อ - สกุล", "เบอร์โทรศัพท์", "ชื่อบริษัท", "แผนก", "ตำแหน่ง", "เพศ", "อายุ", "วันเกิด", "วันที่เข้าร่วมกิจกรรม", "หมายเหตุ"];
+            var header = ["ลำดับที่", "HN", "รหัสพนักงาน", "รหัสบัตรประชาชน", "คำนำหน้า", "ชื่อ", "นามสกุล", "เบอร์โทรศัพท์", "ชื่อบริษัท", "แผนก", "ตำแหน่ง", "เพศ", "อายุ", "วันเกิด", "วันที่เข้าร่วมกิจกรรม", "หมายเหตุ"];
             var rows = [];
 
             if (data.length != 0) {
