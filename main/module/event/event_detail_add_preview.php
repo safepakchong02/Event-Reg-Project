@@ -8,7 +8,7 @@
       <div class="modal-body">
         <form id="detail_add" ng-controller="<?= $ctrl_name ?>">
           <div class="row">
-            <div class="col-6" ng-hide="!check.hn" id="no">
+            <div class="col-6" ng-hide="!check.no" id="no">
               <div class="form-group pb-2">
                 <label> ลำดับที่ :</label>
                 <input type="text" ng-model="data_add.no" name="data_add.no" class="form-control">
@@ -79,9 +79,9 @@
                 <label>เพศ :</label>
                 <select class="form-select" ng-model="data_add.gender">
                   <option selected>------โปรดระบุ------</option>
-                  <option value="male">ชาย</option>
-                  <option value="female">หญิง</option>
-                  <option value="LGBTQ+">เพศทางเลือก</option>
+                  <option value="ชาย">ชาย</option>
+                  <option value="หญิง">หญิง</option>
+                  <option value="เพศทางเลือก">เพศทางเลือก</option>
                 </select>
               </div>
             </div>
