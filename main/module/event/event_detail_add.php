@@ -8,6 +8,12 @@
       <div class="modal-body">
         <form id="detail_add" ng-submit="add_member()" ng-controller="<?= $ctrl_name ?>">
           <div class="row">
+            <div class="col-6" ng-if="check.no" id="no">
+              <div class="form-group pb-2">
+                <label> ลำดับที่ :</label>
+                <input type="text" ng-model="data_add.no" name="data_add.no" class="form-control">
+              </div>
+            </div>
             <div class="col-6" ng-if="check.hn" id="hn">
               <div class="form-group pb-2">
                 <label> HN :</label>

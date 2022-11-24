@@ -8,7 +8,7 @@
             <div class="modal-body">
                 <form id="detail_edit" ng-submit="edit_form_save()" ng-controller="<?= $ctrl_name ?>">
                     <div class="row">
-                        <div class="col-6" ng-if="check.hn" id="no">
+                        <div class="col-6" ng-if="check.no" id="no">
                             <div class="form-group pb-2">
                                 <label> ลำดับที่ :</label>
                                 <input disabled type="text" ng-model="data_edit.no" name="data_edit.no" class="form-control">
