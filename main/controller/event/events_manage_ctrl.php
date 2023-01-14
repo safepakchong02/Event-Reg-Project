@@ -2,6 +2,8 @@
     var app = angular.module("<?= $app_name ?>", ['datatables']);
     app.controller("<?= $ctrl_name ?>", function($scope, $http) { // start controller function
 
+        let method = 'POST';
+        
         // start show event
         let params = (new URL(document.location)).searchParams.get("ev_id");
         params = params === null ? "-1" : params;
@@ -12,10 +14,15 @@
             }) // end then
 
         /* ==================SAVE================== */
+        $scope.edit_and_save_event = () => {
+            method = 'PATCH'
+            $scope.save_event();
+        }
+        
         $scope.save_event = () => { // start save_event function
 
             $http({
-                method: 'POST',
+                method: `${method}`,
                 url: 'main/model/event/query_event.php?event_view=save',
                 data: `ev_title=${$scope.data_event.ev_title}` + // string
                     `ev_detail=${$scope.data_event.ev_detail}` + // string
@@ -55,7 +62,7 @@
         /* ==================DELETE================== */
         $scope.delete_event = (ev_id) => { // start delete_event function
             if (confirm("คุณต้องการลบข้อมูลหรือไม่")) {
-                $http.get(`main/model/event/query_event.php?event_view=del_event&ev_id=${ev_id}`)
+                $http.delete(`main/model/event/query_event.php?event_view=del_event&ev_id=${ev_id}`)
                     .then((res) =>{ // start then
                         $("#modal-status_success").modal("show");
                         setTimeout(() => {
