@@ -72,6 +72,16 @@
 		let text = String(title).replaceAll("{e}", " ");
 		return text;
 	}
+
+	function boolArrayToLSB(boolArray) {
+		let lsb = 0;
+		for (let i = 0; i < boolArray.length; i++) {
+			if (boolArray[i]) {
+				lsb |= 1 << i;
+			}
+		}
+		return lsb;
+	}
 </script>
 
 <?php
