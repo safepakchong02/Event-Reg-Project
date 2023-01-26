@@ -3,6 +3,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.bootstrap5.min.css"> -->
 
+    <link rel="stylesheet" href="./asset/css/styles.css">
     <link rel="stylesheet" href="./asset/css/bootstrap-icons.css">
     <link rel="stylesheet" href="./asset/css/bootstrap.min.css">
     <link rel="stylesheet" href="./asset/css/dataTables.bootstrap5.min.css">
@@ -23,53 +24,3 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped&display=swap" rel="stylesheet">
-
-    <style>
-        body {
-            margin: 0;
-            font-family: 'IBM Plex Sans Thai Looped', sans-serif;
-            line-height: 1.5;
-            background-color: #F5F7FA;
-
-        }
-
-        .btn_custom {
-            background-color: #28B463;
-            color: #7aee42;
-        }
-
-        .btn_danger {
-            background-color: #CB4335;
-            color: #7aee42;
-        }
-
-        .btn_normal {
-            background-color: #3498DB;
-            color: #7aee42;
-        }
-
-        .btn_title {
-            background-color: #EAEAEA;
-            color: #7aee42;
-        }
-
-        .btn_body {
-            background-color: #F1F1F1;
-            color: #7aee42;
-        }
-
-        .shadow {
-            -webkit-box-shadow: 0 12px 34px rgba(0, 0, 0, 0.12);
-            -moz-box-shadow: 0 12px 34px rgba(0, 0, 0, 0.12);
-            box-shadow: 0 12px 34px rgba(0, 0, 0, 0.12);
-        }
-
-        .center_screen {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-    </style>
-
-    </style>

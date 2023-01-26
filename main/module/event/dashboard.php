@@ -1,67 +1,61 @@
 <!-- import ctrl -->
 <?
+$perm = true;
+$ctrl_path = "event";
 $ctrl_name = "events_manage_ctrl";
-include("main/controller/$ctrl_name.php");
+include("main/controller/$ctrl_path/$ctrl_name.php");
 ?>
 
 <!-- เริ่ม dashboard -->
-<div class="container-fluid">
+<div class="container-fluid" ng-controller="<?= $ctrl_name ?>">
+    <div class="row pb-5 pt-5">
+        <!-- edit here -->
+        <h1>Profile(กำลังทำ)</h1>
+    </div>
     <div class="row">
-        <div class="col-12 pt-4" ng-controller="<?= $ctrl_name ?>">
-            <h1>รายชื่อกิจกรรม</h1><br>
-            <!-- เพิ่มข้อมูล -->
-            <div class="d-flex justify-content-end pb-2">
-                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-add">
-                    <i class="bi bi-plus-circle"></i> เพิ่มกิจกรรม
-                </button>
+        <!-- edit here -->
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="myEvent-tab" data-bs-toggle="tab" data-bs-target="#myEvent" type="button" role="tab" aria-controls="myEvent" aria-selected="true">กิจกรรมของฉัน</button>
+            </li>
+            <? if ($perm) { ?>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="manageEvent" data-bs-toggle="tab" data-bs-target="#manageEvent-pane" type="button" role="tab" aria-controls="manageEvent-pane" aria-selected="false">กิจกรรมที่ฉันดูแล</button>
+                </li>
+            <? } ?>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="myEvent" role="tabpanel" aria-labelledby="myEvent-tab" tabindex="0">
+                <div class="row pt-3">
+                    <div class="col-sm-4 pb-2">
+                        <div class="card color-success">
+                            <div class="card-body">
+                                <h5 class="card-title">Special title treatment</h5>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <? include("main/module/event/event_add.php"); ?>
-            <!-- จบการเพิ่มข้อมูล -->
-
-            <!-- status success-->
-            <? include("main/body/status_success.php"); ?>
-            <!-- end success -->
-
-            <!-- แสดงข้อมูล -->
-            <div style="overflow-x:scroll;">
-                <table datatable="ng" id="example" class="table nowrap" style="width:100%">
-                    <thead>
-                        <tr class="table-dark">
-                            <th>ไอดี</th>
-                            <th>ชื่อกิจกรรม</th>
-                            <th>เจ้าหน้าที่ลงทะเบียน</th>
-                            <th>สถานะลงทะเบียน</th>
-                            <th>วันที่เปิดลงทะเบียน</th>
-                            <th>วันที่ปิดลงทะเบียน</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="show_event_data in event_data" class="{{show_event_data.isOpen}}">
-                            <? include("main/module/event/event_edit.php"); ?>
-                            <td>{{show_event_data.ev_id}}</td> <!-- "ev_id" is name col -->
-                            <td>{{viewTitle(show_event_data.ev_title)}}</td>
-                            <td>{{show_event_data.user_name}} {{show_event_data.user_surname}}</td>
-                            <td>{{show_event_data.ev_status}}</td>
-                            <td>{{show_event_data.ev_date_start}}</td>
-                            <td>{{show_event_data.ev_date_end}}</td>
-                            <td>
-                                <a href="index.php?p=event&m=event_detail&ev_id={{show_event_data.ev_id}}" class="btn btn-info btn-sm text-white">ข้อมูลผู้ลงทะเบียน</a>
-                                <button ng-click="edit_event_view(show_event_data.ev_id)" data-bs-toggle="modal" data-bs-target="#modal-edit" class="btn btn-warning btn-sm">แก้ไข</button>
-                                <button ng-click="delete_event(show_event_data.ev_id)" class="btn btn-danger btn-sm">ลบ</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <script>
-                $(document).ready(function() {
-                    var table = $('#example').DataTable({
-                        // scrollX: true,
-                    });
-                });
-            </script>
-            <!-- จบการแสดงข้อมูล -->
+            <? if ($perm) { ?>
+                <div class="tab-pane fade" id="manageEvent-pane" role="tabpanel" aria-labelledby="manageEvent" tabindex="0">
+                    <div class="row pt-3">
+                        <div class="col-sm-4 pb-2">
+                            <a href="index.php?p=event&m=event_detail" class="btn btn-success">สร้างกิจกรรม <i class="bi bi-plus-square-dotted"></i></a>
+                        </div>
+                        <div class="row pt-3">
+                            <div class="col-sm-4 pb-2">
+                                <div class="card color-warning">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Special title treatment</h5>
+                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <? } ?>
         </div>
     </div>
 </div>

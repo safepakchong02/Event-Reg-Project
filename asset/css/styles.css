@@ -1,0 +1,19 @@
+body {
+    margin: 0;
+    font-family: 'IBM Plex Sans Thai Looped', sans-serif;
+    line-height: 1.5;
+    background-color: #F5F7FA;
+
+}
+
+.color-warning {
+    background-color: #ffdf80;
+}
+
+.color-danger {
+    background-color: #ec939c;
+}
+
+.color-success {
+    background-color: #93ebc2;
+}

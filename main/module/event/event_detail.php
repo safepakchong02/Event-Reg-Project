@@ -1,148 +1,187 @@
 <!-- import ctrl -->
 <?
-$ctrl_name = "event_detail_manage_ctrl";
-include("main/controller/$ctrl_name.php");
+$perm = true;
+$ctrl_path = "event";
+$ctrl_name = "events_manage_ctrl";
+include("main/controller/$ctrl_path/$ctrl_name.php");
 ?>
 
-<? if (isset($_GET["ev_id"])) { ?>
-    <!-- ข้อมูลผู้ลงทะเบียน -->
-    <? $ev_id = $_GET["ev_id"]; ?>
-    <div class="col-12 pt-4" ng-controller="<?= $ctrl_name ?>">
-        <!-- เพิ่มข้อมูล -->
-        <? include("main/module/event/event_detail_add.php"); ?>
-        <!-- จบการเพิ่มข้อมูล -->
-
-        <!-- success -->
-        <? include("main/body/status_reg_success.php"); ?>
-        <? include("main/body/status_success.php"); ?>
-        <!-- end success -->
-
-        <!-- error -->
-        <? include("main/body/status_reg_error_isNoData.php"); ?>
-        <? include("main/body/status_reg_error_isExist.php"); ?>
-        <!-- end error -->
-
-        <!-- edit -->
-        <? include("main/module/event/event_detail_edit.php"); ?>
-        <!-- end edit -->
-
-        <div class="row">
-            <div class="col-1" style="width: 140px;">
-                <a href="index.php?p=event&m=dashboard" class="btn btn-primary"><i class="bi bi-caret-left-fill"></i>ย้อนกลับ</a>
-            </div>
-            <div class="col">
-                <h1>รายชื่อผู้ลงทะเบียน</h1>
-            </div>
-        </div>
-        <div class="container-fluid pb-2">
+<div class="container" ng-controller="<?= $ctrl_name ?>">
+    <div class="row pt-3">
+        <h1>สร้างกิจกรรม</h1>
+        <form>
             <div class="row">
-                <div class="col-6">
-                    <h3>กิจกรรม : {{viewTitle(ev_title)}}</3>
+                <div class="col pb-2">
+                    <label for="data_event.ev_title" class="form-label">ชื่อกิจกรรม</label>
+                    <input type="text" class="form-control" id="data_event.ev_title" name="data_event.ev_title" ng-model="data_event.ev_title">
                 </div>
-                <div class="col-6" align="right">
-                    <!-- <div class="col-12" align="right">
-                        <button ng-hide="isInit" type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modal-detail_add">
-                            <i class="bi bi-person-plus-fill"></i> เพิ่มรายชื่อ
-                        </button>
-                        <a href="index.php?p=event&m=event_detail_setting&ev_id=<?= $ev_id ?>" class="btn btn-primary btn-sm">
-                            <i class="bi bi-gear-wide-connected"></i> ตั้งค่า
-                        </a>
-                        <a href="index.php?p=event&m=event_detail_import&ev_id=<?= $ev_id ?>" class="btn btn-primary btn-sm">
-                            <i class="bi bi-upload"></i> นำเข้าข้อมูล
-                        </a>
-                        <a ng-hide="isInit" href="index.php?p=event&m=event_detail_export&ev_id=<?= $ev_id ?>" class="btn btn-info btn-sm ">
-                            <i class="bi bi-file-earmark-arrow-up"></i></i> ส่งออกข้อมูล
-                        </a>
-                        <button ng-hide="isInit" type="button" class="btn btn-danger btn-sm" ng-click="del_all_reg(<?= $ev_id ?>)">
-                            <i class="bi bi-trash"></i> ลบข้อมูลทั้งหมด
-                        </button>
-                    </div> -->
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            เมนู
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="index.php?p=reg&m=reg_dashboard&ev_id=<?= $ev_id ?>&preview=true"><i class="bi bi-eye-fill"></i> ไปหน้าลงทะเบียน</a></li>
-                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-detail_add"><i class="bi bi-person-plus-fill"></i> เพิ่มรายชื่อ</a></li>
-                            <li><a class="dropdown-item" href="index.php?p=event&m=event_detail_setting&ev_id=<?= $ev_id ?>"><i class="bi bi-gear-wide-connected"></i> ตั้งค่า</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="index.php?p=event&m=event_detail_import&ev_id=<?= $ev_id ?>"><i class="bi bi-upload"></i> นำเข้าข้อมูล</a></li>
-                            <li><a class="dropdown-item" href="index.php?p=event&m=event_detail_export&ev_id=<?= $ev_id ?>"><i class="bi bi-file-earmark-arrow-up"></i>ส่งออกข้อมูล</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#" ng-click="del_all_reg(<?= $ev_id ?>)"><i class="bi bi-trash"></i> ลบข้อมูลทั้งหมด</a></li>
-                        </ul>
+                <div class="col pb-2">
+                    <label for="data_event.ev_limit" class="form-label">จำกัดจำนวน(-1 ไม่จำกัด)</label>
+                    <input type="number" class="form-control" id="data_event.ev_limit" name="data_event.ev_limit" ng-model="data_event.ev_limit">
+                </div>
+            </div>
+            <div class="mb-2">
+                <label for="exampleFormControlTextarea1" class="form-label">Event detail</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            <div class="row pt-3 pb-3 border rounded-2">
+                <div class="col-12 pb-4">
+                    <span class="h5">ประเภทข้อมูลที่ต้องการ</span>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-check">
+                        <input disabled class="form-check-input" type="checkbox" id="data_event.ev_dtype" name="data_event.ev_dtype" ng-model="data_event.ev_dtype[0]">
+                        <label class="form-check-label" for="">
+                            อีเมล
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="data_event.ev_dtype" name="data_event.ev_dtype" ng-model="data_event.ev_dtype[1]">
+                        <label class="form-check-label" for="">
+                            คำนำหน้า
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-check">
+                        <input disabled class="form-check-input" type="checkbox" id="data_event.ev_dtype" name="data_event.ev_dtype" ng-model="data_event.ev_dtype[2]">
+                        <label class="form-check-label" for="">
+                            ชื่อ
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-check">
+                        <input disabled class="form-check-input" type="checkbox" id="data_event.ev_dtype" name="data_event.ev_dtype" ng-model="data_event.ev_dtype[3]">
+                        <label class="form-check-label" for="">
+                            นามสกุล
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="data_event.ev_dtype" name="data_event.ev_dtype" ng-model="data_event.ev_dtype[4]">
+                        <label class="form-check-label" for="">
+                            รหัสพนักงาน / รหัสนักศึกษา
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="data_event.ev_dtype" name="data_event.ev_dtype" ng-model="data_event.ev_dtype[5]">
+                        <label class="form-check-label" for="">
+                            รหัสบัตรประชาชน
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="data_event.ev_dtype" name="data_event.ev_dtype" ng-model="data_event.ev_dtype[6]">
+                        <label class="form-check-label" for="">
+                            เพศ
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="data_event.ev_dtype" name="data_event.ev_dtype" ng-model="data_event.ev_dtype[7]">
+                        <label class="form-check-label" for="">
+                            วันเกิด
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="data_event.ev_dtype" name="data_event.ev_dtype" ng-model="data_event.ev_dtype[8]">
+                        <label class="form-check-label" for="">
+                            เบอร์โทรศัพท์
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="data_event.ev_dtype" name="data_event.ev_dtype" ng-model="data_event.ev_dtype[9]">
+                        <label class="form-check-label" for="">
+                            ชื่อบริษัท / ชื่อสถานศึกษา
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="data_event.ev_dtype" name="data_event.ev_dtype" ng-model="data_event.ev_dtype[10]">
+                        <label class="form-check-label" for="">
+                            แผนก / สาขาวิชา
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="data_event.ev_dtype" name="data_event.ev_dtype" ng-model="data_event.ev_dtype[11]">
+                        <label class="form-check-label" for="">
+                            ตำแหน่ง / ชั่นปี
+                        </label>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- แสดงข้อมูล -->
-        <!-- data table -->
-        <table datatable="ng" id="example" class="table nowrap dt-responsive" style="width:100%">
-            <thead>
-                <tr class="table-dark">
-                    <th ng-show="check.no">ลำดับที่</th>
-                    <th ng-show="check.hn">HN</th>
-                    <th ng-show="check.emp_id">รหัสพนักงาน</th>
-                    <th ng-show="check.card_id">รหัสบัตรประชาชน</th>
-                    <th ng-show="check.prefix">คำนำหน้า</th>
-                    <th ng-show="check.name">ชื่อ</th>
-                    <th ng-show="check.surname">นามสกุล</th>
-                    <th ng-show="check.call">เบอร์โทรศัพท์</th>
-                    <th ng-show="check.com_name">ชื่อบริษัท</th>
-                    <th ng-show="check.dep">แผนก</th>
-                    <th ng-show="check.pos">ตำแหน่ง</th>
-                    <th ng-show="check.gender">เพศ</th>
-                    <th ng-show="check.age">อายุ</th>
-                    <th ng-show="check.birthDate">วันเกิด</th>
-                    <th>วันที่เข้าร่วมกิจกรรม</th>
-                    <th ng-show="check.comment">หมายเหตุ</th>
-                    <th data-priority="1"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="row in data_table">
-                    <td ng-show="check.no">{{row.no}}</td>
-                    <td ng-show="check.hn">{{row.hn}}</td>
-                    <td ng-show="check.emp_id">{{row.emp_id}}</td>
-                    <td ng-show="check.card_id">{{row.card_id}}</td>
-                    <td ng-show="check.prefix">{{row.prefix}}</td>
-                    <td ng-show="check.name">{{row.name}}</td>
-                    <td ng-show="check.surname">{{row.surname}}</td>
-                    <td ng-show="check.call">{{row.call}}</td>
-                    <td ng-show="check.com_name">{{row.com_name}}</td>
-                    <td ng-show="check.dep">{{row.dep}}</td>
-                    <td ng-show="check.pos">{{row.pos}}</td>
-                    <td ng-show="check.gender">{{row.gender}}</td>
-                    <td ng-show="check.age">{{row.age}}</td>
-                    <td ng-show="check.birthDate">{{row.birthDate}}</td>
-                    <td>{{checkReg(row.reg_date)}}</td>
-                    <td ng-show="check.comment">{{row.comment}}</td>
-                    <td>
-                        <button type="button" ng-click="reset_reg(row.id)" class="btn btn-primary btn-sm">รีเซ็ทการลงทะเบียน</button>
-                        <button type="button" ng-click="edit_reg_view(row.id)" data-bs-toggle="modal" data-bs-target="#modal-detail_edit" class="btn btn-warning btn-sm">แก้ไข</button>
-                        <button type="button" ng-click="del_reg(row.id)" class="btn btn-danger btn-sm">ลบ</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <!-- end data table -->
-        <script>
-            $(document).ready(function() {
-                var table = $('#example').DataTable({
-                    responsive: true,
-                    columnDefs: [{
-                        responsivePriority: 1,
-                        targets: -1
-                    }]
-                });
-            });
-        </script>
+            <div class="mb">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="data_event.ev_public" name="data_event.ev_public" ng-model="data_event.ev_public">
+                    <label class="form-check-label" for="data_event.ev_public">กิจกรรมนี้เปิดเป็นสารธารณะหรือไม่</label>
+                </div>
+            </div>
+            <div class="mb">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="data_event.ev_selfReg" name="data_event.ev_selfReg" ng-model="data_event.ev_selfReg">
+                    <label class="form-check-label" for="data_event.ev_selfReg">ลงทะเบียนด้วยตนเอง</label>
+                </div>
+            </div>
+            <div class="mb">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="data_event.ev_preReg" name="data_event.ev_preReg" ng-model="data_event.ev_preReg">
+                    <label class="form-check-label" for="data_event.ev_preReg">ลงทะเบียนล่วงหน้า</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <label for="exampleFormControlTextarea1" class="form-label">ev_preRegStart</label>
+                    <input type="datetime-local" class="default" />
+                </div>
+                <div class="col-sm-6">
+                    <label for="exampleFormControlTextarea1" class="form-label">ev_preRegEnd</label>
+                    <input type="datetime-local" class="default" />
+                </div>
+            </div>
+            <div class="mb-1">
+                <label for="exampleFormControlTextarea1" class="form-label">Event check-in</label>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <label for="exampleFormControlTextarea1" class="form-label">ev_checkInStart</label>
+                    <input type="datetime-local" class="default" />
+                </div>
+                <div class="col-sm-6">
+                    <label for="exampleFormControlTextarea1" class="form-label">ev_checkInEnd</label>
+                    <input type="datetime-local" class="default" />
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Event start</label>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <label for="exampleFormControlTextarea1" class="form-label">ev_eventStart</label>
+                    <input type="datetime-local" class="default" />
+                </div>
+                <div class="col-sm-6 pb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">ev_eventEnd</label>
+                    <input type="datetime-local" class="default" />
+                </div>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
     </div>
-    <!-- จบการแสดงข้อมูล -->
-<? } else { ?>
-    <meta http-equiv="refresh" content="0;url=index.php?p=event&m=dashboard">
-<? } ?>
+</div>

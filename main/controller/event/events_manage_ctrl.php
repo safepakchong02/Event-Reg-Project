@@ -1,9 +1,16 @@
-<script>
+<script ng-init="data_event.ev_limit=-1;data_event.ev_dtype=[];">
     var app = angular.module("<?= $app_name ?>", ['datatables']);
     app.controller("<?= $ctrl_name ?>", function($scope, $http) { // start controller function
 
         let method = 'POST';
-        
+        const numberOfDtype = 12;
+
+        for (let index = 0; index < numberOfDtype; index++) {
+            $scope.data_event.ev_dtype[index] = true;
+        }
+
+        // console.log($scope.data_event.ev_dtype);
+
         // start show event
         let params = (new URL(document.location)).searchParams.get("ev_id");
         params = params === null ? "-1" : params;
@@ -14,11 +21,12 @@
             }) // end then
 
         /* ==================SAVE================== */
+
         $scope.edit_and_save_event = () => {
             method = 'PATCH'
             $scope.save_event();
         }
-        
+
         $scope.save_event = () => { // start save_event function
 
             $http({
@@ -63,7 +71,7 @@
         $scope.delete_event = (ev_id) => { // start delete_event function
             if (confirm("คุณต้องการลบข้อมูลหรือไม่")) {
                 $http.delete(`main/model/event/query_event.php?event_view=del_event&ev_id=${ev_id}`)
-                    .then((res) =>{ // start then
+                    .then((res) => { // start then
                         $("#modal-status_success").modal("show");
                         setTimeout(() => {
                             location.reload();
