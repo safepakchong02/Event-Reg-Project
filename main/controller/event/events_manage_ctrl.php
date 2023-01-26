@@ -21,17 +21,10 @@
             }) // end then
 
         /* ==================SAVE================== */
-
-        $scope.edit_and_save_event = () => {
-            method = 'PATCH'
-            $scope.save_event();
-        }
-
-        $scope.save_event = () => { // start save_event function
-
+        $scope.create_event = () => { // start save_event function
             $http({
-                method: `${method}`,
-                url: 'main/model/event/query_event.php?event_view=save',
+                method: `POST`,
+                url: 'main/model/event/query_event.php?event_view=create',
                 data: `ev_title=${$scope.data_event.ev_title}` + // string
                     `ev_detail=${$scope.data_event.ev_detail}` + // string
                     `ev_limit=${$scope.data_event.ev_limit}` + // number

@@ -1,4 +1,84 @@
  <?php
+
+    $value = $_GET['event_view'] ?? $_POST['event_view'] ?? null;
+    if ($value === null) {
+        echo "{\"status\": 400 Bad request}";
+    }
+
+    include_once('../../../asset/config/config.php');
+
+    switch ($value) {
+        case "getEvent" : getEvent(); break;
+        case "createEvent" : createEvent(); break;
+        case "editEvent" : editEvent(); break;
+        case "deleteEvent" : deleteEvent(); break;
+        default: echo "{\"status\": 400 Bad request}";
+    }
+
+    function getEvent() {
+
+    }
+
+    function createEvent() {
+        $mysqli = new mysqli($handle)
+        $mysqli->begin_transaction();
+        try {
+            $query = "CALL createEvent( " . $eventId ."  )"
+
+            $result = mysqli_query($mysqli, $query);
+
+            if ($result > 0) {
+                echo "{\"status\": 200 Success}";
+            }
+            echo "{\"status\": 400 Bad request}";
+            $mysqli->commit();
+        }
+        catch (Exception e) {
+
+        }
+        $mysqli->close();
+    }
+
+    function editEvent() {
+        $mysqli = new mysqli($handle)
+        $mysqli->begin_transaction();
+        try {
+            $query = "CALL editEvent( " . $eventId ."  )"
+
+            $result = mysqli_query($mysqli, $query);
+
+            if ($result > 0) {
+                echo "{\"status\": 200 Success}";
+            }
+            echo "{\"status\": 400 Bad request}";
+            $mysqli->commit();
+        }
+        catch (Exception e) {
+
+        }
+        $mysqli->close();
+    }
+
+    function deleteEvent($eventId) {
+        $mysqli = new mysqli($handle)
+        $mysqli->begin_transaction();
+        try {
+            $query = "CALL deleteEvent( " . $eventId ."  )"
+
+            $result = mysqli_query($mysqli, $query);
+
+            if ($result > 0) {
+                echo "{\"status\": 200 Success}";
+            }
+            echo "{\"status\": 400 Bad request}";
+            $mysqli->commit();
+        }
+        catch (Exception e) {
+
+        }
+        $mysqli->close();
+    }
+
     date_default_timezone_set('Asia/Bangkok');
 
     if (@$_GET['event_view'] != '') {
