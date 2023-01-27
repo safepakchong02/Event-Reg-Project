@@ -22,7 +22,7 @@ $app->get('/', function (Request $request, Response $response, $args) {
     return $response;
 });
 
-$app->get('/api/event/getEvent', EventController::class . '::test');
+$app->get('/event/getEvent', EventController::class . '::test');
 
 $app->run();
 ?>
