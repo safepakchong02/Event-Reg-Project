@@ -1,115 +1,191 @@
-<div class="modal fade" tabindex="-1" id="modal-detail_edit">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"><i class="bi bi-pencil-square"></i> แก้ไขรายชื่อผู้ลงทะเบียน</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<!-- import ctrl -->
+<?
+$perm = true;
+$ctrl_path = "event";
+$ctrl_name = "events_manage_ctrl";
+include("main/controller/$ctrl_path/$ctrl_name.php");
+?>
+
+<div class="container" ng-controller="<?= $ctrl_name ?>" data-editor="ClassicEditor" data-collaboration="false" data-revision-history="false">
+    <div class="row pt-3">
+        <h1>สร้างกิจกรรม</h1>
+        <form>
+            <div class="row pb-3">
+                <div class="col pb-2">
+                    <label for="ev_title" class="form-label">ชื่อกิจกรรม</label>
+                    <input type="text" class="form-control" id="ev_title" name="ev_title" ng-model="data_event.ev_title">
+                </div>
+                <div class="col pb-2">
+                    <label for="ev_limit" class="form-label">จำกัดจำนวน (-1 ไม่จำกัด)</label>
+                    <input type="number" class="form-control" id="ev_limit" name="ev_limit" ng-model="data_event.ev_limit">
+                </div>
             </div>
-            <div class="modal-body">
-                <form id="detail_edit" ng-submit="edit_form_save()" ng-controller="<?= $ctrl_name ?>">
-                    <div class="row">
-                        <div class="col-6" ng-if="check.no" id="no">
-                            <div class="form-group pb-2">
-                                <label> ลำดับที่ :</label>
-                                <input disabled type="text" ng-model="data_edit.no" name="data_edit.no" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-6" ng-if="check.hn" id="hn">
-                            <div class="form-group pb-2">
-                                <label> HN :</label>
-                                <input type="text" ng-model="data_edit.hn" name="data_edit.hn" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-6" ng-if="check.emp_id" id="emp_id">
-                            <div class="form-group pb-2">
-                                <label> รหัสพนักงาน :</label>
-                                <input type="text" ng-model="data_edit.emp_id" name="data_edit.emp_id" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-6" ng-if="check.card_id" id="card_id">
-                            <div class="form-group pb-2">
-                                <label> รหัสบัตรประชาชน :</label>
-                                <input type="text" ng-model="data_edit.card_id" name="data_edit.card_id" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-6" ng-if="check.prefix" id="prefix">
-                            <div class="form-group pb-2">
-                                <label> คำนำหน้า :</label>
-                                <input type="text" ng-model="data_edit.prefix" name="data_edit.prefix" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-6" ng-if="check.name" id="name">
-                            <div class="form-group pb-2">
-                                <label> ชื่อ :</label>
-                                <input type="text" ng-model="data_edit.name" name="data_edit.name" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-6" ng-if="check.surname" id="surname">
-                            <div class="form-group pb-2">
-                                <label> นามสกุล :</label>
-                                <input type="text" ng-model="data_edit.surname" name="data_edit.surname" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-6" ng-if="check.call" id="call">
-                            <div class="form-group pb-2">
-                                <label> เบอร์โทรศัพท์ :</label>
-                                <input type="tel" ng-model="data_edit.call" name="data_edit.call" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-6" ng-if="check.com_name" id="com_name">
-                            <div class="form-group pb-2">
-                                <label> ชื่อบริษัท :</label>
-                                <input type="text" ng-model="data_edit.com_name" name="data_edit.com_name" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-6" ng-if="check.dep" id="dep">
-                            <div class="form-group pb-2">
-                                <label> แผนก :</label>
-                                <input type="text" ng-model="data_edit.dep" name="data_edit.dep" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-6" ng-if="check.pos" id="pos">
-                            <div class="form-group pb-2">
-                                <label> ตำแหน่ง :</label>
-                                <input type="text" ng-model="data_edit.pos" name="data_edit.pos" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-6" ng-if="check.gender" id="gender">
-                            <div class="form-group pb-2">
-                                <label>เพศ :</label>
-                                <select class="form-select" ng-model="data_edit.gender">
-                                    <option selected>------โปรดระบุ------</option>
-                                    <option value="ชาย">ชาย</option>
-                                    <option value="หญิง">หญิง</option>
-                                    <option value="เพศทางเลือก">เพศทางเลือก</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-6" ng-if="check.age" id="age">
-                            <div class="form-group pb-2">
-                                <label> อายุ :</label>
-                                <input type="number" ng-model="data_edit.age" name="data_edit.age" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-6" ng-if="check.birthDate" id="birthDate">
-                            <div class="form-group pb-2">
-                                <label> วันเดือนปีเกิด :</label>
-                                <input type="date" ng-model="data_edit.birthDate" name="data_edit.birthDate" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-12" ng-if="check.comment" id="comment">
-                            <div class="form-group pb-2">
-                                <label> หมายเหตุ :</label>
-                                <textarea rows="3" ng-model="data_edit.comment" name="data_edit.comment" class="form-control"></textarea>
-                            </div>
-                        </div>
+            <div class="row pb-3">
+                <div class="col-sm-12">
+                    <span class="">รายละเอียดกิจกรรม</span>
+                </div>
+                <div class="col-sm-12">
+                    <div id="ev_detail">
+
                     </div>
-                </form>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" form="detail_edit" class="btn btn-primary">Save changes</button>
+            <div class="row pt-3 pb-3 border rounded-2">
+                <div class="col-12 pb-4">
+                    <span class="h5">ประเภทข้อมูลที่ต้องการ</span>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-check">
+                        <input disabled class="form-check-input" type="checkbox" id="ev_dtype" name="ev_dtype" ng-model="data_event.ev_dtype[0]">
+                        <label class="form-check-label" for="ev_dtype">
+                            อีเมล
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="ev_dtype" name="ev_dtype" ng-model="data_event.ev_dtype[1]">
+                        <label class="form-check-label" for="ev_dtype">
+                            คำนำหน้า
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-check">
+                        <input disabled class="form-check-input" type="checkbox" id="ev_dtype" name="ev_dtype" ng-model="data_event.ev_dtype[2]">
+                        <label class="form-check-label" for="ev_dtype">
+                            ชื่อ
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-check">
+                        <input disabled class="form-check-input" type="checkbox" id="ev_dtype" name="ev_dtype" ng-model="data_event.ev_dtype[3]">
+                        <label class="form-check-label" for="ev_dtype">
+                            นามสกุล
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="ev_dtype" name="ev_dtype" ng-model="data_event.ev_dtype[4]">
+                        <label class="form-check-label" for="ev_dtype">
+                            รหัสพนักงาน / รหัสนักศึกษา
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="ev_dtype" name="ev_dtype" ng-model="data_event.ev_dtype[5]">
+                        <label class="form-check-label" for="ev_dtype">
+                            รหัสบัตรประชาชน
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="ev_dtype" name="ev_dtype" ng-model="data_event.ev_dtype[6]">
+                        <label class="form-check-label" for="ev_dtype">
+                            เพศ
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="ev_dtype" name="ev_dtype" ng-model="data_event.ev_dtype[7]">
+                        <label class="form-check-label" for="ev_dtype">
+                            วันเกิด
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="ev_dtype" name="ev_dtype" ng-model="data_event.ev_dtype[8]">
+                        <label class="form-check-label" for="ev_dtype">
+                            เบอร์โทรศัพท์
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="ev_dtype" name="ev_dtype" ng-model="data_event.ev_dtype[9]">
+                        <label class="form-check-label" for="ev_dtype">
+                            ชื่อบริษัท / ชื่อสถานศึกษา
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="ev_dtype" name="ev_dtype" ng-model="data_event.ev_dtype[10]">
+                        <label class="form-check-label" for="ev_dtype">
+                            แผนก / สาขาวิชา
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="ev_dtype" name="ev_dtype" ng-model="data_event.ev_dtype[11]">
+                        <label class="form-check-label" for="ev_dtype">
+                            ตำแหน่ง / ชั่นปี
+                        </label>
+                    </div>
+                </div>
             </div>
-        </div>
+            <div class="row mt-3 pb-3 border rounded-2">
+                <div class="col-12 mt-3 pb-3">
+                    <span class="h5">ตั้งค่าการลงทะเบียน</span>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="ev_public" name="ev_public" ng-model="data_event.ev_public">
+                        <label class="form-check-label" for="ev_public">กิจกรรมนี้เปิดเป็นสารธารณะหรือไม่</label>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="ev_preReg" name="ev_preReg" ng-model="data_event.ev_preReg">
+                        <label class="form-check-label" for="ev_preReg">กิจกรรมนี้เปิดให้ลงทะเบียนล่วงหน้าหรือไม่</label>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="ev_selfReg" name="ev_selfReg" ng-model="data_event.ev_selfReg">
+                        <label class="form-check-label" for="ev_selfReg">กิจกรรมนี้สามารถลงทะเบียนเข้างานด้วยตนเองได้หรือไม่</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3 pb-3 border rounded-2">
+                <div class="col-12 mt-3 pb-3">
+                    <span class="h5">ตั้งค่าวัน/เวลา</span>
+                </div>
+                <div class="col-sm-4">
+                    <label for="ev_eventStart" class="form-label">เริ่มกิจกรรม</label>
+                    <input type="datetime-local" class="form-control" id="ev_eventStart" name="ev_eventStart" ng-model="data_event.ev_eventStart">
+                    <br>
+                    <label for="ev_eventEnd" class="form-label">จบกิจกรรม</label>
+                    <input type="datetime-local" class="form-control" id="ev_eventEnd" name="ev_eventEnd" ng-model="data_event.ev_eventEnd">
+                </div>
+                <div class="col-sm-4" ng-show="data_event.ev_preReg">
+                    <label for="ev_preRegStart" class="form-label">เปิดลงทะเบียนล่วงหน้า</label>
+                    <input type="datetime-local" class="form-control" id="ev_preRegStart" name="ev_preRegStart" ng-model="data_event.ev_preRegStart">
+                    <br>
+                    <label for="ev_preRegEnd" class="form-label">ปิดลงทะเบียนล่วงหน้า</label>
+                    <input type="datetime-local" class="form-control" id="ev_preRegEnd" name="ev_preRegEnd" ng-model="data_event.ev_preRegEnd">
+                </div>
+                <div class="col-sm-4">
+                    <label for="ev_checkInStart" class="form-label">เปิดลงทะเบียนเข้างาน</label>
+                    <input type="datetime-local" class="form-control" id="ev_checkInStart" name="ev_checkInStart" ng-model="data_event.ev_checkInStart">
+                    <br>
+                    <label for="ev_checkInEnd" class="form-label">ปิดลงทะเบียนเข้างาน</label>
+                    <input type="datetime-local" class="form-control" id="ev_checkInEnd" name="ev_checkInEnd" ng-model="data_event.ev_checkInEnd">
+                </div>
+            </div>
+            <div class="row pt-3">
+                <div class="col-sm-3">
+                    <button type="button" class="btn btn-primary" ng-if="!isCreate" ng-click="save_event('POST','createEvent')">บันทึก</button>
+                    <button type="button" class="btn btn-primary" ng-if="isCreate" ng-click="save_event('PATCH','editEvent')">บันทึก</button>
+                    <button type="button" class="btn btn-danger" ng-if="isCreate" ng-click="delete_event(data_event.ev_eventId)">ลบกิจกรรม</button>
+                </div>
+            </div>
+        </form>
     </div>
 </div>

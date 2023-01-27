@@ -23,7 +23,7 @@ include("main/function/function_date.php");
     <title>SUT-Event</title>
 </head>
 
-<body ng-app="<?= $app_name ?>">
+<body ng-app="<?= $app_name ?>" style="font-family: 'IBM Plex Sans Thai Looped', sans-serif !important;">
     <div class="container-fluid">
         <div class="row">
             <!-- sidebar -->
