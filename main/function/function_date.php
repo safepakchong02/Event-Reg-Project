@@ -18,30 +18,35 @@
 		}
 	}
 
-	// แปลง JS default date format เป็น dd/mm/yyyy hh:mm(30/12/2022 00:00)
+	// แปลง JS default date format เป็น YYYY-MM-DD hh:mm:ss(2022-12-01 00:00:00)
 	function convertDate(str) {
-		var out = new Date(str);
+		if (str !== "" && str !== null && typeof(str) !== "undefined") {
+			let obj = new Date(str);
 
-		out = addZero(out.getDate()) + "/" +
-			addZero(out.getMonth() + 1) + "/" +
-			addZero(out.getFullYear()) + " " +
-			addZero(out.getHours()) + ":" +
-			addZero(out.getMinutes());
+			let out = `${addZero(obj.getFullYear())}-
+			${addZero(obj.getMonth() + 1)}-
+			${addZero(obj.getDate())} 
+			${addZero(obj.getHours())}:
+			${addZero(obj.getMinutes())}:
+			${"00"}`
 
-		return out;
-	} // end convertDate function
+			return out;
+		} else {
+			return "";
+		}
+	}
 
-	// แปลง string date format เป็น object JS date // format คือ dd/mm/yyyy hh:mm(30/12/2022 00:00)
+	// แปลง string date format เป็น object JS date // format คือ YYYY-MM-DD hh:mm:ss(2022-12-01 00:00:00)
 	function createDate(str) {
-		if (str != "") {
+		if (str !== "" && str !== null && typeof(str) !== "undefined") {
 			str = str.split(" ");
-			var date = str[0].split("/");
+			var date = str[0].split("-");
 			var time = str[1].split(":");
 
 			var date_js = new Date(
-				delZero(date[2]), // year
+				delZero(date[0]), // year
 				(delZero(date[1]) - 1), // month
-				delZero(date[0]), // day
+				delZero(date[2]), // day
 				delZero(time[0]), // hour
 				delZero(time[1]) // minutes
 			)

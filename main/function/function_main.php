@@ -19,6 +19,32 @@
 		}
 		return boolArray;
 	}
+
+	function encodeHTML(str) {
+		return str.replace(/[&<>"']/g, function(tag) {
+			var charsToReplace = {
+				'&': '&amp;',
+				'<': '&lt;',
+				'>': '&gt;',
+				'"': '&quot;',
+				"'": '&#39;'
+			};
+			return charsToReplace[tag] || tag;
+		});
+	}
+
+	function decodeHTML(str) {
+		return str.replace(/&amp;|&lt;|&gt;|&quot;|&#39;/g, function(tag) {
+			var charsToReplace = {
+				'&amp;': '&',
+				'&lt;': '<',
+				'&gt;': '>',
+				'&quot;': '"',
+				'&#39;': "'"
+			};
+			return charsToReplace[tag] || tag;
+		});
+	}
 </script>
 
 <?php

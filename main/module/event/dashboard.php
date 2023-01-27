@@ -28,10 +28,26 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
             <div class="tab-pane fade show active" id="myEvent" role="tabpanel" aria-labelledby="myEvent-tab" tabindex="0">
                 <div class="row pt-3">
                     <div class="col-sm-4 pb-2">
+                        <div class="card color-warning">
+                            <div class="card-body">
+                                <h5 class="card-title">ชื่อกิจกรรม</h5>
+                                <a href="index.php?p=event&m=event_detail" class="btn btn-primary">รายละเอียด <i class="bi bi-chevron-double-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 pb-2">
                         <div class="card color-success">
                             <div class="card-body">
-                                <h5 class="card-title">Special title treatment</h5>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <h5 class="card-title">ชื่อกิจกรรม</h5>
+                                <a href="index.php?p=event&m=event_detail" class="btn btn-primary">รายละเอียด <i class="bi bi-chevron-double-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 pb-2">
+                        <div class="card color-danger">
+                            <div class="card-body">
+                                <h5 class="card-title">ชื่อกิจกรรม</h5>
+                                <a href="index.php?p=event&m=event_detail" class="btn btn-primary">รายละเอียด <i class="bi bi-chevron-double-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -41,14 +57,30 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
                 <div class="tab-pane fade" id="manageEvent-pane" role="tabpanel" aria-labelledby="manageEvent" tabindex="0">
                     <div class="row pt-3">
                         <div class="col-sm-4 pb-2">
-                            <a href="index.php?p=event&m=event_detail" class="btn btn-success">สร้างกิจกรรม <i class="bi bi-plus-square-dotted"></i></a>
+                            <a href="index.php?p=event&m=event_detail_edit" class="btn btn-success">สร้างกิจกรรม <i class="bi bi-plus-square-dotted"></i></a>
                         </div>
                         <div class="row pt-3">
                             <div class="col-sm-4 pb-2">
                                 <div class="card color-warning">
                                     <div class="card-body">
-                                        <h5 class="card-title">Special title treatment</h5>
-                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                        <h5 class="card-title">ชื่อกิจกรรม</h5>
+                                        <a href="index.php?p=event&m=event_detail" class="btn btn-primary">รายละเอียด <i class="bi bi-chevron-double-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 pb-2">
+                                <div class="card color-success">
+                                    <div class="card-body">
+                                        <h5 class="card-title">ชื่อกิจกรรม</h5>
+                                        <a href="index.php?p=event&m=event_detail" class="btn btn-primary">รายละเอียด <i class="bi bi-chevron-double-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 pb-2">
+                                <div class="card color-danger">
+                                    <div class="card-body">
+                                        <h5 class="card-title">ชื่อกิจกรรม</h5>
+                                        <a href="index.php?p=event&m=event_detail" class="btn btn-primary">รายละเอียด <i class="bi bi-chevron-double-right"></i></a>
                                     </div>
                                 </div>
                             </div>
