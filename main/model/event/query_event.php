@@ -73,9 +73,9 @@ use Nette\Utils\Random;
         $eventId = "EV" + random_bytes(4);
         $result = mysqli_query($handle, "SELECT ev_eventId from event where ev_eventId = " . $eventId . "");
         if (!$result) {
-            return $eventId
+            return $eventId;
         }
-        return genEventId()
+        return genEventId();
     }
 
     function getEvent()
