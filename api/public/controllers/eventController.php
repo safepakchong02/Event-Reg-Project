@@ -40,8 +40,20 @@
         }
 
         public static function editEvent(Request $request, Response $response, $args) {
-            $response->getBody()->write("Hello world2!");
-            return $response;
+            $body = $request->getParsedBody();
+            $return = new responseObject(0, null, null);
+            if (!$body || !$args['eventId']) {
+                $return = new responseObject(400, "Bad request", null);
+                return $response->withStatus(400)->withJson($return->getResponse());
+            }
+            $result = updateEvent($body, $args['eventId']);
+            if ($result !== 200) {
+                $return = new responseObject(500, "Error", "");
+            }
+            else {
+                $return = new responseObject(200, "Updated Success", "");
+            }
+            return $response->withStatus($result)->withJson($return->getResponse());
         }
 
         public static function deleteEvent(Request $request, Response $response, $args) {
