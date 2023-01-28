@@ -87,7 +87,6 @@ use Nette\Utils\Random;
     , $lat, $long, $preRegStart, $preRegEnd, $checkInStart, $checkInEnd, $eventStart
     , $eventEnd)
     {
-
         $handle->begin_transaction();
         try {
             $query = "CALL createEvent( " . $userId . ", " . $eventId . " " . $title . ", 

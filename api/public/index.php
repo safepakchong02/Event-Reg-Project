@@ -1,5 +1,5 @@
 <?php
-use Psr\Http\Message\ResponseInterface as Response;
+use Slim\Http\Response as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
 use Selective\BasePath\BasePathMiddleware;
@@ -22,7 +22,12 @@ $app->get('/', function (Request $request, Response $response, $args) {
     return $response;
 });
 
-$app->get('/event/getEvent', EventController::class . '::test');
+$app->group('/event', function($app) {
+    $app->get('/', EventController::class . '::getEvent');
+    $app->post('/', EventController::class . '::createEvent');
+    $app->patch('/{eventId}', EventController::class . '::editEvent');
+    $app->delete('/{eventId}', EventController::class . '::deleteEvent');
+});
 
 $app->run();
 ?>
