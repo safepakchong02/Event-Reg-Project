@@ -57,8 +57,25 @@
         }
 
         public static function deleteEvent(Request $request, Response $response, $args) {
-            $response->getBody()->write("Hello world2!");
-            return $response;
+            $body = $request->getParsedBody();
+            if (!$body) {
+                $return = new responseObject(400, "Bad request", null);
+                return $response->withStatus(400)->withJson($return->getResponse());
+            }
+            $eventId = array_key_exists("eventId", $args) ? $args['eventId'] : null;
+            $userId = array_key_exists("userId", $body) ? $body['userId'] : null;
+            if (!$eventId|| !$userId) {
+                $return = new responseObject(400, "Bad request", null);
+                return $response->withStatus(400)->withJson($return->getResponse());
+            }
+            $result = deleteEvent($eventId, $userId);
+            if ($result !== 200) {
+                $return = new responseObject(500, "Error", "");
+            }
+            else {
+                $return = new responseObject(200, "Updated Success", "");
+            }
+            return $response->withStatus($result)->withJson($return->getResponse());
         }
     }
 

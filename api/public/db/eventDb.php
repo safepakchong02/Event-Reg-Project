@@ -78,4 +78,25 @@
         
         return 200;
     }
+
+    function deleteEvent($eventId, $userId) {
+        $returnData = null;
+        try {
+            $handle = connectDb();
+            $handle->beginTransaction();
+            $query = "CALL deleteEvent('{$userId}', '{$eventId}')";
+
+            $result = $handle->prepare($query);
+            $result->execute();
+            $handle->commit();
+        }
+        catch (PDOException $e) {
+            $handle->rollback();
+            echo $e->getMessage();
+            echo "err";
+            return 500;
+        }
+        
+        return 200;
+    }
 ?>
