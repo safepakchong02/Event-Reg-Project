@@ -45,6 +45,7 @@
 			return charsToReplace[tag] || tag;
 		});
 	}
+	
 </script>
 
 <?php
