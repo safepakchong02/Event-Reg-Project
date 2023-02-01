@@ -2,7 +2,7 @@
 <?
 $perm = true;
 $ctrl_path = "event";
-$ctrl_name = "events_manage_ctrl";
+$ctrl_name = "event_detail_edit_ctrl";
 include("main/controller/$ctrl_path/$ctrl_name.php");
 ?>
 
@@ -10,6 +10,7 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
     <div class="row pt-3">
         <h1>สร้างกิจกรรม</h1>
         <form>
+            <!-- title and limit -->
             <div class="row pb-3">
                 <div class="col pb-2">
                     <label for="ev_title" class="form-label">ชื่อกิจกรรม</label>
@@ -20,6 +21,7 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
                     <input type="number" class="form-control" id="ev_limit" name="ev_limit" ng-model="data_event.ev_limit">
                 </div>
             </div>
+            <!-- event detail -->
             <div class="row pb-3">
                 <div class="col-sm-12">
                     <span class="">รายละเอียดกิจกรรม</span>
@@ -30,6 +32,7 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
                     </div>
                 </div>
             </div>
+            <!-- event dtype -->
             <div class="row pt-3 pb-3 border rounded-2">
                 <div class="col-12 pb-4">
                     <span class="h5">ประเภทข้อมูลที่ต้องการ</span>
@@ -130,6 +133,7 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
                     </div>
                 </div>
             </div>
+            <!-- event setting -->
             <div class="row mt-3 pb-3 border rounded-2">
                 <div class="col-12 mt-3 pb-3">
                     <span class="h5">ตั้งค่าการลงทะเบียน</span>
@@ -153,6 +157,7 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
                     </div>
                 </div>
             </div>
+            <!-- event date -->
             <div class="row mt-3 pb-3 border rounded-2">
                 <div class="col-12 mt-3 pb-3">
                     <span class="h5">ตั้งค่าวัน/เวลา</span>
@@ -179,11 +184,12 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
                     <input type="datetime-local" class="form-control" id="ev_checkInEnd" name="ev_checkInEnd" ng-model="data_event.ev_checkInEnd">
                 </div>
             </div>
+            <!-- btn -->
             <div class="row pt-3">
                 <div class="col-sm-3">
-                    <button type="button" class="btn btn-primary" ng-if="!isCreate" ng-click="save_event('POST','createEvent')">บันทึก</button>
-                    <button type="button" class="btn btn-primary" ng-if="isCreate" ng-click="save_event('PATCH','editEvent')">บันทึก</button>
-                    <button type="button" class="btn btn-danger" ng-if="isCreate" ng-click="delete_event(data_event.ev_eventId)">ลบกิจกรรม</button>
+                    <button type="button" class="btn btn-primary" ng-if="isCreate" ng-click="save_event('POST','createEvent')">บันทึก</button>
+                    <button type="button" class="btn btn-primary" ng-if="!isCreate" ng-click="save_event('PATCH','editEvent')">บันทึก</button>
+                    <button type="button" class="btn btn-danger" ng-if="!isCreate" ng-click="delete_event(data_event.ev_eventId)">ลบกิจกรรม</button>
                 </div>
             </div>
         </form>

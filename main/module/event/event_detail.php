@@ -1,6 +1,16 @@
-<div class="container-fluid">
-    <div class="row pt-5">
+<!-- import ctrl -->
+<?
+$ctrl_path = "event";
+$ctrl_name = "event_detail_ctrl";
+include("main/controller/$ctrl_path/$ctrl_name.php");
+?>
 
+<div class="container-fluid" ng-controller="<?= $ctrl_name ?>">
+    <div class="row pb-2 pt-5">
+        <h1>{{event_data.ev_title}}</h1>
+        <p>วันเวลาเปิด-ปิดลงทะเบียนล่วงหน้า : {{event_data.ev_preRegStart}} - {{event_data.ev_preRegEnd}}</p>
+        <p>วันเวลาเปิด-ปิดลงทะเบียนเข้างาน : {{event_data.ev_checkInStart}} - {{event_data.ev_checkInEnd}}</p>
+        <p>วันเวลาที่กิจกรรมเริ่ม-จบ : {{event_data.ev_eventStart}} - {{event_data.ev_eventEnd}}</p>
     </div>
     <div class="row">
         <!-- edit here -->
@@ -20,25 +30,33 @@
             <div class="tab-pane fade show active" id="eventDetail" role="tabpanel" aria-labelledby="eventDetail-tab" tabindex="0">
                 <div class="row pt-3">
                     <div class="col-10 pb-2">
-                        <div class="card">
+                        <div class="card text-center">
+                            <div class="card-header">
+                                รายละเอียดกิจกรรม
+                            </div>
                             <div class="card-body">
-                                <h3 class="card-title">รายละเอียดกิจกรรม</h3>
-                                <h5 class="card-title">บลาๆๆ</h5>
-                                <h5 class="card-title">บลาๆๆ</h5>
-                                <h5 class="card-title">บลาๆๆ</h5>
+                                <p class="card-text">{{event_data.ev_detail}}</p>
+                            </div>
+                            <div class="card-footer">
+                                <span>QR code สำหรับกิจกรรมนี้</span><br>
+                                <div id="qrcode" class="d-flex justify-content-center"></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-2 pb-2">
-                        <div class="row">
-                            <div class="col-md-12 pb-2">
-                                <img src="./asset/user.png" alt="" height="150px">
-                            </div>
-                            <div class="col-md-12">
-                                <div class="card color-success">
+                        <div class="row pb-2">
+                            <div class="col-sm-12">
+                                <div class="card text-center color-success">
+                                    <img src="./asset/user.png" class="card-img-top img-thumbnail color-success">
                                     <div class="card-body">
-                                        <h5 class="card-title">45/100</h5>
-                                        <a href="#" class="btn btn-primary">ลงทะเบียน</a>
+                                        <p class="h5">สร้างโดย</p>
+                                        <p>นายอิทธิพล สิงห์บุรี</p>
+                                        <hr>
+                                        <p class="h5">จำนวนผู้เข้าร่วม</p>
+                                        <p>47/120</p>
+                                        <hr>
+                                        <button type="button" ng-click="preReg()" ng-if="isPreReg" id="preReg" class="btn btn-sm btn-primary">ลงทะเบียนล่วงหน้า <i class="bi bi-box-arrow-in-right"></i></button>
+                                        <button type="button" ng-click="checkIn()" ng-if="isSelfCheckIn" id="checkIn" class="btn btn-sm btn-primary">ลงทะเบียน <i class="bi bi-box-arrow-in-right"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -51,7 +69,6 @@
                     <div class="card">
                         <div class="card-body">
                             <h3 class="card-title">รายงานกิจกรรม</h3>
-                            <h5 class="card-title">บลาๆๆ</h5>
                             <h5 class="card-title">บลาๆๆ</h5>
                             <h5 class="card-title">บลาๆๆ</h5>
                         </div>

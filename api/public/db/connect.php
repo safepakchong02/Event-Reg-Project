@@ -2,9 +2,9 @@
     function connectDb(){
         $handler = null;
         $db = "prj65_16";
-        $host = "localhost";
-        $user = "root";
-        $password = "";
+        $host = "203.158.3.36";
+        $user = "prj65_16";
+        $password = "884396";
         try {
             $handler = new PDO("mysql:host=$host;dbname=$db", $user, $password);
             $handler->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
