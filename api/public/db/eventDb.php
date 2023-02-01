@@ -92,11 +92,42 @@
         }
         catch (PDOException $e) {
             $handle->rollback();
-            echo $e->getMessage();
-            echo "err";
             return 500;
         }
-        
         return 200;
     }
+
+    function preRegister ($eventId, $userId) {
+        try {
+            $handle = connectDb();
+            $handle->beginTransaction();
+            $query = "CALL preRegister('{$userId}', '{$eventId}')";
+
+            $result = $handle->prepare($query);
+            $result->execute();
+            $handle->commit();
+        }
+        catch (PDOException $e) {
+            $handle->rollback();
+            return 500;
+        }
+        return 200;
+    } 
+
+    function checkIn ($eventId, $userId) {
+        try {
+            $handle = connectDb();
+            $handle->beginTransaction();
+            $query = "CALL checkIn('{$userId}', '{$eventId}')";
+
+            $result = $handle->prepare($query);
+            $result->execute();
+            $handle->commit();
+        }
+        catch (PDOException $e) {
+            $handle->rollback();
+            return 500;
+        }
+        return 200;
+    } 
 ?>

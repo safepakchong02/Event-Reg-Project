@@ -27,6 +27,9 @@ $app->group('/event', function($app) {
     $app->post('/', EventController::class . '::createEvent');
     $app->patch('/{eventId}', EventController::class . '::editEvent');
     $app->delete('/{eventId}', EventController::class . '::deleteEvent');
+    
+    $app->patch('/{eventId}/preRegister', EventController::class . '::preRegister');
+    $app->patch('/{eventId}/checkIn', EventController::class . '::checkIn');
 });
 
 $app->run();
