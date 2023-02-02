@@ -1,5 +1,4 @@
 <script ng-init="data_event.ev_limit=-1;data_event.ev_dtype=[];">
-    var app = angular.module("<?= $app_name ?>", ['datatables']);
     app.controller("<?= $ctrl_name ?>", function($scope, $http) { // start controller function
 
         let qrcode = new QRCode(document.getElementById("qrcode"), {
@@ -28,7 +27,7 @@
                 url: `api/event/${ev_eventId}`,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
-                    'Authorization': `token`
+                    'Authorization': `${$scope.ac_token}`
                 }
             }).then((res) => {
                 $scope.event_data = res.data.results_data[0];
@@ -52,10 +51,10 @@
             if (now >= preRegStart && now <= preRegEnd) {
                 $http({
                     method: `GET`,
-                    url: `api/reg/preReg`,
+                    url: `api/event/${$scope.event_data.ev_eventId}/preRegister`,
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
-                        'Authorization': `token`
+                        'Authorization': `${$scope.ac_token}`
                     }
                 }).then((res) => {
                     Swal.fire({
@@ -72,10 +71,10 @@
             if (now >= checkInStart && now <= checkInEnd) {
                 $http({
                     method: `GET`,
-                    url: `api/reg/checkIn`,
+                    url: `api/event/${$scope.event_data.ev_eventId}/checkIn`,
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
-                        'Authorization': `token`
+                        'Authorization': `${$scope.ac_token}`
                     }
                 }).then((res) => {
                     Swal.fire({
@@ -92,10 +91,10 @@
             if (now >= checkInStart && now <= checkInEnd) {
                 $http({
                     method: `GET`,
-                    url: `api/reg/checkIn/${u_userId}`,
+                    url: `api/event/${$scope.event_data.ev_eventId}/checkIn/${u_userId}`,
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
-                        'Authorization': `token`
+                        'Authorization': `${$scope.ac_token}`
                     }
                 }).then((res) => {
                     Swal.fire({

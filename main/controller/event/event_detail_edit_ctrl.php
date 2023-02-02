@@ -1,5 +1,4 @@
 <script ng-init="data_event.ev_limit=-1;data_event.ev_dtype=[];">
-    var app = angular.module("<?= $app_name ?>", ['datatables']);
     app.controller("<?= $ctrl_name ?>", function($scope, $http) { // start controller function
 
         const numberOfDtype = 12;
@@ -35,7 +34,7 @@
                 url: `api/event/${ev_eventId}`,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
-                    'Authorization': `token`
+                    'Authorization': `${$scope.ac_token}`
                 }
             }).then((res) => {
                 let event_data = res.data.results_data[0];
@@ -65,26 +64,26 @@
             $http({
                 method: `${method}`,
                 url: `${url}`,
-                data: `u_userId=${"1234"}` + // string
-                    `ev_title=${$scope.data_event.ev_title}` + // string
-                    `ev_detail=${encodeHTML(editor.getData())}` + // string
-                    `ev_limit=${$scope.data_event.ev_limit}` + // int
-                    `ev_dtype=${parseInt(boolArrayToLSB($scope.data_event.ev_dtype), 2)}` + // int
-                    `ev_selfReg=${Number($scope.data_event.ev_selfReg)}` + // int
-                    `ev_preReg=${Number($scope.data_event.ev_preReg)}` + // int
-                    `ev_public=${Number($scope.data_event.ev_public)}` + // int
-                    `ev_Gps=${""}` + // boolean
-                    `ev_lat=${""}` + // long
-                    `ev_long=${""}` + // long
-                    `ev_preRegStart=${convertDate($scope.data_event.ev_preRegStart)}` + // string datetime-local
-                    `ev_preRegEnd=${convertDate($scope.data_event.ev_preRegEnd)}` + // string datetime-local
-                    `ev_checkInStart=${convertDate($scope.data_event.ev_checkInStart)}` + // string datetime-local
-                    `ev_checkInEnd=${convertDate($scope.data_event.ev_checkInEnd)}` + // string datetime-local
-                    `ev_eventStart=${convertDate($scope.data_event.ev_eventStart)}` + // string datetime-local
+                data: `u_userId=${$scope.u_userId}` + // string
+                    `&ev_title=${$scope.data_event.ev_title}` + // string
+                    `&ev_detail=${encodeHTML(editor.getData())}` + // string
+                    `&ev_limit=${$scope.data_event.ev_limit}` + // int
+                    `&ev_dtype=${parseInt(boolArrayToLSB($scope.data_event.ev_dtype), 2)}` + // int
+                    `&ev_selfReg=${Number($scope.data_event.ev_selfReg)}` + // int
+                    `&ev_preReg=${Number($scope.data_event.ev_preReg)}` + // int
+                    `&ev_public=${Number($scope.data_event.ev_public)}` + // int
+                    `&ev_Gps=${""}` + // boolean
+                    `&ev_lat=${""}` + // long
+                    `&ev_long=${""}` + // long
+                    `&ev_preRegStart=${convertDate($scope.data_event.ev_preRegStart)}` + // string datetime-local
+                    `&ev_preRegEnd=${convertDate($scope.data_event.ev_preRegEnd)}` + // string datetime-local
+                    `&ev_checkInStart=${convertDate($scope.data_event.ev_checkInStart)}` + // string datetime-local
+                    `&ev_checkInEnd=${convertDate($scope.data_event.ev_checkInEnd)}` + // string datetime-local
+                    `&ev_eventStart=${convertDate($scope.data_event.ev_eventStart)}` + // string datetime-local
                     `&ev_eventEnd=${convertDate($scope.data_event.ev_eventEnd)}`, // string datetime-local
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
-                    'Authorization': `token`
+                    'Authorization': `${$scope.ac_token}`
                 }
             }).then((res) => {
                     Swal.fire({
@@ -122,7 +121,7 @@
                         url: `api/event/deleteEvent/${ev_eventId}`,
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded',
-                            'Authorization': `token`
+                            'Authorization': `${$scope.ac_token}`
                         }
                     }).then((res) => {
                             Swal.fire({

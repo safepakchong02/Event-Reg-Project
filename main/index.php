@@ -4,11 +4,12 @@
 date_default_timezone_set('Asia/Bangkok');
 
 // global var
-$app_name = "SuthReg";
+$app_name = "SUTEvent";
 $_SESSION["default_path"] = "main/module/event/dashboard.php";
 
 include("main/function/function_main.php");
 include("main/function/function_date.php");
+include("main/function/function_cookies.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,9 +22,17 @@ include("main/function/function_date.php");
     <? include("main/body/header.php"); ?>
     <!-- end header -->
     <title>SUT-Event</title>
+
+    <!-- handle login -->
+    <?
+    $ctrl_path = "login";
+    $ctrl_name = "login_handle_ctrl";
+    include("main/controller/$ctrl_path/$ctrl_name.php");
+    ?>
+    <!-- end handle login -->
 </head>
 
-<body ng-app="<?= $app_name ?>" style="font-family: 'IBM Plex Sans Thai Looped', sans-serif !important;">
+<body ng-app="<?= $app_name ?>" ng-controller="<?= $ctrl_name ?>" style="font-family: 'IBM Plex Sans Thai Looped', sans-serif !important;">
     <div class="container-fluid">
         <div class="row">
             <!-- sidebar -->

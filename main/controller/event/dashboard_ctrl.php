@@ -1,5 +1,4 @@
 <script>
-    var app = angular.module("<?= $app_name ?>", ['datatables']);
     app.controller("<?= $ctrl_name ?>", function($scope, $http) { // start controller function
 
         // เรียกข้อมูล กิจกรรมของฉัน
@@ -8,7 +7,7 @@
             url: `api/event/MyEvent`,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': `token`
+                'Authorization': `${$scope.ac_token}`
             }
         }).then((res) => {
             $scope.myEvent = res.data.results_data;
@@ -20,7 +19,7 @@
             url: `api/event/ModEvent`,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': `token`
+                'Authorization': `${$scope.ac_token}`
             }
         }).then((res) => {
             $scope.ModEvent = res.data.results_data;
