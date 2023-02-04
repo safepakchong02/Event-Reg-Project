@@ -51,6 +51,26 @@
         return $rs;
     }
 
+    function eventMember($eventId){
+        try {
+            $handle = connectDb();
+            $handle->beginTransaction();
+            $query = "SELECT * FROM eventMemberView where ev_eventId = '{$eventId}'";
+
+            $result = $handle->prepare($query);
+            $result->execute();
+
+            $rs = $result->fetchAll();
+
+            $handle->commit();
+        }
+        catch (PDOException $e) {
+            $handle->rollback();
+            return 500;
+        }
+        return $rs;
+    }
+
     function updateEvent($data, $eventId) {
 
         $data['title'] = array_key_exists("title", $data) ? $data['title'] : null;
