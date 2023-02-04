@@ -4,6 +4,27 @@
 
     global $handle;
     global $returnData;
+
+    function getEvent($eventId){
+        try {
+            $handle = connectDb();
+            $handle->beginTransaction();
+            $query = "SELECT * FROM eventPermView where ev_eventId = '{$eventId}'";
+
+            $result = $handle->prepare($query);
+            $result->execute();
+
+            $rs = $result->fetchAll();
+            if ($rs->s)
+
+            $handle->commit();
+        }
+        catch (PDOException $e) {
+            $handle->rollback();
+            return 500;
+        }
+        return $rs;
+    }
     function createEvent($data) {
         $returnData = null;
         try {
@@ -41,6 +62,27 @@
             $result->execute();
 
             $rs = $result->fetchAll();
+
+            $handle->commit();
+        }
+        catch (PDOException $e) {
+            $handle->rollback();
+            return 500;
+        }
+        return $rs;
+    }
+
+    function eventPermission($eventId){
+        try {
+            $handle = connectDb();
+            $handle->beginTransaction();
+            $query = "SELECT * FROM eventPermView where ev_eventId = '{$eventId}'";
+
+            $result = $handle->prepare($query);
+            $result->execute();
+
+            $rs = $result->fetchAll();
+            if ($rs->s)
 
             $handle->commit();
         }

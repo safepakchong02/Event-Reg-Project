@@ -26,6 +26,7 @@ $app->group('/event', function($app) {
     $app->get('/', EventController::class . '::getEvent');
     $app->get('/{eventId}', EventController::class . '::getEventDetail');
     $app->get('/{eventId}/member', EventController::class . '::getEventMember');
+    $app->get('/{eventId}/permission', EventController::class . '::getEventPermission');
     $app->post('/', EventController::class . '::createEvent');
     $app->patch('/{eventId}', EventController::class . '::editEvent');
     $app->delete('/{eventId}', EventController::class . '::deleteEvent');
