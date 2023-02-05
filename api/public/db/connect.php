@@ -14,7 +14,7 @@
             }
         }
         catch (PDOException $e) {
-
+            
         }
         return $handler;
     }

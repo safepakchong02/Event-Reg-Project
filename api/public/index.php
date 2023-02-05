@@ -6,7 +6,9 @@ use Selective\BasePath\BasePathMiddleware;
 
 require '../vendor/autoload.php';
 require_once 'controllers/eventController.php';
+require_once 'controllers/userController.php';
 use controllers\EventController;
+use controllers\UserController;
 
 $app = AppFactory::create();
 
@@ -17,10 +19,13 @@ $app->add(new BasePathMiddleware($app));
 $app->addErrorMiddleware(true, true, true);
 
 $app->get('/', function (Request $request, Response $response, $args) {
-    var_dump(class_exists('controllers\EventController'));
     $response->getBody()->write("Hello world!");
     return $response;
 });
+
+$app->post('/login', UserController::class . '::login');
+
+$app->post('/register', UserController::class . '::register');
 
 $app->group('/event', function($app) {
     $app->get('/', EventController::class . '::getEvent');
@@ -29,11 +34,11 @@ $app->group('/event', function($app) {
     $app->get('/{eventId}/permission', EventController::class . '::getEventPermission');
     $app->post('/', EventController::class . '::createEvent');
     $app->patch('/{eventId}', EventController::class . '::editEvent');
-    $app->delete('/{eventId}', EventController::class . '::deleteEvent');
-    
+    $app->delete('/{eventId}', EventController::class . '::deleteEvent');    
     $app->patch('/{eventId}/preRegister', EventController::class . '::preRegister');
     $app->patch('/{eventId}/checkIn', EventController::class . '::checkIn');
 });
+
 
 $app->run();
 ?>

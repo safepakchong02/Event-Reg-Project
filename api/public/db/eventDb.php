@@ -15,8 +15,6 @@
             $result->execute();
 
             $rs = $result->fetchAll();
-            if ($rs->s)
-
             $handle->commit();
         }
         catch (PDOException $e) {
@@ -30,15 +28,15 @@
         try {
             $handle = connectDb();
             $handle->beginTransaction();
-            $query = "CALL createEvent( '{$data['userId']}' , '{$data['eventId']}',
-            '{$data['title']}', 
-            '{$data['detail']}', '{$data['limit']}', 
-            '{$data['dType']}', '{$data['selfReg']}', '{$data['public']}',
-            '{$data['preReg']}', '{$data['gps']}',
-            '{$data['lat']}', '{$data['long']}', 
-            '{$data['preRegStart']}', '{$data['preRegEnd']}', 
-            '{$data['checkInStart']}', '{$data['checkInEnd']}', 
-            '{$data['eventStart']}', '{$data['eventEnd']}')";
+            $query = "CALL createEvent( '{$data['ev_userId']}' , '{$data['ev_eventId']}',
+            '{$data['ev_title']}', 
+            '{$data['ev_detail']}', '{$data['ev_limit']}', 
+            '{$data['ev_dType']}', '{$data['ev_selfReg']}', '{$data['ev_public']}',
+            '{$data['ev_preReg']}', '{$data['ev_gps']}',
+            '{$data['ev_lat']}', '{$data['ev_long']}', 
+            '{$data['ev_preRegStart']}', '{$data['ev_preRegEnd']}', 
+            '{$data['ev_checkInStart']}', '{$data['ev_checkInEnd']}', 
+            '{$data['ev_eventStart']}', '{$data['ev_eventEnd']}')";
 
             $result = $handle->prepare($query);
             $result->execute();
@@ -82,8 +80,6 @@
             $result->execute();
 
             $rs = $result->fetchAll();
-            if ($rs->s)
-
             $handle->commit();
         }
         catch (PDOException $e) {

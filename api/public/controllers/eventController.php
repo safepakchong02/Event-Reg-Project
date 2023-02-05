@@ -168,7 +168,7 @@
                     return $response->withStatus(400)->withJson($return->getResponse());
                 }
                 $result = preRegister($eventId, $userId);
-                if ($result !== 200) {
+                if ($result === 500) {
                     $return = new responseObject(500, "Error", "");
                 }
                 else {
