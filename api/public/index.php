@@ -27,6 +27,8 @@ $app->post('/login', UserController::class . '::login');
 
 $app->post('/register', UserController::class . '::register');
 
+$app->post('/logout', UserController::class . '::logout');
+
 $app->group('/event', function($app) {
     $app->get('/', EventController::class . '::getEvent');
     $app->get('/{eventId}', EventController::class . '::getEventDetail');

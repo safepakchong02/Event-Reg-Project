@@ -76,7 +76,27 @@
         }
 
         public static function logout(Request $request, Response $response, $args) {
-
+            try {
+                $header = getallheaders();
+                $token = $header["Authorization"];
+                $result = logout($token);
+                if ($result === 500) {
+                    $return = new responseObject(500, "Error", "");
+                    return $response->withStatus(500)->withJson($return->getResponse());
+                }
+                else {
+                    $return = new responseObject(200, "Success", '');
+                    setcookie('token', '', time() - 86400);
+                    setcookie('userId', '', time() - 86400);
+                    setcookie('role', '', time() - 86400);
+                    setcookie('name', '', time() - 86400);
+                }
+                return $response->withStatus(200)->withJson($return->getResponse());
+            }
+            catch (Exception $e) {
+                $return = new responseObject(500, "Error", $e->getMessage());
+                return $response->withStatus(500)->withJson($return->getResponse());
+            }
         }
     }
 

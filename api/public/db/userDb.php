@@ -62,6 +62,23 @@
         return false;
     }
 
+    function logout ($token) {
+        try {
+            $handle = connectDb();
+            $handle->beginTransaction();
+            $query = "DELETE FROM accessToken WHERE ac_token = '{$token}'";
+            $result = $handle->prepare($query);
+            $result->execute();
+            $handle->commit();
+        }
+        catch (PDOException $e) {
+            $handle->rollback();
+            echo $e->getMessage();
+            return 500;
+        }
+        return 200;
+    }
+
     function register($data){
         $data['u_password'] = md5($data['u_password']);
         $data['ud_emp_id'] = array_key_exists("ud_emp_id", $data) ? $data['ud_emp_id'] : null;
