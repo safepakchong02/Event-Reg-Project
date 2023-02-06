@@ -9,7 +9,7 @@
         try {
             $handle = connectDb();
             $handle->beginTransaction();
-            $query = "SELECT * FROM users WHERE u_email = '{$email}' AND u_password = '{$password}'";
+            $query = "SELECT * FROM users WHERE u_email = '{$email}' AND u_password = '{$password}' AND u_status = 'A'";
 
             $result = $handle->prepare($query);
             $result->execute();
@@ -229,6 +229,23 @@
             return 500;
         }
         return $returnData;
+    }
+
+    function deactivate($userId) {
+        try {
+            $handle = connectDb();
+            $handle->beginTransaction();
+            $query = "UPDATE users SET u_status = 'N' WHERE u_userId = '{$userId}'";
+            $result = $handle->prepare($query);
+            $result->execute();
+            $handle->commit();
+        }
+        catch (PDOException $e) {
+            $handle->rollback();
+            echo $e->getMessage();
+            return 500;
+        }
+        return 200;
     }
 
 ?>

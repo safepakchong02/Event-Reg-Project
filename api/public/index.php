@@ -41,6 +41,7 @@ $app->group('/admin', function($app) {
 
 $app->group('/user', function($app) {
     $app->get('/profile', UserController::class . '::getProfile');
+    $app->post('/deactivate', UserController::class . '::deactivate');
 });
 
 $app->group('/event', function($app) {
