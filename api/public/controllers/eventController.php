@@ -9,6 +9,7 @@
     use TheSeer\Tokenizer\Exception;
     require_once 'responseObject.php';
     require_once '../public/db/eventDb.php';
+    require_once '../public/db/userDb.php';
 
     Class EventController
     {
@@ -209,6 +210,46 @@
                 return $response->withStatus(500)->withJson($return->getResponse());
             }
         }
+
+
+        public static function getMyRegisteredEvent(Request $request, Response $response, $args) {
+            try {
+                $auth = authen($request->getHeaders());
+                $userId = array_key_exists('u_userId', (array)$auth) ? $auth['u_userId'] : null;
+                if (!$userId) {
+                    $return = new responseObject(500, "Error", "");
+                    return $response->withStatus(500)->withJson($return->getResponse());
+                }
+
+                $result = getMyRegisteredEvent($userId);
+                $return = new responseObject(200, "Success", $result);
+                return $response->withStatus(200)->withJson($return->getResponse());
+            }
+            catch (Exception $e) {
+                $return = new responseObject(500, "Error", $e->getMessage());
+                return $response->withStatus(500)->withJson($return->getResponse());
+            }
+        }
+
+        public static function getModEvent(Request $request, Response $response, $args) {
+            try {
+                $auth = authen($request->getHeaders());
+                $userId = array_key_exists('u_userId', (array)$auth) ? $auth['u_userId'] : null;
+                if (!$userId) {
+                    $return = new responseObject(500, "Error", "");
+                    return $response->withStatus(500)->withJson($return->getResponse());
+                }
+ 
+                $result = getModEvent($userId);
+                $return = new responseObject(200, "Success", $result);
+                return $response->withStatus(200)->withJson($return->getResponse());
+            }
+            catch (Exception $e) {
+                $return = new responseObject(500, "Error", $e->getMessage());
+                return $response->withStatus(500)->withJson($return->getResponse());
+            }
+        }
+
     }
 
 

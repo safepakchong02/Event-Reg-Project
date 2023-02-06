@@ -207,6 +207,47 @@
             return 500;
         }
         return 200;
-    } 
+    }
+    
+    function getMyRegisteredEvent($userId) {
+        try {
+            $handle = connectDb();
+            $handle->beginTransaction();
+            $query = "SELECT * FROM 
+            eventView as e 
+            LEFT JOIN eventMemberView as m ON e.ev_eventId = m.ev_eventId
+            WHERE m.u_userId = '{$userId}'
+            ORDER BY e.ev_status = 1";
+            $result = $handle->prepare($query);
+            $result->execute();
+            $returnData = $result->fetchAll();
+            $handle->commit();
+        }
+        catch (PDOException $e) {
+            $handle->rollback();
+            return 500;
+        }
+        return $returnData;
+    }
+    function getModEvent($userId) {
+        try {
+            $handle = connectDb();
+            $handle->beginTransaction();
+            $query = "SELECT * FROM 
+            eventView as e 
+            LEFT JOIN eventPermView as m ON e.ev_eventId = m.ev_eventId
+            WHERE m.u_userId = '{$userId}' OR e.ev_createdBy = '{$userId}'
+            ORDER BY e.ev_createdBy";
+            $result = $handle->prepare($query);
+            $result->execute();
+            $returnData = $result->fetchAll();
+            $handle->commit();
+        }
+        catch (PDOException $e) {
+            $handle->rollback();
+            return 500;
+        }
+        return $returnData;
+    }
 
 ?>

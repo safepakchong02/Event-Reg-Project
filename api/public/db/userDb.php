@@ -79,6 +79,31 @@
         return 200;
     }
 
+    function forcelogout ($userId) {
+        try {
+            $handle = connectDb();
+            $handle->beginTransaction();
+            $query = "SELECT ac_token FROM tokenView where u_userId = '{$userId}'";
+            $result = $handle->prepare($query);
+            $result->execute();
+            $token = $result->fetch();
+            if (!$token) {
+                return 500;
+            }
+            $param = $token['ac_token'];
+            $query = "DELETE FROM accessToken WHERE ac_token = '{$param}'";
+            $result = $handle->prepare($query);
+            $result->execute();
+            $handle->commit();
+        }
+        catch (PDOException $e) {
+            $handle->rollback();
+            echo $e->getMessage();
+            return 500;
+        }
+        return 200;
+    }
+
     function register($data){
         $data['u_password'] = md5($data['u_password']);
         $data['ud_emp_id'] = array_key_exists("ud_emp_id", $data) ? $data['ud_emp_id'] : null;
@@ -129,6 +154,81 @@
             return 500;
         }
         return 201;
+    }
+
+    function authen($token) {
+        try {
+            $returnData = [];
+            if (!array_key_exists('Authorization', $token) || !$token['Authorization'][0]){
+                return $returnData;
+            }
+            $handle = connectDb();
+            $handle->beginTransaction();
+            $query = "SELECT u_userId, u_role FROM userView WHERE ac_token = '{$token['Authorization'][0]}' AND ac_expireTime > NOW() LIMIT 1";
+            $result = $handle->prepare($query);
+            $result->execute();
+            $returnData = $result->fetch();
+            $handle->commit();
+        }
+        catch (PDOException $e) {
+            $handle->rollback();
+            echo $e->getMessage();
+            return 500;
+        }
+        return $returnData;
+    }
+
+    function getUserAdmin() {
+        try {
+            $handle = connectDb();
+            $handle->beginTransaction();
+            $query = "SELECT * FROM userView ORDER BY u_status = 'A'";
+            $result = $handle->prepare($query);
+            $result->execute();
+            $returnData = $result->fetchAll();
+            $handle->commit();
+        }
+        catch (PDOException $e) {
+            $handle->rollback();
+            echo $e->getMessage();
+            return 500;
+        }
+        return $returnData;
+    }
+
+    function editRole($userId, $role) {
+        try {
+            $handle = connectDb();
+            $handle->beginTransaction();
+            $query = "UPDATE users SET u_role = '{$role}' WHERE u_userId = '{$userId}'";
+            $result = $handle->prepare($query);
+            $result->execute();
+            $handle->commit();
+        }
+        catch (PDOException $e) {
+            $handle->rollback();
+            echo $e->getMessage();
+            return 500;
+        }
+        return 200;
+    }
+
+    function getProfile($userId){
+        try {
+            $handle = connectDb();
+            $handle->beginTransaction();
+            $query = "SELECT * FROM userView WHERE u_userId = '{$userId}'";
+            $result = $handle->prepare($query);
+            $result->execute();
+            $returnData = $result->fetch();
+            $handle->commit();
+        }
+        catch (PDOException $e) {
+            $handle->rollback();
+            echo $e->getMessage();
+            return 500;
+        }
+        return $returnData;
     }
 
 ?>
