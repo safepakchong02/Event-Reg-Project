@@ -111,37 +111,37 @@
 
     function updateEvent($data, $eventId) {
 
-        $data['title'] = array_key_exists("title", $data) ? $data['title'] : null;
-        $data['detail'] = array_key_exists("detail", $data) ? $data['detail'] : null;
-        $data['dType'] = array_key_exists("dType", $data) ? $data['dType'] : null;
-        $data['selfReg'] = array_key_exists("selfReg", $data) ? $data['selfReg'] : null;
-        $data['public'] = array_key_exists("public", $data) ? $data['public'] : null;
-        $data['preReg'] = array_key_exists("preReg", $data) ? $data['preReg'] : null;
-        $data['gps'] = array_key_exists("gps", $data) ? $data['gps'] : null;
-        $data['lat'] = array_key_exists("lat", $data) ? $data['lat'] : null;
-        $data['long'] = array_key_exists("long", $data) ? $data['long'] : null;
-        $data['preRegStart'] = array_key_exists("preRegStart", $data) ? $data['preRegStart'] : null;
-        $data['preRegEnd'] = array_key_exists("preRegEnd", $data) ? $data['preRegEnd'] : null;
-        $data['checkInStart'] = array_key_exists("checkInStart", $data) ? $data['checkInStart'] : null;
-        $data['checkInEnd'] = array_key_exists("checkInEnd", $data) ? $data['checkInEnd'] : null;
-        $data['eventStart'] = array_key_exists("eventStart", $data) ? $data['eventStart'] : null;
-        $data['eventEnd'] = array_key_exists("eventEnd", $data) ? $data['eventEnd'] : null;
-        $data['status'] = array_key_exists("status", $data) ? $data['status'] : null;
+        $data['ev_title'] = array_key_exists("ev_title", $data) ? $data['ev_title'] : null;
+        $data['ev_detail'] = array_key_exists("ev_detail", $data) ? $data['ev_detail'] : null;
+        $data['ev_dType'] = array_key_exists("ev_dType", $data) ? $data['ev_dType'] : null;
+        $data['ev_selfReg'] = array_key_exists("ev_selfReg", $data) ? $data['ev_selfReg'] : null;
+        $data['ev_public'] = array_key_exists("ev_public", $data) ? $data['ev_public'] : null;
+        $data['ev_preReg'] = array_key_exists("ev_preReg", $data) ? $data['ev_preReg'] : null;
+        $data['ev_gps'] = array_key_exists("ev_gps", $data) ? $data['ev_gps'] : null;
+        $data['ev_lat'] = array_key_exists("ev_lat", $data) ? $data['ev_lat'] : null;
+        $data['ev_long'] = array_key_exists("ev_long", $data) ? $data['long'] : null;
+        $data['ev_preRegStart'] = array_key_exists("ev_preRegStart", $data) ? $data['ev_preRegStart'] : null;
+        $data['ev_preRegEnd'] = array_key_exists("ev_preRegEnd", $data) ? $data['ev_preRegEnd'] : null;
+        $data['ev_checkInStart'] = array_key_exists("ev_checkInStart", $data) ? $data['ev_checkInStart'] : null;
+        $data['ev_checkInEnd'] = array_key_exists("ev_checkInEnd", $data) ? $data['ev_checkInEnd'] : null;
+        $data['ev_eventStart'] = array_key_exists("ev_eventStart", $data) ? $data['ev_eventStart'] : null;
+        $data['ev_eventEnd'] = array_key_exists("ev_eventEnd", $data) ? $data['ev_eventEnd'] : null;
+        $data['ev_status'] = array_key_exists("ev_status", $data) ? $data['ev_status'] : null;
 
         
         $returnData = null;
         try {
             $handle = connectDb();
             $handle->beginTransaction();
-            $query = "CALL updateEvent( '{$data['userId']}' , '{$eventId}',
-            '{$data['title']}', 
-            '{$data['detail']}', '{$data['limit']}', 
-            '{$data['dType']}', '{$data['selfReg']}', '{$data['public']}',
-            '{$data['preReg']}', '{$data['gps']}',
-            '{$data['lat']}', '{$data['long']}', 
-            '{$data['preRegStart']}', '{$data['preRegEnd']}', 
-            '{$data['checkInStart']}', '{$data['checkInEnd']}', 
-            '{$data['eventStart']}', '{$data['eventEnd']}', '{$data['status']}')";
+            $query = "CALL updateEvent( '{$data['u_userId']}' , '{$eventId}',
+            '{$data['ev_ev_title']}', 
+            '{$data['ev_detail']}', '{$data['ev_limit']}', 
+            '{$data['ev_dType']}', '{$data['ev_selfReg']}', '{$data['ev_public']}',
+            '{$data['ev_preReg']}', '{$data['ev_gps']}',
+            '{$data['ev_lat']}', '{$data['ev_long']}', 
+            '{$data['ev_preRegStart']}', '{$data['ev_preRegEnd']}', 
+            '{$data['ev_checkInStart']}', '{$data['ev_checkInEnd']}', 
+            '{$data['ev_eventStart']}', '{$data['ev_eventEnd']}', '{$data['ev_status']}')";
             echo $query;
             echo json_encode($data);
             $result = $handle->prepare($query);
