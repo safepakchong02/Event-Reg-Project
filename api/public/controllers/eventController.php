@@ -56,7 +56,8 @@
             try {
                 $auth = authen($request->getHeaders());
                 $userId = array_key_exists('u_userId', (array)$auth) ? $auth['u_userId'] : null;
-                if (!checkManager($userId)){
+                $idcheck = checkManager($userId);
+                if (!array_key_exists('u_userId', (array)$idcheck)){
                     $return = new responseObject(500, "Error", null);
                     return $response->withStatus(500)->withJson($return->getResponse());
                 }
@@ -310,6 +311,69 @@
  
                 $result = getModEvent($userId);
                 $return = new responseObject(200, "Success", $result);
+                return $response->withStatus(200)->withJson($return->getResponse());
+            }
+            catch (Exception $e) {
+                $return = new responseObject(500, "Error", $e->getMessage());
+                return $response->withStatus(500)->withJson($return->getResponse());
+            }
+        }
+
+        public static function addEventRole(Request $request, Response $response, $args) {
+            try {
+                $auth = authen($request->getHeaders());
+                $userId = array_key_exists('u_userId', (array)$auth) ? $auth['u_userId'] : null;
+                $idcheck = checkManager($userId);
+                $role = array_key_exists('p_role', (array)$idcheck) ? $idcheck['p_role'] : null;
+                if (!checkEventOwner($userId) && (!array_key_exists('u_userId', (array)$idcheck) || $role != 1 )){
+                    $return = new responseObject(500, "Error", null);
+                    return $response->withStatus(500)->withJson($return->getResponse());
+                }
+                $body = $request->getParsedBody();
+                $user = array_key_exists('u_userId', (array)$body) ? $body['u_userId'] : null;
+                $r = array_key_exists('p_role', (array)$body) ? $body['p_role'] : null;
+                $eventId = $args['eventId'];
+                if (!$body || !$user || !$r) {
+                    $return = new responseObject(500, "Error", "");
+                    return $response->withStatus(500)->withJson($return->getResponse());
+                }
+                $result = addEventRole($eventId, $user, $r);
+                if ($result === 500) {
+                    $return = new responseObject(500, "Error", "");
+                    return $response->withStatus(500)->withJson($return->getResponse());
+                }
+                $return = new responseObject(200, "Success", "");
+                return $response->withStatus(200)->withJson($return->getResponse());
+            }
+            catch (Exception $e) {
+                $return = new responseObject(500, "Error", $e->getMessage());
+                return $response->withStatus(500)->withJson($return->getResponse());
+            }
+        }
+
+        public static function deleteEventRole(Request $request, Response $response, $args) {
+            try {
+                $auth = authen($request->getHeaders());
+                $userId = array_key_exists('u_userId', (array)$auth) ? $auth['u_userId'] : null;
+                $idcheck = checkManager($userId);
+                $role = array_key_exists('p_role', (array)$idcheck) ? $idcheck['p_role'] : null;
+                if (!checkEventOwner($userId) && (!array_key_exists('u_userId', (array)$idcheck) || $role != 1 )){
+                    $return = new responseObject(500, "Error", null);
+                    return $response->withStatus(500)->withJson($return->getResponse());
+                }
+                $body = $request->getParsedBody();
+                $user = array_key_exists('u_userId', (array)$body) ? $body['u_userId'] : null;
+                $eventId = $args['eventId'];
+                if (!$body || !$user) {
+                    $return = new responseObject(500, "Error", "");
+                    return $response->withStatus(500)->withJson($return->getResponse());
+                }
+                $result = deleteEventRole($eventId, $user);
+                if ($result === 500) {
+                    $return = new responseObject(500, "Error", "");
+                    return $response->withStatus(500)->withJson($return->getResponse());
+                }
+                $return = new responseObject(200, "Success", "");
                 return $response->withStatus(200)->withJson($return->getResponse());
             }
             catch (Exception $e) {

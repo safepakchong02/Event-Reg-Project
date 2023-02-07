@@ -26,10 +26,59 @@
         try {
             $handle = connectDb();
             $handle->beginTransaction();
-            $query = "SELECT * FROM eventPermView WHERE ev_createdBy = '{$eventId}' OR u_userId = '{$eventId}'";
+            $query = "SELECT * FROM eventPermView WHERE ev_createdBy = '{$eventId}' OR u_userId = '{$eventId}' LIMIT 1";
             $result = $handle->prepare($query);
             $result->execute();
-            $returnData = $result->fetchAll();
+            $returnData = $result->fetch();
+            $handle->commit();
+        }
+        catch (PDOException $e) {
+            $handle->rollback();
+            return [];
+        }
+        return $returnData;
+    }
+
+    function addEventRole ($eventId, $user, $r) {
+        try {
+            $handle = connectDb();
+            $handle->beginTransaction();
+            $query = "CALL addEventRole('{$eventId}', '{$user}', '{$r}' )";
+            $result = $handle->prepare($query);
+            $result->execute();
+            $handle->commit();
+        }
+        catch (PDOException $e) {
+            $handle->rollback();
+            return 500;
+        }
+        return 200;
+    }
+
+    function deleteEventRole ($eventId, $user) {
+        try {
+            $handle = connectDb();
+            $handle->beginTransaction();
+            $query = "CALL deleteEventRole('{$eventId}', '{$user}')";
+            $result = $handle->prepare($query);
+            $result->execute();
+            $handle->commit();
+        }
+        catch (PDOException $e) {
+            $handle->rollback();
+            return 500;
+        }
+        return 200;
+    }
+    
+    function checkEventOwner($eventId){
+        try {
+            $handle = connectDb();
+            $handle->beginTransaction();
+            $query = "SELECT * FROM eventPermView WHERE ev_createdBy = '{$eventId}'  LIMIT 1";
+            $result = $handle->prepare($query);
+            $result->execute();
+            $returnData = $result->fetch();
             if (!$returnData) {
                 return false;
             }
