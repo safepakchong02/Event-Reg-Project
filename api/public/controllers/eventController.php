@@ -112,7 +112,7 @@
                     $return = new responseObject(400, "Bad request", null);
                     return $response->withStatus(400)->withJson($return->getResponse());
                 }
-                $result = updateEvent($body, $args['ev_eventId']);
+                $result = updateEvent($body, $args['eventId']);
                 if ($result !== 200) {
                     $return = new responseObject(500, "Error", "");
                 }

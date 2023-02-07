@@ -135,7 +135,7 @@
             $handle = connectDb();
             $handle->beginTransaction();
             $query = "CALL updateEvent( '{$data['u_userId']}' , '{$eventId}',
-            '{$data['ev_ev_title']}', 
+            '{$data['ev_title']}', 
             '{$data['ev_detail']}', '{$data['ev_limit']}', 
             '{$data['ev_dType']}', '{$data['ev_selfReg']}', '{$data['ev_public']}',
             '{$data['ev_preReg']}', '{$data['ev_gps']}',
