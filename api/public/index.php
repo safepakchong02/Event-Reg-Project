@@ -54,6 +54,7 @@ $app->group('/event', function($app) {
 
 $app->group('/event', function($app) {
     $app->get('/{eventId}/report', EventController::class . '::getEventReport');
+    $app->get('/{eventId}/reportAmount', EventController::class . '::getEventReportAmount');
     $app->get('/{eventId}/member', EventController::class . '::getEventMember');
     $app->get('/{eventId}/permission', EventController::class . '::getEventPermission');
     $app->post('/', EventController::class . '::createEvent');

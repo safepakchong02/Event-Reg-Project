@@ -41,8 +41,25 @@
 
         public static function getEventReport(Request $request, Response $response, $args) {
             try {
+                $eventId =  $args['eventId'];
+                $result = getEventReport($eventId);
+                $return = new responseObject(200, "Success", $result);
+                return $response->withStatus(200)->withJson($return->getResponse());
+            }
+            catch (Exception $e) {
+                $return = new responseObject(500, "Error", $e->getMessage());
+                return $response->withStatus(500)->withJson($return->getResponse());
+            }
+        }
+
+        public static function getEventReportAmount(Request $request, Response $response, $args) {
+            try {
                 $auth = authen($request->getHeaders());
-                $role = array_key_exists('u_role', (array)$auth) ? $auth['u_role'] : null;
+                $userId = array_key_exists('u_userId', (array)$auth) ? $auth['u_userId'] : null;
+                if (!checkManager($userId)){
+                    $return = new responseObject(500, "Error", null);
+                    return $response->withStatus(500)->withJson($return->getResponse());
+                }
                 $param = $request->getQueryParams();
                 $c = array();
                 $b = null;
@@ -61,10 +78,8 @@
                         $b = $val;
                     }
                 }
-                $c[] = "ev_status = 1";
-                $c[] = "ev_public = 1";
-                //$result = getEvent($c);
-                $return = new responseObject(200, "Success", "");
+                $result = getEventReportAmount($c, $b);
+                $return = new responseObject(200, "Success", $result);
                 return $response->withStatus(200)->withJson($return->getResponse());
             }
             catch (Exception $e) {

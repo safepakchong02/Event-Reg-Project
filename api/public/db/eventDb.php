@@ -21,6 +21,60 @@
         }
         return $returnData;
     }
+
+    function checkManager($eventId){
+        try {
+            $handle = connectDb();
+            $handle->beginTransaction();
+            $query = "SELECT * FROM eventPermView WHERE ev_createdBy = '{$eventId}' OR u_userId = '{$eventId}'";
+            $result = $handle->prepare($query);
+            $result->execute();
+            $returnData = $result->fetchAll();
+            if (!$returnData) {
+                return false;
+            }
+            $handle->commit();
+        }
+        catch (PDOException $e) {
+            $handle->rollback();
+            return [];
+        }
+        return true;
+    }
+
+    function getEventReportAmount($data, $filter){
+        try {
+            $handle = connectDb();
+            $handle->beginTransaction();
+            $query = "SELECT " . implode(', ', $filter). ", count(*) as count FROM eventReportView where  " . implode(' AND ', $data). " GROUP BY " . implode(', ', $filter). "";
+            $result = $handle->prepare($query);
+            $result->execute();
+            $returnData = $result->fetchAll();
+            $handle->commit();
+        }
+        catch (PDOException $e) {
+            $handle->rollback();
+            return [];
+        }
+        return $returnData;
+    }
+
+    function getEventReport($eventId){
+        try {
+            $handle = connectDb();
+            $handle->beginTransaction();
+            $query = "SELECT * FROM eventReport WHERE ev_eventId = '{$eventId}'";
+            $result = $handle->prepare($query);
+            $result->execute();
+            $returnData = $result->fetchAll();
+            $handle->commit();
+        }
+        catch (PDOException $e) {
+            $handle->rollback();
+            return [];
+        }
+        return $returnData;
+    }
     function createEvent($data) {
         $returnData = null;
         try {
