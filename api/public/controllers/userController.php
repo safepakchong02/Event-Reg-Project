@@ -230,6 +230,10 @@
                 return $response->withStatus(500)->withJson($return->getResponse());
             }
         }
+
+        public static function editProfile (Request $request, Response $response, $args) {
+            
+        }
     }
 
 
