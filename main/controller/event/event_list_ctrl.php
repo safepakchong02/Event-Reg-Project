@@ -10,7 +10,7 @@
                 'Authorization': `${$scope.ac_token}`
             }
         }).then((res) => {
-            $scope.event_list = res.data.results_data;
+            $scope.event_list = res.data.resultData;
         })
     }); // end controller function
 </script>

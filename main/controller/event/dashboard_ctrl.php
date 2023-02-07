@@ -10,7 +10,7 @@
                 'Authorization': `${$scope.ac_token}`
             }
         }).then((res) => {
-            $scope.myEvent = res.data.results_data;
+            $scope.myEvent = res.data.resultData;
         })
 
         // เรียกข้อมูล กิจกรรมที่ฉันดูแล/สร้าง
@@ -22,7 +22,7 @@
                 'Authorization': `${$scope.ac_token}`
             }
         }).then((res) => {
-            $scope.ModEvent = res.data.results_data;
+            $scope.ModEvent = res.data.resultData;
         })
     }); // end controller function
 </script>

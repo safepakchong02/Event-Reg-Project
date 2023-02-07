@@ -39,7 +39,7 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
                 </div>
                 <div class="col-sm-3">
                     <div class="form-check">
-                        <input disabled class="form-check-input" type="checkbox" id="ev_dtype" name="ev_dtype" ng-model="data_event.ev_dtype[0]">
+                        <input class="form-check-input" type="checkbox" id="ev_dtype" name="ev_dtype" ng-model="data_event.ev_dtype[0]">
                         <label class="form-check-label" for="ev_dtype">
                             อีเมล
                         </label>
@@ -55,7 +55,7 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
                 </div>
                 <div class="col-sm-3">
                     <div class="form-check">
-                        <input disabled class="form-check-input" type="checkbox" id="ev_dtype" name="ev_dtype" ng-model="data_event.ev_dtype[2]">
+                        <input class="form-check-input" type="checkbox" id="ev_dtype" name="ev_dtype" ng-model="data_event.ev_dtype[2]">
                         <label class="form-check-label" for="ev_dtype">
                             ชื่อ
                         </label>
@@ -63,7 +63,7 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
                 </div>
                 <div class="col-sm-3">
                     <div class="form-check">
-                        <input disabled class="form-check-input" type="checkbox" id="ev_dtype" name="ev_dtype" ng-model="data_event.ev_dtype[3]">
+                        <input class="form-check-input" type="checkbox" id="ev_dtype" name="ev_dtype" ng-model="data_event.ev_dtype[3]">
                         <label class="form-check-label" for="ev_dtype">
                             นามสกุล
                     </div>

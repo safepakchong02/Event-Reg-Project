@@ -8,7 +8,7 @@
         // bypass login
         setCookie(KEY_TOKEN, "token", 30);
         setCookie(KEY_ROLE, "1", 30);
-        setCookie(KEY_USER_ID, "user_id", 30);
+        setCookie(KEY_USER_ID, "c3aa22a7-9be3-11ed-bf9e-0242ac140002", 30);
 
         $scope.handle_login = () => {
             if (myPath === loginPath) return;

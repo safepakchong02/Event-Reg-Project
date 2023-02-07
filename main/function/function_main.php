@@ -1,4 +1,9 @@
 <script>
+	function checkNull(str) {
+		if (str === null) return true;
+		else return false;
+	}
+
 	function boolArrayToLSB(boolArray) {
 		let lsb = 0;
 		for (let i = 0; i < boolArray.length; i++) {
@@ -21,6 +26,7 @@
 	}
 
 	function encodeHTML(str) {
+		if (checkNull(str)) return "";
 		return str.replace(/[&<>"']/g, function(tag) {
 			var charsToReplace = {
 				'&': '&amp;',
@@ -34,6 +40,7 @@
 	}
 
 	function decodeHTML(str) {
+		if (checkNull(str)) return "";
 		return str.replace(/&amp;|&lt;|&gt;|&quot;|&#39;/g, function(tag) {
 			var charsToReplace = {
 				'&amp;': '&',
@@ -45,7 +52,6 @@
 			return charsToReplace[tag] || tag;
 		});
 	}
-	
 </script>
 
 <?php

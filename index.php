@@ -1,4 +1,4 @@
 <?
-    require("asset/config/config.php");
+    // require("asset/config/config.php");
     require("main/index.php");
 ?>

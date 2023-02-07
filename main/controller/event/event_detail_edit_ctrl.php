@@ -37,12 +37,11 @@
                     'Authorization': `${$scope.ac_token}`
                 }
             }).then((res) => {
-                let event_data = res.data.results_data[0];
-                $scope.event_data.ev_eventId = event_data.ev_eventId; // string
-                $scope.event_data.ev_title = event_data.ev_title; // string
+                let data_event = res.data.resultData[0];
+                $scope.data_event.ev_eventId = data_event.ev_eventId; // string
+                $scope.data_event.ev_title = data_event.ev_title; // string
                 editor.setData(decodeHTML(data_event.ev_detail)); // html
                 $scope.data_event.ev_limit = parseInt(data_event.ev_limit);
-                int
                 $scope.data_event.ev_dtype = LSBToBoolArray(data_event.ev_dtype); // boolean array
                 $scope.data_event.ev_public = Boolean(data_event.ev_public); // boolean
                 $scope.data_event.ev_preReg = Boolean(data_event.ev_preReg); // boolean
@@ -59,8 +58,7 @@
         /* ==================SAVE================== */
 
         $scope.save_event = (method, path_api) => { // start save_event function
-            let url = $scope.isCreate ? `api/event/${path_api}` : `api/event/${path_api}/${$scope.event_data.ev_eventId}`;
-
+            let url = $scope.isCreate ? `api/event/` : `api/event/${$scope.data_event.ev_eventId}`;
             $http({
                 method: `${method}`,
                 url: `${url}`,
@@ -86,17 +84,23 @@
                     'Authorization': `${$scope.ac_token}`
                 }
             }).then((res) => {
-                    Swal.fire({
+                    console.log(res);
+                    if (res.code !== 201) Swal.fire({
+                        icon: 'error',
+                        title: 'บันทึกข้อมูลไม่สำเร็จ',
+                        text: res.code
+                    });
+                    else Swal.fire({
                         icon: 'success',
                         title: 'บัมทึกข้อมูลเสร็จสิ้น',
-                    })
+                    });
                 }, // end is success
                 (res) => { // optional
+                    console.log(res);
                     // failed
                     Swal.fire({
                         icon: 'error',
                         title: 'ไม่สามารถบันทึกข้อมูลได้',
-                        text: res.error
                     }) // end is error
                 }); // end then
 

@@ -30,7 +30,8 @@
                     'Authorization': `${$scope.ac_token}`
                 }
             }).then((res) => {
-                $scope.event_data = res.data.results_data[0];
+                console.log(res);
+                $scope.event_data = res.data.resultData[0];
                 $scope.event_data.ev_eventId = event_data.ev_eventId; // string
                 $scope.event_data.ev_title = event_data.ev_title; // string
                 $scope.event_data.ev_detail = decodeHTML($scope.event_data.ev_detail); // html
