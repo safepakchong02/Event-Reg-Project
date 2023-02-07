@@ -108,7 +108,7 @@
             try {
                 $body = $request->getParsedBody();
                 $return = new responseObject(0, null, null);
-                if (!$body || !$args['ev_eventId']) {
+                if (!$body || !$args['eventId']) {
                     $return = new responseObject(400, "Bad request", null);
                     return $response->withStatus(400)->withJson($return->getResponse());
                 }
