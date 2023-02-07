@@ -118,16 +118,15 @@
         $data['ev_selfReg'] = array_key_exists("ev_selfReg", $data) ? $data['ev_selfReg'] : null;
         $data['ev_public'] = array_key_exists("ev_public", $data) ? $data['ev_public'] : null;
         $data['ev_preReg'] = array_key_exists("ev_preReg", $data) ? $data['ev_preReg'] : null;
-        $data['ev_gps'] = array_key_exists("ev_gps", $data) ? $data['ev_gps'] : null;
-        $data['ev_lat'] = array_key_exists("ev_lat", $data) ? $data['ev_lat'] : null;
-        $data['ev_long'] = array_key_exists("ev_long", $data) ? $data['ev_long'] : null;
+        $data['ev_gps'] = array_key_exists("ev_gps", $data) ? $data['ev_gps'] : 0;
+        $data['ev_lat'] = array_key_exists("ev_lat", $data) ? $data['ev_lat'] : 0.0;
+        $data['ev_long'] = array_key_exists("ev_long", $data) ? $data['ev_long'] : 0.0;
         $data['ev_preRegStart'] = array_key_exists("ev_preRegStart", $data) ? $data['ev_preRegStart'] : null;
         $data['ev_preRegEnd'] = array_key_exists("ev_preRegEnd", $data) ? $data['ev_preRegEnd'] : null;
         $data['ev_checkInStart'] = array_key_exists("ev_checkInStart", $data) ? $data['ev_checkInStart'] : null;
         $data['ev_checkInEnd'] = array_key_exists("ev_checkInEnd", $data) ? $data['ev_checkInEnd'] : null;
         $data['ev_eventStart'] = array_key_exists("ev_eventStart", $data) ? $data['ev_eventStart'] : null;
         $data['ev_eventEnd'] = array_key_exists("ev_eventEnd", $data) ? $data['ev_eventEnd'] : null;
-        $data['ev_status'] = array_key_exists("ev_status", $data) ? $data['ev_status'] : null;
 
         
         $returnData = null;
@@ -142,7 +141,8 @@
             '{$data['ev_lat']}', '{$data['ev_long']}', 
             '{$data['ev_preRegStart']}', '{$data['ev_preRegEnd']}', 
             '{$data['ev_checkInStart']}', '{$data['ev_checkInEnd']}', 
-            '{$data['ev_eventStart']}', '{$data['ev_eventEnd']}', '{$data['ev_status']}')";
+            '{$data['ev_eventStart']}', '{$data['ev_eventEnd']}')";
+            echo $query;
             $result = $handle->prepare($query);
             $result->execute();
             $handle->commit();
