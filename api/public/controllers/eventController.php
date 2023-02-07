@@ -15,15 +15,9 @@
     {
         public static function getEvent(Request $request, Response $response, $args) {
             try {
-                $eventId = $args['eventId'];
-                $return = new responseObject(0, null, null);
-                $result = eventDetail($eventId);
-                if (!$result) {
-                    $return = new responseObject(500, "Error", "");
-                }
-                else {
-                    $return = new responseObject(201, "Created Success", $result);
-                }
+                $auth = authen($request->getHeaders());
+                $role = array_key_exists('u_role', (array)$auth) ? $auth['u_role'] : null;
+                
                 return $response->withStatus(200)->withJson($return->getResponse());
             }
             catch (Exception $e) {
