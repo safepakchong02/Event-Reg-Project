@@ -17,7 +17,20 @@
             try {
                 $auth = authen($request->getHeaders());
                 $role = array_key_exists('u_role', (array)$auth) ? $auth['u_role'] : null;
-                
+                $param = $request->getQueryParams();
+                $c = array();
+                foreach ($param as $key=>$val) {
+                    if ($key === 'ev_title') {
+                        $c[] = "ev_title LIKE '%$val%'";
+                    }
+                    if ($key === 'ev_eventId') {
+                        $c[] = "ev_eventId = '$val'";
+                    }
+                }
+                $c[] = "ev_status = 1";
+                $c[] = "ev_public = 1";
+                $result = getEvent($c);
+                $return = new responseObject(200, "Success", $result);
                 return $response->withStatus(200)->withJson($return->getResponse());
             }
             catch (Exception $e) {

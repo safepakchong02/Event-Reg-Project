@@ -5,23 +5,21 @@
     global $handle;
     global $returnData;
 
-    function getEvent($eventId){
+    function getEvent($param){
         try {
             $handle = connectDb();
             $handle->beginTransaction();
-            $query = "SELECT * FROM eventPermView where ev_eventId = '{$eventId}'";
-
+            $query = "SELECT * FROM eventView where " . implode(' AND ', $param). " ";
             $result = $handle->prepare($query);
             $result->execute();
-
-            $rs = $result->fetchAll();
+            $returnData = $result->fetchAll();
             $handle->commit();
         }
         catch (PDOException $e) {
             $handle->rollback();
-            return 500;
+            return [];
         }
-        return $rs;
+        return $returnData;
     }
     function createEvent($data) {
         $returnData = null;

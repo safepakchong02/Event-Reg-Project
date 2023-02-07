@@ -46,7 +46,7 @@ $app->group('/user', function($app) {
 });
 
 $app->group('/event', function($app) {
-    $app->get('/', EventController::class . '::getEvent');
+    $app->get('', EventController::class . '::getEvent');
     $app->get('/MyEvent', EventController::class . '::getMyRegisteredEvent');
     $app->get('/ModEvent', EventController::class . '::getModEvent');
     $app->get('/{eventId}', EventController::class . '::getEventDetail');
