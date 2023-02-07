@@ -144,6 +144,10 @@
             '{$data['ev_eventStart']}', '{$data['ev_eventEnd']}')";
             $result = $handle->prepare($query);
             $result->execute();
+            $af = $result->rowCount();
+            if ($af === 0){
+                return 500;
+            }
             $handle->commit();
         }
         catch (PDOException $e) {
