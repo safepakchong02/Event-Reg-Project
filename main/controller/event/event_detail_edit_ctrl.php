@@ -84,7 +84,7 @@
                     'Authorization': `${$scope.ac_token}`
                 }
             }).then((res) => {
-                    console.log(res);
+                    console.log(res.data);
                     if (res.code !== 201) Swal.fire({
                         icon: 'error',
                         title: 'บันทึกข้อมูลไม่สำเร็จ',
