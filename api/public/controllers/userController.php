@@ -232,7 +232,36 @@
         }
 
         public static function editProfile (Request $request, Response $response, $args) {
-            
+            try {
+                $auth = authen($request->getHeaders());
+                $userId = array_key_exists('u_userId', (array)$auth) ? $auth['u_userId'] : null;
+                $role = array_key_exists('u_role', (array)$auth) ? $auth['u_role'] : null;
+                if (!$userId) {
+                    $return = new responseObject(500, "Error", "");
+                    return $response->withStatus(500)->withJson($return->getResponse());
+                }
+                $body = $request->getParsedBody();
+                $param = array_key_exists('u_userId', (array)$body) ? $body['u_userId'] : null;
+                if (!$param) {
+                    $return = new responseObject(500, "Missing or incorrect parameter", "");
+                    return $response->withStatus(500)->withJson($return->getResponse());
+                }
+                if ($param != $userId) {
+                    $return = new responseObject(500, "Missing or incorrect parameter", "");
+                    return $response->withStatus(500)->withJson($return->getResponse()); 
+                }
+                $result = editProfile($body);
+                if ($result === 500) {
+                    $return = new responseObject(500, "Error", "");
+                    return $response->withStatus(500)->withJson($return->getResponse());
+                }
+                $return = new responseObject(200, "Success", "");
+                return $response->withStatus(200)->withJson($return->getResponse());
+            }
+            catch (Exception $e) {
+                $return = new responseObject(500, "Error", $e->getMessage());
+                return $response->withStatus(500)->withJson($return->getResponse());
+            }
         }
     }
 

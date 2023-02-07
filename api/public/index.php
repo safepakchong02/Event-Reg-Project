@@ -42,7 +42,7 @@ $app->group('/admin', function($app) {
 $app->group('/user', function($app) {
     $app->get('/profile', UserController::class . '::getProfile');
     $app->post('/deactivate', UserController::class . '::deactivate');
-    $app->patch('/edit', UserController::class . '::editProfile');
+    $app->patch('/profile/edit', UserController::class . '::editProfile');
 });
 
 $app->group('/event', function($app) {

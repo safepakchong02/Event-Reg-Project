@@ -248,4 +248,45 @@
         return 200;
     }
 
+    function editProfile($data) {
+        $userId = array_key_exists("u_userId", $data) ? $data['u_userId'] : null;
+        $data['ud_emp_id'] = array_key_exists("ud_emp_id", $data) ? $data['ud_emp_id'] : null;
+        $data['ud_card_id'] = array_key_exists("ud_card_id", $data) ? $data['ud_card_id'] : null;
+        $data['ud_prefix'] = array_key_exists("ud_prefix", $data) ? $data['ud_prefix'] : null;
+        $data['ud_firstName'] = array_key_exists("ud_firstName", $data) ? $data['ud_firstName'] : null;
+        $data['ud_lastName'] = array_key_exists("ud_lastName", $data) ? $data['ud_lastName'] : null;
+        $data['ud_gender'] = array_key_exists("ud_gender", $data) ? $data['ud_gender'] : null;
+        $data['ud_birthDate'] = array_key_exists("ud_birthDate", $data) ? $data['ud_birthDate'] : null;
+        $data['ud_phone'] = array_key_exists("ud_phone", $data) ? $data['ud_phone'] : null;
+        $data['ud_orgName'] = array_key_exists("ud_orgName", $data) ? $data['ud_orgName'] : null;
+        $data['ud_department'] = array_key_exists("ud_department", $data) ? $data['ud_department'] : null;
+        $data['ud_position'] = array_key_exists("ud_position", $data) ? $data['ud_position'] : null;
+        try {
+            $column = array();
+            foreach($data as $key=>$val) {
+                if ($val != null && $key != 'u_userId') {
+                    $column[] = "$key = '$val'";
+                }
+            }
+            $handle = connectDb();
+            $handle->beginTransaction();
+            $query = "UPDATE users SET 
+            " . implode (', ', $column ) ."
+            WHERE u_userId = '{$userId}' AND u_status = 'A'";
+            $result = $handle->prepare($query);
+            $result->execute();
+            $af = $result->rowCount();
+            if ($af === 0){
+                return 500;
+            }
+            $handle->commit();
+        }
+        catch (PDOException $e) {
+            $handle->rollback();
+            echo $e->getMessage();
+            return 500;
+        }
+        return 200;
+    }
+
 ?>
