@@ -23,7 +23,12 @@
     }
 
     function genEventId() {
-        $eventId = "EV" + random_bytes(4);
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = 'EV';
+        for ($i = 2; $i < 10; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
         try {
             $handle = connectDb();
             $handle->beginTransaction();
