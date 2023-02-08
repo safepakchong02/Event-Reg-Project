@@ -148,6 +148,12 @@
 
         public static function createEvent(Request $request, Response $response, $args) {
             try {
+                $auth = authen($request->getHeaders());
+                $userId = array_key_exists('u_userId', (array)$auth) ? $auth['u_userId'] : null;
+                if (!$userId) {
+                    $return = new responseObject(500, "Error", "");
+                    return $response->withStatus(500)->withJson($return->getResponse());
+                }
                 $body = $request->getParsedBody();
                 $return = new responseObject(0, null, null);
                 if (!$body) {
@@ -155,6 +161,7 @@
                     return $response->withStatus(400)->withJson($return->getResponse());
                 }
                 $body['ev_eventId'] = genEventId();
+                $body['ev_userId'] = $userId;
                 $result = createEvent($body);
                 if ($result !== 201) {
                     $return = new responseObject(500, "Error", "");
