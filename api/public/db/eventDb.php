@@ -176,13 +176,12 @@
             $query = "CALL createEvent( '{$data['ev_userId']}' , '{$data['ev_eventId']}',
             '{$data['ev_title']}', 
             '{$data['ev_detail']}', '{$data['ev_limit']}', 
-            '{$data['ev_dType']}', '{$data['ev_selfReg']}', '{$data['ev_public']}',
-            '{$data['ev_preReg']}', '{$data['ev_gps']}',
+            '{$data['ev_dType']}', '{$data['ev_selfReg']}', 
+            '{$data['ev_preReg']}', '{$data['ev_public']}', '{$data['ev_gps']}',
             '{$data['ev_lat']}', '{$data['ev_long']}', 
             '{$data['ev_preRegStart']}', '{$data['ev_preRegEnd']}', 
             '{$data['ev_checkInStart']}', '{$data['ev_checkInEnd']}', 
             '{$data['ev_eventStart']}', '{$data['ev_eventEnd']}')";
-            echo $query;
 
             $result = $handle->prepare($query);
             $result->execute();
