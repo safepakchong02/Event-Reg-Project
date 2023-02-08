@@ -32,7 +32,7 @@
         try {
             $handle = connectDb();
             $handle->beginTransaction();
-            $query = "SELECT ev_eventId from event where ev_eventId = '{$randomString}'";
+            $query = "SELECT ev_eventId from events where ev_eventId = '{$randomString}'";
             $result = $handle->prepare($query);
             $result->execute();
             $returnData = $result->fetch();
@@ -44,7 +44,7 @@
         catch (PDOException $e) {
             $handle->rollback();
             echo $e->getMessage();
-            return [];
+            return 500;
         }
         return genEventId();
     }
