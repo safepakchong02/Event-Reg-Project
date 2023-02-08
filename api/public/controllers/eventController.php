@@ -203,7 +203,7 @@
                     $return = new responseObject(400, "Bad request", null);
                     return $response->withStatus(400)->withJson($return->getResponse());
                 }
-                $eventId = array_key_exists("ev_eventId", $args) ? $args['ev_eventId'] : null;
+                $eventId = array_key_exists("eventId", $args) ? $args['eventId'] : null;
                 $userId = array_key_exists("u_userId", $body) ? $body['u_userId'] : null;
                 if (!$eventId|| !$userId) {
                     $return = new responseObject(400, "Bad request", null);
