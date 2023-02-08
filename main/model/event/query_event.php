@@ -71,11 +71,35 @@ use Nette\Utils\Random;
 
     function genEventId() {
         $eventId = "EV" + random_bytes(4);
-        $result = mysqli_query($handle, "SELECT ev_eventId from event where ev_eventId = " . $eventId . "");
+        try
+        $handle->prepare("SELECT ev_eventId from event where ev_eventId = " . $eventId . "");
         if (!$result) {
             return $eventId;
         }
         return genEventId();
+        try {
+            $query = "CALL createEvent( " . $userId . ", " . $eventId . " " . $title . ", 
+            " . $detail . ", " . $limit . ", 
+            " . $dType . ", " . $selfReg . ", 
+            " . $preReg . ", " . $gps . ",
+            " . $lat . ", " . $long . ", 
+            " . $preRegStart . ", " . $preRegEnd . ", 
+            " . $checkInStart . ", " . $checkInEnd . ", 
+            " . $eventStart . ", " . $eventEnd . ")";
+
+            $result = mysqli_query($handle, $query);
+
+            if ($result > 0) {
+                echo "{\"status\": 200 Success}";
+            }
+            echo "{\"status\": 400 Bad request}";
+            $handle->commit();
+        }
+        catch (Exception $e) {
+            $handle->rollback();
+            echo $e->getMessage();
+        }
+        $handle->close();
     }
 
     function getEvent()

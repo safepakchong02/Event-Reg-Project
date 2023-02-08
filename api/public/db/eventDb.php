@@ -22,6 +22,28 @@
         return $returnData;
     }
 
+    function genEventId() {
+        $eventId = "EV" + random_bytes(4);
+        try {
+            $handle = connectDb();
+            $handle->beginTransaction();
+            $query = "SELECT ev_eventId from event where ev_eventId = '{$eventId}'";
+            $result = $handle->prepare($query);
+            $result->execute();
+            $returnData = $result->fetch();
+            if (!$returnData) {
+                return $eventId;
+            }
+            $handle->commit();
+        }
+        catch (PDOException $e) {
+            $handle->rollback();
+            return [];
+        }
+        return genEventId();
+    }
+
+
     function checkManager($eventId){
         try {
             $handle = connectDb();
@@ -339,8 +361,7 @@
             $handle->beginTransaction();
             $query = "SELECT * FROM 
             eventView as e 
-            LEFT JOIN eventPermView as m ON e.ev_eventId = m.ev_eventId
-            WHERE m.u_userId = '{$userId}' OR e.ev_createdBy = '{$userId}'
+            WHERE e.ev_createdBy = '{$userId}'
             ORDER BY e.ev_createdBy";
             $result = $handle->prepare($query);
             $result->execute();
