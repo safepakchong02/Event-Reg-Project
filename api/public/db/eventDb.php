@@ -155,6 +155,22 @@
     function createEvent($data) {
         $returnData = null;
         try {
+            $data['ev_title'] = array_key_exists("ev_title", $data) ? $data['ev_title'] : null;
+            $data['ev_detail'] = array_key_exists("ev_detail", $data) ? $data['ev_detail'] : null;
+            $data['ev_limit'] = array_key_exists("ev_limit", $data) ? $data['ev_limit'] : null;
+            $data['ev_dType'] = array_key_exists("ev_dType", $data) ? $data['ev_dType'] : null;
+            $data['ev_selfReg'] = array_key_exists("ev_selfReg", $data) ? $data['ev_selfReg'] : null;
+            $data['ev_public'] = array_key_exists("ev_public", $data) ? $data['ev_public'] : null;
+            $data['ev_preReg'] = array_key_exists("ev_preReg", $data) ? $data['ev_preReg'] : null;
+            $data['ev_gps'] = array_key_exists("ev_gps", $data) ? $data['ev_gps'] : 0;
+            $data['ev_lat'] = array_key_exists("ev_lat", $data) ? $data['ev_lat'] : 0.0;
+            $data['ev_long'] = array_key_exists("ev_long", $data) ? $data['ev_long'] : 0.0;
+            $data['ev_preRegStart'] = array_key_exists("ev_preRegStart", $data) ? $data['ev_preRegStart'] : null;
+            $data['ev_preRegEnd'] = array_key_exists("ev_preRegEnd", $data) ? $data['ev_preRegEnd'] : null;
+            $data['ev_checkInStart'] = array_key_exists("ev_checkInStart", $data) ? $data['ev_checkInStart'] : null;
+            $data['ev_checkInEnd'] = array_key_exists("ev_checkInEnd", $data) ? $data['ev_checkInEnd'] : null;
+            $data['ev_eventStart'] = array_key_exists("ev_eventStart", $data) ? $data['ev_eventStart'] : null;
+            $data['ev_eventEnd'] = array_key_exists("ev_eventEnd", $data) ? $data['ev_eventEnd'] : null;
             $handle = connectDb();
             $handle->beginTransaction();
             $query = "CALL createEvent( '{$data['ev_userId']}' , '{$data['ev_eventId']}',
