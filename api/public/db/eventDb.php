@@ -43,6 +43,7 @@
         }
         catch (PDOException $e) {
             $handle->rollback();
+            echo $e->getMessage();
             return [];
         }
         return genEventId();

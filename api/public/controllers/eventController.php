@@ -160,7 +160,7 @@
                     $return = new responseObject(400, "Bad request", null);
                     return $response->withStatus(400)->withJson($return->getResponse());
                 }
-                $body['ev_eventId'] = (string)genEventId();
+                $body['ev_eventId'] = genEventId();
                 $body['ev_userId'] = $userId;
                 $result = createEvent($body);
                 if ($result !== 201) {
