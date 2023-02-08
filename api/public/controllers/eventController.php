@@ -221,10 +221,6 @@
         public static function deleteEvent(Request $request, Response $response, $args) {
             try{
                 $body = $request->getParsedBody();
-                if (!$userId) {
-                    $return = new responseObject(500, "Error", "");
-                    return $response->withStatus(500)->withJson($return->getResponse());
-                }
                 $eventId = array_key_exists("eventId", $args) ? $args['eventId'] : null;
                 $userId = array_key_exists('u_userId', (array)$body) ? $body['u_userId'] : null;
                 if (!$eventId|| !$userId) {
