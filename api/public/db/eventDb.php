@@ -182,6 +182,7 @@
             '{$data['ev_preRegStart']}', '{$data['ev_preRegEnd']}', 
             '{$data['ev_checkInStart']}', '{$data['ev_checkInEnd']}', 
             '{$data['ev_eventStart']}', '{$data['ev_eventEnd']}')";
+            echo $query;
 
             $result = $handle->prepare($query);
             $result->execute();
