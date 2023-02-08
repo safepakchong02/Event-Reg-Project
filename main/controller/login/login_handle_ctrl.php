@@ -6,7 +6,7 @@
         const registerPath = "?p=login&m=register";
 
         // bypass login
-        setCookie(KEY_TOKEN, "token", 30);
+        setCookie(KEY_TOKEN, "4202fe770ce090ae841a823b7ff31bb4ad6d70bd422c49355cedbe8a4a5e1ab8", 30);
         setCookie(KEY_ROLE, "1", 30);
         setCookie(KEY_USER_ID, "c3aa22a7-9be3-11ed-bf9e-0242ac140002", 30);
 

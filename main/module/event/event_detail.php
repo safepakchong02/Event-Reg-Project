@@ -6,11 +6,11 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
 ?>
 
 <div class="container-fluid" ng-controller="<?= $ctrl_name ?>">
-    <div class="row pb-2 pt-5">
+    <div class="row pt-3 mt-3 mb-3 rounded {{event_data.ev_checkInState}}">
         <h1>{{event_data.ev_title}}</h1>
-        <p>วันเวลาเปิด-ปิดลงทะเบียนล่วงหน้า : {{event_data.ev_preRegStart}} - {{event_data.ev_preRegEnd}}</p>
-        <p>วันเวลาเปิด-ปิดลงทะเบียนเข้างาน : {{event_data.ev_checkInStart}} - {{event_data.ev_checkInEnd}}</p>
-        <p>วันเวลาที่กิจกรรมเริ่ม-จบ : {{event_data.ev_eventStart}} - {{event_data.ev_eventEnd}}</p>
+        <span style="font-size: small;" ng-if="isPreReg">ลงทะเบียนล่วงหน้า : {{event_data.ev_preRegStart}} - {{event_data.ev_preRegEnd}}</span>
+        <span style="font-size: small;">ลงทะเบียนเข้างาน : {{event_data.ev_checkInStart}} - {{event_data.ev_checkInEnd}}</span>
+        <span style="font-size: small;">วันเวลากิจกรรม : {{event_data.ev_eventStart}} - {{event_data.ev_eventEnd}}</span>
     </div>
     <div class="row">
         <!-- edit here -->
@@ -35,7 +35,7 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
                                 รายละเอียดกิจกรรม
                             </div>
                             <div class="card-body">
-                                <p class="card-text">{{event_data.ev_detail}}</p>
+                                <div class="card-text" id="ev_detail"></div>
                             </div>
                             <div class="card-footer">
                                 <span>QR code สำหรับกิจกรรมนี้</span><br>
@@ -46,17 +46,24 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
                     <div class="col-2 pb-2">
                         <div class="row pb-2">
                             <div class="col-sm-12">
-                                <div class="card text-center color-success">
-                                    <img src="./asset/user.png" class="card-img-top img-thumbnail color-success">
+                                <div class="card text-center {{event_data.ev_checkInState}}">
                                     <div class="card-body">
                                         <p class="h5">สร้างโดย</p>
-                                        <p>นายอิทธิพล สิงห์บุรี</p>
+                                        <p>{{event_data.ev_createdByName}}</p>
                                         <hr>
                                         <p class="h5">จำนวนผู้เข้าร่วม</p>
-                                        <p>47/120</p>
+                                        <p>{{eventReport.signedUp}}/{{event_data.ev_limit}}</p>
                                         <hr>
-                                        <button type="button" ng-click="preReg()" ng-if="isPreReg" id="preReg" class="btn btn-sm btn-primary">ลงทะเบียนล่วงหน้า <i class="bi bi-box-arrow-in-right"></i></button>
-                                        <button type="button" ng-click="checkIn()" ng-if="isSelfCheckIn" id="checkIn" class="btn btn-sm btn-primary">ลงทะเบียน <i class="bi bi-box-arrow-in-right"></i></button>
+                                        <div class="row pb-2">
+                                            <div class="col-12">
+                                                <button type="button" ng-click="preReg()" ng-if="isPreReg" ng-disabled="!isTimePreReg" id="preReg" class="btn btn-sm btn-primary col-12">ลงทะเบียนล่วงหน้า <i class="bi bi-box-arrow-in-right"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="row pb-2">
+                                            <div class="col-12">
+                                                <button type="button" ng-click="checkIn()" ng-if="isSelfCheckIn" ng-disabled="!isTimeCheckIn" id="checkIn" class="btn btn-sm btn-primary col-12">ลงทะเบียนเข้างาน <i class="bi bi-box-arrow-in-right"></i></button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -65,13 +72,43 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
                 </div>
             </div>
             <div class="tab-pane fade" id="eventReport-pane" role="tabpanel" aria-labelledby="eventReport" tabindex="0">
-                <div class="row pt-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h3 class="card-title">รายงานกิจกรรม</h3>
-                            <h5 class="card-title">บลาๆๆ</h5>
-                            <h5 class="card-title">บลาๆๆ</h5>
+                <div class="row justify-content-md-center pt-2" align="center">
+                    <div class="col-12">
+                        <p class="h1">สรุปผลโดยรวม</p>
+                    </div>
+                    <div class="col-xs-6 col-md-3">
+                        <div class="circular-progress-join">
+                            <span class="progress-value-join">{{eventReport.checkedIn}}</span>
                         </div>
+                        <br><text class="text-black text-size"><i class="bi bi-people-fill"></i>จำนวนผู้มาเข้าร่วม</text>
+                    </div>
+                    <div class="col-xs-6 col-md-3">
+                        <div class="circular-progress-no_join">
+                            <span class="progress-value-no_join">{{eventReport.notCheckedIn}}</span>
+                        </div>
+                        <br><text class="text-black text-size"><i class="bi bi-people-fill"></i>จำนวนผู้ไม่มาเข้าร่วม</text>
+                    </div>
+                    <div class="col-xs-6 col-md-3">
+                        <div class="circular-progress-all">
+                            <span class="progress-value-all">{{eventReport.signedUp}}</span>
+                        </div>
+                        <br><text class="text-black text-size"><i class="bi bi-people-fill"></i>จำนวนผู้ลงทะเบียน</text>
+                    </div>
+                </div>
+                <hr>
+                <div class="row justify-content-md-center">
+                    <div class="col-12">
+                        <p class="h1">สรุปผลโดยละเอียด</p>
+                    </div>
+                    <div class="col-12">
+                        <select name="filter" id="filter" ng-model="report_filter">
+                            <option value="month">เดือน</option>
+                            <option value="day">วัน</option>
+                            <option value="hour">ช่วงเวลา</option>
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <canvas id="chart"></canvas>
                     </div>
                 </div>
             </div>
@@ -79,39 +116,62 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
                 <div class="row pt-3">
                     <div class="col-10 pb-2"></div>
                     <div class="col-2 pb-2">
-                        <a href="#" class="btn btn-primary">แก้ไขกิจกรรม <i class="bi bi-pencil-square"></i></a>
+                        <a href="index.php?p=event&m=event_detail_edit&ev_eventId={{event_data.ev_eventId}}" class="btn btn-primary">แก้ไขกิจกรรม <i class="bi bi-pencil-square"></i></a>
                     </div>
                 </div>
                 <div class="row pt-3">
-                    <table class="table">
-                        <thead>
-                            <tr class="table-info">
-                                <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr class="table-info">
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <!-- data table -->
+                    <div class="table-responsive">
+                        <table datatable="ng" id="example" class="table nowrap dt-responsive" style="width:100%">
+                            <thead>
+                                <tr class="table-dark">
+                                    <th ng-if="event_data.ev_dType[0]">อีเมล</th>
+                                    <th ng-if="event_data.ev_dType[1]">คำนำหน้า</th>
+                                    <th ng-if="event_data.ev_dType[2]">ชื่อ</th>
+                                    <th ng-if="event_data.ev_dType[3]">นามสกุล</th>
+                                    <th ng-if="event_data.ev_dType[4]">รหัสพนักงาน / รหัสนักศึกษา</th>
+                                    <th ng-if="event_data.ev_dType[5]">รหัสบัตรประชาชน</th>
+                                    <th ng-if="event_data.ev_dType[6]">เพศ</th>
+                                    <th ng-if="event_data.ev_dType[7]">วันเกิด</th>
+                                    <th ng-if="event_data.ev_dType[8]">เบอร์โทรศัพท์</th>
+                                    <th ng-if="event_data.ev_dType[9]">ชื่อบริษัท / ชื่อสถานศึกษา</th>
+                                    <th ng-if="event_data.ev_dType[10]">แผนก / สาขาวิชา</th>
+                                    <th ng-if="event_data.ev_dType[11]">ตำแหน่ง / ชั่นปี</th>
+                                    <th>ลงทะเบียนล่วงหน้า</th>
+                                    <th>ลงทะเบียนเข้างาน</th>
+                                    <th>เมนู</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="table-light" ng-repeat="row in eventMembers">
+                                    <td ng-if="event_data.ev_dType[0]">{{checkString(row.u_email)}}</td>
+                                    <td ng-if="event_data.ev_dType[1]">{{checkString(row.ud_prefix)}}</td>
+                                    <td ng-if="event_data.ev_dType[2]">{{checkString(row.ud_firstName)}}</td>
+                                    <td ng-if="event_data.ev_dType[3]">{{checkString(row.ud_lastName)}}</td>
+                                    <td ng-if="event_data.ev_dType[4]">{{checkString(row.ud_emp_id)}}</td>
+                                    <td ng-if="event_data.ev_dType[5]">{{checkString(row.ud_card_id)}}</td>
+                                    <td ng-if="event_data.ev_dType[6]">{{checkString(row.ud_gender)}}</td>
+                                    <td ng-if="event_data.ev_dType[7]">{{checkString(row.ud_birthDate)}}</td>
+                                    <td ng-if="event_data.ev_dType[8]">{{checkString(row.ud_phone)}}</td>
+                                    <td ng-if="event_data.ev_dType[9]">{{checkString(row.ud_orgName)}}</td>
+                                    <td ng-if="event_data.ev_dType[10]">{{checkString(row.ud_department)}}</td>
+                                    <td ng-if="event_data.ev_dType[11]">{{checkString(row.ud_position)}}</td>
+                                    <td>{{checkString(row.m_preReg)}}</td>
+                                    <td>{{checkString(row.m_checkIn)}}</td>
+                                    <td>
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            เมนู
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><button class="dropdown-item" ng-click="checkInByMod(row.u_userId)">ลงทะเบียนเข้างาน</button></li>
+                                            <li><button class="dropdown-item">ลบ</button></li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- end data table -->
                 </div>
             </div>
         </div>

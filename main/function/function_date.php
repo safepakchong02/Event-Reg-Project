@@ -23,12 +23,12 @@
 		if (str !== "" && str !== null && typeof(str) !== "undefined") {
 			let obj = new Date(str);
 
-			let out = `${addZero(obj.getFullYear())}-
-			${addZero(obj.getMonth() + 1)}-
-			${addZero(obj.getDate())} 
-			${addZero(obj.getHours())}:
-			${addZero(obj.getMinutes())}:
-			${"00"}`
+			let out = `${addZero(obj.getFullYear())}-` +
+			`${addZero(obj.getMonth() + 1)}-` +
+			`${addZero(obj.getDate())} ` +
+			`${addZero(obj.getHours())}:` +
+			`${addZero(obj.getMinutes())}:` +
+			`${"00"}`;
 
 			return out;
 		} else {

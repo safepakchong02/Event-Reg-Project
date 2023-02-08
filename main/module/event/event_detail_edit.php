@@ -39,95 +39,95 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
                 </div>
                 <div class="col-sm-3">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="ev_dtype" name="ev_dtype" ng-model="data_event.ev_dtype[0]">
-                        <label class="form-check-label" for="ev_dtype">
+                        <input class="form-check-input" type="checkbox" id="ev_dType" name="ev_dType" ng-model="data_event.ev_dType[0]">
+                        <label class="form-check-label" for="ev_dType">
                             อีเมล
                         </label>
                     </div>
                 </div>
                 <div class="col-sm-3">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="ev_dtype" name="ev_dtype" ng-model="data_event.ev_dtype[1]">
-                        <label class="form-check-label" for="ev_dtype">
+                        <input class="form-check-input" type="checkbox" id="ev_dType" name="ev_dType" ng-model="data_event.ev_dType[1]">
+                        <label class="form-check-label" for="ev_dType">
                             คำนำหน้า
                         </label>
                     </div>
                 </div>
                 <div class="col-sm-3">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="ev_dtype" name="ev_dtype" ng-model="data_event.ev_dtype[2]">
-                        <label class="form-check-label" for="ev_dtype">
+                        <input class="form-check-input" type="checkbox" id="ev_dType" name="ev_dType" ng-model="data_event.ev_dType[2]">
+                        <label class="form-check-label" for="ev_dType">
                             ชื่อ
                         </label>
                     </div>
                 </div>
                 <div class="col-sm-3">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="ev_dtype" name="ev_dtype" ng-model="data_event.ev_dtype[3]">
-                        <label class="form-check-label" for="ev_dtype">
+                        <input class="form-check-input" type="checkbox" id="ev_dType" name="ev_dType" ng-model="data_event.ev_dType[3]">
+                        <label class="form-check-label" for="ev_dType">
                             นามสกุล
                     </div>
                 </div>
                 <div class="col-sm-3">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="ev_dtype" name="ev_dtype" ng-model="data_event.ev_dtype[4]">
-                        <label class="form-check-label" for="ev_dtype">
+                        <input class="form-check-input" type="checkbox" id="ev_dType" name="ev_dType" ng-model="data_event.ev_dType[4]">
+                        <label class="form-check-label" for="ev_dType">
                             รหัสพนักงาน / รหัสนักศึกษา
                         </label>
                     </div>
                 </div>
                 <div class="col-sm-3">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="ev_dtype" name="ev_dtype" ng-model="data_event.ev_dtype[5]">
-                        <label class="form-check-label" for="ev_dtype">
+                        <input class="form-check-input" type="checkbox" id="ev_dType" name="ev_dType" ng-model="data_event.ev_dType[5]">
+                        <label class="form-check-label" for="ev_dType">
                             รหัสบัตรประชาชน
                         </label>
                     </div>
                 </div>
                 <div class="col-sm-3">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="ev_dtype" name="ev_dtype" ng-model="data_event.ev_dtype[6]">
-                        <label class="form-check-label" for="ev_dtype">
+                        <input class="form-check-input" type="checkbox" id="ev_dType" name="ev_dType" ng-model="data_event.ev_dType[6]">
+                        <label class="form-check-label" for="ev_dType">
                             เพศ
                         </label>
                     </div>
                 </div>
                 <div class="col-sm-3">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="ev_dtype" name="ev_dtype" ng-model="data_event.ev_dtype[7]">
-                        <label class="form-check-label" for="ev_dtype">
+                        <input class="form-check-input" type="checkbox" id="ev_dType" name="ev_dType" ng-model="data_event.ev_dType[7]">
+                        <label class="form-check-label" for="ev_dType">
                             วันเกิด
                         </label>
                     </div>
                 </div>
                 <div class="col-sm-3">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="ev_dtype" name="ev_dtype" ng-model="data_event.ev_dtype[8]">
-                        <label class="form-check-label" for="ev_dtype">
+                        <input class="form-check-input" type="checkbox" id="ev_dType" name="ev_dType" ng-model="data_event.ev_dType[8]">
+                        <label class="form-check-label" for="ev_dType">
                             เบอร์โทรศัพท์
                         </label>
                     </div>
                 </div>
                 <div class="col-sm-3">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="ev_dtype" name="ev_dtype" ng-model="data_event.ev_dtype[9]">
-                        <label class="form-check-label" for="ev_dtype">
+                        <input class="form-check-input" type="checkbox" id="ev_dType" name="ev_dType" ng-model="data_event.ev_dType[9]">
+                        <label class="form-check-label" for="ev_dType">
                             ชื่อบริษัท / ชื่อสถานศึกษา
                         </label>
                     </div>
                 </div>
                 <div class="col-sm-3">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="ev_dtype" name="ev_dtype" ng-model="data_event.ev_dtype[10]">
-                        <label class="form-check-label" for="ev_dtype">
+                        <input class="form-check-input" type="checkbox" id="ev_dType" name="ev_dType" ng-model="data_event.ev_dType[10]">
+                        <label class="form-check-label" for="ev_dType">
                             แผนก / สาขาวิชา
                         </label>
                     </div>
                 </div>
                 <div class="col-sm-3">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="ev_dtype" name="ev_dtype" ng-model="data_event.ev_dtype[11]">
-                        <label class="form-check-label" for="ev_dtype">
+                        <input class="form-check-input" type="checkbox" id="ev_dType" name="ev_dType" ng-model="data_event.ev_dType[11]">
+                        <label class="form-check-label" for="ev_dType">
                             ตำแหน่ง / ชั่นปี
                         </label>
                     </div>

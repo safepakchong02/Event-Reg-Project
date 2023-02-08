@@ -1,15 +1,14 @@
 <script>
 	function checkNull(str) {
-		if (str === null) return true;
+		if (str.length === 0) return true;
 		else return false;
 	}
 
 	function boolArrayToLSB(boolArray) {
-		let lsb = 0;
+		let lsb = "";
 		for (let i = 0; i < boolArray.length; i++) {
-			if (boolArray[i]) {
-				lsb |= 1 << i;
-			}
+			if (boolArray[i] && boolArray[i] !== null) lsb = "1" + lsb;
+			else lsb = "0" + lsb;
 		}
 		return lsb;
 	}
@@ -26,14 +25,14 @@
 	}
 
 	function encodeHTML(str) {
-		if (checkNull(str)) return "";
+		// if (checkNull(str)) return "";
 		return str.replace(/[&<>"']/g, function(tag) {
 			var charsToReplace = {
-				'&': '&amp;',
-				'<': '&lt;',
-				'>': '&gt;',
-				'"': '&quot;',
-				"'": '&#39;'
+				'--': '--amp;',
+				'<': '--lt;',
+				'>': '--gt;',
+				'"': '--quot;',
+				"'": '--#39;'
 			};
 			return charsToReplace[tag] || tag;
 		});
@@ -41,16 +40,44 @@
 
 	function decodeHTML(str) {
 		if (checkNull(str)) return "";
-		return str.replace(/&amp;|&lt;|&gt;|&quot;|&#39;/g, function(tag) {
+		return str.replace(/--amp;|--lt;|--gt;|--quot;|--#39;/g, function(tag) {
 			var charsToReplace = {
-				'&amp;': '&',
-				'&lt;': '<',
-				'&gt;': '>',
-				'&quot;': '"',
-				'&#39;': "'"
+				'--amp;': '&',
+				'--lt;': '<',
+				'--gt;': '>',
+				'--quot;': '"',
+				'--#39;': "'"
 			};
 			return charsToReplace[tag] || tag;
 		});
+	}
+
+	function setEventStatus(arrEvent) {
+		let newArr = [];
+		let now = new Date();
+
+		for (let i = 0; i < arrEvent.length; i++) {
+			let data_event = {};
+			data_event = arrEvent[i];
+			let date_st = createDate(data_event.ev_checkInStart);
+			let date_ed = createDate(data_event.ev_checkInEnd);
+
+			if (now < date_st) data_event["ev_checkInState"] = "color-warning";
+			else if (now > date_st && now < date_ed) data_event["ev_checkInState"] = "color-success";
+			else data_event["ev_checkInState"] = "color-danger";
+
+			newArr.push(data_event);
+		}
+
+		return newArr;
+	}
+
+	function intToBool(int) {
+		return int == 1 ? true : false
+	}
+	
+	function boolToInt(bool) {
+		return bool == true ? 1 : 0;
 	}
 </script>
 

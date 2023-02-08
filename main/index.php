@@ -33,15 +33,11 @@ include("main/function/function_cookies.php");
 </head>
 
 <body ng-app="<?= $app_name ?>" ng-controller="<?= $ctrl_name ?>" style="font-family: 'IBM Plex Sans Thai Looped', sans-serif !important;">
+    <? include("main/body/navbar.php"); ?>
     <div class="container-fluid">
         <div class="row">
-            <!-- sidebar -->
-            <div class="col-2">
-                <? include("main/body/sidebar.php"); ?>
-            </div>
-            <!-- end sidebar -->
             <!-- content -->
-            <div class="col-10">
+            <div class="col-12">
                 <?
                 if (isset($_GET["p"]) && isset($_GET["m"])) {
                     $path = chk_get_url($_GET["p"]);
