@@ -73,7 +73,7 @@
                         $c[] = "month = $val%";
                     }
                     if ($key === 'day') {
-                        $c[] = "month = $val%";
+                        $c[] = "day = $val%";
                     }
                     if ($key === 'filter') {
                         $b = $val;
