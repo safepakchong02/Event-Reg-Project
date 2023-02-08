@@ -168,7 +168,7 @@
                 $body['ev_userId'] = $userId;
                 $result = createEvent($body);
                 if ($result !== 201) {
-                    $return = new responseObject(500, "Error", "");
+                    $return = new responseObject(500, "Error Inserted", "");
                 }
                 else {
                     $return = new responseObject(201, "Created Success", "");
