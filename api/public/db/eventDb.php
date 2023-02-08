@@ -32,12 +32,12 @@
         try {
             $handle = connectDb();
             $handle->beginTransaction();
-            $query = "SELECT ev_eventId from event where ev_eventId = '{$eventId}'";
+            $query = "SELECT ev_eventId from event where ev_eventId = '{$randomString}'";
             $result = $handle->prepare($query);
             $result->execute();
             $returnData = $result->fetch();
             if (!$returnData) {
-                return $eventId;
+                return $randomString;
             }
             $handle->commit();
         }
