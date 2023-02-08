@@ -165,6 +165,10 @@
                     $return = new responseObject(500, "Error", "");
                     return $response->withStatus(500)->withJson($return->getResponse());
                 }
+                if (!array_key_exists('ev_eventStart', $body)) {
+                    $return = new responseObject(500, "Error", "");
+                    return $response->withStatus(500)->withJson($return->getResponse());
+                }
                 $body['ev_userId'] = $userId;
                 $result = createEvent($body);
                 if ($result !== 201) {
