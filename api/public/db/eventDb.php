@@ -365,7 +365,7 @@
             $query = "SELECT * FROM 
             eventView as e 
             LEFT JOIN eventMemberView as m ON e.ev_eventId = m.ev_eventId
-            WHERE m.u_userId = '{$userId}'
+            WHERE m.u_userId = '{$userId}' AND e.ev_status = 1
             ORDER BY e.ev_status = 1";
             $result = $handle->prepare($query);
             $result->execute();
@@ -384,7 +384,7 @@
             $handle->beginTransaction();
             $query = "SELECT * FROM 
             eventView as e 
-            WHERE e.ev_createdBy = '{$userId}'
+            WHERE e.ev_createdBy = '{$userId}' AND e.ev_status = 1
             ORDER BY e.ev_createdBy";
             $result = $handle->prepare($query);
             $result->execute();
