@@ -173,6 +173,7 @@
         }
         catch (PDOException $e) {
             $handle->rollback();
+            echo $e->getMessage();
             return 500;
         }
         
