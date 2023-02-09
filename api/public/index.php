@@ -35,6 +35,7 @@ $app->post('/logout', UserController::class . '::logout');
 
 $app->group('/admin', function($app) {
     $app->get('/users', UserController::class . '::getUserAdmin');
+    $app->get('/report', UserController::class . '::getAdminReport');
     $app->post('/logout', UserController::class . '::forceLogout');
     $app->patch('/user/role', UserController::class . '::editRole');
     $app->patch('/resetpassword', UserController::class . '::resetpassword');

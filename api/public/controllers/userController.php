@@ -13,11 +13,31 @@
     Class UserController
     {
 
+        public static function getAdminReport(Request $request, Response $response, $args) {
+            try {
+                $auth = authen($request->getHeaders());
+                $userId = array_key_exists('u_userId', (array)$auth) ? $auth['u_userId'] : null;
+                $role = array_key_exists('u_role', (array)$auth) ? $auth['u_role'] : -1;
+                if (!$userId || $role != 3) {
+                    $return = new responseObject(401, "Permission invalid", "");
+                    return $response->withStatus(401)->withJson($return->getResponse());
+                }
+                $result = getAdminReport();
+                $return = new responseObject(200, "Success",  $result);
+                return $response->withStatus(200)->withJson($return->getResponse());
+            }
+            catch (Exception $e) {
+                $return = new responseObject(500, "Error", $e->getMessage());
+                return $response->withStatus(500)->withJson($return->getResponse());
+            }
+        }
+
         public static function changePassword(Request $request, Response $response, $args) {
             try {
                 $auth = authen($request->getHeaders());
                 $userId = array_key_exists('u_userId', (array)$auth) ? $auth['u_userId'] : null;
-                if (!$userId) {
+                $role = array_key_exists('u_role', (array)$auth) ? $auth['u_role'] : -1;
+                if (!$userId || $role != 3) {
                     $return = new responseObject(401, "Permission invalid", "");
                     return $response->withStatus(401)->withJson($return->getResponse());
                 }

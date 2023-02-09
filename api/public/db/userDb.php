@@ -6,6 +6,37 @@
     global $returnData;
 
 
+    function getAdminReport() {
+        try {
+            $returnData = array(
+                'users' => 0,
+                'events' => 0
+            );
+            $handle = connectDb();
+            $handle->beginTransaction();
+            $query = "SELECT count(*) as users FROM users";
+            $result = $handle->prepare($query);
+            $result->execute();
+            $rs1 = $result->fetch();
+
+            $query2 = "SELECT count(*) as events FROM events";
+            $result2 = $handle->prepare($query2);
+            $result2->execute();
+            $rs2 = $result2->fetch();
+
+            $returnData = array(
+                'users' => $rs1['users'],
+                'events' => $rs2['events']
+            );
+            $handle->commit();
+        }
+        catch (PDOException $e) {
+            $handle->rollback();
+            echo $e->getMessage();
+            return [];
+        }
+        return $returnData;
+    }
     function changepassword($userId, $oldpassword, $newpassword) {
         try {
             $oldpwd = md5($oldpassword);
@@ -14,6 +45,7 @@
             $handle->beginTransaction();
             $query1 = "SELECT u_userId FROM users WHERE u_userId = '{$userId}' AND u_password = '{$oldpwd}' AND u_status = 'A' LIMIT 1";
             $result = $handle->prepare($query1);
+            $result->execute();
             $rs = $result->fetch();
             if (!$rs) {
                 return 404;
