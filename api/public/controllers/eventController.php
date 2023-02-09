@@ -431,9 +431,7 @@
             try {
                 $auth = authen($request->getHeaders());
                 $userId = array_key_exists('u_userId', (array)$auth) ? $auth['u_userId'] : null;
-                $idcheck = checkManager($userId);
-                $role = array_key_exists('p_role', (array)$idcheck) ? $idcheck['p_role'] : -1;
-                if (!checkEventOwner($userId) && (!array_key_exists('u_userId', (array)$idcheck) || $role != 1 )){
+                if (!checkEventOwner($args['eventId'],$userId)){
                     $return = new responseObject(500, "Error", null);
                     return $response->withStatus(500)->withJson($return->getResponse());
                 }
@@ -463,9 +461,7 @@
             try {
                 $auth = authen($request->getHeaders());
                 $userId = array_key_exists('u_userId', (array)$auth) ? $auth['u_userId'] : null;
-                $idcheck = checkManager($userId);
-                $role = array_key_exists('p_role', (array)$idcheck) ? $idcheck['p_role'] : -1;
-                if (!checkEventOwner($userId) && (!array_key_exists('u_userId', (array)$idcheck) || $role != 1 )){
+                if (!checkEventOwner($args['eventId'], $userId)){
                     $return = new responseObject(500, "Error", null);
                     return $response->withStatus(500)->withJson($return->getResponse());
                 }
