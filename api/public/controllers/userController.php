@@ -23,7 +23,7 @@ class UserController
             $userId = array_key_exists('u_userId', (array)$auth) ? $auth['u_userId'] : null;
             $role = array_key_exists('u_role', (array)$auth) ? $auth['u_role'] : -1;
             if (!$userId || $role != 3) {
-                $return = new responseObject(401, "Permission invalid", "");
+                $return = new responseObject(401, "Unauthorized", "");
                 return $response->withStatus(401)->withJson($return->getResponse());
             }
             $result = getAdminReport();
@@ -75,7 +75,7 @@ class UserController
             $auth = authen($request->getHeaders());
             $role = array_key_exists('u_role', (array)$auth) ? $auth['u_role'] : -1;
             if ($role != 3) {
-                $return = new responseObject(401, "Permission invalid", "");
+                $return = new responseObject(401, "Unauthorized", "");
                 return $response->withStatus(401)->withJson($return->getResponse());
             }
             $body = $request->getParsedBody();
@@ -134,16 +134,16 @@ class UserController
         try {
             $body = $request->getParsedBody();
             if (!$body) {
-                $return = new responseObject(400, "Missing or incorrect parameters", null);
+                $return = new responseObject(400, "Bad request", null);
                 return $response->withStatus(400)->withJson($return->getResponse());
             }
             if (!$body['u_email'] || !$body['u_password']) {
-                $return = new responseObject(400, "Missing or incorrect parameters", null);
+                $return = new responseObject(400, "Bad request", null);
                 return $response->withStatus(400)->withJson($return->getResponse());
             }
             $email = checkEmail($body['u_email']);
             if ($email) {
-                $return = new responseObject(400, "Email already exist", null);
+                $return = new responseObject(400, "Bad request", null);
                 return $response->withStatus(400)->withJson($return->getResponse());
             }
             $result = register($body);
@@ -188,20 +188,24 @@ class UserController
             $auth = authen($request->getHeaders());
             $role = array_key_exists('u_role', (array)$auth) ? $auth['u_role'] : -1;
             if ($role == -1 || $role != 3) {
-                $return = new responseObject(500, "Error", "");
-                return $response->withStatus(500)->withJson($return->getResponse());
+                $return = new responseObject(401, "Unauthorized", "");
+                return $response->withStatus(401)->withJson($return->getResponse());
             }
             $body = $request->getParsedBody();
             $userId = array_key_exists('u_userId', $body) ? $body['u_userId'] : null;
             if (!$userId) {
-                $return = new responseObject(500, "Error", "");
-                return $response->withStatus(500)->withJson($return->getResponse());
+                $return = new responseObject(400, "Bad request", "");
+                return $response->withStatus(400)->withJson($return->getResponse());
             }
             $result = forcelogout($userId);
+            if ($result === 404) {
+                $return = new responseObject(404, "Not found", "");
+                return $response->withStatus(404)->withJson($return->getResponse());
+            }
             if ($result === 500) {
                 $return = new responseObject(500, "Error", "");
                 return $response->withStatus(500)->withJson($return->getResponse());
-            } else {
+            } else if ($result === 200){
                 $return = new responseObject(200, "Success", '');
                 setcookie('ac_token', "", time() - 86400 * 30, "/");
                 setcookie('u_userId', "", time() - 86400 * 30, "/");
@@ -221,8 +225,8 @@ class UserController
             $auth = authen($request->getHeaders());
             $role = array_key_exists('u_role', (array)$auth) ? $auth['u_role'] : -1;
             if ($role == -1 || $role != 3) {
-                $return = new responseObject(500, "Error", "");
-                return $response->withStatus(500)->withJson($return->getResponse());
+                $return = new responseObject(401, "Error", "");
+                return $response->withStatus(401)->withJson($return->getResponse());
             }
             $result = getUserAdmin();
             $return = new responseObject(200, "Success", $result);
@@ -239,8 +243,8 @@ class UserController
             $auth = authen($request->getHeaders());
             $role = array_key_exists('u_role', (array)$auth) ? $auth['u_role'] : -1;
             if ($role == -1 || $role != 3) {
-                $return = new responseObject(500, "Error", "");
-                return $response->withStatus(500)->withJson($return->getResponse());
+                $return = new responseObject(401, "Unauthorized", "");
+                return $response->withStatus(401)->withJson($return->getResponse());
             }
             $body = $request->getParsedBody();
             $userId = array_key_exists('u_userId', (array)$body) ? $body['u_userId'] : null;
@@ -268,7 +272,7 @@ class UserController
             $auth = authen($request->getHeaders());
             $userId = array_key_exists('u_userId', (array)$auth) ? $auth['u_userId'] : null;
             if (!$userId) {
-                $return = new responseObject(500, "Error", "");
+                $return = new responseObject(401, "Error", "");
                 return $response->withStatus(500)->withJson($return->getResponse());
             }
             $result = getProfile($userId);
@@ -291,19 +295,19 @@ class UserController
             $userId = array_key_exists('u_userId', (array)$auth) ? $auth['u_userId'] : null;
             $role = array_key_exists('u_role', (array)$auth) ? $auth['u_role'] : -1;
             if (!$userId) {
-                $return = new responseObject(500, "Error", "");
-                return $response->withStatus(500)->withJson($return->getResponse());
+                $return = new responseObject(401, "Unauthorized", "");
+                return $response->withStatus(401)->withJson($return->getResponse());
             }
             $body = $request->getParsedBody();
             $param = array_key_exists('u_userId', (array)$body) ? $body['u_userId'] : null;
             if (!$param) {
-                $return = new responseObject(500, "Error", "");
-                return $response->withStatus(500)->withJson($return->getResponse());
+                $return = new responseObject(400, "Bad request", "");
+                return $response->withStatus(400)->withJson($return->getResponse());
             }
             if ($param != $userId) {
                 if ($role != 3) {
-                    $return = new responseObject(500, "Error", "");
-                    return $response->withStatus(500)->withJson($return->getResponse());
+                    $return = new responseObject(401, "Unauthorized", "");
+                    return $response->withStatus(401)->withJson($return->getResponse());
                 }
             }
             $result = deactivate($param);

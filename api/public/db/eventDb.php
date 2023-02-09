@@ -66,7 +66,7 @@
     }
 
 
-    function checkManager($eventId){
+    /*function checkManager($eventId){
         try {
             $handle = connectDb();
             $handle->beginTransaction();
@@ -81,7 +81,7 @@
             return [];
         }
         return $returnData;
-    }
+    }*/
 
     function addEventRole ($eventId, $user, $r) {
         try {
@@ -115,11 +115,11 @@
         return 200;
     }
     
-    function checkEventOwner($eventId){
+    function checkEventOwner($eventId, $userId){
         try {
             $handle = connectDb();
             $handle->beginTransaction();
-            $query = "SELECT * FROM eventPermView WHERE ev_createdBy = '{$eventId}'  LIMIT 1";
+            $query = "SELECT * FROM eventView WHERE ev_createdBy = '{$eventId}' AND ev_createdBy = '{$userId}' LIMIT 1";
             $result = $handle->prepare($query);
             $result->execute();
             $returnData = $result->fetch();
@@ -130,7 +130,7 @@
         }
         catch (PDOException $e) {
             $handle->rollback();
-            return [];
+            return false;
         }
         return true;
     }

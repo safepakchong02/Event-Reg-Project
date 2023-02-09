@@ -164,7 +164,7 @@
             $result->execute();
             $token = $result->fetch();
             if (!$token) {
-                return 500;
+                return 404;
             }
             $param = $token['ac_token'];
             $query = "DELETE FROM accessToken WHERE ac_token = '{$param}'";
