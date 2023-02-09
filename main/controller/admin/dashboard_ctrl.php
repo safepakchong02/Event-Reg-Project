@@ -27,8 +27,20 @@
                 'Authorization': `${$scope.ac_token}`
             }
         }).then((res) => {
-            console.log(res.data.resultData);
+            // console.log(res.data.resultData);
             $scope.users = res.data.resultData;
+        })
+
+        $http({
+            method: `GET`,
+            url: `api/admin/report`,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': `${$scope.ac_token}`
+            }
+        }).then((res) => {
+            // console.log(res.data.resultData);
+            $scope.admin_data = res.data.resultData;
         })
 
 
@@ -110,7 +122,7 @@
                     })
                     else Swal.fire({
                         icon: 'success',
-                        title: 'ลบผู้ใช้เสร็จสิ้น',
+                        title: 'บันทึกเสร็จสิ้น',
                     })
                 }, // end then
                 (res) => { // optional
@@ -122,6 +134,50 @@
                         // text: res.error
                     })
                 }); // end error
+        }
+
+        $scope.resetPassword = (u_userId) => {
+            Swal.fire({
+                title: 'คุณต้องการรีเซ็ทรหัสผ่านผู้ใช้นี้หรือไม่?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $http({
+                        method: `PATCH`,
+                        url: `api/admin/resetpassword`,
+                        data: `u_userId=${u_userId}` +
+                            `&u_password=q1w2e3r4`,
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'Authorization': `${$scope.ac_token}`
+                        }
+                    }).then((res) => {
+                            console.log(res);
+                            if (res.data.code !== 201 && res.data.code !== 200) Swal.fire({
+                                icon: 'error',
+                                title: 'error',
+                            })
+                            else Swal.fire({
+                                icon: 'success',
+                                title: 'รีเซ็ทรหัสผ่านผู้ใช้เสร็จสิ้น',
+                                text: "รหัสผ่านคือ q1w2e3r4"
+                            })
+                        }, // end then
+                        (res) => { // optional
+                            // failed
+                            console.log(res);
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'ไม่สามารถลบข้อมูลได้',
+                                text: res.error
+                            })
+                        }); // end error
+                } // end if result.isConfirmed
+            }) // end then Swal result
         }
 
         $scope.removeUser = (u_userId) => {

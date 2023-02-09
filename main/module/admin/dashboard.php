@@ -12,7 +12,7 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
             <div class="card bg-success text-white">
                 <div class="card-body">
                     <h5 class="card-title">จำนวนผู้ใช้งานทั้งหมด</h5>
-                    <h1>574</h1>
+                    <h1>{{admin_data.users}}</h1>
                 </div>
             </div>
         </div>
@@ -20,14 +20,9 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
             <div class="card bg-success text-white">
                 <div class="card-body">
                     <h5 class="card-title">จำนวนกิจกรรมทั้งหมด</h5>
-                    <h1>23</h1>
+                    <h1>{{admin_data.events}}</h1>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row pb-2">
-        <div class="d-flex justify-content-end">
-            <a href="#" class="btn btn-success">เพิ่มผู้ใช้งาน <i class="bi bi-plus-square-dotted"></i></a>
         </div>
     </div>
     <div class="table-responsive">
@@ -46,14 +41,15 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
                 <tr class="table-light" ng-repeat="row in users">
                     <td>{{row.u_userId}}</td>
                     <td>{{row.u_email}}</td>
-                    <td>{{row.ud_firstName}}</td>
+                    <td>{{row.ud_firstName}} {{row.ud_lastName}}</td>
                     <td>{{showRole(row.u_role)}}</td>
-                    <td>{{row.lastLogin}}</td>
+                    <td>{{row.ac_createTime}}</td>
                     <td>
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             action
                         </button>
                         <ul class="dropdown-menu">
+                            <li><button ng-click="resetPassword(row.u_userId)" class="dropdown-item">รีเซ็ทรหัสผ่าน</button></li>
                             <li><button ng-click="changeRole(row.u_userId)" class="dropdown-item">แก้ไขสิทธิผู้ใช้</button></li>
                             <li><button ng-click="forceLogout(row.u_userId)" class="dropdown-item">ออกจากระบบ</button></li>
                             <li><button ng-click="removeUser(row.u_userId)" class="dropdown-item">ลบ</button></li>

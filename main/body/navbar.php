@@ -25,7 +25,7 @@
                         </button>
                         <ul class="dropdown-menu dropdown-menu-dark">
                             <li><a class="dropdown-item" href="index.php?p=user&m=profile">โปรไฟล์</a></li>
-                            <li><a class="dropdown-item" href="#">ออกจากระบบ</a></li>
+                            <li><a class="dropdown-item" href="index.php?p=login&m=login&logout">ออกจากระบบ</a></li>
                         </ul>
                     </li>
                 </ul>
