@@ -119,7 +119,7 @@
         try {
             $handle = connectDb();
             $handle->beginTransaction();
-            $query = "SELECT * FROM eventView WHERE ev_createdBy = '{$eventId}' AND ev_createdBy = '{$userId}' LIMIT 1";
+            $query = "SELECT * FROM eventView WHERE ev_eventId = '{$eventId}' AND ev_createdBy = '{$userId}' LIMIT 1";
             $result = $handle->prepare($query);
             $result->execute();
             $returnData = $result->fetch();
