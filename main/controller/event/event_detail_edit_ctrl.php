@@ -131,7 +131,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $http({
-                        method: `DELETE`,
+                        method: `POST`,
                         url: `api/event/${ev_eventId}`,
                         data: `u_userId=${$scope.u_userId}`,
                         headers: {

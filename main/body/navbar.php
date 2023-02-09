@@ -12,13 +12,16 @@
                 <li class="nav-item">
                     <a class="nav-link text-white" href="index.php?p=event&m=event_list">รายชื่อกิจกรรม</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="index.php?p=admin&m=dashboard">Admin</a>
+                </li>
 
             </ul>
             <div class="d-flex">
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
                         <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown
+                            {{ud_name}}
                         </button>
                         <ul class="dropdown-menu dropdown-menu-dark">
                             <li><a class="dropdown-item" href="index.php?p=user&m=profile">โปรไฟล์</a></li>

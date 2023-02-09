@@ -3,33 +3,29 @@
     app.controller("<?= $ctrl_name ?>", function($scope, $http) { // start controller function
         const myPath = location.search;
         const loginPath = "?p=login&m=login";
+        const logoutPath = "?p=login&m=login&logout";
         const registerPath = "?p=login&m=register";
-
-        // bypass login
-        setCookie(KEY_TOKEN, "4202fe770ce090ae841a823b7ff31bb4ad6d70bd422c49355cedbe8a4a5e1ab8", 30);
-        setCookie(KEY_ROLE, "1", 30);
-        setCookie(KEY_USER_ID, "c3aa22a7-9be3-11ed-bf9e-0242ac140002", 30);
 
         $scope.handle_login = () => {
             if (myPath === loginPath) return;
             if (myPath === registerPath) return;
+            if (myPath === logoutPath) return;
             if (getCookie(KEY_TOKEN) === "") {
                 Swal.fire({
                     icon: 'warning',
                     title: 'กรุณาเข้าสู่ระบบ',
                 }).then(() => {
-                    location.replace("index.php?p=login&m=login");
+                    // location.replace("index.php?p=login&m=login");
                 })
             } else {
                 $scope.ac_token = getCookie(KEY_TOKEN);
                 $scope.u_role = getCookie(KEY_ROLE);
                 $scope.u_userId = getCookie(KEY_USER_ID);
+                $scope.ud_name = getCookie(KEY_NAME);
             }
         }
 
         $scope.handle_login();
-
-        // console.log(myPath);
-        // console.log(location.href);
+        console.log(document.cookie);
     }); // end controller function
 </script>

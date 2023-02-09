@@ -3,6 +3,7 @@
     const KEY_TOKEN = "ac_token";
     const KEY_ROLE = "u_role";
     const KEY_USER_ID = "u_userId";
+    const KEY_NAME = "ud_name";
 
     
     // function to set a cookie
@@ -26,6 +27,5 @@
                 return c.substring(name.length, c.length);
             }
         }
-        return "";
     }
 </script>

@@ -9,7 +9,8 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
 <div class="container-fluid" ng-controller="<?= $ctrl_name ?>">
     <div class="row pb-5 pt-5">
         <!-- edit here -->
-        <h1>Profile(กำลังทำ)</h1>
+        <h1>สวัสดี!!! {{ud_name}}</h1>
+        <a href="index.php?p=user&m=profile" class="btn btn-primary col-auto">โปรไฟล์ >></a>
     </div>
     <div class="row">
         <!-- edit here -->

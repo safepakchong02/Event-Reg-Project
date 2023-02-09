@@ -33,8 +33,8 @@ include("main/function/function_cookies.php");
 </head>
 
 <body ng-app="<?= $app_name ?>" ng-controller="<?= $ctrl_name ?>" style="font-family: 'IBM Plex Sans Thai Looped', sans-serif !important;">
-    <? include("main/body/navbar.php"); ?>
-    <div class="container-fluid">
+    <? if(@$_GET["p"] != "login") include("main/body/navbar.php"); ?>
+    <div class="container-fluid bg-light">
         <div class="row">
             <!-- content -->
             <div class="col-12">

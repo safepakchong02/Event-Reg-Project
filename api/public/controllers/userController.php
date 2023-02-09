@@ -95,10 +95,10 @@
                 }
                 else {
                     $return = new responseObject(200, "Success", $result['ac_token']);
-                    setcookie('ac_token', $result['ac_token'], time() + 86400);
-                    setcookie('u_userId', $result['u_userId'], time() + 86400);
-                    setcookie('u_role', $result['u_role'], time() + 86400);
-                    setcookie('ud_name', $result['u_name'], time() + 86400);
+                    setcookie('ac_token', $result['ac_token'], time() + 86400, "/");
+                    setcookie('u_userId', $result['u_userId'], time() + 86400, "/");
+                    setcookie('u_role', $result['u_role'], time() + 86400, "/");
+                    setcookie('ud_name', $result['u_name'], time() + 86400, "/");
                 }
                 return $response->withStatus(200)->withJson($return->getResponse());
             }
@@ -327,6 +327,3 @@
             }
         }
     }
-
-
-?>

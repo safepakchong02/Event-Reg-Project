@@ -75,9 +75,16 @@
 	function intToBool(int) {
 		return int == 1 ? true : false
 	}
-	
+
 	function boolToInt(bool) {
 		return bool == true ? 1 : 0;
+	}
+
+	function filterList(selector, state) {
+		document.querySelectorAll(selector).forEach((element) => {
+			if (state) element.classList.remove("ng-hide");
+			else element.classList.add("ng-hide");
+		})
 	}
 </script>
 
