@@ -103,21 +103,21 @@ class UserController
         try {
             $body = $request->getParsedBody();
             if (!$body) {
-                $return = new responseObject(400, "Missing or incorrect parameters", null);
+                $return = new responseObject(400, "Bad request", null);
                 return $response->withStatus(400)->withJson($return->getResponse());
             }
             $email = array_key_exists("u_email", $body) ? $body['u_email'] : null;
             $password = array_key_exists("u_password", $body) ? md5($body['u_password']) : null;
             if (!$email || !$password) {
-                $return = new responseObject(400, "Missing or incorrect parameters", null);
+                $return = new responseObject(400, "Bad request", null);
                 return $response->withStatus(400)->withJson($return->getResponse());
             }
             $result = login($email, $password);
-            if ($result === 500) {
-                $return = new responseObject(500, "Error", "");
-                return $response->withStatus(500)->withJson($return->getResponse());
+            if ($result === 403) {
+                $return = new responseObject(403, "Forbidden", "");
+                return $response->withStatus(403)->withJson($return->getResponse());
             } else {
-                $return = new responseObject(200, "Success", $result['ac_token']);
+                $return = new responseObject(200, "Success", "");
                 setcookie('ac_token', $result['ac_token'], time() + 86400 * 30, "/");
                 setcookie('u_userId', $result['u_userId'], time() + 86400 * 30, "/");
                 setcookie('u_role', $result['u_role'], time() + 86400 * 30, "/");

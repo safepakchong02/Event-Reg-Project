@@ -102,18 +102,18 @@
                     $returnData = $r2;
                 }
                 else {
-                    return 500;
+                    return 403;
                 }           
             }
             else {
-                return 500;
+                return 403;
             }
             $handle->commit();
         }
         catch (PDOException $e) {
             $handle->rollback();
             echo $e->getMessage();
-            return 500;
+            return 403;
         }
         return $returnData;
     }

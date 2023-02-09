@@ -139,7 +139,7 @@
         try {
             $handle = connectDb();
             $handle->beginTransaction();
-            $query = "SELECT " . implode(', ', $filter). ", count(*) as count FROM eventReportView where  " . implode(' AND ', $data). " GROUP BY " . implode(', ', $filter). "";
+            $query = "SELECT " . implode(', ', $filter). ", sum(count) as count FROM eventReportView where  " . implode(' AND ', $data). " GROUP BY " . implode(', ', $filter). "";
             $result = $handle->prepare($query);
             $result->execute();
             $returnData = $result->fetchAll();
