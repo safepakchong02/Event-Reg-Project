@@ -319,6 +319,8 @@
             $result = $handle->prepare($query);
             $result->execute();
             $af = $result->rowCount();
+            echo $query;
+            echo $af;
             if ($af === 0){
                 return 500;
             }

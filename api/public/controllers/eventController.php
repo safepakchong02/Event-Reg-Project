@@ -329,7 +329,7 @@
                     $return = new responseObject(500, "Error", "");
                 }
                 else {
-                    $return = new responseObject(200, "Updated Success", "");
+                    $return = new responseObject(200, "Success", "");
                 }
                 return $response->withStatus($result)->withJson($return->getResponse());
             }
