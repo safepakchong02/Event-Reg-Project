@@ -155,8 +155,8 @@
                 }
                 $body = $request->getParsedBody();
                 $userId = array_key_exists('u_userId', (array)$body) ? $body['u_userId'] : null;
-                $userRole = array_key_exists('u_role', (array)$body) ? $body['u_role'] : null; 
-                if (!$userId || !$userRole) {
+                $userRole = array_key_exists('u_role', (array)$body) ? $body['u_role'] : -1; 
+                if (!$userId || $userRole == -1) {
                     $return = new responseObject(400, "Bad request", "");
                     return $response->withStatus(400)->withJson($return->getResponse());
                 }
