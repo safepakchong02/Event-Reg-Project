@@ -63,17 +63,17 @@
                 }
                 $param = $request->getQueryParams();
                 $c = array();
-                $b = array();
+                $b = '*';
                 $c[] = "ev_eventId = '{$args['eventId']}'";
                 foreach ($param as $key=>$val) {
                     if ($key === 'year') {
-                        $c[] = "year = $val%";
+                        $c[] = "year = $val";
                     }
                     if ($key === 'month') {
-                        $c[] = "month = $val%";
+                        $c[] = "month = $val";
                     }
                     if ($key === 'day') {
-                        $c[] = "day = $val%";
+                        $c[] = "day = $val";
                     }
                     if ($key === 'filter') {
                         $b = $val;
