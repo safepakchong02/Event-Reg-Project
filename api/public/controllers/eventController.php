@@ -63,7 +63,7 @@
                 }
                 $param = $request->getQueryParams();
                 $c = array();
-                $b = null;
+                $b = array();
                 $c[] = "ev_eventId = '{$args['eventId']}'";
                 foreach ($param as $key=>$val) {
                     if ($key === 'year') {
