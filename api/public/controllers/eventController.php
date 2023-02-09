@@ -162,34 +162,62 @@
                 }
                 $body['ev_eventId'] = genEventId();
                 if ($body['ev_eventId'] === 500) {
-                    $return = new responseObject(500, "Error", "");
-                    return $response->withStatus(500)->withJson($return->getResponse());
+                    $return = new responseObject(400, "Missing parameter", "");
+                    return $response->withStatus(400)->withJson($return->getResponse());
+                }
+                if (!array_key_exists('ev_title', $body)) {
+                    $return = new responseObject(400, "Missing parameter", "");
+                    return $response->withStatus(400)->withJson($return->getResponse());
+                }
+                if (!array_key_exists('ev_limit', $body)) {
+                    $return = new responseObject(400, "Missing parameter", "");
+                    return $response->withStatus(400)->withJson($return->getResponse());
+                }
+                if (!array_key_exists('ev_dType', $body)) {
+                    $return = new responseObject(400, "Missing parameter", "");
+                    return $response->withStatus(400)->withJson($return->getResponse());
+                }
+                if (!array_key_exists('ev_public', $body)) {
+                    $return = new responseObject(400, "Missing parameter", "");
+                    return $response->withStatus(400)->withJson($return->getResponse());
+                }
+                if (!array_key_exists('ev_selfReg', $body)) {
+                    $return = new responseObject(400, "Missing parameter", "");
+                    return $response->withStatus(400)->withJson($return->getResponse());
+                }
+                if (!array_key_exists('ev_preReg', $body)) {
+                    $return = new responseObject(400, "Missing parameter", "");
+                    return $response->withStatus(400)->withJson($return->getResponse());
                 }
                 if (!array_key_exists('ev_checkInStart', $body)) {
-                    $return = new responseObject(500, "Error", "");
-                    return $response->withStatus(500)->withJson($return->getResponse());
+                    $return = new responseObject(400, "Missing parameter", "");
+                    return $response->withStatus(400)->withJson($return->getResponse());
+                }
+                if (!array_key_exists('ev_checkInStart', $body)) {
+                    $return = new responseObject(400, "Missing parameter", "");
+                    return $response->withStatus(400)->withJson($return->getResponse());
                 }
                 if (!array_key_exists('ev_checkInEnd', $body)) {
-                    $return = new responseObject(500, "Error", "");
-                    return $response->withStatus(500)->withJson($return->getResponse());
+                    $return = new responseObject(400, "Missing parameter", "");
+                    return $response->withStatus(400)->withJson($return->getResponse());
                 }
                 if (!array_key_exists('ev_eventStart', $body)) {
-                    $return = new responseObject(500, "Error", "");
-                    return $response->withStatus(500)->withJson($return->getResponse());
+                    $return = new responseObject(400, "Missing parameter", "");
+                    return $response->withStatus(400)->withJson($return->getResponse());
                 }
                 if (!array_key_exists('ev_eventEnd', $body)) {
-                    $return = new responseObject(500, "Error", "");
-                    return $response->withStatus(500)->withJson($return->getResponse());
+                    $return = new responseObject(400, "Missing parameter", "");
+                    return $response->withStatus(400)->withJson($return->getResponse());
                 }
                 $ev = array_key_exists('ev_preReg', $body) ? $body['ev_preReg'] : -1;
                 if ($ev === 1) {
                     if (!array_key_exists('ev_preRegStart', $body)) {
-                        $return = new responseObject(500, "Error", "");
-                        return $response->withStatus(500)->withJson($return->getResponse());
+                        $return = new responseObject(400, "Missing parameter", "");
+                    return $response->withStatus(400)->withJson($return->getResponse());
                     }
                     if (!array_key_exists('ev_preRegEnd', $body)) {
-                        $return = new responseObject(500, "Error", "");
-                        return $response->withStatus(500)->withJson($return->getResponse());
+                        $return = new responseObject(400, "Missing parameter", "");
+                    return $response->withStatus(400)->withJson($return->getResponse());
                     }
                 }
                 $body['ev_userId'] = $userId;

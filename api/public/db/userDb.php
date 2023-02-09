@@ -67,7 +67,7 @@
             $pwd = md5($pass);
             $handle = connectDb();
             $handle->beginTransaction();
-            $query = "UPDATE users SET u_password = '{$pwd}' WHERE u_userId = $userId";
+            $query = "UPDATE users SET u_password = '{$pwd}' WHERE u_userId = '{$userId}'";
             $result = $handle->prepare($query);
             $result->execute();
             $handle->commit();
