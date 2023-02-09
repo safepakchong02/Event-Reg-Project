@@ -21,11 +21,10 @@
                 $scope.ac_token = getCookie(KEY_TOKEN);
                 $scope.u_role = getCookie(KEY_ROLE);
                 $scope.u_userId = getCookie(KEY_USER_ID);
-                $scope.ud_name = getCookie(KEY_NAME);
+                $scope.ud_name = decodeURIComponent(getCookie(KEY_NAME));
             }
         }
 
         $scope.handle_login();
-        console.log(document.cookie);
     }); // end controller function
 </script>

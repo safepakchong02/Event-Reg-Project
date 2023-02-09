@@ -50,7 +50,7 @@
             if (!$rs) {
                 return 404;
             }
-            $query2 = "UPDATE users SET u_password = '{$newpwd}' WHERE u_userId = $userId";
+            $query2 = "UPDATE users SET u_password = '{$newpwd}' WHERE u_userId = '{$userId}'";
             $result2 = $handle->prepare($query2);
             $result2->execute();
             $handle->commit();

@@ -18,23 +18,27 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
                         <input disabled type="email" class="form-control" id="u_email" name="u_email" ng-model="profile_data.u_email">
                     </div>
                 </div>
-                <div class="col-lg-4 pb-2">
+                <div class="col-lg-4 pb-2" ng-show="editPassword">
                     <div class="col-auto">
                         <label for="u_password" class="form-label">รหัสผ่านเก่า</label>
-                        <input disabled type="password" class="form-control" id="u_password" name="u_password" ng-model="profile_data.u_password">
+                        <input type="password" class="form-control" id="u_password" name="u_password" ng-model="profile_data.u_password">
                     </div>
                 </div>
-                <div class="col-lg-4 pb-2">
+                <div class="col-lg-4 pb-2" ng-show="editPassword">
                     <div class="col-auto">
                         <label for="u_newPassword" class="form-label">รหัสผ่านใหม่</label>
-                        <input disabled type="password" class="form-control" id="u_newPassword" name="u_newPassword" ng-model="profile_data.u_newPassword">
+                        <input type="password" class="form-control" id="u_newPassword" name="u_newPassword" ng-model="profile_data.u_newPassword">
                     </div>
                 </div>
-                <div class="col-lg-4 pb-2">
+                <div class="col-lg-4 pb-2" ng-show="editPassword">
                     <div class="col-auto">
                         <label for="u_repeatPassword" class="form-label">ยืนยันรหัสผ่าน</label>
-                        <input disabled type="password" class="form-control" id="u_repeatPassword" name="u_repeatPassword" ng-model="profile_data.u_repeatPassword">
+                        <input type="password" class="form-control" id="u_repeatPassword" name="u_repeatPassword" ng-model="profile_data.u_repeatPassword">
                     </div>
+                </div>
+                <div class="col-auto pb-2">
+                    <button ng-click="editPassword=true" type="button" class="btn btn-warning">เปลี่ยนรหัสผ่าน</button>
+                    <button ng-click="changePassword()" ng-show="editPassword" type="button" class="btn btn-primary">บันทึก</button>
                 </div>
             </div>
             <!-- part 2 -->
@@ -42,12 +46,12 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
                 <div class="col-lg-4 pb-2">
                     <div class="col-auto">
                         <label for="ud_prefix" class="form-label">คำนำหน้า</label>
-                        <select disabled id="ud_prefix" class="form-select" ng-model="profile_data.prefix">
-                            <option selected ng-selected="profile_data.prefix == 'เลือก...'" value="เลือก...">เลือก...</option>
-                            <option ng-selected="profile_data.prefix == 'นาย'" value="นาย">นาย</option>
-                            <option ng-selected="profile_data.prefix == 'นางสาว'" value="นางสาว">นางสาว</option>
-                            <option ng-selected="profile_data.prefix == 'นาง'" value="นาง">นาง</option>
-                            <option ng-selected="profile_data.prefix == 'อาจารย์'" value="อาจารย์">อาจารย์</option>
+                        <select disabled id="ud_prefix" class="form-select" ng-model="profile_data.ud_prefix">
+                            <option selected ng-selected="profile_data.ud_prefix == 'เลือก...'" value="เลือก...">เลือก...</option>
+                            <option ng-selected="profile_data.ud_prefix == 'นาย'" value="นาย">นาย</option>
+                            <option ng-selected="profile_data.ud_prefix == 'นางสาว'" value="นางสาว">นางสาว</option>
+                            <option ng-selected="profile_data.ud_prefix == 'นาง'" value="นาง">นาง</option>
+                            <option ng-selected="profile_data.ud_prefix == 'อาจารย์'" value="อาจารย์">อาจารย์</option>
                         </select>
                     </div>
                 </div>
@@ -80,19 +84,19 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
                     <div class="row">
                         <div class="col-auto">
                             <div class="form-check">
-                                <input disabled class="form-check-input" type="radio" name="ud_gender" id="ud_gender1" value="ชาย">
+                                <input disabled class="form-check-input" type="radio" name="ud_gender" id="ud_gender1" value="ชาย" ng-model="profile_data.ud_gender">
                                 <label class="form-check-label" for="ud_gender1">ชาย</label>
                             </div>
                         </div>
                         <div class="col-auto">
                             <div class="form-check">
-                                <input disabled class="form-check-input" type="radio" name="ud_gender" id="ud_gender2" value="หญิง">
+                                <input disabled class="form-check-input" type="radio" name="ud_gender" id="ud_gender2" value="หญิง" ng-model="profile_data.ud_gender">
                                 <label class="form-check-label" for="ud_gender2">หญิง</label>
                             </div>
                         </div>
                         <div class="col-auto">
                             <div class="form-check">
-                                <input disabled class="form-check-input" type="radio" name="ud_gender" id="ud_gender3" value="ไม่ต้องการระบุ">
+                                <input disabled class="form-check-input" type="radio" name="ud_gender" id="ud_gender3" value="ไม่ต้องการระบุ" ng-model="profile_data.ud_gender">
                                 <label class="form-check-label" for="ud_gender3">ไม่ต้องการระบุ</label>
                             </div>
                         </div>
@@ -101,7 +105,7 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
                 <div class="col-sm-6 pb-2">
                     <div class="col-auto">
                         <label for="ud_birthDate" class="form-label">วันเกิด</label>
-                        <input disabled type="datetime-local" class="form-control" id="ud_birthDate" name="ud_birthDate" ng-model="profile_data.ud_birthDate">
+                        <input disabled type="date" class="form-control" id="ud_birthDate" name="ud_birthDate" ng-model="profile_data.ud_birthDate">
                     </div>
                 </div>
                 <div class="col-sm-6 pb-2">

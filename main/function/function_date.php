@@ -24,11 +24,11 @@
 			let obj = new Date(str);
 
 			let out = `${addZero(obj.getFullYear())}-` +
-			`${addZero(obj.getMonth() + 1)}-` +
-			`${addZero(obj.getDate())} ` +
-			`${addZero(obj.getHours())}:` +
-			`${addZero(obj.getMinutes())}:` +
-			`${"00"}`;
+				`${addZero(obj.getMonth() + 1)}-` +
+				`${addZero(obj.getDate())} ` +
+				`${addZero(obj.getHours())}:` +
+				`${addZero(obj.getMinutes())}:` +
+				`${"00"}`;
 
 			return out;
 		} else {
@@ -49,6 +49,23 @@
 				delZero(date[2]), // day
 				delZero(time[0]), // hour
 				delZero(time[1]) // minutes
+			)
+			return date_js;
+		} else {
+			return str;
+		}
+	}
+
+	// แปลง string date format เป็น object JS date // format คือ YYYY-MM-DD hh:mm:ss(2022-12-01 00:00:00)
+	function createDate2(str) {
+		if (str !== "" && str !== null && typeof(str) !== "undefined") {
+			var date = str.split("-");
+			// console.log(date);
+			
+			var date_js = new Date(
+				delZero(date[0]), // year
+				(delZero(date[1]) - 1), // month
+				delZero(date[2]) // day
 			)
 			return date_js;
 		} else {
