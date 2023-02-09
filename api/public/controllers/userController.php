@@ -12,6 +12,69 @@
 
     Class UserController
     {
+
+        public static function changePassword(Request $request, Response $response, $args) {
+            try {
+                $auth = authen($request->getHeaders());
+                $userId = array_key_exists('u_userId', (array)$auth) ? $auth['u_userId'] : null;
+                if (!$userId) {
+                    $return = new responseObject(401, "Permission invalid", "");
+                    return $response->withStatus(401)->withJson($return->getResponse());
+                }
+                $body = $request->getParsedBody();
+                $oldpassword = array_key_exists('u_oldpassword', $body) ? $body['u_oldpassword'] : null;
+                $newpassword = array_key_exists('u_newpassword', $body) ? $body['u_newpassword'] : null;
+                if (!$oldpassword || !$newpassword) {
+                    $return = new responseObject(400, "Bad request", "");
+                    return $response->withStatus(400)->withJson($return->getResponse());
+                }
+                $result = changepassword($userId,$oldpassword, $newpassword);
+                if ($result === 500) {
+                    $return = new responseObject(500, "Error", "");
+                    return $response->withStatus(500)->withJson($return->getResponse());
+                }
+                if ($result === 404) {
+                    $return = new responseObject(404, "User not found or incorrect password", "");
+                    return $response->withStatus(404)->withJson($return->getResponse());
+                }
+                $return = new responseObject(200, "Success", "");
+                return $response->withStatus(200)->withJson($return->getResponse());
+            }
+            catch (Exception $e) {
+                $return = new responseObject(500, "Error", $e->getMessage());
+                return $response->withStatus(500)->withJson($return->getResponse());
+            }
+        }
+
+        public static function resetpassword(Request $request, Response $response, $args) {
+            try {
+                $auth = authen($request->getHeaders());
+                $role = array_key_exists('u_role', (array)$auth) ? $auth['u_role'] : -1;
+                if ($role != 3) {
+                    $return = new responseObject(401, "Permission invalid", "");
+                    return $response->withStatus(401)->withJson($return->getResponse());
+                }
+                $body = $request->getParsedBody();
+                $userId = array_key_exists('u_userId', $body) ? $body['u_userId'] : null;
+                $password = array_key_exists('u_password', $body) ? $body['u_userId'] : null;
+                if (!$userId || !$password) {
+                    $return = new responseObject(400, "Bad request", "");
+                    return $response->withStatus(400)->withJson($return->getResponse());
+                }
+                $result = resetpassword($userId, $password);
+                if ($result === 500) {
+                    $return = new responseObject(500, "Error", "");
+                    return $response->withStatus(500)->withJson($return->getResponse());
+                }
+                $return = new responseObject(200, "Success", "");
+                return $response->withStatus(200)->withJson($return->getResponse());
+            }
+            catch (Exception $e) {
+                $return = new responseObject(500, "Error", $e->getMessage());
+                return $response->withStatus(500)->withJson($return->getResponse());
+            }
+        }
+
         public static function login(Request $request, Response $response, $args) {
             try {
                 $body = $request->getParsedBody();
@@ -32,10 +95,10 @@
                 }
                 else {
                     $return = new responseObject(200, "Success", $result['ac_token']);
-                    setcookie('token', $result['ac_token'], time() + 86400);
-                    setcookie('userId', $result['u_userId'], time() + 86400);
-                    setcookie('role', $result['u_role'], time() + 86400);
-                    setcookie('name', $result['u_name'], time() + 86400);
+                    setcookie('ac_token', $result['ac_token'], time() + 86400);
+                    setcookie('u_userId', $result['u_userId'], time() + 86400);
+                    setcookie('u_role', $result['u_role'], time() + 86400);
+                    setcookie('ud_name', $result['u_name'], time() + 86400);
                 }
                 return $response->withStatus(200)->withJson($return->getResponse());
             }
@@ -102,8 +165,8 @@
         public static function forceLogout(Request $request, Response $response, $args) {
             try {
                 $auth = authen($request->getHeaders());
-                $role = array_key_exists('u_role', (array)$auth) ? $auth['u_role'] : null;
-                if (!$role || $role != 3) {
+                $role = array_key_exists('u_role', (array)$auth) ? $auth['u_role'] : -1;
+                if ($role == -1 || $role != 3) {
                     $return = new responseObject(500, "Error", "");
                     return $response->withStatus(500)->withJson($return->getResponse());
                 }
@@ -130,8 +193,8 @@
         public static function getUserAdmin(Request $request, Response $response, $args) {
             try {
                 $auth = authen($request->getHeaders());
-                $role = array_key_exists('u_role', (array)$auth) ? $auth['u_role'] : null;
-                if (!$role || $role != 3) {
+                $role = array_key_exists('u_role', (array)$auth) ? $auth['u_role'] : -1;
+                if ($role == -1 || $role != 3) {
                     $return = new responseObject(500, "Error", "");
                     return $response->withStatus(500)->withJson($return->getResponse());
                 }
@@ -148,8 +211,8 @@
         public static function editRole(Request $request, Response $response, $args) {
             try {
                 $auth = authen($request->getHeaders());
-                $role = array_key_exists('u_role', (array)$auth) ? $auth['u_role'] : null;
-                if (!$role || $role != 3) {
+                $role = array_key_exists('u_role', (array)$auth) ? $auth['u_role'] : -1;
+                if ($role == -1 || $role != 3) {
                     $return = new responseObject(500, "Error", "");
                     return $response->withStatus(500)->withJson($return->getResponse());
                 }
@@ -200,7 +263,7 @@
             try {
                 $auth = authen($request->getHeaders());
                 $userId = array_key_exists('u_userId', (array)$auth) ? $auth['u_userId'] : null;
-                $role = array_key_exists('u_role', (array)$auth) ? $auth['u_role'] : null;
+                $role = array_key_exists('u_role', (array)$auth) ? $auth['u_role'] : -1;
                 if (!$userId) {
                     $return = new responseObject(500, "Error", "");
                     return $response->withStatus(500)->withJson($return->getResponse());
@@ -235,7 +298,7 @@
             try {
                 $auth = authen($request->getHeaders());
                 $userId = array_key_exists('u_userId', (array)$auth) ? $auth['u_userId'] : null;
-                $role = array_key_exists('u_role', (array)$auth) ? $auth['u_role'] : null;
+                $role = array_key_exists('u_role', (array)$auth) ? $auth['u_role'] : -1;
                 if (!$userId) {
                     $return = new responseObject(500, "Error", "");
                     return $response->withStatus(500)->withJson($return->getResponse());

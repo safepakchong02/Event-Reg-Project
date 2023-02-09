@@ -16,7 +16,7 @@
         public static function getEvent(Request $request, Response $response, $args) {
             try {
                 $auth = authen($request->getHeaders());
-                $role = array_key_exists('u_role', (array)$auth) ? $auth['u_role'] : null;
+                $role = array_key_exists('u_role', (array)$auth) ? $auth['u_role'] : -1;
                 $param = $request->getQueryParams();
                 $c = array();
                 foreach ($param as $key=>$val) {
@@ -302,6 +302,43 @@
             }
         }
 
+        public static function deleteMember(Request $request, Response $response, $args) {
+            try {
+                $auth = authen($request->getHeaders());
+                $userId = array_key_exists('u_userId', (array)$auth) ? $auth['u_userId'] : null;
+                $idcheck = checkManager($userId);
+                $role = array_key_exists('p_role', (array)$idcheck) ? $idcheck['p_role'] : -1;
+                if (!checkEventOwner($userId) && (!array_key_exists('u_userId', (array)$idcheck) || $role != 1 )){
+                    $return = new responseObject(401, "Permission denied", null);
+                    return $response->withStatus(401)->withJson($return->getResponse());
+                }
+
+                $body = $request->getParsedBody();
+                if (!$body) {
+                    $return = new responseObject(400, "Bad request", null);
+                    return $response->withStatus(400)->withJson($return->getResponse());
+                }
+                $eventId = array_key_exists("eventId", $args) ? $args['eventId'] : null;
+                $delU = array_key_exists('u_userId', (array)$body) ? $body['u_userId'] : null;
+                if (!$eventId|| !$delU) {
+                    $return = new responseObject(400, "Bad request", null);
+                    return $response->withStatus(400)->withJson($return->getResponse());
+                }
+                $result = deleteMember($eventId, $delU);
+                if ($result !== 200) {
+                    $return = new responseObject(500, "Error", "");
+                }
+                else {
+                    $return = new responseObject(200, "Updated Success", "");
+                }
+                return $response->withStatus($result)->withJson($return->getResponse());
+            }
+            catch (Exception $e) {
+                $return = new responseObject(500, "Error", $e->getMessage());
+                return $response->withStatus(500)->withJson($return->getResponse());
+            }
+        }
+
 
         public static function getMyRegisteredEvent(Request $request, Response $response, $args) {
             try {
@@ -346,7 +383,7 @@
                 $auth = authen($request->getHeaders());
                 $userId = array_key_exists('u_userId', (array)$auth) ? $auth['u_userId'] : null;
                 $idcheck = checkManager($userId);
-                $role = array_key_exists('p_role', (array)$idcheck) ? $idcheck['p_role'] : null;
+                $role = array_key_exists('p_role', (array)$idcheck) ? $idcheck['p_role'] : -1;
                 if (!checkEventOwner($userId) && (!array_key_exists('u_userId', (array)$idcheck) || $role != 1 )){
                     $return = new responseObject(500, "Error", null);
                     return $response->withStatus(500)->withJson($return->getResponse());
@@ -378,7 +415,7 @@
                 $auth = authen($request->getHeaders());
                 $userId = array_key_exists('u_userId', (array)$auth) ? $auth['u_userId'] : null;
                 $idcheck = checkManager($userId);
-                $role = array_key_exists('p_role', (array)$idcheck) ? $idcheck['p_role'] : null;
+                $role = array_key_exists('p_role', (array)$idcheck) ? $idcheck['p_role'] : -1;
                 if (!checkEventOwner($userId) && (!array_key_exists('u_userId', (array)$idcheck) || $role != 1 )){
                     $return = new responseObject(500, "Error", null);
                     return $response->withStatus(500)->withJson($return->getResponse());

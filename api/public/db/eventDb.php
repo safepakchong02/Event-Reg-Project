@@ -5,6 +5,22 @@
     global $handle;
     global $returnData;
 
+
+    function deleteMember($eventId, $userId) {
+        try {
+            $handle = connectDb();
+            $handle->beginTransaction();
+            $query = "CALL deleteMember('{$userId}', '{$eventId}')";
+            $result = $handle->prepare($query);
+            $result->execute();
+            $handle->commit();
+        }
+        catch (PDOException $e) {
+            $handle->rollback();
+            return 500;
+        }
+        return 200;
+    }
     function getEvent($param){
         try {
             $handle = connectDb();
@@ -54,7 +70,7 @@
         try {
             $handle = connectDb();
             $handle->beginTransaction();
-            $query = "SELECT * FROM eventPermView WHERE ev_createdBy = '{$eventId}' OR u_userId = '{$eventId}' LIMIT 1";
+            $query = "SELECT * FROM eventPermView WHERE u_userId = '{$eventId}' LIMIT 1";
             $result = $handle->prepare($query);
             $result->execute();
             $returnData = $result->fetch();

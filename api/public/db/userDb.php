@@ -4,6 +4,49 @@
 
     global $handle;
     global $returnData;
+
+
+    function changepassword($userId, $oldpassword, $newpassword) {
+        try {
+            $oldpwd = md5($oldpassword);
+            $newpwd = md5($newpassword);
+            $handle = connectDb();
+            $handle->beginTransaction();
+            $query1 = "SELECT u_userId FROM users WHERE u_userId = '{$userId}' AND u_password = '{$oldpwd}' AND u_status = 'A' LIMIT 1";
+            $result = $handle->prepare($query1);
+            $rs = $result->fetch();
+            if (!$rs) {
+                return 404;
+            }
+            $query2 = "UPDATE users SET u_password = '{$newpwd}' WHERE u_userId = $userId";
+            $result2 = $handle->prepare($query2);
+            $result2->execute();
+            $handle->commit();
+        }
+        catch (PDOException $e) {
+            $handle->rollback();
+            echo $e->getMessage();
+            return 500;
+        }
+        return 200;
+    }
+    function resetpassword($userId, $pass){
+        try {
+            $pwd = md5($pass);
+            $handle = connectDb();
+            $handle->beginTransaction();
+            $query = "UPDATE users SET u_password = '{$pwd}' WHERE u_userId = $userId";
+            $result = $handle->prepare($query);
+            $result->execute();
+            $handle->commit();
+        }
+        catch (PDOException $e) {
+            $handle->rollback();
+            echo $e->getMessage();
+            return 500;
+        }
+        return 200;
+    }
     function login($email, $password) {
         $returnData = null;
         try {

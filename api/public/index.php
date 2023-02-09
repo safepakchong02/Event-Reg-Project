@@ -37,12 +37,14 @@ $app->group('/admin', function($app) {
     $app->get('/users', UserController::class . '::getUserAdmin');
     $app->post('/logout', UserController::class . '::forceLogout');
     $app->patch('/user/role', UserController::class . '::editRole');
+    $app->patch('/resetpassword', UserController::class . '::resetpassword');
 });
 
 $app->group('/user', function($app) {
     $app->get('/profile', UserController::class . '::getProfile');
     $app->post('/deactivate', UserController::class . '::deactivate');
     $app->patch('/profile/edit', UserController::class . '::editProfile');
+    $app->patch('/changepassword', UserController::class . '::changepassword');
 });
 
 $app->group('/event', function($app) {
@@ -56,6 +58,7 @@ $app->group('/event', function($app) {
     $app->get('/{eventId}/report', EventController::class . '::getEventReport');
     $app->get('/{eventId}/reportAmount', EventController::class . '::getEventReportAmount');
     $app->get('/{eventId}/member', EventController::class . '::getEventMember');
+    $app->delete('/{eventId}/member/delete', EventController::class . '::deleteMember');
     $app->get('/{eventId}/permission', EventController::class . '::getEventPermission');
     $app->patch('/{eventId}/permission/add', EventController::class . '::addEventRole');
     $app->delete('/{eventId}/permission/delete', EventController::class . '::deleteEventRole');
