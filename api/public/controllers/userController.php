@@ -201,8 +201,13 @@ class UserController
             if ($result === 500) {
                 $return = new responseObject(500, "Error", "");
                 return $response->withStatus(500)->withJson($return->getResponse());
+            } else {
+                $return = new responseObject(200, "Success", '');
+                setcookie('ac_token', "", time() - 86400 * 30, "/");
+                setcookie('u_userId', "", time() - 86400 * 30, "/");
+                setcookie('u_role', "", time() - 86400 * 30, "/");
+                setcookie('ud_name', "", time() - 86400 * 30, "/");
             }
-            $return = new responseObject(200, "Success", "");
             return $response->withStatus(200)->withJson($return->getResponse());
         } catch (Exception $e) {
             $return = new responseObject(500, "Error", $e->getMessage());

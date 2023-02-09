@@ -97,8 +97,9 @@
                 $rs1->execute();
                 $rs2 = $handle->prepare($query2);
                 $rs2->execute();
-                if ($rs2) {
-                    $returnData = $rs2->fetch();
+                $r2 = $rs2->fetch();
+                if ($r2) {
+                    $returnData = $r2;
                 }
                 else {
                     return 500;
