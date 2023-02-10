@@ -266,7 +266,7 @@
         }
         catch (PDOException $e) {
             $handle->rollback();
-            return 500;
+            return [];
         }
         return $rs;
     }
@@ -391,7 +391,7 @@
         }
         catch (PDOException $e) {
             $handle->rollback();
-            return 500;
+            return [];
         }
         return $returnData;
     }
@@ -410,7 +410,7 @@
         }
         catch (PDOException $e) {
             $handle->rollback();
-            return 500;
+            return [];
         }
         return $returnData;
     }

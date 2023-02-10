@@ -60,9 +60,9 @@ $app->group('/event', function($app) {
     $app->get('/{eventId}/reportAmount', EventController::class . '::getEventReportAmount');
     $app->get('/{eventId}/member', EventController::class . '::getEventMember');
     $app->delete('/{eventId}/member/delete', EventController::class . '::deleteMember');
-    $app->get('/{eventId}/permission', EventController::class . '::getEventPermission');
-    $app->patch('/{eventId}/permission/add', EventController::class . '::addEventRole');
-    $app->delete('/{eventId}/permission/delete', EventController::class . '::deleteEventRole');
+    //$app->get('/{eventId}/permission', EventController::class . '::getEventPermission');
+    //$app->patch('/{eventId}/permission/add', EventController::class . '::addEventRole');
+    //$app->delete('/{eventId}/permission/delete', EventController::class . '::deleteEventRole');
     $app->post('/', EventController::class . '::createEvent');
     $app->patch('/{eventId}', EventController::class . '::editEvent');
     $app->delete('/{eventId}', EventController::class . '::deleteEvent');    

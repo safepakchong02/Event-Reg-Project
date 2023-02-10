@@ -58,8 +58,8 @@
                 $userId = array_key_exists('u_userId', (array)$auth) ? $auth['u_userId'] : null;
                 $idcheck = checkEventOwner($args['eventId'],$userId);
                 if (!$idcheck){
-                    $return = new responseObject(500, "Error", null);
-                    return $response->withStatus(500)->withJson($return->getResponse());
+                    $return = new responseObject(401, "Unauthorized", null);
+                    return $response->withStatus(401)->withJson($return->getResponse());
                 }
                 $param = $request->getQueryParams();
                 $c = array();
@@ -111,14 +111,15 @@
         public static function getEventMember(Request $request, Response $response, $args) {
             try {
                 $eventId = $args['eventId'];
+                $auth = authen($request->getHeaders());
+                $userId = array_key_exists('u_userId', (array)$auth) ? $auth['u_userId'] : null;
+                if (!checkEventOwner($args['eventId'], $userId) ){
+                    $return = new responseObject(401, "Unauthorized", null);
+                    return $response->withStatus(401)->withJson($return->getResponse());
+                }
                 $return = new responseObject(0, null, null);
                 $result = eventMember($eventId);
-                if (!$result) {
-                    $return = new responseObject(500, "Error", "");
-                }
-                else {
-                    $return = new responseObject(201, "Created Success", $result);
-                }
+                $return = new responseObject(200, "Success", $result);
                 return $response->withStatus(200)->withJson($return->getResponse());
             }
             catch (Exception $e) {
@@ -303,14 +304,19 @@
 
         public static function preRegister(Request $request, Response $response, $args) {
             try {
+                $auth = authen($request->getHeaders());
+                $userId = array_key_exists('u_userId', (array)$auth) ? $auth['u_userId'] : null;
+                if (!$userId) {
+                    $return = new responseObject(401, "Unauthorized", "");
+                    return $response->withStatus(401)->withJson($return->getResponse());
+                }
                 $body = $request->getParsedBody();
                 if (!$body) {
                     $return = new responseObject(400, "Bad request", null);
                     return $response->withStatus(400)->withJson($return->getResponse());
                 }
                 $eventId = array_key_exists("eventId", $args) ? $args['eventId'] : null;
-                $userId = array_key_exists('u_userId', (array)$body) ? $body['u_userId'] : null;
-                if (!$eventId|| !$userId) {
+                if (!$eventId) {
                     $return = new responseObject(400, "Bad request", null);
                     return $response->withStatus(400)->withJson($return->getResponse());
                 }
@@ -331,14 +337,19 @@
 
         public static function checkIn(Request $request, Response $response, $args) {
             try {
+                $auth = authen($request->getHeaders());
+                $userId = array_key_exists('u_userId', (array)$auth) ? $auth['u_userId'] : null;
+                if (!$userId) {
+                    $return = new responseObject(401, "Unauthorized", "");
+                    return $response->withStatus(401)->withJson($return->getResponse());
+                }
                 $body = $request->getParsedBody();
                 if (!$body) {
                     $return = new responseObject(400, "Bad request", null);
                     return $response->withStatus(400)->withJson($return->getResponse());
                 }
                 $eventId = array_key_exists("eventId", $args) ? $args['eventId'] : null;
-                $userId = array_key_exists('u_userId', (array)$body) ? $body['u_userId'] : null;
-                if (!$eventId|| !$userId) {
+                if (!$eventId) {
                     $return = new responseObject(400, "Bad request", null);
                     return $response->withStatus(400)->withJson($return->getResponse());
                 }
@@ -362,7 +373,7 @@
                 $auth = authen($request->getHeaders());
                 $userId = array_key_exists('u_userId', (array)$auth) ? $auth['u_userId'] : null;
                 if (!checkEventOwner($args['eventId'], $userId) ){
-                    $return = new responseObject(401, "Permission denied", null);
+                    $return = new responseObject(401, "Unauthorized", null);
                     return $response->withStatus(401)->withJson($return->getResponse());
                 }
 
