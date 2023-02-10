@@ -151,8 +151,8 @@
                 $auth = authen($request->getHeaders());
                 $userId = array_key_exists('u_userId', (array)$auth) ? $auth['u_userId'] : null;
                 if (!$userId) {
-                    $return = new responseObject(500, "Error", "");
-                    return $response->withStatus(500)->withJson($return->getResponse());
+                    $return = new responseObject(401, "Unauthorized", "");
+                    return $response->withStatus(401)->withJson($return->getResponse());
                 }
                 $body = $request->getParsedBody();
                 $return = new responseObject(0, null, null);
@@ -223,7 +223,7 @@
                 $body['ev_userId'] = $userId;
                 $result = createEvent($body);
                 if ($result !== 201) {
-                    $return = new responseObject(500, "Error Inserted", "");
+                    $return = new responseObject(500, "Error", "");
                 }
                 else {
                     $return = new responseObject(201, "Created Success", "");
@@ -394,8 +394,8 @@
                 $auth = authen($request->getHeaders());
                 $userId = array_key_exists('u_userId', (array)$auth) ? $auth['u_userId'] : null;
                 if (!$userId) {
-                    $return = new responseObject(500, "Error", "");
-                    return $response->withStatus(500)->withJson($return->getResponse());
+                    $return = new responseObject(401, "Unauthorized", "");
+                    return $response->withStatus(401)->withJson($return->getResponse());
                 }
 
                 $result = getMyRegisteredEvent($userId);
@@ -413,8 +413,8 @@
                 $auth = authen($request->getHeaders());
                 $userId = array_key_exists('u_userId', (array)$auth) ? $auth['u_userId'] : null;
                 if (!$userId) {
-                    $return = new responseObject(500, "Error", "");
-                    return $response->withStatus(500)->withJson($return->getResponse());
+                    $return = new responseObject(401, "Unauthorized", "");
+                    return $response->withStatus(401)->withJson($return->getResponse());
                 }
  
                 $result = getModEvent($userId);

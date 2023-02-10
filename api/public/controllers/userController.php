@@ -41,8 +41,8 @@ class UserController
             $auth = authen($request->getHeaders());
             $userId = array_key_exists('u_userId', (array)$auth) ? $auth['u_userId'] : null;
             $role = array_key_exists('u_role', (array)$auth) ? $auth['u_role'] : -1;
-            if (!$userId || $role != 3) {
-                $return = new responseObject(401, "Permission invalid", "");
+            if (!$userId) {
+                $return = new responseObject(401, "Unauthorized", "");
                 return $response->withStatus(401)->withJson($return->getResponse());
             }
             $body = $request->getParsedBody();
@@ -58,7 +58,7 @@ class UserController
                 return $response->withStatus(500)->withJson($return->getResponse());
             }
             if ($result === 404) {
-                $return = new responseObject(404, "User not found or incorrect password", "");
+                $return = new responseObject(404, "์Not found", "");
                 return $response->withStatus(404)->withJson($return->getResponse());
             }
             $return = new responseObject(200, "Success", "");
@@ -330,18 +330,18 @@ class UserController
             $userId = array_key_exists('u_userId', (array)$auth) ? $auth['u_userId'] : null;
             $role = array_key_exists('u_role', (array)$auth) ? $auth['u_role'] : -1;
             if (!$userId) {
-                $return = new responseObject(500, "Error", "");
-                return $response->withStatus(500)->withJson($return->getResponse());
+                $return = new responseObject(401, "Unauthorized", "");
+                return $response->withStatus(401)->withJson($return->getResponse());
             }
             $body = $request->getParsedBody();
             $param = array_key_exists('u_userId', (array)$body) ? $body['u_userId'] : null;
             if (!$param) {
-                $return = new responseObject(500, "Missing or incorrect parameter", "");
-                return $response->withStatus(500)->withJson($return->getResponse());
+                $return = new responseObject(400, "Bad request", "");
+                return $response->withStatus(400)->withJson($return->getResponse());
             }
             if ($param != $userId) {
-                $return = new responseObject(500, "Missing or incorrect parameter", "");
-                return $response->withStatus(500)->withJson($return->getResponse());
+                $return = new responseObject(400, "Bad request", "");
+                return $response->withStatus(400)->withJson($return->getResponse());
             }
             $result = editProfile($body);
             if ($result === 500) {
