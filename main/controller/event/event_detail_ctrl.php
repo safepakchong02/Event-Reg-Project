@@ -7,6 +7,7 @@
         }
 
         $scope.selectData = () => {
+            console.log($scope.report_filter);
             switch ($scope.report_filter) {
                 case "hour":
                     $("#report_day").removeClass("ng-hide");

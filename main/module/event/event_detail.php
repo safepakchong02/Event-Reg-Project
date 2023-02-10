@@ -96,7 +96,7 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
                     </div>
                 </div>
                 <hr>
-                <div class="row justify-content-md-center" align="center" ng-if="u_userId == event_data.ev_createdBy">
+                <div class="row justify-content-md-center" align="center" ng-show="u_userId == event_data.ev_createdBy">
                     <div class="col-12">
                         <p class="h1">สรุปผลโดยละเอียด</p>
                     </div>

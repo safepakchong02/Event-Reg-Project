@@ -104,7 +104,7 @@
                         icon: 'success',
                         title: 'บัมทึกข้อมูลเสร็จสิ้น',
                     }).then((res) => {
-                        location.reload();
+                        location.replace("index.php");
                     });
                 }, // end is success
                 (res) => { // optional
@@ -135,7 +135,6 @@
                     $http({
                         method: `DELETE`,
                         url: `api/event/${ev_eventId}`,
-                        data: `u_userId=${$scope.u_userId}`,
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded',
                             'Authorization': `${$scope.ac_token}`

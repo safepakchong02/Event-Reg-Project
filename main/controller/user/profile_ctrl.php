@@ -15,6 +15,13 @@
             })
         }
 
+        $scope.viewChangePassword = () => {
+            $scope.editPassword = true
+            $("#oldPass").removeClass("ng-hide");
+            $("#newPass").removeClass("ng-hide");
+            $("#repeatPass").removeClass("ng-hide");
+        }
+
         if ($scope.isRegister) {
             // เรียกข้อมูล ข้อมูลผู้ใช้
             $http({

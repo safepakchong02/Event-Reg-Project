@@ -18,26 +18,26 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
                         <input disabled type="email" class="form-control" id="u_email" name="u_email" ng-model="profile_data.u_email">
                     </div>
                 </div>
-                <div class="col-lg-4 pb-2" ng-show="editPassword" ng-if="isRegister">
+                <div class="col-lg-4 pb-2" ng-show="editPassword" ng-if="isRegister" id="oldPass">
                     <div class="col-auto">
                         <label for="u_password" class="form-label">รหัสผ่านเก่า</label>
                         <input type="password" class="form-control" id="u_password" name="u_password" ng-model="profile_data.u_password">
                     </div>
                 </div>
-                <div class="col-lg-4 pb-2" ng-show="editPassword">
+                <div class="col-lg-4 pb-2" ng-show="editPassword" id="newPass">
                     <div class="col-auto">
                         <label for="u_newPassword" class="form-label">รหัสผ่านใหม่</label>
                         <input type="password" class="form-control" id="u_newPassword" name="u_newPassword" ng-model="profile_data.u_newPassword">
                     </div>
                 </div>
-                <div class="col-lg-4 pb-2" ng-show="editPassword">
+                <div class="col-lg-4 pb-2" ng-show="editPassword" id="repeatPass">
                     <div class="col-auto">
                         <label for="u_repeatPassword" class="form-label">ยืนยันรหัสผ่าน</label>
                         <input type="password" class="form-control" id="u_repeatPassword" name="u_repeatPassword" ng-model="profile_data.u_repeatPassword">
                     </div>
                 </div>
                 <div class="col-auto pb-2" ng-if="isRegister">
-                    <button ng-click="editPassword=true" type="button" class="btn btn-warning">เปลี่ยนรหัสผ่าน</button>
+                    <button ng-click="viewChangePassword()" type="button" class="btn btn-warning">เปลี่ยนรหัสผ่าน</button>
                     <button ng-click="changePassword()" ng-show="editPassword" type="button" class="btn btn-primary">บันทึก</button>
                 </div>
             </div>
