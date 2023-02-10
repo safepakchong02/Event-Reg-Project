@@ -14,7 +14,7 @@
                 $scope.myEvents = [];
                 $scope.myEvents = setEventStatus(res.data.resultData);
                 // console.log($scope.myEvents);
-                // console.log(res.data.resultData);
+                console.log(res.data.resultData);
             })
         }
 

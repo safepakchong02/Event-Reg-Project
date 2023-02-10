@@ -345,7 +345,6 @@
             $handle = connectDb();
             $handle->beginTransaction();
             $query = "CALL preRegister('{$userId}', '{$eventId}')";
-
             $result = $handle->prepare($query);
             $result->execute();
             $handle->commit();

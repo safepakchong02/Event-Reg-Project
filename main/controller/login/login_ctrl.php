@@ -12,7 +12,7 @@
                 }
             }).then((res) => {
                 // console.log(res.data.code);
-                if (res.data.code == 500) Swal.fire({
+                if (res.data.code !== 200 && res.data.code !== 200) Swal.fire({
                     icon: 'warning',
                     title: 'อีเมล หรือรหัสผ่านไม่ถูกต้อง',
                 });
@@ -51,7 +51,7 @@
         let hasLogout = (new URL(document.location)).searchParams.get("logout");
         hasLogout = hasLogout !== null ? true : false;
 
-        if(hasLogout) $scope.logout();
+        if (hasLogout) $scope.logout();
 
     }); // end controller function
 </script>

@@ -213,7 +213,7 @@
                         'Authorization': `${$scope.ac_token}`
                     }
                 }).then((res) => {
-                    // console.log(res.data);
+                    console.log(res.data);
                     Swal.fire({
                         icon: 'success',
                         title: 'ลงทะเบียนล่วงหน้าเรียบร้อย',

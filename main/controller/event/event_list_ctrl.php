@@ -4,22 +4,22 @@
         $scope.filterList = (eventState) => {
             switch (eventState) {
                 case "all":
-                    filterList("#color-waring", true);
+                    filterList("#color-warning", true);
                     filterList("#color-success", true);
                     filterList("#color-danger", true);
                     break;
                 case "incoming":
-                    filterList("#color-waring", true);
+                    filterList("#color-warning", true);
                     filterList("#color-success", false);
                     filterList("#color-danger", false);
                     break;
                 case "opening":
-                    filterList("#color-waring", false);
+                    filterList("#color-warning", false);
                     filterList("#color-success", true);
                     filterList("#color-danger", false);
                     break;
                 case "closed":
-                    filterList("#color-waring", false);
+                    filterList("#color-warning", false);
                     filterList("#color-success", false);
                     filterList("#color-danger", true);
                     break;

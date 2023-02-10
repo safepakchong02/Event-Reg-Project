@@ -95,7 +95,7 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="table-light" ng-repeat="row in eventLists">
+                        <tr class="{{row.ev_checkInState}}" id="{{row.ev_checkInState}}" ng-repeat="row in eventLists">
                             <td>
                                 <a href="index.php?p=event&m=event_detail&ev_eventId={{row.ev_eventId}}" class="">{{row.ev_title}}</a>
                             </td>
