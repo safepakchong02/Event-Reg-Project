@@ -95,10 +95,10 @@
                 $return = new responseObject(0, null, null);
                 $result = eventDetail($eventId);
                 if (!$result) {
-                    $return = new responseObject(500, "Error", "");
+                    $return = new responseObject(404, "Not found", "");
                 }
                 else {
-                    $return = new responseObject(201, "Created Success", $result);
+                    $return = new responseObject(200, "Success", $result);
                 }
                 return $response->withStatus(200)->withJson($return->getResponse());
             }
@@ -241,8 +241,8 @@
                 $auth = authen($request->getHeaders());
                 $userId = array_key_exists('u_userId', (array)$auth) ? $auth['u_userId'] : null;
                 if (!$userId) {
-                    $return = new responseObject(500, "Error", "");
-                    return $response->withStatus(500)->withJson($return->getResponse());
+                    $return = new responseObject(401, "Unauthorized", "");
+                    return $response->withStatus(401)->withJson($return->getResponse());
                 }
                 $body = $request->getParsedBody();
                 $return = new responseObject(0, null, null);
@@ -275,10 +275,14 @@
 
         public static function deleteEvent(Request $request, Response $response, $args) {
             try{
-                $body = $request->getParsedBody();
+                $auth = authen($request->getHeaders());
+                $userId = array_key_exists('u_userId', (array)$auth) ? $auth['u_userId'] : null;
+                if (!$userId) {
+                    $return = new responseObject(401, "Unauthorized", "");
+                    return $response->withStatus(401)->withJson($return->getResponse());
+                }
                 $eventId = array_key_exists("eventId", $args) ? $args['eventId'] : null;
-                $userId = array_key_exists('u_userId', (array)$body) ? $body['u_userId'] : null;
-                if (!$eventId|| !$userId) {
+                if (!$eventId) {
                     $return = new responseObject(400, "Bad request", null);
                     return $response->withStatus(400)->withJson($return->getResponse());
                 }
