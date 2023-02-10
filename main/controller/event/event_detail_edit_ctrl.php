@@ -95,7 +95,7 @@
             }).then((res) => {
                     console.log(res);
                     // console.log(res.config.data);
-                    if (res.data.code !== 201 || res.data.code !== 200) Swal.fire({
+                    if (res.data.code !== 201 && res.data.code !== 200) Swal.fire({
                         icon: 'error',
                         title: 'บันทึกข้อมูลไม่สำเร็จ',
                         text: res.code
@@ -103,6 +103,8 @@
                     else Swal.fire({
                         icon: 'success',
                         title: 'บัมทึกข้อมูลเสร็จสิ้น',
+                    }).then((res) => {
+                        location.reload();
                     });
                 }, // end is success
                 (res) => { // optional
@@ -131,7 +133,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $http({
-                        method: `POST`,
+                        method: `DELETE`,
                         url: `api/event/${ev_eventId}`,
                         data: `u_userId=${$scope.u_userId}`,
                         headers: {
@@ -139,11 +141,13 @@
                             'Authorization': `${$scope.ac_token}`
                         }
                     }).then((res) => {
-                        console.log(res);
+                            // console.log(res);
                             Swal.fire({
                                 icon: 'success',
                                 title: 'ลบข้อมูลเสร็จสิ้น',
-                            })
+                            }).then((res) => {
+                                location.replace("index.php");
+                            });
                         }, // end then
                         (res) => { // optional
                             // failed

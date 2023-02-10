@@ -11,7 +11,7 @@
                     'Content-Type': 'application/x-www-form-urlencoded',
                 }
             }).then((res) => {
-                console.log(res);
+                // console.log(res.data.code);
                 if (res.data.code == 500) Swal.fire({
                     icon: 'warning',
                     title: 'อีเมล หรือรหัสผ่านไม่ถูกต้อง',

@@ -4,18 +4,18 @@
         const myPath = location.search;
         const loginPath = "?p=login&m=login";
         const logoutPath = "?p=login&m=login&logout";
-        const registerPath = "?p=login&m=register";
+        const registerPath = "?p=user&m=profile&register";
 
         $scope.handle_login = () => {
             if (myPath === loginPath) return;
             if (myPath === registerPath) return;
             if (myPath === logoutPath) return;
-            if (getCookie(KEY_TOKEN) === "") {
+            if (getCookie(KEY_TOKEN) === undefined) {
                 Swal.fire({
                     icon: 'warning',
                     title: 'กรุณาเข้าสู่ระบบ',
                 }).then(() => {
-                    // location.replace("index.php?p=login&m=login");
+                    location.replace("index.php?p=login&m=login");
                 })
             } else {
                 $scope.ac_token = getCookie(KEY_TOKEN);

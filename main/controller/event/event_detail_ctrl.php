@@ -6,6 +6,26 @@
             else return str;
         }
 
+        $scope.selectData = () => {
+            switch ($scope.report_filter) {
+                case "hour":
+                    $("#report_day").removeClass("ng-hide");
+                    $("#report_month").removeClass("ng-hide");
+                    $("#report_year").removeClass("ng-hide");
+                    break;
+                case "day":
+                    $("#report_day").addClass("ng-hide");
+                    $("#report_month").removeClass("ng-hide");
+                    $("#report_year").removeClass("ng-hide");
+                    break;
+                case "month":
+                    $("#report_day").addClass("ng-hide");
+                    $("#report_month").addClass("ng-hide");
+                    $("#report_year").removeClass("ng-hide");
+                    break;
+            }
+        }
+
         let qrcode = new QRCode(document.getElementById("qrcode"), {
             text: location.href,
             width: 240,
@@ -23,6 +43,8 @@
         let preRegEnd;
         let checkInStart;
         let checkInEnd;
+        let hasCreate = false;
+        let chart;
 
         if (!$scope.isCreate) {
             $http({
@@ -36,7 +58,7 @@
                 $scope.event_data = setEventStatus(res.data.resultData)[0];
 
                 document.getElementById("ev_detail").innerHTML = decodeHTML($scope.event_data.ev_detail); // html
-                $scope.event_data.ev_limit = $scope.event_data.ev_limit === -1 ? "ไม่จำกัด" : $scope.event_data.ev_limit;
+                $scope.event_data.ev_limit = $scope.event_data.ev_limit == -1 ? "ไม่จำกัด" : $scope.event_data.ev_limit;
                 $scope.event_data.ev_dType = LSBToBoolArray($scope.event_data.ev_dType);
 
                 $scope.isPreReg = intToBool($scope.event_data.ev_preReg);
@@ -56,6 +78,8 @@
                     if (now >= checkInStart && now <= checkInEnd) $scope.isTimeCheckIn = true;
                     else $scope.isTimeCheckIn = false;
                 }
+
+                console.log($scope.event_data);
             }) // end then
 
             // start section report
@@ -68,6 +92,14 @@
                 }
             }).then((res) => {
                 $scope.eventReport = res.data.resultData[0];
+
+                if ($scope.eventReport == undefined) {
+                    $scope.eventReport = {
+                        "checkedIn": 0,
+                        "notCheckedIn": 0,
+                        "signedUp": 0,
+                    };
+                }
 
                 let cp_join = document.querySelector(".circular-progress-join"),
                     cp_no_join = document.querySelector(".circular-progress-no_join"),
@@ -97,26 +129,74 @@
                 // console.log(res.data.resultData);
             }) // end then
 
-            const ctx = document.getElementById('chart');
+            $scope.getReport = () => {
+                let data = `filter=${$scope.report_filter}&`;
 
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                    datasets: [{
-                        label: '# of Votes',
-                        data: [12, 19, 3, 5, 2, 3],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
+                switch ($scope.report_filter) {
+                    case "hour":
+                        data += `day=${$scope.report_day}&`;
+                    case "day":
+                        data += `month=${$scope.report_month}&`;
+                    case "month":
+                        data += `year=${$scope.report_year}`;
+                        break;
                 }
-            });
+
+                $http({
+                    method: `GET`,
+                    url: `api/event/${ev_eventId}/reportAmount?${data}`,
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Authorization': `${$scope.ac_token}`
+                    }
+                }).then((res) => {
+
+                    let result = res.data.resultData;
+                    let labels = [];
+                    let dataSet = [];
+
+                    console.log(result.length);
+
+                    if (result.length != 0) {
+                        for (let i = 0; i < result.length; i++) {
+                            labels.push(`${$scope.report_filter} ${result[i][$scope.report_filter]}`);
+                            dataSet.push(result[i]["count"]);
+                        }
+
+                        const ctx = document.getElementById('chart');
+
+                        if (hasCreate) {
+                            chart.destroy();
+                            hasCreate = false;
+                        }
+
+                        chart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                fill: false,
+                                lineTension: 0,
+                                labels: labels,
+                                datasets: [{
+                                    data: dataSet,
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                legend: {
+                                    display: false
+                                },
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
+                                }
+                            }
+                        }); // end new Chart
+
+                        hasCreate = true;
+                    }
+                }) // end then
+            }
             // end section manager report
         } // end if isCreate
 
@@ -132,11 +212,13 @@
                         'Authorization': `${$scope.ac_token}`
                     }
                 }).then((res) => {
-                    console.log(res.data);
+                    // console.log(res.data);
                     Swal.fire({
                         icon: 'success',
                         title: 'ลงทะเบียนล่วงหน้าเรียบร้อย',
-                    })
+                    }).then((res) => {
+                        location.reload();
+                    });
                 })
             }
         }
@@ -157,13 +239,14 @@
                     Swal.fire({
                         icon: 'success',
                         title: 'ลงชื่อเข้างานเรียบร้อย',
-                    })
+                    }).then((res) => {
+                        location.reload();
+                    });
                 })
             }
         }
 
         $scope.checkInByMod = (u_userId) => {
-            console.log("checkin");
 
             if (now >= checkInStart && now <= checkInEnd) {
                 $http({
@@ -179,9 +262,31 @@
                     Swal.fire({
                         icon: 'success',
                         title: 'ลงชื่อเข้างานเรียบร้อย',
-                    })
+                    }).then((res) => {
+                        location.reload();
+                    });
                 })
-            } else console.log("error");
+            }
+        }
+
+        $scope.deleteMember = (u_userId) => {
+            $http({
+                method: `DELETE`,
+                url: `api/event/${$scope.event_data.ev_eventId}/member/delete`,
+                data: `u_userId=${u_userId}`,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Authorization': `${$scope.ac_token}`
+                }
+            }).then((res) => {
+                console.log(res.data);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'ลบเรียบร้อย',
+                }).then((res) => {
+                    location.reload();
+                });
+            })
         }
 
 

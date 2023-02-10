@@ -30,7 +30,7 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
                                 </div>
                             </div>
                             <div>
-                                <p class="mb-0">ถ้ายังไม่มีบัญชี? <a href="#!" class="text-primary-50 fw-bold">สร้างบัญชี</a></p>
+                                <p class="mb-0">ถ้ายังไม่มีบัญชี? <a href="index.php?p=user&m=profile&register" class="text-primary-50 fw-bold">สร้างบัญชี</a></p>
                             </div>
                         </div>
                     </div>

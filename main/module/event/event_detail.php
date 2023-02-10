@@ -21,7 +21,7 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="eventReport" data-bs-toggle="tab" data-bs-target="#eventReport-pane" type="button" role="tab" aria-controls="eventReport-pane" aria-selected="false">รายงานกิจกรรม</button>
             </li>
-            <li class="nav-item" role="presentation">
+            <li class="nav-item" role="presentation" ng-if="u_userId == event_data.ev_createdBy">
                 <button class="nav-link" id="manageEvent" data-bs-toggle="tab" data-bs-target="#manageEvent-pane" type="button" role="tab" aria-controls="manageEvent-pane" aria-selected="false">จัดการกิจกรรม</button>
             </li>
         </ul>
@@ -29,21 +29,21 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="eventDetail" role="tabpanel" aria-labelledby="eventDetail-tab" tabindex="0">
                 <div class="row pt-3">
-                    <div class="col-10 pb-2">
-                        <div class="card text-center">
-                            <div class="card-header">
+                    <div class="col-9 pb-2">
+                        <div class="card">
+                            <div class="card-header text-center">
                                 รายละเอียดกิจกรรม
                             </div>
                             <div class="card-body">
                                 <div class="card-text" id="ev_detail"></div>
                             </div>
-                            <div class="card-footer">
+                            <div class="card-footer text-center">
                                 <span>QR code สำหรับกิจกรรมนี้</span><br>
                                 <div id="qrcode" class="d-flex justify-content-center"></div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-2 pb-2">
+                    <div class="col-3 pb-2">
                         <div class="row pb-2">
                             <div class="col-sm-12">
                                 <div class="card text-center {{event_data.ev_checkInState}}">
@@ -96,23 +96,58 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
                     </div>
                 </div>
                 <hr>
-                <div class="row justify-content-md-center">
+                <div class="row justify-content-md-center" align="center" ng-if="u_userId == event_data.ev_createdBy">
                     <div class="col-12">
                         <p class="h1">สรุปผลโดยละเอียด</p>
                     </div>
+                    <!-- select data -->
                     <div class="col-12">
-                        <select name="filter" id="filter" ng-model="report_filter">
-                            <option value="month">เดือน</option>
-                            <option value="day">วัน</option>
-                            <option value="hour">ช่วงเวลา</option>
-                        </select>
+                        <div class="row justify-content-md-center" align="center">
+                            <div class="col-auto">
+                                <label for="filter" class="form-label">ประเภทข้อมูล</label>
+                                <select class="form-select" name="filter" id="filter" ng-model="report_filter" ng-change="selectData()">
+                                    <option value="month">เดือน</option>
+                                    <option value="day">วัน</option>
+                                    <option value="hour">ช่วงเวลา</option>
+                                </select>
+                            </div>
+                            <div class="col-auto ng-hide" id="report_year">
+                                <label for="year" class="form-label">เลือกปี</label>
+                                <select class="form-select" name="year" id="year" ng-model="report_year">
+                                    <? for ($i = 2000; $i <= 2050; $i++) { ?>
+                                        <option value="<?= $i ?>"><?= $i ?></option>
+                                    <? } ?>
+                                </select>
+                            </div>
+                            <div class="col-auto ng-hide" id="report_month">
+                                <label for="month" class="form-label">เลือกเดือน</label>
+                                <select class="form-select" name="month" id="month" ng-model="report_month">
+                                    <? for ($i = 1; $i <= 12; $i++) { ?>
+                                        <option value="<?= $i ?>"><?= $i ?></option>
+                                    <? } ?>
+                                </select>
+                            </div>
+                            <div class="col-auto ng-hide" id="report_day">
+                                <label for="day" class="form-label">เลือกวัน</label>
+                                <select class="form-select" name="day" id="day" ng-model="report_day">
+                                    <? for ($i = 1; $i <= 31; $i++) { ?>
+                                        <option value="<?= $i ?>"><?= $i ?></option>
+                                    <? } ?>
+                                </select>
+                            </div>
+                            <div class="col-12 mt-2">
+                                <button ng-click="getReport()" class="btn btn-primary" id="btn" type="button">แสดงผล</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-6">
+
+                    <!-- show data -->
+                    <div class="col-6" id="body_canvas">
                         <canvas id="chart"></canvas>
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade" id="manageEvent-pane" role="tabpanel" aria-labelledby="manageEvent" tabindex="0">
+            <div class="tab-pane fade" id="manageEvent-pane" role="tabpanel" aria-labelledby="manageEvent" tabindex="0" ng-if="u_userId == event_data.ev_createdBy">
                 <div class="row pt-3">
                     <div class="col-10 pb-2"></div>
                     <div class="col-2 pb-2">
@@ -164,7 +199,7 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
                                         </button>
                                         <ul class="dropdown-menu">
                                             <li><button class="dropdown-item" ng-click="checkInByMod(row.u_userId)">ลงทะเบียนเข้างาน</button></li>
-                                            <li><button class="dropdown-item">ลบ</button></li>
+                                            <li><button class="dropdown-item" ng-click="deleteMember(row.u_userId)">ลบ</button></li>
                                         </ul>
                                     </td>
                                 </tr>

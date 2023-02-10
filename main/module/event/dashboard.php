@@ -18,7 +18,7 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="myEvent-tab" data-bs-toggle="tab" data-bs-target="#myEvent-pane" type="button" role="tab" aria-controls="myEvent-pane" aria-selected="true">กิจกรรมของฉัน</button>
             </li>
-            <li class="nav-item" role="presentation">
+            <li class="nav-item" role="presentation" ng-if="u_role == 1">
                 <button class="nav-link" id="manageEvent-tab" data-bs-toggle="tab" data-bs-target="#manageEvent-pane" type="button" role="tab" aria-controls="manageEvent-pane" aria-selected="false">กิจกรรมที่ฉันดูแล</button>
             </li>
         </ul>
@@ -36,7 +36,7 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade" id="manageEvent-pane" role="tabpanel" aria-labelledby="manageEvent-tab" tabindex="0">
+            <div class="tab-pane fade" id="manageEvent-pane" role="tabpanel" aria-labelledby="manageEvent-tab" tabindex="0" ng-if="u_role == 1">
                 <? include("main/body/checkInState.php"); ?>
                 <div class="row pt-3">
                     <div class="col-sm-4 pb-2">

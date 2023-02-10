@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-dark text-white">
+<nav class="navbar navbar-expand-lg bg-dark text-white" id="nav">
     <div class="container-fluid">
         <a class="navbar-brand text-white" href="#">SUT-Events</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,7 +12,7 @@
                 <li class="nav-item">
                     <a class="nav-link text-white" href="index.php?p=event&m=event_list">รายชื่อกิจกรรม</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" ng-if="u_role == 3">
                     <a class="nav-link text-white" href="index.php?p=admin&m=dashboard">Admin</a>
                 </li>
 

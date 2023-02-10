@@ -72,7 +72,9 @@
                             else Swal.fire({
                                 icon: 'success',
                                 title: 'ออกจากระบบเสร็จสิ้น',
-                            })
+                            }).then((res) => {
+                                location.reload();
+                            });
                         }, // end then
                         (res) => { // optional
                             // failed
@@ -123,7 +125,9 @@
                     else Swal.fire({
                         icon: 'success',
                         title: 'บันทึกเสร็จสิ้น',
-                    })
+                    }).then((res) => {
+                        location.reload();
+                    });
                 }, // end then
                 (res) => { // optional
                     // failed
@@ -165,7 +169,9 @@
                                 icon: 'success',
                                 title: 'รีเซ็ทรหัสผ่านผู้ใช้เสร็จสิ้น',
                                 text: "รหัสผ่านคือ q1w2e3r4"
-                            })
+                            }).then((res) => {
+                                location.reload();
+                            });
                         }, // end then
                         (res) => { // optional
                             // failed
@@ -208,7 +214,9 @@
                             else Swal.fire({
                                 icon: 'success',
                                 title: 'ลบผู้ใช้เสร็จสิ้น',
-                            })
+                            }).then((res) => {
+                                location.reload();
+                            });
                         }, // end then
                         (res) => { // optional
                             // failed

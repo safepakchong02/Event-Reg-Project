@@ -51,7 +51,7 @@
             }
         }).then((res) => {
             $scope.eventLists = setEventStatus(res.data.resultData);
-            console.log($scope.eventLists);
+            // console.log($scope.eventLists);
         })
     }); // end controller function
 </script>

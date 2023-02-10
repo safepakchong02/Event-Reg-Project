@@ -13,7 +13,7 @@
             }).then((res) => {
                 $scope.myEvents = [];
                 $scope.myEvents = setEventStatus(res.data.resultData);
-                console.log($scope.myEvents);
+                // console.log($scope.myEvents);
                 // console.log(res.data.resultData);
             })
         }
@@ -30,7 +30,7 @@
             }).then((res) => {
                 $scope.modEvents = [];
                 $scope.modEvents = setEventStatus(res.data.resultData);
-                console.log($scope.modEvents);
+                // console.log($scope.modEvents);
                 // console.log(res.data.resultData);
             })
         }
