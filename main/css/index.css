@@ -1,0 +1,26 @@
+.mainBg {
+    background: url("https://www.transparentpng.com/thumb/pattern/p3NBVZ-data-security-and-privacy-software-services-safe-data.png");
+    background-size: 100%;
+    background-repeat: repeat;
+    /*background: rgb(245, 245, 245);*/
+    opacity: 1;
+    /*background-image:  linear-gradient(30deg, rgba(70,70,70,1) 12%, transparent 12.5%, transparent 87%,  rgba(70,70,70,1) 87.5%,  rgba(70,70,70,1)), 
+    linear-gradient(150deg, rgba(255,218,87,0.9623250667454482) 12%, transparent 12.5%, transparent 87%, rgba(255,218,87,0.9623250667454482) 87.5%, rgba(255,218,87,0.9623250667454482)), 
+    linear-gradient(30deg, rgba(255,148,42,0.9483194645045518) 12%, transparent 12.5%, transparent 87%, rgba(255,148,42,0.9483194645045518) 87.5%, rgba(255,148,42,0.9483194645045518)), 
+    linear-gradient(150deg, rgba(255,148,42,0.9483194645045518) 12%, transparent 12.5%, transparent 87%, rgba(255,148,42,0.9483194645045518) 87.5%, rgba(255,148,42,0.9483194645045518)), 
+    linear-gradient(60deg, rgba(255,148,42,0.9483194645045518) 25%, transparent 25.5%, transparent 75%, rgba(255,148,42,0.9483194645045518) 75%, rgba(255,148,42,0.9483194645045518)), 
+    linear-gradient(60deg, rgba(70,70,70,1) 25%, transparent 25.5%, transparent 75%, rgba(70,70,70,1) 75%, rgba(70,70,70,1));
+    */height: 100vh;
+}
+
+.grBg {
+    background: linear-gradient(0deg, rgba(70,70,70,1) 0%, rgba(255,205,26,1) 16%, rgba(255,218,87,0.9623250667454482) 27%, rgba(255,148,42,0.9483194645045518) 86%);;
+}
+
+.test {
+background-color: #e5e5f7;
+opacity: 0.3;
+background-image:  linear-gradient(30deg, #444cf7 12%, transparent 12.5%, transparent 87%, #444cf7 87.5%, #444cf7), linear-gradient(150deg, #444cf7 12%, transparent 12.5%, transparent 87%, #444cf7 87.5%, #444cf7), linear-gradient(30deg, #444cf7 12%, transparent 12.5%, transparent 87%, #444cf7 87.5%, #444cf7), linear-gradient(150deg, #444cf7 12%, transparent 12.5%, transparent 87%, #444cf7 87.5%, #444cf7), linear-gradient(60deg, #444cf777 25%, transparent 25.5%, transparent 75%, #444cf777 75%, #444cf777), linear-gradient(60deg, #444cf777 25%, transparent 25.5%, transparent 75%, #444cf777 75%, #444cf777);
+background-size: 18px 32px;
+background-position: 0 0, 0 0, 9px 16px, 9px 16px, 0 0, 9px 16px;
+}

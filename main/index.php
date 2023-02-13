@@ -13,6 +13,7 @@ include("main/function/function_cookies.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
+<link rel="stylesheet" type="text/css" href="/Event-Reg-Project/main/css/index.css">
 
 <head>
     <meta charset="UTF-8">
@@ -32,9 +33,9 @@ include("main/function/function_cookies.php");
     <!-- end handle login -->
 </head>
 
-<body ng-app="<?= $app_name ?>" ng-controller="<?= $ctrl_name ?>" style="font-family: 'IBM Plex Sans Thai Looped', sans-serif !important;">
+<body class="grBg"ng-app="<?= $app_name ?>" ng-controller="<?= $ctrl_name ?>" style="font-family: 'IBM Plex Sans Thai Looped', sans-serif !important;">
     <? if(@$_GET["p"] != "login") include("main/body/navbar.php"); ?>
-    <div class="container-fluid bg-light">
+    <div class="container-fluid mainBg">
         <div class="row">
             <!-- content -->
             <div class="col-12">

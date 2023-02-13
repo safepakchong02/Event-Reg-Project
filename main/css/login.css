@@ -1,0 +1,59 @@
+@media only screen and (max-width: 480px) {
+    .login-card {
+        height: calc(100% - 58%);
+    }
+    .span-text{
+        display: none;
+    }
+    .forgetpassword p{
+        font-size: 10pt;
+        display: flex;
+        justify-content: flex-end;
+    }
+    .cBox {
+        padding: 3rem 3rem 0 3rem;
+        border-style: none;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 5px 5px -5px;
+    }
+}
+
+
+@media only screen and (min-width: 481px) {
+    .login-card {
+        height: calc(100% - 50%);
+    }
+    .forgetpassword{
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: flex-end;
+    }
+    .cBox {
+        padding: 3rem 3rem 0 3rem;
+        border-style: none;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 5px 5px -5px;
+    }
+}
+
+@media only screen and (min-width: 769px) {
+    .login-card {
+        height: calc(100% - 48%);
+    }
+    .forgetpassword{
+        margin-bottom: 20px;
+    }
+}
+
+@media only screen and (min-width: 1025px) {
+    .login-card {
+        height: calc(100% - 45%);
+    }
+    .forgetpassword{
+        margin-bottom: 30px;
+    }
+    .cBox {
+        padding: 3rem;
+        border-style: none;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+    }
+}
+    
