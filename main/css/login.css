@@ -1,30 +1,43 @@
 @media only screen and (max-width: 480px) {
     .login-card {
-        height: calc(100% - 60%);
+        height: calc(100% - 58%);
     }
     .span-text{
         display: none;
+    }
+    .forgetpassword p{
+        font-size: 10pt;
+        display: flex;
+        justify-content: flex-end;
     }
 }
 
 @media only screen and (min-width: 481px) {
     .login-card {
-        height: calc(100% - 40%);
+        height: calc(100% - 50%);
+    }
+    .forgetpassword{
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: flex-end;
     }
 }
 
 @media only screen and (min-width: 769px) {
     .login-card {
-        height: calc(100% - 30%);
+        height: calc(100% - 48%);
+    }
+    .forgetpassword{
+        margin-bottom: 20px;
     }
 }
 
 @media only screen and (min-width: 1025px) {
     .login-card {
-        height: calc(100% - 30%);
+        height: calc(100% - 45%);
     }
-    .span-text{
-        margin-top: 50px;
+    .forgetpassword{
+        margin-bottom: 30px;
     }
 }
     
