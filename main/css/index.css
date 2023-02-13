@@ -1,0 +1,5 @@
+.mainBg {
+    background: rgb(70,70,70);
+    background: linear-gradient(360deg, rgba(70,70,70,1) 0%, rgba(255,205,26,1) 16%, rgba(255,218,87,0.9623250667454482) 27%, rgba(255,148,42,0.9483194645045518) 86%);
+    height: 100vh;
+}

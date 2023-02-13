@@ -1,0 +1,30 @@
+@media only screen and (max-width: 480px) {
+    .login-card {
+        height: calc(100% - 60%);
+    }
+    .span-text{
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 481px) {
+    .login-card {
+        height: calc(100% - 40%);
+    }
+}
+
+@media only screen and (min-width: 769px) {
+    .login-card {
+        height: calc(100% - 30%);
+    }
+}
+
+@media only screen and (min-width: 1025px) {
+    .login-card {
+        height: calc(100% - 30%);
+    }
+    .span-text{
+        margin-top: 50px;
+    }
+}
+    
