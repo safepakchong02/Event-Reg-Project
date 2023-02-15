@@ -251,11 +251,14 @@
         return $rs;
     }
 
-    function eventMember($eventId){
+    function eventMember($eventId, $userId){
         try {
             $handle = connectDb();
             $handle->beginTransaction();
             $query = "SELECT * FROM eventMemberView where ev_eventId = '{$eventId}'";
+            if ($userId) {
+                $query = "SELECT * FROM eventMemberView where ev_eventId = '{$eventId}' AND u_userId = '{$userId}'";
+            }
 
             $result = $handle->prepare($query);
             $result->execute();
