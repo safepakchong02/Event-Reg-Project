@@ -27,7 +27,7 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
                                     <label for="floatingPassword">รหัสผ่าน</label>
                                 </div>
                                 <div class="forgetpassword">
-                                 <p>ถ้ายังไม่มีบัญชี? <a href="index.php?p=user&m=profile&register" class="text-primary-50 fw-bold">สร้างบัญชี</a></p>
+                                 <p>หากยังไม่มีบัญชี? <a href="index.php?p=user&m=profile&register" class="text-primary-50 fw-bold">สร้างบัญชี</a></p>
                                 </div>
                                 <div class="d-flex justify-content-center align-items-center">
                                     <button class="btn btn-outline-dark btn-lg px-5" type="button" ng-click="login()">Login</button>
