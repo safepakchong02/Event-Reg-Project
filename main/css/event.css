@@ -1,0 +1,17 @@
+
+.inlineTable tr{
+    display: inline-table!important;
+}
+
+.tableHeader{
+    font-size: 12pt;
+}
+
+.inlineText {
+    margin-top: 10px;
+}
+
+.inlineText td {
+    padding-left: 10px;
+    padding-right: 10px;
+}

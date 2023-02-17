@@ -1,16 +1,17 @@
+<!DOCTYPE html>
 <!-- import ctrl -->
+
 <?
 $ctrl_path = "event";
 $ctrl_name = "dashboard_ctrl";
 include("main/controller/$ctrl_path/$ctrl_name.php");
 ?>
-
 <!-- เริ่ม dashboard -->
 <div class="container-fluid" ng-controller="<?= $ctrl_name ?>">
     <div class="row pb-5 pt-5">
         <!-- edit here -->
         <h1>สวัสดี!!! {{ud_name}}</h1>
-        <a href="index.php?p=user&m=profile" class="btn btn-primary col-auto">โปรไฟล์ >></a>
+        <!-- <a href="index.php?p=user&m=profile" class="btn btn-primary col-auto">โปรไฟล์ >></a> -->
     </div>
     <div class="row">
         <!-- edit here -->
