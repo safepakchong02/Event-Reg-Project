@@ -23,7 +23,7 @@
                         <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                             {{ud_name}}
                         </button>
-                        <ul class="dropdown-menu dropdown-menu-dark">
+                        <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
                             <li><a class="dropdown-item" href="index.php?p=user&m=profile">โปรไฟล์</a></li>
                             <li><a class="dropdown-item" href="index.php?p=login&m=login&logout">ออกจากระบบ</a></li>
                         </ul>
