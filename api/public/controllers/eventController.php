@@ -117,8 +117,15 @@
                     $return = new responseObject(401, "Unauthorized", null);
                     return $response->withStatus(401)->withJson($return->getResponse());
                 }
+                $param = $request->getQueryParams();
+                $userId = null;
+                foreach ($param as $key=>$val) {
+                    if ($key === 'userId') {
+                        $userId = $val;
+                    }
+                }
                 $return = new responseObject(0, null, null);
-                $result = eventMember($eventId);
+                $result = eventMember($eventId, $userId);
                 $return = new responseObject(200, "Success", $result);
                 return $response->withStatus(200)->withJson($return->getResponse());
             }

@@ -146,6 +146,22 @@ class UserController
                 $return = new responseObject(400, "Bad request", null);
                 return $response->withStatus(200)->withJson($return->getResponse());
             }
+            if (!array_key_exists("ud_prefix", $body)) {
+                $return = new responseObject(400, "Bad request", null);
+                return $response->withStatus(200)->withJson($return->getResponse());
+            }
+            if (!array_key_exists("ud_firstName", $body)) {
+                $return = new responseObject(400, "Bad request", null);
+                return $response->withStatus(200)->withJson($return->getResponse());
+            }
+            if (!array_key_exists("ud_lastName", $body)) {
+                $return = new responseObject(400, "Bad request", null);
+                return $response->withStatus(200)->withJson($return->getResponse());
+            }
+            if (!array_key_exists("ud_phone", $body)) {
+                $return = new responseObject(400, "Bad request", null);
+                return $response->withStatus(200)->withJson($return->getResponse());
+            }
             $result = register($body);
             if ($result === 500) {
                 $return = new responseObject(500, "Error", "");
