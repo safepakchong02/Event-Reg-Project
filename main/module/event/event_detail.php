@@ -18,7 +18,7 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="eventDetail-tab" data-bs-toggle="tab" data-bs-target="#eventDetail" type="button" role="tab" aria-controls="eventDetail" aria-selected="true">รายละเอียดกิจกรรม</button>
             </li>
-            <li class="nav-item" role="presentation">
+            <li class="nav-item" role="presentation" ng-if="u_userId == event_data.ev_createdBy">
                 <button class="nav-link" id="eventReport" data-bs-toggle="tab" data-bs-target="#eventReport-pane" type="button" role="tab" aria-controls="eventReport-pane" aria-selected="false">รายงานกิจกรรม</button>
             </li>
             <li class="nav-item" role="presentation" ng-if="u_userId == event_data.ev_createdBy">
@@ -56,12 +56,14 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
                                         <hr>
                                         <div class="row pb-2">
                                             <div class="col-12">
-                                                <button type="button" ng-click="preReg()" ng-if="isPreReg" ng-disabled="!isTimePreReg" id="preReg" class="btn btn-sm btn-primary col-12">ลงทะเบียนล่วงหน้า <i class="bi bi-box-arrow-in-right"></i></button>
+                                                <button type="button" ng-click="preReg()" ng-show="isPreReg && !hasPreReg" ng-disabled="!isTimePreReg" id="preReg" class="btn btn-sm btn-primary col-12">ลงทะเบียนล่วงหน้า <i class="bi bi-box-arrow-in-right"></i></button>
+                                                <button type="button" ng-click="unPreReg()" ng-show="isPreReg && hasPreReg" ng-disabled="!isTimePreReg" id="preReg" class="btn btn-sm btn-danger col-12">ยกเลิก ลงทะเบียนล่วงหน้า <i class="bi bi-box-arrow-in-right"></i></button>
                                             </div>
                                         </div>
                                         <div class="row pb-2">
                                             <div class="col-12">
-                                                <button type="button" ng-click="checkIn()" ng-if="isSelfCheckIn" ng-disabled="!isTimeCheckIn" id="checkIn" class="btn btn-sm btn-primary col-12">ลงทะเบียนเข้างาน <i class="bi bi-box-arrow-in-right"></i></button>
+                                                <button type="button" ng-click="checkIn()" ng-show="isSelfCheckIn && !hasCheckIn" ng-disabled="!isTimeCheckIn" id="checkIn" class="btn btn-sm btn-primary col-12">ลงทะเบียนเข้างาน <i class="bi bi-box-arrow-in-right"></i></button>
+                                                <button type="button" ng-click="unCheckIn()" ng-show="isSelfCheckIn && hasCheckIn" ng-disabled="!isTimeCheckIn" id="checkIn" class="btn btn-sm btn-danger col-12">ยกเลิก ลงทะเบียนเข้างาน <i class="bi bi-box-arrow-in-right"></i></button>
                                             </div>
                                         </div>
                                     </div>
@@ -71,7 +73,7 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade" id="eventReport-pane" role="tabpanel" aria-labelledby="eventReport" tabindex="0">
+            <div class="tab-pane fade" id="eventReport-pane" role="tabpanel" aria-labelledby="eventReport" tabindex="0" ng-show="u_userId == event_data.ev_createdBy">
                 <div class="row justify-content-md-center pt-2" align="center">
                     <div class="col-12">
                         <p class="h1">สรุปผลโดยรวม</p>
@@ -96,7 +98,7 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
                     </div>
                 </div>
                 <hr>
-                <div class="row justify-content-md-center" align="center" ng-show="u_userId == event_data.ev_createdBy">
+                <div class="row justify-content-md-center" align="center">
                     <div class="col-12">
                         <p class="h1">สรุปผลโดยละเอียด</p>
                     </div>

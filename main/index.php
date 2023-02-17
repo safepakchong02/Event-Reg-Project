@@ -13,7 +13,7 @@ include("main/function/function_cookies.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<link rel="stylesheet" type="text/css" href="/Event-Reg-Project/main/css/index.css">
+<link rel="stylesheet" type="text/css" href="main/css/index.css">
 
 <head>
     <meta charset="UTF-8">

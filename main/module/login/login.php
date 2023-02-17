@@ -4,7 +4,7 @@ $ctrl_path = "login";
 $ctrl_name = "login_ctrl";
 include("main/controller/$ctrl_path/$ctrl_name.php");
 ?>
-<link rel="stylesheet" type="text/css" href="/Event-Reg-Project/main/css/login.css">
+<link rel="stylesheet" type="text/css" href="main/css/login.css">
 <div class="login_bg" ng-controller="<?= $ctrl_name ?>">
     <section class="vh-100">
         <div class="container py-5 h-100">

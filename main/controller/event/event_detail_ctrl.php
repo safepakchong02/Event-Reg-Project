@@ -80,7 +80,22 @@
                     else $scope.isTimeCheckIn = false;
                 }
 
-                console.log($scope.event_data);
+                // console.log($scope.event_data);
+            }) // end then
+
+            // query hasReg and CheckIn
+            $http({
+                method: `GET`,
+                url: `api/event/${ev_eventId}/member?userId=${$scope.u_userId}`,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Authorization': `${$scope.ac_token}`
+                }
+            }).then((res) => {
+                if (res.data.resultData.length !== 0) {
+                    if (res.data.resultData[0].m_preReg !== null) $scope.hasPreReg = true;
+                    if (res.data.resultData[0].m_checkIn !== null) $scope.hasCheckIn = true;
+                }
             }) // end then
 
             // start section report
@@ -129,75 +144,6 @@
                 $scope.eventMembers = res.data.resultData;
                 // console.log(res.data.resultData);
             }) // end then
-
-            $scope.getReport = () => {
-                let data = `filter=${$scope.report_filter}&`;
-
-                switch ($scope.report_filter) {
-                    case "hour":
-                        data += `day=${$scope.report_day}&`;
-                    case "day":
-                        data += `month=${$scope.report_month}&`;
-                    case "month":
-                        data += `year=${$scope.report_year}`;
-                        break;
-                }
-
-                $http({
-                    method: `GET`,
-                    url: `api/event/${ev_eventId}/reportAmount?${data}`,
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'Authorization': `${$scope.ac_token}`
-                    }
-                }).then((res) => {
-
-                    let result = res.data.resultData;
-                    let labels = [];
-                    let dataSet = [];
-
-                    console.log(result.length);
-
-                    if (result.length != 0) {
-                        for (let i = 0; i < result.length; i++) {
-                            labels.push(`${$scope.report_filter} ${result[i][$scope.report_filter]}`);
-                            dataSet.push(result[i]["count"]);
-                        }
-
-                        const ctx = document.getElementById('chart');
-
-                        if (hasCreate) {
-                            chart.destroy();
-                            hasCreate = false;
-                        }
-
-                        chart = new Chart(ctx, {
-                            type: 'line',
-                            data: {
-                                fill: false,
-                                lineTension: 0,
-                                labels: labels,
-                                datasets: [{
-                                    data: dataSet,
-                                    borderWidth: 1
-                                }]
-                            },
-                            options: {
-                                legend: {
-                                    display: false
-                                },
-                                scales: {
-                                    y: {
-                                        beginAtZero: true
-                                    }
-                                }
-                            }
-                        }); // end new Chart
-
-                        hasCreate = true;
-                    }
-                }) // end then
-            }
             // end section manager report
         } // end if isCreate
 
@@ -213,10 +159,32 @@
                         'Authorization': `${$scope.ac_token}`
                     }
                 }).then((res) => {
-                    console.log(res.data);
+                    // console.log(res.data);
                     Swal.fire({
                         icon: 'success',
                         title: 'ลงทะเบียนล่วงหน้าเรียบร้อย',
+                    }).then((res) => {
+                        location.reload();
+                    });
+                })
+            }
+        }
+
+        $scope.unPreReg = () => {
+            if (now >= preRegStart && now <= preRegEnd) {
+                $http({
+                    method: `PATCH`,
+                    url: `api/event/${$scope.event_data.ev_eventId}/preRegister`,
+                    data: `u_userId=${$scope.u_userId}`,
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Authorization': `${$scope.ac_token}`
+                    }
+                }).then((res) => {
+                    // console.log(res.data);
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'ยกเลิก ลงทะเบียนล่วงหน้าเรียบร้อย',
                     }).then((res) => {
                         location.reload();
                     });
@@ -240,6 +208,27 @@
                     Swal.fire({
                         icon: 'success',
                         title: 'ลงชื่อเข้างานเรียบร้อย',
+                    }).then((res) => {
+                        location.reload();
+                    });
+                })
+            }
+        }
+
+        $scope.unCheckIn = () => {
+            if (now >= checkInStart && now <= checkInEnd) {
+                $http({
+                    method: `PATCH`,
+                    url: `api/event/${$scope.event_data.ev_eventId}/checkIn`,
+                    data: `u_userId=${$scope.u_userId}`,
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Authorization': `${$scope.ac_token}`
+                    }
+                }).then((res) => {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'ยกเลิก ลงชื่อเข้างานเรียบร้อย',
                     }).then((res) => {
                         location.reload();
                     });
@@ -288,6 +277,75 @@
                     location.reload();
                 });
             })
+        }
+
+        $scope.getReport = () => {
+            let data = `filter=${$scope.report_filter}&`;
+
+            switch ($scope.report_filter) {
+                case "hour":
+                    data += `day=${$scope.report_day}&`;
+                case "day":
+                    data += `month=${$scope.report_month}&`;
+                case "month":
+                    data += `year=${$scope.report_year}`;
+                    break;
+            }
+
+            $http({
+                method: `GET`,
+                url: `api/event/${ev_eventId}/reportAmount?${data}`,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Authorization': `${$scope.ac_token}`
+                }
+            }).then((res) => {
+
+                let result = res.data.resultData;
+                let labels = [];
+                let dataSet = [];
+
+                console.log(result.length);
+
+                if (result.length != 0) {
+                    for (let i = 0; i < result.length; i++) {
+                        labels.push(`${$scope.report_filter} ${result[i][$scope.report_filter]}`);
+                        dataSet.push(result[i]["count"]);
+                    }
+
+                    const ctx = document.getElementById('chart');
+
+                    if (hasCreate) {
+                        chart.destroy();
+                        hasCreate = false;
+                    }
+
+                    chart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            fill: false,
+                            lineTension: 0,
+                            labels: labels,
+                            datasets: [{
+                                data: dataSet,
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            legend: {
+                                display: false
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    }); // end new Chart
+
+                    hasCreate = true;
+                }
+            }) // end then
         }
 
 
