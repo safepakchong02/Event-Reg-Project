@@ -4,14 +4,14 @@ $ctrl_path = "user";
 $ctrl_name = "profile_ctrl";
 include("main/controller/$ctrl_path/$ctrl_name.php");
 ?>
-
+<link rel="stylesheet" type="text/css" href="main/css/userProfile.css">
 <!-- start profile -->
 <div class="container-fluid" ng-controller="<?= $ctrl_name ?>">
     <div class="row pt-5">
         <h1>ประวัติส่วนตัว</h1>
         <form>
             <!-- part 1 -->
-            <div class="row pb-3 pt-3 border rounded-2">
+            <div class="row pb-3 pt-3 border rounded-2 whiteBg">
                 <div class="col-lg-12 pb-2">
                     <div class="col-auto">
                         <label for="u_email" class="form-label">อีเมล</label>
@@ -42,7 +42,7 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
                 </div>
             </div>
             <!-- part 2 -->
-            <div class="row pb-3 pt-3 mt-3 border rounded-2">
+            <div class="row pb-3 pt-3 mt-3 border rounded-2 whiteBg">
                 <div class="col-lg-4 pb-2">
                     <div class="col-auto">
                         <label for="ud_prefix" class="form-label">คำนำหน้า</label>
@@ -134,7 +134,7 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
                 </div>
             </div>
             <!-- btn -->
-            <div class="row pt-3">
+            <div class="row pt-3 ">
                 <div class="col-sm-3 pb-3" ng-if="isRegister">
                     <button type="button" class="btn btn-warning" ng-click="edit()">แก้ไข</button>
                     <button type="button" class="btn btn-primary" ng-show="hasEdit" ng-click="editProfile('user/profile/edit','PATCH',profile_data.u_userId)">บันทึก</button>
