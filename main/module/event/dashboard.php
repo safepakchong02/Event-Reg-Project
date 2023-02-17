@@ -23,7 +23,7 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
                 <button class="nav-link" id="manageEvent-tab" data-bs-toggle="tab" data-bs-target="#manageEvent-pane" type="button" role="tab" aria-controls="manageEvent-pane" aria-selected="false">กิจกรรมที่ฉันดูแล</button>
             </li>
         </ul>
-        <div class="tab-content" id="myTabContent">
+        <div class="tab-content dashBoard" id="myTabContent">
             <div class="tab-pane fade show active" id="myEvent-pane" role="tabpanel" aria-labelledby="myEvent-tab" tabindex="0">
                 <? include("main/body/checkInState.php"); ?>
                 <div class="row pt-3">
