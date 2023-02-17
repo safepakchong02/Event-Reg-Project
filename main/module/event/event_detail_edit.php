@@ -5,11 +5,14 @@ $ctrl_path = "event";
 $ctrl_name = "event_detail_edit_ctrl";
 include("main/controller/$ctrl_path/$ctrl_name.php");
 ?>
-
+<link rel="stylesheet" type="text/css" href="main/css/event.css">
 <div class="container" ng-controller="<?= $ctrl_name ?>" data-editor="ClassicEditor" data-collaboration="false" data-revision-history="false">
     <div class="row pt-3">
+        <div class="topHeader">
         <h1>สร้างกิจกรรม</h1>
-        <form>
+        </div>
+        <div class="dashBoard-top">
+        <form class="form-create">
             <!-- title and limit -->
             <div class="row pb-3">
                 <div class="col pb-2">
@@ -193,5 +196,6 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
                 </div>
             </div>
         </form>
+    </div>
     </div>
 </div>

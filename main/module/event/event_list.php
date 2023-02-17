@@ -4,16 +4,18 @@ $ctrl_path = "event";
 $ctrl_name = "event_list_ctrl";
 include("main/controller/$ctrl_path/$ctrl_name.php");
 ?>
-
+<link rel="stylesheet" type="text/css" href="main/css/event.css">
 <!-- เริ่ม dashboard -->
-<div class="container-fluid" ng-controller="<?= $ctrl_name ?>">
+<div class="container-fluid " ng-controller="<?= $ctrl_name ?>">
+
     <div class="row pb-5 pt-5 text-center">
         <!-- edit here -->
         <h1>ระบบลงทะเบียนออนไลน์</h1>
     </div>
     <!-- show list -->
-    <div class="row">
-        <div class="col-1 rounded p-2">มุมมอง</div>
+    <div class="dashBoard-list">
+    <div class="row topRadio">
+        <div class="col-1 rounded p-2 head">มุมมอง</div>
         <div class="col-auto">
             <div class="form-check rounded p-2" ng-click="showList('card')">
                 <input class="form-check-input" type="radio" name="selectShowList" id="selectShowList1" checked>
@@ -34,10 +36,10 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
     <!-- end show list -->
 
     <!-- filter -->
-    <div class="row pb-3">
-        <div class="col-1 rounded p-2">แสดงผล</div>
+    <div class="row pb-3 btmRadio">
+        <div class="col-1 rounded p-2 head">แสดงผล</div>
         <div class="col-auto">
-            <div class="form-check rounded p-2" ng-click="filterList('all')">
+            <div class="form-check p-2" ng-click="filterList('all')">
                 <input class="form-check-input" type="radio" name="selectFilterShowList" id="selectFilterShowList1" checked>
                 <label class="form-check-label" for="selectFilterShowList1">
                     ทั้งหมด
@@ -45,24 +47,24 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
             </div>
         </div>
         <div class="col-auto">
-            <div class="form-check rounded p-2 color-warning" ng-click="filterList('incoming')">
-                <input class="form-check-input" type="radio" name="selectFilterShowList" id="selectFilterShowList2">
+            <div class="form-check p-2 leftMargin" ng-click="filterList('incoming')">
+                <input class="form-check-input color-warning" type="radio" name="selectFilterShowList" id="selectFilterShowList2">
                 <label class="form-check-label" for="selectFilterShowList2">
                     ยังไม่ถึงเวลาเปิดลงทะเบียนเข้างาน
                 </label>
             </div>
         </div>
         <div class="col-auto">
-            <div class="form-check rounded p-2 color-success" ng-click="filterList('opening')">
-                <input class="form-check-input" type="radio" name="selectFilterShowList" id="selectFilterShowList3">
+            <div class="form-check p-2 leftMargin" ng-click="filterList('opening')">
+                <input class="form-check-input color-success" type="radio" name="selectFilterShowList" id="selectFilterShowList3">
                 <label class="form-check-label" for="selectFilterShowList3">
                     เปิดลงทะเบียนเข้างาน
                 </label>
             </div>
         </div>
         <div class="col-auto">
-            <div class="form-check rounded p-2 color-danger" ng-click="filterList('closed')">
-                <input class="form-check-input" type="radio" name="selectFilterShowList" id="selectFilterShowList4">
+            <div class="form-check p-2 leftMargin" ng-click="filterList('closed')">
+                <input class="form-check-input color-danger" type="radio" name="selectFilterShowList" id="selectFilterShowList4">
                 <label class="form-check-label" for="selectFilterShowList4">
                     ปิดลงทะเบียนเข้างาน
                 </label>
@@ -106,5 +108,6 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
         </div>
     </div>
     <!-- end show list table -->
+</div>
 </div>
 <!-- จบ dashboard -->

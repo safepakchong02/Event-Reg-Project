@@ -23,4 +23,64 @@
     height: auto;
 }
 
+.dashBoard-top {
+    background-color: rgba(255, 240, 240, 0.79);
+    border-radius: 10px 10px 10px 10px;
+    min-height: 650px;
+    height: auto;
+}
+
+.dashBoard-list {
+    background-color: rgba(255, 240, 240, 0.79);
+    border-radius: 10px 10px 10px 10px;
+    min-height: 650px;
+    height: auto;
+    padding: 18px;
+}
+
+
+.form-create{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.leftMargin input{
+    margin-right: 10px;
+}
+
+@media only screen and (max-width: 1036px) {
+    .dashBoard-list{
+        display: block;
+    }
+
+    .dashBoard-list .topRadio{
+        display: flex;
+    }
+
+    .dashBoard-list .topRadio .head{
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 912px) {
+    .dashBoard-list{
+        display: block;
+    }
+
+    .dashBoard-list .btmRadio{
+        display: flex;
+    }
+
+    .dashBoard-list .btmRadio .head{
+        width: 100%;
+    }
+
+}
+
+
+
+
+
     
