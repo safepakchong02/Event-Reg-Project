@@ -113,19 +113,25 @@
                 $eventId = $args['eventId'];
                 $auth = authen($request->getHeaders());
                 $userId = array_key_exists('u_userId', (array)$auth) ? $auth['u_userId'] : null;
-                if (!checkEventOwner($args['eventId'], $userId) ){
+                $param = $request->getQueryParams();
+                $uD = null;
+                foreach ($param as $key=>$val) {
+                    if ($key === 'userId') {
+                        $uD = $val;
+                    }
+                }
+                if (!$uD) {
+                    if (!checkEventOwner($args['eventId'], $userId)){
+                    $return = new responseObject(401, "Unauthorized", null);
+                    return $response->withStatus(401)->withJson($return->getResponse());
+                    }
+                }
+                if ($uD !== $userId) {
                     $return = new responseObject(401, "Unauthorized", null);
                     return $response->withStatus(401)->withJson($return->getResponse());
                 }
-                $param = $request->getQueryParams();
-                $userId = null;
-                foreach ($param as $key=>$val) {
-                    if ($key === 'userId') {
-                        $userId = $val;
-                    }
-                }
                 $return = new responseObject(0, null, null);
-                $result = eventMember($eventId, $userId);
+                $result = eventMember($eventId, $uD);
                 $return = new responseObject(200, "Success", $result);
                 return $response->withStatus(200)->withJson($return->getResponse());
             }
