@@ -33,23 +33,25 @@ include("main/function/function_cookies.php");
     <!-- end handle login -->
 </head>
 
-<body class="grBg"ng-app="<?= $app_name ?>" ng-controller="<?= $ctrl_name ?>" style="font-family: 'IBM Plex Sans Thai Looped', sans-serif !important;">
-    <? if(@$_GET["p"] != "login") include("main/body/navbar.php"); ?>
-    <div class="container-fluid mainBg">
-        <div class="row">
-            <!-- content -->
-            <div class="col-12">
-                <?
-                if (isset($_GET["p"]) && isset($_GET["m"])) {
-                    $path = chk_get_url($_GET["p"]);
-                    $mod = chk_get_url($_GET["m"]);
-                    include(module($path, $mod));
-                } else {
-                    include($_SESSION["default_path"]);
-                }
-                ?>
+<body class="grBg" ng-app="<?= $app_name ?>" ng-controller="<?= $ctrl_name ?>" style="font-family: 'IBM Plex Sans Thai Looped', sans-serif !important;">
+    <div class="mainBg vh-100">
+        <? if (@$_GET["p"] != "login") include("main/body/navbar.php"); ?>
+        <div class="container-fluid">
+            <div class="row">
+                <!-- content -->
+                <div class="col-12">
+                    <?
+                    if (isset($_GET["p"]) && isset($_GET["m"])) {
+                        $path = chk_get_url($_GET["p"]);
+                        $mod = chk_get_url($_GET["m"]);
+                        include(module($path, $mod));
+                    } else {
+                        include($_SESSION["default_path"]);
+                    }
+                    ?>
+                </div>
+                <!-- end content -->
             </div>
-            <!-- end content -->
         </div>
     </div>
 </body>
