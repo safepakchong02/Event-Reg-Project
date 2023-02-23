@@ -5,7 +5,7 @@ $ctrl_path = "event";
 $ctrl_name = "event_detail_edit_ctrl";
 include("main/controller/$ctrl_path/$ctrl_name.php");
 ?>
-<link rel="stylesheet" type="text/css" href="main/css/event.css">
+<link rel="stylesheet" type="text/css" href="asset/css/event.css">
 <div class="container" ng-controller="<?= $ctrl_name ?>" data-editor="ClassicEditor" data-collaboration="false" data-revision-history="false">
     <div class="row pt-3">
         <div class="topHeader">
