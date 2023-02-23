@@ -15,6 +15,7 @@ include("main/function/function_cookies.php");
 <html lang="en">
 <link rel="stylesheet" type="text/css" href="./asset/css/index.css">
 <link rel="stylesheet" type="text/css" href="./asset/css/event.css">
+<link rel="stylesheet" type="text/css" href="./asset/css/login.css">
 
 <head>
     <meta charset="UTF-8">
