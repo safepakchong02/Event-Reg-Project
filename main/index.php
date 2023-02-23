@@ -13,7 +13,8 @@ include("main/function/function_cookies.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<link rel="stylesheet" type="text/css" href="asset/css/index.css">
+<link rel="stylesheet" type="text/css" href="./asset/css/index.css">
+<link rel="stylesheet" type="text/css" href="./asset/css/event.css">
 
 <head>
     <meta charset="UTF-8">
