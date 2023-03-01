@@ -4,10 +4,10 @@ $ctrl_path = "user";
 $ctrl_name = "profile_ctrl";
 include("main/controller/$ctrl_path/$ctrl_name.php");
 ?>
-<link rel="stylesheet" type="text/css" href="main/css/userProfile.css">
+<link rel="stylesheet" type="text/css" href="asset/css/userProfile.css">
 <!-- start profile -->
 <div class="container-fluid" ng-controller="<?= $ctrl_name ?>">
-    <div class="row pt-5">
+    <div class="row pt-3">
         <h1>ประวัติส่วนตัว</h1>
         <form>
             <!-- part 1 -->
@@ -18,7 +18,7 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
                         <input disabled type="email" class="form-control" id="u_email" name="u_email" ng-model="profile_data.u_email">
                     </div>
                 </div>
-                <div class="col-lg-4 pb-2" ng-show="editPassword" ng-if="isRegister" id="oldPass">
+                <div class="col-lg-4 pb-2" ng-show="editPassword" id="oldPass">
                     <div class="col-auto">
                         <label for="u_password" class="form-label">รหัสผ่านเก่า</label>
                         <input type="password" class="form-control" id="u_password" name="u_password" ng-model="profile_data.u_password">
@@ -36,7 +36,7 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
                         <input type="password" class="form-control" id="u_repeatPassword" name="u_repeatPassword" ng-model="profile_data.u_repeatPassword">
                     </div>
                 </div>
-                <div class="col-auto pb-2" ng-if="isRegister">
+                <div class="col-auto pb-2">
                     <button ng-click="viewChangePassword()" type="button" class="btn btn-warning">เปลี่ยนรหัสผ่าน</button>
                     <button ng-click="changePassword()" ng-show="editPassword" type="button" class="btn btn-primary">บันทึก</button>
                 </div>
@@ -135,13 +135,10 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
             </div>
             <!-- btn -->
             <div class="row pt-3 ">
-                <div class="col-sm-3 pb-3" ng-if="isRegister">
+                <div class="col-sm-3 pb-3">
                     <button type="button" class="btn btn-warning" ng-click="edit()">แก้ไข</button>
                     <button type="button" class="btn btn-primary" ng-show="hasEdit" ng-click="editProfile('user/profile/edit','PATCH',profile_data.u_userId)">บันทึก</button>
                     <button type="button" class="btn btn-danger" ng-show="hasEdit" ng-click="deactivate()">ลบบัญชี</button>
-                </div>
-                <div class="col-12" ng-if="!isRegister">
-                    <button type="button" class="btn btn-success col-12" ng-click="register()">ลงทะเบียน</button>
                 </div>
             </div>
         </form>

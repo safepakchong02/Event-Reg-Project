@@ -4,7 +4,7 @@
         const myPath = location.search;
         const loginPath = "?p=login&m=login";
         const logoutPath = "?p=login&m=login&logout";
-        const registerPath = "?p=user&m=profile&register";
+        const registerPath = "?p=login&m=register";
 
         $scope.handle_login = () => {
             if (myPath === loginPath) return;

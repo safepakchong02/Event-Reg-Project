@@ -4,7 +4,7 @@ $ctrl_path = "event";
 $ctrl_name = "event_list_ctrl";
 include("main/controller/$ctrl_path/$ctrl_name.php");
 ?>
-<link rel="stylesheet" type="text/css" href="main/css/event.css">
+<link rel="stylesheet" type="text/css" href="asset/css/event.css">
 <!-- เริ่ม dashboard -->
 <div class="container-fluid " ng-controller="<?= $ctrl_name ?>">
 
@@ -74,7 +74,7 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
     <!-- end filter -->
 
     <!-- show list card -->
-    <div class="row overflow-scroll" id="card_list" style="max-height: 70vh; min-width: 100vh;">
+    <div class="row overflow-scroll" id="card_list">
         <div class="col-sm-4 pb-2" ng-repeat="list in eventLists" id="{{list.ev_checkInState}}">
             <div class="card {{list.ev_checkInState}}">
                 <div class="card-body">

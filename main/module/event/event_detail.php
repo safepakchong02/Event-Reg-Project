@@ -29,7 +29,7 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="eventDetail" role="tabpanel" aria-labelledby="eventDetail-tab" tabindex="0">
                 <div class="row pt-3">
-                    <div class="col-9 pb-2">
+                    <div class="col-sm-12 col-md-9 pb-2">
                         <div class="card">
                             <div class="card-header text-center">
                                 รายละเอียดกิจกรรม
@@ -43,7 +43,7 @@ include("main/controller/$ctrl_path/$ctrl_name.php");
                             </div>
                         </div>
                     </div>
-                    <div class="col-3 pb-2">
+                    <div class="col-sm-12 col-md-3 pb-2">
                         <div class="row pb-2">
                             <div class="col-sm-12">
                                 <div class="card text-center {{event_data.ev_checkInState}}">

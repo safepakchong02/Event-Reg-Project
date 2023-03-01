@@ -14,6 +14,8 @@ include("main/function/function_cookies.php");
 <!DOCTYPE html>
 <html lang="en">
 <link rel="stylesheet" type="text/css" href="asset/css/index.css">
+<link rel="stylesheet" type="text/css" href="asset/css/event.css">
+<link rel="stylesheet" type="text/css" href="asset/css/login.css">
 
 <head>
     <meta charset="UTF-8">
@@ -33,10 +35,10 @@ include("main/function/function_cookies.php");
     <!-- end handle login -->
 </head>
 
-<body class="grBg" ng-app="<?= $app_name ?>" ng-controller="<?= $ctrl_name ?>" style="font-family: 'IBM Plex Sans Thai Looped', sans-serif !important;">
-    <div class="mainBg vh-100">
-        <? if (@$_GET["p"] != "login") include("main/body/navbar.php"); ?>
-        <div class="container-fluid">
+<body class="" ng-app="<?= $app_name ?>" ng-controller="<?= $ctrl_name ?>" style="font-family: 'IBM Plex Sans Thai Looped', sans-serif !important;">
+    <? if (@$_GET["p"] != "login") include("main/body/navbar.php"); ?>
+    <div class="grB">
+        <div class="container-fluid mainHeight vh-100">
             <div class="row">
                 <!-- content -->
                 <div class="col-12">
